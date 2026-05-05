@@ -1,0 +1,666 @@
+{% doc %}
+  @prompt
+    Show the product in much better way than this . WHile showing the product we need to show the details as well or new attribute call specialization
+    
+    Meet Our Top Vet Doctors Now
+    Book trusted veterinary doctor appointments online with Petaloons. Easy booking, verified vets, quick consultations, and quality pet healthcare services for dogs, cats, and all pets. Schedule your pet’s checkup today.
+    
+    Dr. Saurabh Patil
+    Dr. Saurabh Patil
+    Regular priceRs. 1,000.00
+    Consult Now
+    Dr. Priya Deshmukh
+    Dr. Priya Deshmukh
+    Regular priceRs. 1,000.00
+    Consult Now
+    Dr. Rohan Verma
+    Dr. Rohan Verma
+    Regular priceRs. 1,000.00
+    Consult Now
+    Dr. Anjali Sharma
+    Dr. Anjali Sharma
+    Regular priceRs. 1,000.00
+    Consult Now
+    Dr. Varad Dhoot
+    Dr. Varad Dhoot
+    Regular priceRs. 1,000.00
+    Consult Now
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-vet-doctors-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: 40px 20px;
+    background-color: {{ block.settings.section_background }};
+  }
+
+  .ai-vet-doctors-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .ai-vet-doctors-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+
+  .ai-vet-doctors-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .ai-vet-doctors-grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .ai-vet-doctor-card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-vet-doctor-card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .ai-vet-doctor-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+    overflow: hidden;
+    background-color: #f4f4f4;
+  }
+
+  .ai-vet-doctor-image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-vet-doctor-image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4;
+  }
+
+  .ai-vet-doctor-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-vet-doctor-specialization-badge-{{ ai_gen_id }} {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: {{ block.settings.badge_background }};
+    color: {{ block.settings.badge_text_color }};
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .ai-vet-doctor-content-{{ ai_gen_id }} {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ai-vet-doctor-name-{{ ai_gen_id }} {
+    font-size: {{ block.settings.doctor_name_size }}px;
+    color: {{ block.settings.doctor_name_color }};
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+
+  .ai-vet-doctor-specialization-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.specialization_color }};
+    margin: 0 0 12px;
+    font-weight: 500;
+  }
+
+  .ai-vet-doctor-description-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.description_color }};
+    line-height: 1.5;
+    margin: 0 0 16px;
+    flex-grow: 1;
+  }
+
+  .ai-vet-doctor-footer-{{ ai_gen_id }} {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-vet-doctor-price-{{ ai_gen_id }} {
+    font-size: {{ block.settings.price_size }}px;
+    color: {{ block.settings.price_color }};
+    font-weight: 700;
+  }
+
+  .ai-vet-doctor-price-label-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.description_color }};
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .ai-vet-doctor-button-{{ ai_gen_id }} {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    text-decoration: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .ai-vet-doctor-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  .ai-vet-doctor-empty-state-{{ ai_gen_id }} {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666;
+  }
+
+  .ai-vet-doctor-empty-state-{{ ai_gen_id }} p {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-vet-doctors-grid-{{ ai_gen_id }} {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ai-vet-doctors-title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.heading_size }}px * 0.8);
+    }
+
+    .ai-vet-doctors-subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<vet-doctors-{{ ai_gen_id }} class="ai-vet-doctors-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-vet-doctors-header-{{ ai_gen_id }}">
+    {% if block.settings.heading != blank %}
+      <h2 class="ai-vet-doctors-title-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+    {% endif %}
+    {% if block.settings.subtitle != blank %}
+      <div class="ai-vet-doctors-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+    {% endif %}
+  </div>
+
+  {% assign has_products = false %}
+  {% for i in (1..6) %}
+    {% assign product_key = 'doctor_' | append: i %}
+    {% assign product = block.settings[product_key] %}
+    {% if product != blank %}
+      {% assign has_products = true %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if has_products %}
+    <div class="ai-vet-doctors-grid-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% assign product_key = 'doctor_' | append: i %}
+        {% assign specialization_key = 'doctor_' | append: i | append: '_specialization' %}
+        {% assign description_key = 'doctor_' | append: i | append: '_description' %}
+        
+        {% assign product = block.settings[product_key] %}
+        {% assign specialization = block.settings[specialization_key] %}
+        {% assign description = block.settings[description_key] %}
+
+        {% if product != blank %}
+          <div class="ai-vet-doctor-card-{{ ai_gen_id }}">
+            <div class="ai-vet-doctor-image-wrapper-{{ ai_gen_id }}">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  class="ai-vet-doctor-image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="600"
+                  height="600"
+                >
+              {% else %}
+                <div class="ai-vet-doctor-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'product-1' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+              
+              {% if specialization != blank %}
+                <div class="ai-vet-doctor-specialization-badge-{{ ai_gen_id }}">
+                  {{ specialization }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="ai-vet-doctor-content-{{ ai_gen_id }}">
+              <h3 class="ai-vet-doctor-name-{{ ai_gen_id }}">{{ product.title }}</h3>
+              
+              {% if specialization != blank %}
+                <div class="ai-vet-doctor-specialization-{{ ai_gen_id }}">
+                  {{ specialization }}
+                </div>
+              {% endif %}
+
+              {% if description != blank %}
+                <div class="ai-vet-doctor-description-{{ ai_gen_id }}">
+                  {{ description }}
+                </div>
+              {% endif %}
+
+              <div class="ai-vet-doctor-footer-{{ ai_gen_id }}">
+                <div class="ai-vet-doctor-price-wrapper-{{ ai_gen_id }}">
+                  <span class="ai-vet-doctor-price-label-{{ ai_gen_id }}">Consultation Fee</span>
+                  <div class="ai-vet-doctor-price-{{ ai_gen_id }}">
+                    {{ product.price | money }}
+                  </div>
+                </div>
+                <a
+                  href="{{ product.url }}"
+                  class="ai-vet-doctor-button-{{ ai_gen_id }}"
+                >
+                  {{ block.settings.button_text }}
+                </a>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="ai-vet-doctor-empty-state-{{ ai_gen_id }}">
+      <p>Next, add vet doctor products to display</p>
+    </div>
+  {% endif %}
+</vet-doctors-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class VetDoctors{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.cards = this.querySelectorAll('.ai-vet-doctor-card-{{ ai_gen_id }}');
+        this.setupAccessibility();
+      }
+
+      setupAccessibility() {
+        this.cards.forEach((card) => {
+          card.setAttribute('role', 'article');
+        });
+      }
+    }
+
+    customElements.define('vet-doctors-{{ ai_gen_id }}', VetDoctors{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Vet doctors showcase",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Meet Our Top Vet Doctors Now"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Book trusted veterinary doctor appointments online with Petaloons. Easy booking, verified vets, quick consultations, and quality pet healthcare services for dogs, cats, and all pets."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Doctor 1"
+    },
+    {
+      "type": "product",
+      "id": "doctor_1",
+      "label": "Doctor product"
+    },
+    {
+      "type": "text",
+      "id": "doctor_1_specialization",
+      "label": "Specialization",
+      "default": "General Veterinarian"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_1_description",
+      "label": "Description",
+      "default": "Experienced in treating all types of pets with compassionate care."
+    },
+    {
+      "type": "header",
+      "content": "Doctor 2"
+    },
+    {
+      "type": "product",
+      "id": "doctor_2",
+      "label": "Doctor product"
+    },
+    {
+      "type": "text",
+      "id": "doctor_2_specialization",
+      "label": "Specialization",
+      "default": "Surgery Specialist"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_2_description",
+      "label": "Description",
+      "default": "Expert in surgical procedures and post-operative care."
+    },
+    {
+      "type": "header",
+      "content": "Doctor 3"
+    },
+    {
+      "type": "product",
+      "id": "doctor_3",
+      "label": "Doctor product"
+    },
+    {
+      "type": "text",
+      "id": "doctor_3_specialization",
+      "label": "Specialization",
+      "default": "Dental Care"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_3_description",
+      "label": "Description",
+      "default": "Specialized in pet dental health and oral surgery."
+    },
+    {
+      "type": "header",
+      "content": "Doctor 4"
+    },
+    {
+      "type": "product",
+      "id": "doctor_4",
+      "label": "Doctor product"
+    },
+    {
+      "type": "text",
+      "id": "doctor_4_specialization",
+      "label": "Specialization",
+      "default": "Emergency Care"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_4_description",
+      "label": "Description",
+      "default": "Available for urgent and emergency pet care needs."
+    },
+    {
+      "type": "header",
+      "content": "Doctor 5"
+    },
+    {
+      "type": "product",
+      "id": "doctor_5",
+      "label": "Doctor product"
+    },
+    {
+      "type": "text",
+      "id": "doctor_5_specialization",
+      "label": "Specialization",
+      "default": "Exotic Pets"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_5_description",
+      "label": "Description",
+      "default": "Specialized care for birds, reptiles, and exotic animals."
+    },
+    {
+      "type": "header",
+      "content": "Doctor 6"
+    },
+    {
+      "type": "product",
+      "id": "doctor_6",
+      "label": "Doctor product"
+    },
+    {
+      "type": "text",
+      "id": "doctor_6_specialization",
+      "label": "Specialization",
+      "default": "Dermatology"
+    },
+    {
+      "type": "textarea",
+      "id": "doctor_6_description",
+      "label": "Description",
+      "default": "Expert in treating skin conditions and allergies in pets."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Consult Now"
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 6
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "doctor_name_color",
+      "label": "Doctor name",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "specialization_color",
+      "label": "Specialization",
+      "default": "#334fb4"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "price_color",
+      "label": "Price",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge background",
+      "default": "#334fb4"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Button hover background",
+      "default": "#334fb4"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Card border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "doctor_name_size",
+      "label": "Doctor name size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "label": "Price size",
+      "min": 14,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vet doctors showcase"
+    }
+  ]
+}
+{% endschema %}

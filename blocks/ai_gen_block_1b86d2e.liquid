@@ -1,0 +1,368 @@
+{% doc %}
+  @prompt
+    Generate the below in blocks 
+    ⭐ 4.8 Rating  
+    👨‍⚕️ 10+ Years Experience  
+    🐾 500+ Pets Treated  
+    📄 Digital Prescription Provided  
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-stats-container-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+  }
+
+  .ai-stats-wrapper-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.gap }}px;
+    padding: {{ block.settings.padding }}px;
+    background-color: {{ block.settings.background_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-stat-item-{{ ai_gen_id }} {
+    display: flex;
+    align-items: center;
+    gap: {{ block.settings.icon_text_gap }}px;
+    padding: {{ block.settings.item_padding }}px;
+    background-color: {{ block.settings.item_background_color }};
+    border-radius: {{ block.settings.item_border_radius }}px;
+    text-align: {{ block.settings.text_alignment }};
+    {% if block.settings.text_alignment == 'center' %}
+      justify-content: center;
+    {% elsif block.settings.text_alignment == 'right' %}
+      justify-content: flex-end;
+    {% else %}
+      justify-content: flex-start;
+    {% endif %}
+  }
+
+  .ai-stat-icon-{{ ai_gen_id }} {
+    font-size: {{ block.settings.icon_size }}px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .ai-stat-text-{{ ai_gen_id }} {
+    color: {{ block.settings.text_color }};
+    font-size: {{ block.settings.text_size }}px;
+    font-weight: {{ block.settings.text_weight }};
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-stats-wrapper-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+  }
+{% endstyle %}
+
+<ai-stats-{{ ai_gen_id }} class="ai-stats-container-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-stats-wrapper-{{ ai_gen_id }}">
+    {% if block.settings.stat_1_enabled %}
+      <div class="ai-stat-item-{{ ai_gen_id }}">
+        <span class="ai-stat-icon-{{ ai_gen_id }}">{{ block.settings.stat_1_icon }}</span>
+        <p class="ai-stat-text-{{ ai_gen_id }}">{{ block.settings.stat_1_text }}</p>
+      </div>
+    {% endif %}
+
+    {% if block.settings.stat_2_enabled %}
+      <div class="ai-stat-item-{{ ai_gen_id }}">
+        <span class="ai-stat-icon-{{ ai_gen_id }}">{{ block.settings.stat_2_icon }}</span>
+        <p class="ai-stat-text-{{ ai_gen_id }}">{{ block.settings.stat_2_text }}</p>
+      </div>
+    {% endif %}
+
+    {% if block.settings.stat_3_enabled %}
+      <div class="ai-stat-item-{{ ai_gen_id }}">
+        <span class="ai-stat-icon-{{ ai_gen_id }}">{{ block.settings.stat_3_icon }}</span>
+        <p class="ai-stat-text-{{ ai_gen_id }}">{{ block.settings.stat_3_text }}</p>
+      </div>
+    {% endif %}
+
+    {% if block.settings.stat_4_enabled %}
+      <div class="ai-stat-item-{{ ai_gen_id }}">
+        <span class="ai-stat-icon-{{ ai_gen_id }}">{{ block.settings.stat_4_icon }}</span>
+        <p class="ai-stat-text-{{ ai_gen_id }}">{{ block.settings.stat_4_text }}</p>
+      </div>
+    {% endif %}
+  </div>
+</ai-stats-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class AiStats{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+    }
+    customElements.define('ai-stats-{{ ai_gen_id }}', AiStats{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Vet stats",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "Gap between items",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "label": "Container padding",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_padding",
+      "label": "Item padding",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f3f3f3"
+    },
+    {
+      "type": "color",
+      "id": "item_background_color",
+      "label": "Item background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Container border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "item_border_radius",
+      "label": "Item border radius",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "icon_text_gap",
+      "label": "Icon to text gap",
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "text_weight",
+      "label": "Text weight",
+      "options": [
+        { "value": "400", "label": "Normal" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semi bold" },
+        { "value": "700", "label": "Bold" }
+      ],
+      "default": "500"
+    },
+    {
+      "type": "header",
+      "content": "Stat 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat_1_enabled",
+      "label": "Enable stat 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stat_1_icon",
+      "label": "Icon",
+      "default": "⭐"
+    },
+    {
+      "type": "text",
+      "id": "stat_1_text",
+      "label": "Text",
+      "default": "4.8 Rating"
+    },
+    {
+      "type": "header",
+      "content": "Stat 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat_2_enabled",
+      "label": "Enable stat 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stat_2_icon",
+      "label": "Icon",
+      "default": "👨‍⚕️"
+    },
+    {
+      "type": "text",
+      "id": "stat_2_text",
+      "label": "Text",
+      "default": "10+ Years Experience"
+    },
+    {
+      "type": "header",
+      "content": "Stat 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat_3_enabled",
+      "label": "Enable stat 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stat_3_icon",
+      "label": "Icon",
+      "default": "🐾"
+    },
+    {
+      "type": "text",
+      "id": "stat_3_text",
+      "label": "Text",
+      "default": "500+ Pets Treated"
+    },
+    {
+      "type": "header",
+      "content": "Stat 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "stat_4_enabled",
+      "label": "Enable stat 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "stat_4_icon",
+      "label": "Icon",
+      "default": "📄"
+    },
+    {
+      "type": "text",
+      "id": "stat_4_text",
+      "label": "Text",
+      "default": "Digital Prescription Provided"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vet stats"
+    }
+  ]
+}
+{% endschema %}

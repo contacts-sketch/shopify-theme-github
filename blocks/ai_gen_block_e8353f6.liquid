@@ -1,0 +1,814 @@
+{% doc %}
+  @prompt
+    Similar to the below need common health concern for pet
+    
+    Consult top doctors online for any health concern
+    Private online consultations with verified doctors in all specialists
+    
+    View All Specialities
+    General Veterinary Care
+    General Veterinary Care
+    CONSULT NOW
+    Vaccination & Preventive Care
+    Vaccination & Preventive Care
+    CONSULT NOW
+    Orthopedic Specialist
+    Orthopedic Specialist
+    CONSULT NOW
+    Dermatology
+    Dermatology
+    CONSULT NOW
+    Internal Medicine Specialist
+    Internal Medicine Specialist
+    CONSULT NOW
+    Neurology Specialist
+    Neurology Specialist
+    CONSULT NOW
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-pet-health-concerns-{{ ai_gen_id }} {
+    display: block;
+    width: {{ block.settings.desktop_width_percent }}%;
+    max-width: 100%;
+    padding: {{ block.settings.section_padding }}px 0;
+  }
+
+  .ai-pet-health-concerns__container-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .ai-pet-health-concerns__header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.text_alignment }};
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-pet-health-concerns__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 {{ block.settings.title_spacing }}px;
+    font-weight: 600;
+  }
+
+  .ai-pet-health-concerns__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0 0 {{ block.settings.subtitle_spacing }}px;
+  }
+
+  .ai-pet-health-concerns__view-all-{{ ai_gen_id }} {
+    display: inline-block;
+    color: {{ block.settings.link_color }};
+    text-decoration: none;
+    font-size: {{ block.settings.link_size }}px;
+    margin-bottom: 20px;
+  }
+
+  .ai-pet-health-concerns__view-all-{{ ai_gen_id }}:hover {
+    text-decoration: underline;
+  }
+
+  .ai-pet-health-concerns__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-bottom: 20px;
+  }
+
+  .ai-pet-health-concerns__card-{{ ai_gen_id }} {
+    background-color: {{ block.settings.card_background }};
+    border: {{ block.settings.card_border_width }}px solid {{ block.settings.card_border_color }};
+    border-radius: {{ block.settings.card_border_radius }}px;
+    padding: {{ block.settings.card_padding }}px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .ai-pet-health-concerns__card-{{ ai_gen_id }}:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .ai-pet-health-concerns__card-image-wrapper-{{ ai_gen_id }} {
+    width: {{ block.settings.image_size }}px;
+    height: {{ block.settings.image_size }}px;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .ai-pet-health-concerns__card-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-pet-health-concerns__card-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-pet-health-concerns__card-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-pet-health-concerns__card-title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.card_title_size }}px;
+    color: {{ block.settings.card_title_color }};
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .ai-pet-health-concerns__card-button-{{ ai_gen_id }} {
+    background-color: {{ block.settings.button_background }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    padding: 10px 20px;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: {{ block.settings.button_text_size }}px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .ai-pet-health-concerns__card-button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_background }};
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-pet-health-concerns__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_tablet }}, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-pet-health-concerns__grid-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+    }
+
+    .ai-pet-health-concerns__title-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.title_size }}px * 0.8);
+    }
+
+    .ai-pet-health-concerns__subtitle-{{ ai_gen_id }} {
+      font-size: calc({{ block.settings.subtitle_size }}px * 0.9);
+    }
+  }
+{% endstyle %}
+
+<pet-health-concerns-{{ ai_gen_id }}
+  class="ai-pet-health-concerns-{{ ai_gen_id }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-pet-health-concerns__container-{{ ai_gen_id }}">
+    <div class="ai-pet-health-concerns__header-{{ ai_gen_id }}">
+      {% if block.settings.title != blank %}
+        <h2 class="ai-pet-health-concerns__title-{{ ai_gen_id }}">
+          {{ block.settings.title }}
+        </h2>
+      {% endif %}
+
+      {% if block.settings.subtitle != blank %}
+        <div class="ai-pet-health-concerns__subtitle-{{ ai_gen_id }}">
+          {{ block.settings.subtitle }}
+        </div>
+      {% endif %}
+
+      {% if block.settings.view_all_text != blank and block.settings.view_all_link != blank %}
+        <a
+          href="{{ block.settings.view_all_link }}"
+          class="ai-pet-health-concerns__view-all-{{ ai_gen_id }}"
+        >
+          {{ block.settings.view_all_text }}
+        </a>
+      {% endif %}
+    </div>
+
+    <div class="ai-pet-health-concerns__grid-{{ ai_gen_id }}">
+      {% for i in (1..6) %}
+        {% liquid
+          assign concern_enabled_key = 'concern_' | append: i | append: '_enabled'
+          assign concern_title_key = 'concern_' | append: i | append: '_title'
+          assign concern_image_key = 'concern_' | append: i | append: '_image'
+          assign concern_link_key = 'concern_' | append: i | append: '_link'
+          assign concern_button_text_key = 'concern_' | append: i | append: '_button_text'
+
+          assign concern_enabled = block.settings[concern_enabled_key]
+          assign concern_title = block.settings[concern_title_key]
+          assign concern_image = block.settings[concern_image_key]
+          assign concern_link = block.settings[concern_link_key]
+          assign concern_button_text = block.settings[concern_button_text_key]
+        %}
+
+        {% if concern_enabled %}
+          <div class="ai-pet-health-concerns__card-{{ ai_gen_id }}">
+            <div class="ai-pet-health-concerns__card-image-wrapper-{{ ai_gen_id }}">
+              {% if concern_image %}
+                <img
+                  src="{{ concern_image | image_url: width: 300 }}"
+                  alt="{{ concern_title | escape }}"
+                  class="ai-pet-health-concerns__card-image-{{ ai_gen_id }}"
+                  loading="lazy"
+                  width="300"
+                  height="300"
+                >
+              {% else %}
+                <div class="ai-pet-health-concerns__card-image-placeholder-{{ ai_gen_id }}">
+                  {{ 'image' | placeholder_svg_tag }}
+                </div>
+              {% endif %}
+            </div>
+
+            {% if concern_title != blank %}
+              <h3 class="ai-pet-health-concerns__card-title-{{ ai_gen_id }}">
+                {{ concern_title }}
+              </h3>
+            {% endif %}
+
+            {% if concern_link != blank and concern_button_text != blank %}
+              <a
+                href="{{ concern_link }}"
+                class="ai-pet-health-concerns__card-button-{{ ai_gen_id }}"
+              >
+                {{ concern_button_text }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</pet-health-concerns-{{ ai_gen_id }}>
+
+<script>
+  (function() {
+    class PetHealthConcerns{{ ai_gen_id }} extends HTMLElement {
+      constructor() {
+        super();
+      }
+
+      connectedCallback() {
+        this.cards = this.querySelectorAll('.ai-pet-health-concerns__card-{{ ai_gen_id }}');
+        this.setupEventListeners();
+      }
+
+      setupEventListeners() {
+        this.cards.forEach((card) => {
+          const button = card.querySelector('.ai-pet-health-concerns__card-button-{{ ai_gen_id }}');
+          if (button) {
+            card.addEventListener('click', (e) => {
+              if (e.target !== button) {
+                button.click();
+              }
+            });
+          }
+        });
+      }
+    }
+
+    customElements.define('pet-health-concerns-{{ ai_gen_id }}', PetHealthConcerns{{ ai_gen_id }});
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Pet health concerns",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "range",
+      "id": "desktop_width_percent",
+      "label": "Desktop width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Section padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Title",
+      "default": "Common health concerns for pets"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "title_spacing",
+      "label": "Title spacing",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Private online consultations with verified veterinarians in all specialties"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "label": "Subtitle size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_spacing",
+      "label": "Subtitle spacing",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Header spacing",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "inline_richtext",
+      "id": "view_all_text",
+      "label": "View all link text",
+      "default": "View all specialties"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    },
+    {
+      "type": "range",
+      "id": "link_size",
+      "label": "Link size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link color",
+      "default": "#334fb4"
+    },
+    {
+      "type": "header",
+      "content": "Grid layout"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_tablet",
+      "label": "Columns on tablet",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "label": "Grid gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Card style"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Border color",
+      "default": "#e0e0e0"
+    },
+    {
+      "type": "range",
+      "id": "card_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Padding",
+      "min": 12,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "image_size",
+      "label": "Image size",
+      "min": 60,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "label": "Image border radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "card_title_size",
+      "label": "Title size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Title color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Button style"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Background",
+      "default": "#334fb4"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_background",
+      "label": "Hover background",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Concern 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "concern_1_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_1_title",
+      "label": "Title",
+      "default": "General veterinary care"
+    },
+    {
+      "type": "image_picker",
+      "id": "concern_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "concern_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_1_button_text",
+      "label": "Button text",
+      "default": "Consult now"
+    },
+    {
+      "type": "header",
+      "content": "Concern 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "concern_2_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_2_title",
+      "label": "Title",
+      "default": "Vaccination & preventive care"
+    },
+    {
+      "type": "image_picker",
+      "id": "concern_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "concern_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_2_button_text",
+      "label": "Button text",
+      "default": "Consult now"
+    },
+    {
+      "type": "header",
+      "content": "Concern 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "concern_3_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_3_title",
+      "label": "Title",
+      "default": "Orthopedic specialist"
+    },
+    {
+      "type": "image_picker",
+      "id": "concern_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "concern_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_3_button_text",
+      "label": "Button text",
+      "default": "Consult now"
+    },
+    {
+      "type": "header",
+      "content": "Concern 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "concern_4_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_4_title",
+      "label": "Title",
+      "default": "Dermatology"
+    },
+    {
+      "type": "image_picker",
+      "id": "concern_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "concern_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_4_button_text",
+      "label": "Button text",
+      "default": "Consult now"
+    },
+    {
+      "type": "header",
+      "content": "Concern 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "concern_5_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_5_title",
+      "label": "Title",
+      "default": "Internal medicine specialist"
+    },
+    {
+      "type": "image_picker",
+      "id": "concern_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "concern_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_5_button_text",
+      "label": "Button text",
+      "default": "Consult now"
+    },
+    {
+      "type": "header",
+      "content": "Concern 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "concern_6_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_6_title",
+      "label": "Title",
+      "default": "Neurology specialist"
+    },
+    {
+      "type": "image_picker",
+      "id": "concern_6_image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "concern_6_link",
+      "label": "Link"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "concern_6_button_text",
+      "label": "Button text",
+      "default": "Consult now"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pet health concerns"
+    }
+  ]
+}
+{% endschema %}
