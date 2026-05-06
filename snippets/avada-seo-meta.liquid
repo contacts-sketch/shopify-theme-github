@@ -1,7 +1,7 @@
 {%- if request.page_type == 'product' -%}
 {%- unless avada_seo_ovr_product_ids contains product.id -%}
 {%- capture avada_seo_meta_title -%}{{ product.title }}{%- endcapture -%}
-{%- capture avada_seo_meta_description -%}⚡️Buy {{ product.title }} at the lowest price in {{ shop.address.country }}. Check reviews and buy {{ product.title }} today.{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}Shop {{ product.title }} at {{ shop.name }} — premium quality pet wear with fast delivery across {{ shop.address.country }}. Read reviews and order today.{%- endcapture -%}
 {%- endunless -%}
 {%- endif -%}
 {%- if request.page_type == 'collection' -%}
