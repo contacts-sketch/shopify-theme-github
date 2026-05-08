@@ -379,13 +379,8 @@
     // wa.me works on both mobile (opens app) and desktop (opens WhatsApp Web)
     var url = 'https://wa.me/' + number + '?text=' + encoded;
 
-    // Open in new tab so user stays on the website
-    var win = window.open(url, '_blank', 'noopener,noreferrer');
-
-    // Fallback: if popup was blocked, navigate the current tab
-    if (!win || win.closed || typeof win.closed === 'undefined') {
-      window.location.href = url;
-    }
+    // Always open in a new tab — never navigate the current page
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   // ---- Real-time submit button state ----
