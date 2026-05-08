@@ -83,21 +83,22 @@
 
     {%- comment -%} Contact form via Shopify's built-in endpoint {%- endcomment -%}
     {%- comment -%}
-      data-whatsapp-number: digits-only number with country code (no + or spaces).
-      Update this value to change the WhatsApp destination.
+      Plain form — no action, no Shopify contact endpoint.
+      Submission is handled entirely by JS (opens WhatsApp). No server POST.
+      data-whatsapp-number: digits-only, with country code, no spaces.
     {%- endcomment -%}
-    {% form 'contact', id: 'csrwForm', class: 'csrw-form', novalidate: true, data-whatsapp-number: '918625075493' %}
-
-      {%- comment -%} Hidden: Shopify form meta {%- endcomment -%}
-      <input type="hidden" name="contact[subject]" value="Custom Size Request — Petaloons">
+    <form
+      id="csrwForm"
+      class="csrw-form"
+      novalidate
+      data-whatsapp-number="918625075493"
+      onsubmit="return false;"
+    >
 
       {%- comment -%} Hidden: product context (populated by JS) {%- endcomment -%}
-      <input type="hidden" name="contact[product_title]"    id="csrwProductTitle">
-      <input type="hidden" name="contact[product_url]"      id="csrwProductUrl">
-      <input type="hidden" name="contact[selected_variant]" id="csrwSelectedVariant">
-
-      {%- comment -%} Hidden: compiled message body (populated by JS on submit) {%- endcomment -%}
-      <input type="hidden" name="contact[body]" id="csrwBodyField">
+      <input type="hidden" id="csrwProductTitle">
+      <input type="hidden" id="csrwProductUrl">
+      <input type="hidden" id="csrwSelectedVariant">
 
       {%- comment -%} ── Section 1 : Pet Details ── {%- endcomment -%}
       <div class="csrw-section">
@@ -372,7 +373,7 @@
         </span>
       </button>
 
-    {% endform %}
+    </form>
 
     {%- comment -%} ── Success Panel ── {%- endcomment -%}
     <div class="csrw-success" id="csrwSuccess" role="status" aria-live="polite">
