@@ -297,17 +297,9 @@
     submitBtn.classList.add('is-loading');
     submitBtn.disabled = true;
 
-    // Build formatted body (used by both WhatsApp and Shopify contact form)
+    // Build formatted data, open WhatsApp, show success
     const data = collectFormData();
-    buildContactBody(data);
-
-    // 1. Open WhatsApp in a new tab immediately — customer taps Send themselves
     openWhatsApp(data);
-
-    // 2. Submit Shopify contact form in background for email record
-    submitToShopify();
-
-    // 3. Show success state right away (don't block on Shopify response)
     showSuccess();
 
     submitBtn.classList.remove('is-loading');
@@ -335,9 +327,9 @@
       whatsapp:         get('whatsapp'),
       email:            get('contact[email]'),
       productInterested: get('product_interested'),
-      productTitle:     get('contact[product_title]'),
-      productUrl:       get('contact[product_url]'),
-      selectedVariant:  get('contact[selected_variant]'),
+      productTitle:     (document.getElementById('csrwProductTitle')    || {}).value || '',
+      productUrl:       (document.getElementById('csrwProductUrl')      || {}).value || '',
+      selectedVariant:  (document.getElementById('csrwSelectedVariant') || {}).value || '',
     };
   }
 
@@ -394,54 +386,6 @@
     if (!win || win.closed || typeof win.closed === 'undefined') {
       window.location.href = url;
     }
-  }
-
-  // ---- Build Shopify contact[body] (for email record) ----
-
-  function buildContactBody(d) {
-    var lines = [
-      'CUSTOM SIZE REQUEST — Petaloons',
-      '',
-      'PET DETAILS',
-      '  Pet Name    : ' + (d.petName    || ''),
-      '  Pet Type    : ' + (d.petType    || ''),
-      '  Breed       : ' + (d.breed      || ''),
-      '',
-      'MEASUREMENTS',
-      '  Weight      : ' + (d.weightKg      ? d.weightKg      + ' KG' : ''),
-      '  Chest       : ' + (d.chestCm       ? d.chestCm       + ' CM' : ''),
-      '  Neck        : ' + (d.neckCm        ? d.neckCm        + ' CM' : ''),
-      '  Waist       : ' + (d.waistCm       ? d.waistCm       + ' CM' : ''),
-      '  Back Length : ' + (d.backLengthCm  ? d.backLengthCm  + ' CM' : ''),
-      '',
-      'CUSTOMER',
-      '  Name      : ' + (d.customerName || ''),
-      '  WhatsApp  : ' + (d.whatsapp     || ''),
-      '  Email     : ' + (d.email        || ''),
-      '',
-      'PRODUCT',
-      '  Interested In  : ' + (d.productInterested || d.productTitle || ''),
-      '  Product URL    : ' + (d.productUrl        || ''),
-      '  Variant        : ' + (d.selectedVariant   || ''),
-    ];
-
-    var bodyField = form.querySelector('[name="contact[body]"]');
-    if (bodyField) bodyField.value = lines.join('\n');
-  }
-
-  // ---- Background Shopify contact form submission (for email record) ----
-
-  function submitToShopify() {
-    var formData = new FormData(form);
-
-    fetch('/contact', {
-      method:      'POST',
-      body:        formData,
-      credentials: 'same-origin',
-      headers:     { 'X-Requested-With': 'XMLHttpRequest' }
-    }).catch(function () {
-      // Silent — WhatsApp is the primary channel; Shopify record is secondary
-    });
   }
 
   // ---- Real-time submit button state ----
