@@ -3595,3 +3595,7 @@ details-disclosure > details {
     transform: translateX(100%) scaleX(0);
   }
 }
+
+#shop-hcaptcha-badge-container {
+  display: none !important;
+}
