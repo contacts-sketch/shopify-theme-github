@@ -593,8 +593,11 @@
 }
 
 .csrw-submit-btn:disabled {
-  opacity: 0.65;
+  opacity: 0.45;
   cursor: not-allowed;
+  box-shadow: none;
+  background: linear-gradient(135deg, #c9a99a 0%, #b08070 100%);
+  transform: none !important;
 }
 
 .csrw-submit-btn__spinner {

@@ -86,6 +86,13 @@
     // Form submit
     if (form) form.addEventListener('submit', handleSubmit);
 
+    // Real-time: enable submit only when all required fields are filled
+    if (form) {
+      form.addEventListener('input',  updateSubmitState);
+      form.addEventListener('change', updateSubmitState);
+      updateSubmitState(); // set initial state
+    }
+
     // Success close button
     const successCloseBtn = document.getElementById('csrwSuccessClose');
     if (successCloseBtn) successCloseBtn.addEventListener('click', function () {
@@ -437,6 +444,29 @@
     });
   }
 
+  // ---- Real-time submit button state ----
+
+  function updateSubmitState() {
+    var submitBtn = document.getElementById('csrwSubmitBtn');
+    if (!submitBtn || !form) return;
+
+    var allFilled = true;
+    var required = form.querySelectorAll('[data-required]');
+
+    required.forEach(function (input) {
+      if (!input.value || !input.value.trim()) allFilled = false;
+    });
+
+    // Also check email format if filled
+    var emailEl = form.querySelector('[name="contact[email]"]');
+    if (emailEl && emailEl.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailEl.value.trim())) {
+      allFilled = false;
+    }
+
+    submitBtn.disabled = !allFilled;
+    submitBtn.setAttribute('aria-disabled', String(!allFilled));
+  }
+
   // ---- Validation ----
 
   function validateForm() {
@@ -507,6 +537,7 @@
     if (successPanel) successPanel.classList.remove('is-visible');
     clearPhoto();
     hideError();
+    updateSubmitState();
   }
 
   function showError(msg) {
