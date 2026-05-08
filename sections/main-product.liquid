@@ -807,6 +807,48 @@
       }
     </script>
   </div>
+
+  {%- comment -%} FIX 14: Product JSON-LD schema for Google rich results (star ratings, price in SERPs) {%- endcomment -%}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | truncate: 200 | json }},
+    "url": {{ request.origin | append: product.url | json }},
+    "image": [
+      {%- for media in product.media limit: 5 -%}
+        {{ media.preview_image | image_url: width: 1200 | json }}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ],
+    "brand": {
+      "@type": "Brand",
+      "name": {{ product.vendor | json }}
+    },
+    "sku": {{ product.selected_or_first_available_variant.sku | json }},
+    "offers": {
+      "@type": "Offer",
+      "url": {{ request.origin | append: product.url | json }},
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "price": {{ product.selected_or_first_available_variant.price | divided_by: 100.0 | json }},
+      "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+      "availability": {% if product.available %}"https://schema.org/InStock"{% else %}"https://schema.org/OutOfStock"{% endif %},
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
+        "@type": "Organization",
+        "name": {{ shop.name | json }}
+      }
+    }
+    {%- if product.metafields.reviews.rating.value != blank -%}
+    ,"aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": {{ product.metafields.reviews.rating.value }},
+      "reviewCount": {{ product.metafields.reviews.rating_count.value | default: 1 }}
+    }
+    {%- endif -%}
+  }
+  </script>
+
 </product-info>
 
 {% schema %}
