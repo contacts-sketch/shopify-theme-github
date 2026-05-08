@@ -382,7 +382,9 @@
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
 
-    {%- comment -%} Petaloons Custom Size Request Widget {%- endcomment -%}
-    {%- render 'custom-size-request' -%}
+    {%- comment -%} Petaloons Custom Size Request Widget — hidden on book-vet-appointment page {%- endcomment -%}
+    {%- unless template.name == 'page' and page.handle == 'book-vet-appointment' -%}
+      {%- render 'custom-size-request' -%}
+    {%- endunless -%}
   </body>
 </html>
