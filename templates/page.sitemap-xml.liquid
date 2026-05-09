@@ -1,0 +1,174 @@
+{%- layout none -%}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+
+  <!-- =============================================
+       PETALOONS SITEMAP
+       Auto-generated via Shopify Liquid template.
+       Assign this template to a page with handle: sitemap-xml
+       URL: https://www.petaloons.com/pages/sitemap-xml
+       Submit to: Google Search Console → Sitemaps
+       ============================================= -->
+
+  <!-- ① HOMEPAGE — highest priority -->
+  <url>
+    <loc>{{ shop.url }}/</loc>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ② KEY LANDING PAGES — vet booking + collections index -->
+  <url>
+    <loc>{{ shop.url }}/pages/book-vet-appointment</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>{{ shop.url }}/collections/all</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ③ PRIORITY COLLECTIONS (wedding & festive — core SEO targets) -->
+
+  <url>
+    <loc>{{ shop.url }}/collections/dog-sherwani-collection-india</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>{{ shop.url }}/collections/dog-lehengas</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>{{ shop.url }}/collections/dog-couple-dress</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <url>
+    <loc>{{ shop.url }}/collections/dog-tuxedos</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <url>
+    <loc>{{ shop.url }}/collections/dog-t-shirts</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.82</priority>
+  </url>
+
+  <url>
+    <loc>{{ shop.url }}/collections/harness</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.78</priority>
+  </url>
+
+  <url>
+    <loc>{{ shop.url }}/collections/doctors-for-veterinary-services</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+
+  <!-- ④ ALL REMAINING COLLECTIONS (dynamic) -->
+  {%- for collection in collections -%}
+    {%- assign skip = false -%}
+    {%- assign skip_handles = 'frontpage,dog-sherwani-collection-india,dog-lehengas,dog-couple-dress,dog-tuxedos,dog-t-shirts,harness,doctors-for-veterinary-services' | split: ',' -%}
+    {%- for h in skip_handles -%}
+      {%- if collection.handle == h -%}{%- assign skip = true -%}{%- endif -%}
+    {%- endfor -%}
+    {%- unless skip or collection.products_count == 0 -%}
+  <url>
+    <loc>{{ shop.url }}/collections/{{ collection.handle }}</loc>
+    <lastmod>{{ collection.updated_at | date: "%Y-%m-%dT%H:%M:%S+05:30" }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.75</priority>
+  </url>
+    {%- endunless -%}
+  {%- endfor -%}
+
+  <!-- ⑤ ALL PRODUCTS (with featured image for Google image sitemap) -->
+  {%- paginate collections.all.products by 1000 -%}
+    {%- for product in collections.all.products -%}
+      {%- if product.available -%}
+  <url>
+    <loc>{{ shop.url }}/products/{{ product.handle }}</loc>
+    <lastmod>{{ product.published_at | date: "%Y-%m-%dT%H:%M:%S+05:30" }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>
+      {%- if product.tags contains 'sherwani' or product.tags contains 'lehenga' -%}0.85
+      {%- elsif product.tags contains 'tuxedo' or product.tags contains 'couple' -%}0.82
+      {%- else -%}0.75
+      {%- endif -%}
+    </priority>
+    {%- if product.featured_image -%}
+    <image:image>
+      <image:loc>https:{{ product.featured_image | image_url: width: 1200 }}</image:loc>
+      <image:title>{{ product.title | escape }}</image:title>
+      <image:caption>{{ product.description | strip_html | truncate: 200 | escape }}</image:caption>
+    </image:image>
+    {%- endif -%}
+  </url>
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endpaginate -%}
+
+  <!-- ⑥ PAGES (exclude system/utility pages) -->
+  {%- assign excluded_pages = 'cart,search,password,404,gift_card' | split: ',' -%}
+  {%- for page in pages -%}
+    {%- assign skip_page = false -%}
+    {%- for ex in excluded_pages -%}
+      {%- if page.handle == ex -%}{%- assign skip_page = true -%}{%- endif -%}
+    {%- endfor -%}
+    {%- unless skip_page -%}
+  <url>
+    <loc>{{ shop.url }}/pages/{{ page.handle }}</loc>
+    <lastmod>{{ page.published_at | date: "%Y-%m-%dT%H:%M:%S+05:30" }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>
+      {%- if page.handle == 'book-vet-appointment' -%}0.90
+      {%- elsif page.handle contains 'about' or page.handle contains 'contact' -%}0.60
+      {%- else -%}0.65
+      {%- endif -%}
+    </priority>
+  </url>
+    {%- endunless -%}
+  {%- endfor -%}
+
+  <!-- ⑦ BLOG INDEX + ALL ARTICLES (with image sitemap) -->
+  {%- for blog in blogs -%}
+  <url>
+    <loc>{{ shop.url }}/blogs/{{ blog.handle }}</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.70</priority>
+  </url>
+    {%- for article in blog.articles -%}
+  <url>
+    <loc>{{ shop.url }}/blogs/{{ blog.handle }}/{{ article.handle }}</loc>
+    <lastmod>{{ article.published_at | date: "%Y-%m-%dT%H:%M:%S+05:30" }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>
+      {%- if article.handle contains 'sherwani' or article.handle contains 'lehenga' or article.handle contains 'wedding' -%}0.82
+      {%- elsif article.handle contains 'dog' or article.handle contains 'pet' -%}0.75
+      {%- else -%}0.68
+      {%- endif -%}
+    </priority>
+    {%- if article.image -%}
+    <image:image>
+      <image:loc>https:{{ article.image | image_url: width: 1200 }}</image:loc>
+      <image:title>{{ article.title | escape }}</image:title>
+    </image:image>
+    {%- endif -%}
+  </url>
+    {%- endfor -%}
+  {%- endfor -%}
+
+</urlset>

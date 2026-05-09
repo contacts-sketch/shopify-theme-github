@@ -1,242 +1,46 @@
 {% comment %}
-  Renders the modern Petaloons desktop navigation menu.
-  Usage: {% render 'header-dropdown-menu' %}
+  Renders a standard dropdown style menu for the header.
+
+  Usage:
+  {% render 'header-dropdown-menu' %}
 {% endcomment %}
 
-<style>
-/* =============================================
-   PETALOONS — MODERN DESKTOP NAV
-   ============================================= */
-
-.ptm-nav {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  justify-content: center;
-}
-
-.ptm-nav__list {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.ptm-nav__item {
-  position: relative;
-}
-
-/* Top-level link / summary */
-.ptm-nav__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 9px 15px;
-  border-radius: 12px;
-  font-size: 14.5px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: #2a1500;
-  text-decoration: none;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  outline: none;
-  position: relative;
-  transition: background 0.18s ease, color 0.18s ease;
-  white-space: nowrap;
-  list-style: none;
-  -webkit-appearance: none;
-}
-
-/* Animated underline accent */
-.ptm-nav__link::after {
-  content: '';
-  position: absolute;
-  bottom: 5px;
-  left: 15px;
-  right: 15px;
-  height: 2px;
-  background: linear-gradient(90deg, #b8360a, #e05a10);
-  border-radius: 2px;
-  transform: scaleX(0);
-  transform-origin: left center;
-  transition: transform 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.ptm-nav__link:hover {
-  background: rgba(224, 90, 16, 0.07);
-  color: #b8360a;
-}
-
-.ptm-nav__link:hover::after,
-.ptm-nav__link--active::after {
-  transform: scaleX(1);
-}
-
-.ptm-nav__link--active {
-  color: #b8360a;
-  background: rgba(224, 90, 16, 0.06);
-}
-
-/* Caret icon */
-.ptm-caret {
-  flex-shrink: 0;
-  width: 13px;
-  height: 13px;
-  stroke: currentColor;
-  transition: transform 0.2s ease;
-  display: block;
-}
-
-details[open] > .ptm-nav__link .ptm-caret,
-details[open] > summary .ptm-caret {
-  transform: rotate(180deg);
-}
-
-/* ---- Dropdown panel ---- */
-.ptm-dropdown {
-  position: absolute;
-  top: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 210px;
-  background: #ffffff;
-  border: 1px solid rgba(0, 0, 0, 0.07);
-  border-radius: 18px;
-  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.13), 0 4px 12px rgba(0, 0, 0, 0.06);
-  padding: 8px;
-  list-style: none;
-  z-index: 200;
-  animation: ptmFadeDown 0.18s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  overflow: hidden;
-}
-
-/* Arrow pointer above dropdown */
-.ptm-dropdown::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12px;
-  height: 12px;
-  background: #ffffff;
-  border-left: 1px solid rgba(0, 0, 0, 0.07);
-  border-top: 1px solid rgba(0, 0, 0, 0.07);
-  rotate: 45deg;
-  border-radius: 3px 0 0 0;
-}
-
-@keyframes ptmFadeDown {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-}
-
-/* Dropdown items */
-.ptm-dropdown__item {
-  list-style: none;
-}
-
-.ptm-dropdown__link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 9px 14px;
-  border-radius: 11px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #2a1a00;
-  text-decoration: none;
-  transition: background 0.14s ease, color 0.14s ease;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  outline: none;
-  width: 100%;
-  text-align: left;
-  -webkit-appearance: none;
-  list-style: none;
-  line-height: 1.4;
-}
-
-.ptm-dropdown__link:hover {
-  background: rgba(224, 90, 16, 0.08);
-  color: #b8360a;
-}
-
-.ptm-dropdown__link--active {
-  background: rgba(224, 90, 16, 0.10);
-  color: #b8360a;
-  font-weight: 700;
-}
-
-.ptm-dropdown__divider {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.06);
-  margin: 6px 8px;
-}
-
-/* Sub-dropdown (3rd level) */
-.ptm-subdropdown {
-  list-style: none;
-  padding: 4px 0 4px 10px;
-  margin: 2px 0 4px 8px;
-  border-left: 2px solid rgba(224, 90, 16, 0.20);
-  animation: ptmFadeDown 0.15s ease forwards;
-}
-
-.ptm-subdropdown .ptm-dropdown__link {
-  font-size: 13px;
-  padding: 7px 12px;
-}
-
-/* Focus ring for keyboard nav */
-.ptm-nav__link:focus-visible,
-.ptm-dropdown__link:focus-visible {
-  outline: 2px solid #e05a10;
-  outline-offset: 2px;
-}
-</style>
-
-<nav class="ptm-nav header__inline-menu" role="navigation" aria-label="Main navigation">
-  <ul class="ptm-nav__list" role="list">
+<nav class="header__inline-menu">
+  <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
-      <li class="ptm-nav__item">
+      <li>
         {%- if link.links != blank -%}
           <header-menu>
             <details id="Details-HeaderMenu-{{ forloop.index }}">
               <summary
                 id="HeaderMenu-{{ link.handle }}"
-                class="ptm-nav__link{% if link.child_active %} ptm-nav__link--active{% endif %}"
-                aria-haspopup="true"
-                aria-expanded="false"
+                class="header__menu-item list-menu__item link focus-inset"
               >
-                <span>{{- link.title | escape -}}</span>
-                <svg class="ptm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                <span
+                  {%- if link.child_active %}
+                    class="header__active-menu-item"
+                  {% endif %}
+                >
+                  {{- link.title | escape -}}
+                </span>
+                {{- 'icon-caret.svg' | inline_asset_content -}}
               </summary>
               <ul
                 id="HeaderMenu-MenuList-{{ forloop.index }}"
-                class="ptm-dropdown color-{{ section.settings.menu_color_scheme }}"
+                class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
                 role="list"
                 tabindex="-1"
               >
                 {%- for childlink in link.links -%}
-                  <li class="ptm-dropdown__item">
+                  <li>
                     {%- if childlink.links == blank -%}
                       <a
                         id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
                         href="{{ childlink.url }}"
-                        class="ptm-dropdown__link{% if childlink.current %} ptm-dropdown__link--active{% endif %}"
-                        {% if childlink.current %}aria-current="page"{% endif %}
+                        class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
+                        {% if childlink.current %}
+                          aria-current="page"
+                        {% endif %}
                       >
                         {{ childlink.title | escape }}
                       </a>
@@ -244,22 +48,24 @@ details[open] > summary .ptm-caret {
                       <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
                         <summary
                           id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                          class="ptm-dropdown__link ptm-dropdown__link--has-sub"
+                          class="header__menu-item link link--text list-menu__item focus-inset caption-large"
                         >
                           <span>{{ childlink.title | escape }}</span>
-                          <svg class="ptm-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+                          {{- 'icon-caret.svg' | inline_asset_content -}}
                         </summary>
                         <ul
-                          id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}"
-                          class="ptm-subdropdown"
+                          id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                          class="header__submenu list-menu motion-reduce"
                         >
                           {%- for grandchildlink in childlink.links -%}
-                            <li class="ptm-dropdown__item">
+                            <li>
                               <a
                                 id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
                                 href="{{ grandchildlink.url }}"
-                                class="ptm-dropdown__link{% if grandchildlink.current %} ptm-dropdown__link--active{% endif %}"
-                                {% if grandchildlink.current %}aria-current="page"{% endif %}
+                                class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
+                                {% if grandchildlink.current %}
+                                  aria-current="page"
+                                {% endif %}
                               >
                                 {{ grandchildlink.title | escape }}
                               </a>
@@ -277,10 +83,18 @@ details[open] > summary .ptm-caret {
           <a
             id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
-            class="ptm-nav__link{% if link.current %} ptm-nav__link--active{% endif %}"
-            {% if link.current %}aria-current="page"{% endif %}
+            class="header__menu-item list-menu__item link link--text focus-inset"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
           >
-            <span>{{- link.title | escape -}}</span>
+            <span
+              {%- if link.current %}
+                class="header__active-menu-item"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </span>
           </a>
         {%- endif -%}
       </li>
