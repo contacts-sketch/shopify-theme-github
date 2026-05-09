@@ -1,0 +1,409 @@
+{% comment %}
+  Petaloons — Custom Size Request Widget
+  Global floating button + side drawer form
+  Compatible with Dawn theme
+{% endcomment %}
+
+{{ 'custom-size-request.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} ── Floating Button ── {%- endcomment -%}
+<button
+  class="csrw-float-btn"
+  id="csrwOpenBtn"
+  type="button"
+  aria-label="Get Custom Size Help"
+  aria-haspopup="dialog"
+  aria-controls="csrwDrawer"
+>
+  <span class="csrw-float-btn__icon" aria-hidden="true">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="50" cy="70" rx="22" ry="18"/>
+      <ellipse cx="21" cy="50" rx="11" ry="9"/>
+      <ellipse cx="79" cy="50" rx="11" ry="9"/>
+      <ellipse cx="34" cy="28" rx="10" ry="13"/>
+      <ellipse cx="66" cy="28" rx="10" ry="13"/>
+    </svg>
+  </span>
+  <span class="csrw-float-btn__text">Get Custom Size Help</span>
+</button>
+
+{%- comment -%} ── Overlay ── {%- endcomment -%}
+<div class="csrw-overlay" id="csrwOverlay" aria-hidden="true"></div>
+
+{%- comment -%} ── Side Drawer ── {%- endcomment -%}
+<div
+  class="csrw-drawer"
+  id="csrwDrawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Custom Size Request"
+  aria-hidden="true"
+>
+
+  {%- comment -%} Header {%- endcomment -%}
+  <div class="csrw-drawer__header">
+    <div class="csrw-drawer__header-left">
+      <div class="csrw-drawer__header-icon" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="50" cy="70" rx="22" ry="18"/>
+          <ellipse cx="21" cy="50" rx="11" ry="9"/>
+          <ellipse cx="79" cy="50" rx="11" ry="9"/>
+          <ellipse cx="34" cy="28" rx="10" ry="13"/>
+          <ellipse cx="66" cy="28" rx="10" ry="13"/>
+        </svg>
+      </div>
+      <div>
+        <h2 class="csrw-drawer__title">Custom Size Help</h2>
+        <p class="csrw-drawer__subtitle">Tell us about your pet — we'll find the perfect fit</p>
+      </div>
+    </div>
+    <button
+      class="csrw-drawer__close"
+      id="csrwCloseBtn"
+      type="button"
+      aria-label="Close custom size form"
+    >
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  {%- comment -%} Body {%- endcomment -%}
+  <div class="csrw-drawer__body">
+
+    {%- comment -%} Product context banner (shown on product pages via JS) {%- endcomment -%}
+    <div class="csrw-product-banner" id="csrwProductBanner" style="margin:16px 24px 0;" role="status">
+      <span class="csrw-product-banner__icon">✨</span>
+      <div class="csrw-product-banner__text">
+        <strong id="csrwBannerTitle"></strong>
+        Product details have been auto-captured from this page.
+      </div>
+    </div>
+
+    {%- comment -%} Contact form via Shopify's built-in endpoint {%- endcomment -%}
+    {%- comment -%}
+      Plain form — no action, no Shopify contact endpoint.
+      Submission is handled entirely by JS (opens WhatsApp). No server POST.
+      data-whatsapp-number: digits-only, with country code, no spaces.
+    {%- endcomment -%}
+    <form
+      id="csrwForm"
+      class="csrw-form"
+      novalidate
+      data-whatsapp-number="918625075493"
+      onsubmit="return false;"
+    >
+
+      {%- comment -%} Hidden: product context (populated by JS) {%- endcomment -%}
+      <input type="hidden" id="csrwProductTitle">
+      <input type="hidden" id="csrwProductUrl">
+      <input type="hidden" id="csrwSelectedVariant">
+
+      {%- comment -%} ── Section 1 : Pet Details ── {%- endcomment -%}
+      <div class="csrw-section">
+        <h3 class="csrw-section__title">🐶 Pet Details</h3>
+
+        <div class="csrw-grid-2">
+          <div class="csrw-field">
+            <label for="csrwPetName">
+              Pet Name <span class="csrw-required">*</span>
+            </label>
+            <input
+              type="text"
+              id="csrwPetName"
+              name="pet_name"
+              placeholder="e.g. Max"
+              data-required
+              autocomplete="off"
+            >
+            <span class="csrw-field__error-msg">Please enter your pet's name</span>
+          </div>
+
+          <div class="csrw-field">
+            <label for="csrwPetType">
+              Pet Type <span class="csrw-required">*</span>
+            </label>
+            <select id="csrwPetType" name="pet_type" data-required>
+              <option value="">Select…</option>
+              <option value="Dog">Dog</option>
+              <option value="Cat">Cat</option>
+            </select>
+            <span class="csrw-field__error-msg">Please select a pet type</span>
+          </div>
+        </div>
+
+        <div class="csrw-field" style="margin-top:12px;">
+          <label for="csrwBreed">
+            Breed <span class="csrw-required">*</span>
+          </label>
+          <input
+            type="text"
+            id="csrwBreed"
+            name="breed"
+            placeholder="e.g. Golden Retriever"
+            data-required
+            autocomplete="off"
+          >
+          <span class="csrw-field__error-msg">Please enter your pet's breed</span>
+        </div>
+      </div>
+
+      {%- comment -%} ── Section 2 : Measurements ── {%- endcomment -%}
+      <div class="csrw-section">
+        <h3 class="csrw-section__title">📏 Measurements</h3>
+
+        <div class="csrw-grid-2">
+
+          <div class="csrw-field">
+            <label for="csrwWeight">Weight <span class="csrw-required">*</span></label>
+            <div class="csrw-field__input-wrap">
+              <input
+                type="number"
+                id="csrwWeight"
+                name="weight_kg"
+                placeholder="0.0"
+                step="0.1"
+                min="0"
+                max="200"
+                data-required
+              >
+              <span class="csrw-field__unit">KG</span>
+            </div>
+            <span class="csrw-field__error-msg">Required</span>
+          </div>
+
+          <div class="csrw-field">
+            <label for="csrwChest">Chest Size <span class="csrw-required">*</span></label>
+            <div class="csrw-field__input-wrap">
+              <input
+                type="number"
+                id="csrwChest"
+                name="chest_cm"
+                placeholder="0"
+                step="0.5"
+                min="0"
+                data-required
+              >
+              <span class="csrw-field__unit">CM</span>
+            </div>
+            <span class="csrw-field__error-msg">Required</span>
+          </div>
+
+          <div class="csrw-field">
+            <label for="csrwNeck">Neck Size <span class="csrw-required">*</span></label>
+            <div class="csrw-field__input-wrap">
+              <input
+                type="number"
+                id="csrwNeck"
+                name="neck_cm"
+                placeholder="0"
+                step="0.5"
+                min="0"
+                data-required
+              >
+              <span class="csrw-field__unit">CM</span>
+            </div>
+            <span class="csrw-field__error-msg">Required</span>
+          </div>
+
+          <div class="csrw-field">
+            <label for="csrwWaist">Waist Size <span class="csrw-required">*</span></label>
+            <div class="csrw-field__input-wrap">
+              <input
+                type="number"
+                id="csrwWaist"
+                name="waist_cm"
+                placeholder="0"
+                step="0.5"
+                min="0"
+                data-required
+              >
+              <span class="csrw-field__unit">CM</span>
+            </div>
+            <span class="csrw-field__error-msg">Required</span>
+          </div>
+
+          <div class="csrw-field csrw-field--span2">
+            <label for="csrwBack">Back Length <span class="csrw-required">*</span></label>
+            <div class="csrw-field__input-wrap">
+              <input
+                type="number"
+                id="csrwBack"
+                name="back_length_cm"
+                placeholder="0"
+                step="0.5"
+                min="0"
+                data-required
+              >
+              <span class="csrw-field__unit">CM</span>
+            </div>
+            <span class="csrw-field__error-msg">Required</span>
+          </div>
+
+        </div>
+      </div>
+
+      {%- comment -%} ── Section 3 : Customer Details ── {%- endcomment -%}
+      <div class="csrw-section">
+        <h3 class="csrw-section__title">👤 Your Details</h3>
+
+        <div class="csrw-field">
+          <label for="csrwCustomerName">
+            Your Name <span class="csrw-required">*</span>
+          </label>
+          <input
+            type="text"
+            id="csrwCustomerName"
+            name="contact[name]"
+            placeholder="Full name"
+            data-required
+            autocomplete="name"
+          >
+          <span class="csrw-field__error-msg">Please enter your name</span>
+        </div>
+
+        <div class="csrw-grid-2" style="margin-top:12px;">
+
+          <div class="csrw-field">
+            <label for="csrwWhatsapp">
+              WhatsApp Number <span class="csrw-required">*</span>
+            </label>
+            <input
+              type="tel"
+              id="csrwWhatsapp"
+              name="whatsapp"
+              placeholder="+91 XXXXX XXXXX"
+              data-required
+              autocomplete="tel"
+            >
+            <span class="csrw-field__error-msg">Please enter your WhatsApp number</span>
+          </div>
+
+          <div class="csrw-field">
+            <label for="csrwEmail">
+              Email <span class="csrw-required">*</span>
+            </label>
+            <input
+              type="email"
+              id="csrwEmail"
+              name="contact[email]"
+              placeholder="your@email.com"
+              data-required
+              autocomplete="email"
+            >
+            <span class="csrw-field__error-msg">Please enter a valid email</span>
+          </div>
+
+        </div>
+
+        <div class="csrw-field" style="margin-top:12px;">
+          <label for="csrwProductInterested">
+            Product Interested In
+            <span class="csrw-optional">(optional)</span>
+          </label>
+          <input
+            type="text"
+            id="csrwProductInterested"
+            name="product_interested"
+            placeholder="e.g. Dog Jacket, Harness, T-shirt…"
+            autocomplete="off"
+          >
+        </div>
+      </div>
+
+      {%- comment -%} ── Section 4 : Pet Photo ── {%- endcomment -%}
+      <div class="csrw-section">
+        <h3 class="csrw-section__title">📸 Pet Photo</h3>
+
+        <div class="csrw-field">
+          <label>
+            Upload a Photo of Your Pet
+            <span class="csrw-optional">(optional — helps us recommend better)</span>
+          </label>
+
+          <div class="csrw-upload-area" id="csrwUploadArea">
+            <input
+              type="file"
+              name="contact[attachment]"
+              id="csrwPhotoInput"
+              accept="image/jpeg,image/png,image/webp,image/gif"
+              aria-label="Upload pet photo"
+            >
+            <div class="csrw-upload-placeholder">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="3"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+              <span>Drop photo here or <u>click to browse</u></span>
+              <small>JPEG, PNG, WEBP · max 5 MB</small>
+            </div>
+
+            <div class="csrw-upload-preview" id="csrwUploadPreview">
+              <img class="csrw-upload-preview__img" src="" alt="Pet photo preview">
+              <div class="csrw-upload-preview__info">
+                <div class="csrw-upload-preview__name"></div>
+                <div class="csrw-upload-preview__size"></div>
+              </div>
+              <button
+                type="button"
+                class="csrw-upload-preview__remove"
+                id="csrwRemovePhoto"
+                aria-label="Remove photo"
+              >
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {%- comment -%} Error message {%- endcomment -%}
+      <div class="csrw-form-error" id="csrwFormError" role="alert"></div>
+
+      {%- comment -%} Submit {%- endcomment -%}
+      <button type="submit" class="csrw-submit-btn" id="csrwSubmitBtn" disabled aria-disabled="true">
+        <span class="csrw-submit-btn__spinner" aria-hidden="true"></span>
+        <span class="csrw-submit-btn__label">
+          Send My Pet Measurement &nbsp;🐾
+        </span>
+      </button>
+
+    </form>
+
+    {%- comment -%} ── Success Panel ── {%- endcomment -%}
+    <div class="csrw-success" id="csrwSuccess" role="status" aria-live="polite">
+      <div class="csrw-success__paw" aria-hidden="true">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="50" cy="70" rx="22" ry="18"/>
+          <ellipse cx="21" cy="50" rx="11" ry="9"/>
+          <ellipse cx="79" cy="50" rx="11" ry="9"/>
+          <ellipse cx="34" cy="28" rx="10" ry="13"/>
+          <ellipse cx="66" cy="28" rx="10" ry="13"/>
+        </svg>
+      </div>
+      <div class="csrw-success__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h3 class="csrw-success__title">Thank you!</h3>
+      <p class="csrw-success__message">
+        Our <strong>Petaloons team</strong> will review your pet's measurements and get back to you with the best custom size recommendation on <strong>WhatsApp</strong>.
+      </p>
+      <button type="button" class="csrw-success__close" id="csrwSuccessClose">
+        Done
+      </button>
+    </div>
+
+    {%- comment -%} Spacer so last section clears mobile bottom bar {%- endcomment -%}
+    <div style="height:8px;" aria-hidden="true"></div>
+
+  </div>{%- comment -%} /.csrw-drawer__body {%- endcomment -%}
+</div>{%- comment -%} /.csrw-drawer {%- endcomment -%}
+
+<script src="{{ 'custom-size-request.js' | asset_url }}" defer="defer"></script>

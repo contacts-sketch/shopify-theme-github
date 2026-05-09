@@ -426,26 +426,55 @@
   customElements.define('sticky-header', StickyHeader);
 {% endjavascript %}
 
+{%- liquid
+  assign _sameAs = '' | split: ','
+  if settings.social_twitter_link != blank
+    assign _t = settings.social_twitter_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_facebook_link != blank
+    assign _t = settings.social_facebook_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_pinterest_link != blank
+    assign _t = settings.social_pinterest_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_instagram_link != blank
+    assign _t = settings.social_instagram_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_tiktok_link != blank
+    assign _t = settings.social_tiktok_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_tumblr_link != blank
+    assign _t = settings.social_tumblr_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_snapchat_link != blank
+    assign _t = settings.social_snapchat_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_youtube_link != blank
+    assign _t = settings.social_youtube_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+  if settings.social_vimeo_link != blank
+    assign _t = settings.social_vimeo_link | split: '|'
+    assign _sameAs = _sameAs | concat: _t
+  endif
+-%}
 <script type="application/ld+json">
   {
-    "@context": "http://schema.org",
+    "@context": "https://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
     {% endif %}
-    "sameAs": [
-      {{ settings.social_twitter_link | json }},
-      {{ settings.social_facebook_link | json }},
-      {{ settings.social_pinterest_link | json }},
-      {{ settings.social_instagram_link | json }},
-      {{ settings.social_tiktok_link | json }},
-      {{ settings.social_tumblr_link | json }},
-      {{ settings.social_snapchat_link | json }},
-      {{ settings.social_youtube_link | json }},
-      {{ settings.social_vimeo_link | json }}
-    ],
-    "url": {{ request.origin | append: page.url | json }}
+    "sameAs": {{ _sameAs | json }},
+    "url": {{ request.origin | append: request.path | json }}
   }
 </script>
 
@@ -453,7 +482,7 @@
   {% assign potential_action_target = request.origin | append: routes.search_url | append: '?q={search_term_string}' %}
   <script type="application/ld+json">
     {
-      "@context": "http://schema.org",
+      "@context": "https://schema.org",
       "@type": "WebSite",
       "name": {{ shop.name | json }},
       "potentialAction": {
@@ -461,7 +490,7 @@
         "target": {{ potential_action_target | json }},
         "query-input": "required name=search_term_string"
       },
-      "url": {{ request.origin | append: page.url | json }}
+      "url": {{ request.origin | json }}
     }
   </script>
 {%- endif -%}

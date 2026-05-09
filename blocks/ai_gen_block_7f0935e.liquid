@@ -289,6 +289,52 @@
   })();
 </script>
 
+{%- liquid
+  assign faq_has_items = false
+  if block.settings.faq_1_question != blank
+    assign faq_has_items = true
+  endif
+-%}
+{%- if faq_has_items -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- assign faq_sep = false -%}
+      {%- if block.settings.faq_1_question != blank -%}
+        {"@type":"Question","name":{{ block.settings.faq_1_question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.faq_1_answer | json }}}}
+        {%- assign faq_sep = true -%}
+      {%- endif -%}
+      {%- if block.settings.faq_2_question != blank -%}
+        {%- if faq_sep -%},{%- endif -%}
+        {"@type":"Question","name":{{ block.settings.faq_2_question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.faq_2_answer | json }}}}
+        {%- assign faq_sep = true -%}
+      {%- endif -%}
+      {%- if block.settings.faq_3_question != blank -%}
+        {%- if faq_sep -%},{%- endif -%}
+        {"@type":"Question","name":{{ block.settings.faq_3_question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.faq_3_answer | json }}}}
+        {%- assign faq_sep = true -%}
+      {%- endif -%}
+      {%- if block.settings.faq_4_question != blank -%}
+        {%- if faq_sep -%},{%- endif -%}
+        {"@type":"Question","name":{{ block.settings.faq_4_question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.faq_4_answer | json }}}}
+        {%- assign faq_sep = true -%}
+      {%- endif -%}
+      {%- if block.settings.faq_5_question != blank -%}
+        {%- if faq_sep -%},{%- endif -%}
+        {"@type":"Question","name":{{ block.settings.faq_5_question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.faq_5_answer | json }}}}
+        {%- assign faq_sep = true -%}
+      {%- endif -%}
+      {%- if block.settings.faq_6_question != blank -%}
+        {%- if faq_sep -%},{%- endif -%}
+        {"@type":"Question","name":{{ block.settings.faq_6_question | json }},"acceptedAnswer":{"@type":"Answer","text":{{ block.settings.faq_6_answer | json }}}}
+      {%- endif -%}
+    ]
+  }
+</script>
+{%- endif -%}
+
 {% schema %}
 {
   "name": "FAQ accordion",
