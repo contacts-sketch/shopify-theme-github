@@ -326,7 +326,7 @@
 /* DOCTORS SECTION */
 .bva-doctors { background:#fff; padding:80px 20px; }
 .bva-filter-row { display:flex; align-items:center; gap:16px; margin-bottom:20px; flex-wrap:wrap; }
-.bva-filter-tabs { display:flex; gap:8px; overflow-x:auto; flex:1; padding-bottom:4px; scrollbar-width:none; -ms-overflow-style:none; }
+.bva-filter-tabs { display:flex; gap:8px; overflow-x:auto; flex:1; min-width:0; padding-bottom:4px; scrollbar-width:none; -ms-overflow-style:none; -webkit-overflow-scrolling:touch; }
 .bva-filter-tabs::-webkit-scrollbar { display:none; }
 .bva-filter-tab { background:#f3f3f3; border:1.5px solid transparent; color:#666; font-size:13px; font-weight:600; padding:8px 18px; border-radius:40px; cursor:pointer; white-space:nowrap; transition:all .18s; font-family:inherit; flex-shrink:0; }
 .bva-filter-tab:hover { background:#eff6ff; color:#334fb4; }
@@ -507,17 +507,22 @@
   .bva-stat strong  { font-size:19px; }
   .bva-stat span    { font-size:11px; }
 
-  /* Filter row — stacked */
-  .bva-filter-row { flex-direction:column; gap:10px; align-items:stretch; }
+  /* Filter row — stacked, tabs scroll horizontally */
+  .bva-filter-row { flex-direction:column; gap:10px; align-items:stretch; overflow:hidden; }
   .bva-filter-tabs {
+    width:100%;
+    max-width:100%;
+    min-width:0;
     overflow-x:auto;
-    padding-bottom:4px;
+    padding-bottom:6px;
     gap:6px;
     scrollbar-width:none;
     -ms-overflow-style:none;
+    -webkit-overflow-scrolling:touch;
+    flex-wrap:nowrap;
   }
   .bva-filter-tabs::-webkit-scrollbar { display:none; }
-  .bva-filter-tab { font-size:12px; padding:7px 14px; }
+  .bva-filter-tab { font-size:12px; padding:7px 14px; flex-shrink:0; }
   .bva-doctor-search-wrap { width:100%; box-sizing:border-box; }
   .bva-doctor-search { flex:1; min-width:0; }
 
