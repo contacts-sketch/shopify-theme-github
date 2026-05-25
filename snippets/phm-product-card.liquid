@@ -1,0 +1,40 @@
+{%- comment -%}
+  Petaloons Homepage Product Card Snippet
+  Usage: {%- render 'phm-product-card', product: product, badge: badge -%}
+  Usage (dark): {%- render 'phm-product-card', product: product, badge: badge, dark: true -%}
+{%- endcomment -%}
+
+<div class="phm-prod-card{% if dark %} phm-prod-card--dark{% endif %}">
+  <a href="{{ product.url }}" class="phm-prod-card__img-wrap" aria-label="{{ product.title | escape }}">
+    {%- if product.featured_image -%}
+      <img
+        src="{{ product.featured_image | image_url: width: 480 }}"
+        alt="{{ product.featured_image.alt | default: product.title | escape }}"
+        loading="lazy"
+        width="480"
+        height="480"
+        class="phm-prod-card__img"
+      >
+    {%- else -%}
+      <div class="phm-prod-card__placeholder">🐾</div>
+    {%- endif -%}
+    {%- if badge != blank -%}
+      <span class="phm-prod-card__badge phm-prod-card__badge--{% if badge == 'Bestseller' %}best{% elsif badge == 'Sale' %}sale{% else %}new{% endif %}">{{ badge }}</span>
+    {%- endif -%}
+    {%- unless product.available -%}
+      <span class="phm-prod-card__badge phm-prod-card__badge--oos">Sold Out</span>
+    {%- endunless -%}
+  </a>
+  <div class="phm-prod-card__body">
+    <h3 class="phm-prod-card__title">
+      <a href="{{ product.url }}">{{ product.title | escape | truncate: 50 }}</a>
+    </h3>
+    <div class="phm-prod-card__price">
+      {{ product.price | money }}
+      {%- if product.compare_at_price > product.price -%}
+        <span class="phm-prod-card__compare">{{ product.compare_at_price | money }}</span>
+      {%- endif -%}
+    </div>
+    <a href="{{ product.url }}" class="phm-prod-card__btn" aria-label="Shop {{ product.title | escape }}">Shop Now</a>
+  </div>
+</div>
