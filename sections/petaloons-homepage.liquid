@@ -9,6 +9,9 @@
 {%- assign wedding_col = collections['wedding-collection-dog'] -%}
 {%- assign ethnic_col = collections['ethnic-wear-for-dogs'] -%}
 {%- assign bestsellers_col = collections['avada-best-sellers'] -%}
+{%- assign couple_col = collections['dog-couple-dress'] -%}
+{%- assign tuxedo_col = collections['dog-tuxedos'] -%}
+{%- assign harness_col = collections['harness'] -%}
 
 <!-- ══ STRUCTURED DATA ══ -->
 <script type="application/ld+json">
@@ -253,6 +256,147 @@
       </div>
       <div class="phm-collection-cta">
         <a href="/collections/dog-t-shirts" class="phm-btn phm-btn--primary">Browse All Dog T-Shirts →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DOG COUPLE DRESS ══ -->
+  <section class="phm-collection-section phm-section--warm" id="dog-couple-dress">
+    <div class="phm-section-inner">
+      <div class="phm-collection-hd">
+        <div>
+          <span class="phm-eyebrow phm-eyebrow--rose">Couple Goals 💑</span>
+          <h2 class="phm-section-title">Matching Dog Couple Dress</h2>
+          <p class="phm-section-sub">For the bride &amp; groom of the dog world — matching lehenga &amp; sherwani sets perfect for weddings, photo shoots and celebrations.</p>
+        </div>
+        <a href="/collections/dog-couple-dress" class="phm-btn phm-btn--outline phm-view-all">View All Couple Outfits →</a>
+      </div>
+      <div class="phm-prod-grid">
+        {%- for product in couple_col.products limit: 4 -%}
+          {%- assign badge = '' -%}
+          {%- if forloop.index == 1 -%}{%- assign badge = 'Bestseller' -%}{%- endif -%}
+          {%- if product.compare_at_price > product.price -%}{%- assign badge = 'Sale' -%}{%- endif -%}
+          {%- render 'phm-product-card', product: product, badge: badge -%}
+        {%- else -%}
+          <p class="phm-empty">No products found.</p>
+        {%- endfor -%}
+      </div>
+      <div class="phm-collection-cta">
+        <a href="/collections/dog-couple-dress" class="phm-btn phm-btn--amber">Browse All Couple Outfits →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DOG TUXEDOS ══ -->
+  <section class="phm-collection-section phm-section--dark" id="dog-tuxedos">
+    <div class="phm-section-inner">
+      <div class="phm-collection-hd phm-collection-hd--dark">
+        <div>
+          <span class="phm-eyebrow phm-eyebrow--amber">Dapper &amp; Dashing 🎩</span>
+          <h2 class="phm-section-title phm-title--white">Dog Tuxedos — Party Ready</h2>
+          <p class="phm-section-sub phm-sub--muted">Sharp, sophisticated and event-perfect. Our dog tuxedos are tailored for weddings, birthdays and every occasion that calls for a dapper look.</p>
+        </div>
+        <a href="/collections/dog-tuxedos" class="phm-btn phm-btn--white phm-view-all">View All Tuxedos →</a>
+      </div>
+      <div class="phm-prod-grid">
+        {%- for product in tuxedo_col.products limit: 4 -%}
+          {%- assign badge = '' -%}
+          {%- if forloop.index == 1 -%}{%- assign badge = 'Bestseller' -%}{%- endif -%}
+          {%- if product.compare_at_price > product.price -%}{%- assign badge = 'Sale' -%}{%- endif -%}
+          {%- render 'phm-product-card', product: product, badge: badge, dark: true -%}
+        {%- else -%}
+          <p class="phm-empty">No products found.</p>
+        {%- endfor -%}
+      </div>
+      <div class="phm-collection-cta">
+        <a href="/collections/dog-tuxedos" class="phm-btn phm-btn--amber">Browse All Dog Tuxedos →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PET HARNESS & ACCESSORIES ══ -->
+  <section class="phm-collection-section phm-section--light" id="pet-harness">
+    <div class="phm-section-inner">
+      <div class="phm-collection-hd">
+        <div>
+          <span class="phm-eyebrow">Walk in Style 🐕</span>
+          <h2 class="phm-section-title">Pet Harness &amp; Accessories</h2>
+          <p class="phm-section-sub">Safe, comfortable harnesses for daily walks. Designed for all breeds — no-pull, no-choke, padded and fully adjustable.</p>
+        </div>
+        <a href="/collections/harness" class="phm-btn phm-btn--outline phm-view-all">View All Harnesses →</a>
+      </div>
+      <div class="phm-prod-grid">
+        {%- for product in harness_col.products limit: 4 -%}
+          {%- assign badge = '' -%}
+          {%- if forloop.index == 1 -%}{%- assign badge = 'New' -%}{%- endif -%}
+          {%- if product.compare_at_price > product.price -%}{%- assign badge = 'Sale' -%}{%- endif -%}
+          {%- render 'phm-product-card', product: product, badge: badge -%}
+        {%- else -%}
+          <p class="phm-empty">No products found.</p>
+        {%- endfor -%}
+      </div>
+      <div class="phm-collection-cta">
+        <a href="/collections/harness" class="phm-btn phm-btn--primary">Shop All Harnesses →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PET CARE SERVICES ══ -->
+  <section class="phm-services" aria-label="Petaloons Pet Care Services">
+    <div class="phm-section-inner">
+      <div class="phm-section-hd">
+        <span class="phm-eyebrow">Beyond Fashion</span>
+        <h2 class="phm-section-title">Complete Pet Care, All in One Place</h2>
+        <p class="phm-section-sub">We don't just dress your dog — we keep them healthy, nourished and loved too.</p>
+      </div>
+      <div class="phm-services__grid">
+
+        <!-- AI Diet Planner Card -->
+        <div class="phm-svc-card phm-svc-card--diet">
+          <div class="phm-svc-card__header">
+            <span class="phm-svc-card__badge">🤖 AI-Powered • Free</span>
+            <div class="phm-svc-card__icon-wrap"><span class="phm-svc-card__icon">🥗</span></div>
+          </div>
+          <div class="phm-svc-card__body">
+            <h3 class="phm-svc-card__title">AI Pet Diet Planner</h3>
+            <p class="phm-svc-card__desc">Get a personalised meal plan for your dog based on breed, age, weight and health. Built on expert veterinary nutrition data — free and instant.</p>
+            <ul class="phm-svc-card__list">
+              <li>✓ Breed-specific nutrition recommendations</li>
+              <li>✓ Age &amp; weight based portion sizes</li>
+              <li>✓ Allergy-safe &amp; vet-approved meal ideas</li>
+              <li>✓ 100% free — instant results in seconds</li>
+            </ul>
+            <a href="/pages/ai-pet-diet-planner" class="phm-btn phm-btn--amber phm-svc-card__cta">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+              Get My Dog's Diet Plan →
+            </a>
+          </div>
+          <div class="phm-svc-card__decor" aria-hidden="true">🥕🥩🐟🥦</div>
+        </div>
+
+        <!-- Find a Vet Card -->
+        <div class="phm-svc-card phm-svc-card--vet">
+          <div class="phm-svc-card__header">
+            <span class="phm-svc-card__badge">🩺 Verified Vets</span>
+            <div class="phm-svc-card__icon-wrap"><span class="phm-svc-card__icon">👨‍⚕️</span></div>
+          </div>
+          <div class="phm-svc-card__body">
+            <h3 class="phm-svc-card__title">Find a Vet &amp; Book Online</h3>
+            <p class="phm-svc-card__desc">Connect with trusted, verified veterinarians for checkups, vaccinations, skin issues, dental care and emergency consultations — book a slot in minutes.</p>
+            <ul class="phm-svc-card__list">
+              <li>✓ Verified &amp; experienced doctors only</li>
+              <li>✓ Online &amp; in-clinic appointment slots</li>
+              <li>✓ Vaccination &amp; health reminders</li>
+              <li>✓ Instant booking confirmation</li>
+            </ul>
+            <a href="/pages/book-vet-appointment" class="phm-btn phm-btn--primary phm-svc-card__cta">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Find a Doctor &amp; Book →
+            </a>
+          </div>
+          <div class="phm-svc-card__decor" aria-hidden="true">💉🔬🏥🩻</div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -609,6 +753,37 @@
 .phm-cta-strip__text span { font-size:14px; color:rgba(255,255,255,.6); }
 .phm-cta-strip__actions { display:flex; gap:12px; flex-wrap:wrap; }
 
+/* ── WARM SECTION ── */
+.phm-section--warm { background:#fff8f2; }
+.phm-eyebrow--rose { color:#be123c; background:#fff1f2; }
+
+/* ── OOS badge ── */
+.phm-prod-card__badge--oos { background:#6b7280; color:#fff; }
+
+/* ── SERVICES SECTION ── */
+.phm-services { background:linear-gradient(180deg,#f7f5f2 0%,#fff 100%); padding:80px 0; }
+.phm-services__grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:stretch; }
+.phm-svc-card { border-radius:24px; padding:36px 32px 32px; position:relative; overflow:hidden; display:flex; flex-direction:column; gap:0; }
+.phm-svc-card--diet { background:linear-gradient(135deg,#fffbeb 0%,#fff7ed 100%); border:1.5px solid #fde68a; }
+.phm-svc-card--vet  { background:linear-gradient(135deg,#eff6ff 0%,#f0fdf4 100%); border:1.5px solid #bfdbfe; }
+.phm-svc-card__header { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; }
+.phm-svc-card__badge { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.08em; padding:5px 12px; border-radius:20px; }
+.phm-svc-card--diet .phm-svc-card__badge { background:#fef3c7; color:#92400e; border:1px solid #fde68a; }
+.phm-svc-card--vet  .phm-svc-card__badge { background:#dbeafe; color:#1e40af; border:1px solid #bfdbfe; }
+.phm-svc-card__icon-wrap { width:56px; height:56px; border-radius:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.phm-svc-card--diet .phm-svc-card__icon-wrap { background:rgba(254,169,16,.18); }
+.phm-svc-card--vet  .phm-svc-card__icon-wrap { background:rgba(51,79,180,.12); }
+.phm-svc-card__icon { font-size:28px; }
+.phm-svc-card__body { flex:1; display:flex; flex-direction:column; }
+.phm-svc-card__title { font-size:22px; font-weight:800; color:#121212; margin:0 0 10px; line-height:1.2; }
+.phm-svc-card__desc { font-size:15px; color:#555; line-height:1.7; margin:0 0 20px; }
+.phm-svc-card__list { list-style:none; padding:0; margin:0 0 28px; display:flex; flex-direction:column; gap:9px; }
+.phm-svc-card__list li { font-size:14px; font-weight:600; }
+.phm-svc-card--diet .phm-svc-card__list li { color:#78350f; }
+.phm-svc-card--vet  .phm-svc-card__list li { color:#1e3a5f; }
+.phm-svc-card__cta { align-self:flex-start; margin-top:auto; }
+.phm-svc-card__decor { position:absolute; bottom:18px; right:20px; font-size:24px; letter-spacing:4px; opacity:.18; pointer-events:none; user-select:none; }
+
 /* ══════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════ */
@@ -623,6 +798,7 @@
   .phm-blog-grid { grid-template-columns:repeat(2,1fr); }
   .phm-collection-hd { flex-direction:column; align-items:flex-start; gap:16px; }
   .phm-stat__div { display:none; }
+  .phm-services__grid { grid-template-columns:1fr; }
 }
 @media (max-width:768px) {
   .phm-hero { padding:64px 16px 72px; }
@@ -650,6 +826,9 @@
   .phm-why__grid { grid-template-columns:1fr; }
   .phm-faq-q { font-size:14px; padding:16px; }
   .phm-stats-bar__inner { gap:12px 20px; }
+  .phm-svc-card { padding:24px 20px 60px; }
+  .phm-svc-card__title { font-size:19px; }
+  .phm-svc-card__cta { width:100%; justify-content:center; }
 }
 @media (max-width:400px) {
   .phm-occasions__grid { grid-template-columns:repeat(2,1fr); }
