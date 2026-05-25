@@ -1,0 +1,1337 @@
+{%- comment -%}
+  SEO NOTE — Set in Shopify Admin › Pages › Book Vet Appointment › SEO:
+  Title       : Book Vet Appointment Online for Your Pet | Petaloons
+  Description : Book online vet appointments for dogs, cats & all pets on Petaloons.
+                Consult certified veterinarians from home — general care, vaccinations,
+                dermatology, surgery & more. Affordable, fast & trusted.
+  Handle      : book-vet-appointment
+{%- endcomment -%}
+
+<!-- ── Structured Data: FAQPage + MedicalOrganization ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalOrganization",
+      "name": "Petaloons Vet Consultation",
+      "url": "{{ shop.url }}/pages/book-vet-appointment",
+      "description": "Book online vet appointments for pets. Certified veterinarians available for dogs, cats and all pets.",
+      "medicalSpecialty": ["Veterinary","GeneralPractice","Surgery","Dermatology","Dentistry"],
+      "availableService": {
+        "@type": "MedicalTherapy",
+        "name": "Online Veterinary Consultation"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I book a vet appointment online on Petaloons?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply browse our verified vets, choose a specialist, pick a time slot, and confirm your booking. The entire process takes under 2 minutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are Petaloons veterinarians certified?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every vet on Petaloons is a licensed professional verified by our team. All hold valid veterinary practice licences."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which pets are covered for online vet consultation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We cover dogs, cats, birds, rabbits, and small animals. Exotic pet specialists are also available on request."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I get a prescription from an online vet?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, our licensed vets can issue digital prescriptions for most non-emergency conditions during the online consultation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the cost of an online vet consultation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Consultation fees vary by specialist and duration. Prices are displayed transparently on each vet's profile before you book."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I book emergency vet appointments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We have emergency-available vets for urgent situations. Look for the 'Available Now' badge on vet profiles for immediate consultations."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<div class="bva-page" id="petaloons-book-vet">
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════ -->
+  <section class="bva-hero">
+    <div class="bva-hero__inner">
+
+      <div class="bva-hero__badges">
+        <span class="bva-badge bva-badge--green">
+          <span class="bva-badge__dot"></span> 100+ Vets Online Now
+        </span>
+        <span class="bva-badge bva-badge--blue">✓ Certified &amp; Verified</span>
+        <span class="bva-badge bva-badge--amber">⚡ Consult in 5 Min</span>
+      </div>
+
+      <h1 class="bva-hero__title">
+        Book a Vet Appointment<br/>
+        <span class="bva-hero__title-highlight">Online — From Home</span>
+      </h1>
+
+      <p class="bva-hero__subtitle">
+        Connect with certified veterinarians for dogs, cats &amp; all pets.
+        Get expert advice, prescriptions &amp; follow-up care — any time, anywhere.
+      </p>
+
+      <!-- Search bar -->
+      <div class="bva-search-bar">
+        <div class="bva-search-bar__icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <input
+          type="text"
+          class="bva-search-bar__input"
+          placeholder="Search by speciality, symptom or vet name…"
+          id="bva-search-input"
+          aria-label="Search vets"
+        />
+        <a href="/collections/doctors-for-veterinary-services" class="bva-search-bar__btn">
+          Find a Vet
+        </a>
+      </div>
+
+      <!-- Quick speciality pills -->
+      <div class="bva-quick-pills">
+        <span class="bva-quick-label">Popular:</span>
+        <a href="/collections/doctors-for-veterinary-services" class="bva-quick-pill">General Checkup</a>
+        <a href="/collections/doctors-for-veterinary-services" class="bva-quick-pill">Vaccination</a>
+        <a href="/collections/doctors-for-veterinary-services" class="bva-quick-pill">Skin Issues</a>
+        <a href="/collections/doctors-for-veterinary-services" class="bva-quick-pill">Emergency</a>
+        <a href="/collections/doctors-for-veterinary-services" class="bva-quick-pill">Dental Care</a>
+      </div>
+
+    </div>
+
+    <!-- Hero decorative paw -->
+    <div class="bva-hero__decor" aria-hidden="true">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="50" cy="40" rx="20" ry="26" fill="currentColor" opacity=".08"/>
+        <ellipse cx="100" cy="22" rx="20" ry="26" fill="currentColor" opacity=".06"/>
+        <ellipse cx="150" cy="40" rx="20" ry="26" fill="currentColor" opacity=".05"/>
+        <ellipse cx="28" cy="88" rx="17" ry="22" fill="currentColor" opacity=".05"/>
+        <path d="M100 185 C50 155 18 118 28 85 C42 48 88 55 100 88 C112 55 158 48 172 85 C182 118 150 155 100 185Z" fill="currentColor" opacity=".07"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       STATS BAR
+  ════════════════════════════════════════════ -->
+  <section class="bva-stats">
+    <div class="bva-stats__inner">
+      <div class="bva-stat">
+        <strong>100+</strong>
+        <span>Verified Vets</span>
+      </div>
+      <div class="bva-stat__divider"></div>
+      <div class="bva-stat">
+        <strong>10,000+</strong>
+        <span>Happy Pet Parents</span>
+      </div>
+      <div class="bva-stat__divider"></div>
+      <div class="bva-stat">
+        <strong>25+</strong>
+        <span>Specialities</span>
+      </div>
+      <div class="bva-stat__divider"></div>
+      <div class="bva-stat">
+        <strong>4.8 ★</strong>
+        <span>Average Rating</span>
+      </div>
+      <div class="bva-stat__divider"></div>
+      <div class="bva-stat">
+        <strong>5 Min</strong>
+        <span>Avg. Wait Time</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       HOW IT WORKS
+  ════════════════════════════════════════════ -->
+  <section class="bva-how">
+    <div class="bva-section-inner">
+      <div class="bva-section-header">
+        <span class="bva-eyebrow">Simple Process</span>
+        <h2 class="bva-section-title">Book a Vet in 3 Easy Steps</h2>
+        <p class="bva-section-sub">From search to consultation in under 5 minutes — no waiting rooms, no stress.</p>
+      </div>
+      <div class="bva-steps">
+        <div class="bva-step">
+          <div class="bva-step__number">01</div>
+          <div class="bva-step__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="bva-step__title">Choose a Specialty</h3>
+          <p class="bva-step__desc">Browse by condition, pet type, or specialisation. Filter by availability and language.</p>
+        </div>
+        <div class="bva-step__connector" aria-hidden="true">→</div>
+        <div class="bva-step">
+          <div class="bva-step__number">02</div>
+          <div class="bva-step__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3 class="bva-step__title">Pick Your Vet</h3>
+          <p class="bva-step__desc">View profiles, ratings, experience, and fees. Read reviews from real pet parents.</p>
+        </div>
+        <div class="bva-step__connector" aria-hidden="true">→</div>
+        <div class="bva-step">
+          <div class="bva-step__number">03</div>
+          <div class="bva-step__icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3 class="bva-step__title">Book &amp; Consult</h3>
+          <p class="bva-step__desc">Pick a time slot and consult via video or chat. Get prescriptions &amp; follow-up care.</p>
+        </div>
+      </div>
+      <div class="bva-how__cta">
+        <a href="/collections/doctors-for-veterinary-services" class="bva-btn bva-btn--primary">Book a Vet Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SPECIALITIES GRID
+  ════════════════════════════════════════════ -->
+  <section class="bva-specialities">
+    <div class="bva-section-inner">
+      <div class="bva-section-header">
+        <span class="bva-eyebrow">What We Cover</span>
+        <h2 class="bva-section-title">Consult Top Vets Across All Specialities</h2>
+        <p class="bva-section-sub">From routine check-ups to complex conditions — our specialists cover it all.</p>
+      </div>
+      <div class="bva-spec-grid">
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card">
+          <div class="bva-spec-card__icon bva-spec-card__icon--blue">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <strong>General Veterinary Care</strong>
+          <span>Routine exams, health checks &amp; wellness visits</span>
+        </a>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card">
+          <div class="bva-spec-card__icon bva-spec-card__icon--green">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <strong>Vaccination &amp; Preventive Care</strong>
+          <span>Timely vaccines &amp; deworming schedules</span>
+        </a>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card">
+          <div class="bva-spec-card__icon bva-spec-card__icon--amber">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </div>
+          <strong>Dermatology</strong>
+          <span>Skin conditions, allergies &amp; coat issues</span>
+        </a>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card">
+          <div class="bva-spec-card__icon bva-spec-card__icon--red">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <strong>Emergency Care</strong>
+          <span>Urgent consultations available 24/7</span>
+        </a>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card">
+          <div class="bva-spec-card__icon bva-spec-card__icon--purple">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <strong>Orthopaedics</strong>
+          <span>Bone, joint &amp; mobility disorders</span>
+        </a>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card">
+          <div class="bva-spec-card__icon bva-spec-card__icon--teal">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+          </div>
+          <strong>Neurology</strong>
+          <span>Seizures, nerve &amp; brain conditions</span>
+        </a>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card">
+          <div class="bva-spec-card__icon bva-spec-card__icon--pink">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v1H6a3 3 0 0 0-3 3v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a3 3 0 0 0-3-3h-3V5a3 3 0 0 0-3-3z"/></svg>
+          </div>
+          <strong>Dental Care</strong>
+          <span>Oral health, scaling &amp; dental surgery</span>
+        </a>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-spec-card bva-spec-card--view-all">
+          <div class="bva-spec-card__icon bva-spec-card__icon--dark">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 8 16 12 12 16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          </div>
+          <strong>View All Specialities</strong>
+          <span>25+ more categories available</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       WHY PETALOONS
+  ════════════════════════════════════════════ -->
+  <section class="bva-why">
+    <div class="bva-section-inner bva-why__layout">
+
+      <div class="bva-why__content">
+        <span class="bva-eyebrow bva-eyebrow--light">Why Pet Parents Trust Us</span>
+        <h2 class="bva-why__title">Veterinary Care That<br/>Puts Your Pet First</h2>
+        <p class="bva-why__desc">We started Petaloons because we believe every pet deserves world-class medical care — without the stress of travel, long queues, or hidden costs.</p>
+
+        <ul class="bva-why__list">
+          <li class="bva-why__item">
+            <div class="bva-why__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>100% Verified Vets</strong>
+              <p>Every vet is licence-checked and profile-verified by our team before going live.</p>
+            </div>
+          </li>
+          <li class="bva-why__item">
+            <div class="bva-why__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>Transparent Pricing</strong>
+              <p>See the full consultation fee before you book. No hidden charges, ever.</p>
+            </div>
+          </li>
+          <li class="bva-why__item">
+            <div class="bva-why__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>Digital Prescriptions</strong>
+              <p>Receive valid prescriptions instantly after your consultation — no follow-up trips.</p>
+            </div>
+          </li>
+          <li class="bva-why__item">
+            <div class="bva-why__item-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div>
+              <strong>All Pets Welcome</strong>
+              <p>Dogs, cats, birds, rabbits, and exotic animals — we have a specialist for every pet.</p>
+            </div>
+          </li>
+        </ul>
+
+        <a href="/collections/doctors-for-veterinary-services" class="bva-btn bva-btn--white">
+          Meet Our Vets →
+        </a>
+      </div>
+
+      <div class="bva-why__cards">
+        <div class="bva-trust-card">
+          <div class="bva-trust-card__icon" aria-hidden="true">🏆</div>
+          <strong>Top-Rated Platform</strong>
+          <span>4.8★ from 2,000+ verified reviews</span>
+        </div>
+        <div class="bva-trust-card">
+          <div class="bva-trust-card__icon" aria-hidden="true">🕐</div>
+          <strong>Available 24/7</strong>
+          <span>Emergency vets online around the clock</span>
+        </div>
+        <div class="bva-trust-card">
+          <div class="bva-trust-card__icon" aria-hidden="true">📋</div>
+          <strong>Digital Records</strong>
+          <span>All consultations saved in your pet's profile</span>
+        </div>
+        <div class="bva-trust-card">
+          <div class="bva-trust-card__icon" aria-hidden="true">💊</div>
+          <strong>Instant Rx</strong>
+          <span>Valid prescriptions issued online</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ════════════════════════════════════════════ -->
+  <section class="bva-reviews">
+    <div class="bva-section-inner">
+      <div class="bva-section-header">
+        <span class="bva-eyebrow">Real Pet Parents</span>
+        <h2 class="bva-section-title">What Our Community Says</h2>
+      </div>
+      <div class="bva-reviews-grid">
+
+        <div class="bva-review-card">
+          <div class="bva-review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bva-review-card__text">"Booked a vet for my Labrador at 11 PM when he was vomiting. Got a consultation within 10 minutes. The vet was incredibly calm and helped us through the whole thing. Lifesaver!"</p>
+          <div class="bva-review-card__author">
+            <div class="bva-review-card__avatar" aria-hidden="true">P</div>
+            <div>
+              <strong>Priya Sharma</strong>
+              <span>Labrador Mom · Mumbai</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bva-review-card bva-review-card--featured">
+          <div class="bva-review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bva-review-card__text">"My cat had a skin rash and I was panicking. The dermatology vet on Petaloons diagnosed it in one session, prescribed the exact medicine, and it cleared up in a week. So relieved!"</p>
+          <div class="bva-review-card__author">
+            <div class="bva-review-card__avatar" aria-hidden="true">R</div>
+            <div>
+              <strong>Rahul Desai</strong>
+              <span>Cat Parent · Pune</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="bva-review-card">
+          <div class="bva-review-card__stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <p class="bva-review-card__text">"I live in a small town with no good vet nearby. Petaloons has been a blessing — my Golden Retriever gets regular check-ups online. The vets are thorough and genuinely caring."</p>
+          <div class="bva-review-card__author">
+            <div class="bva-review-card__avatar" aria-hidden="true">A</div>
+            <div>
+              <strong>Anjali Menon</strong>
+              <span>Golden Retriever Mom · Nashik</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FAQ
+  ════════════════════════════════════════════ -->
+  <section class="bva-faq">
+    <div class="bva-section-inner">
+      <div class="bva-section-header">
+        <span class="bva-eyebrow">Got Questions?</span>
+        <h2 class="bva-section-title">Frequently Asked Questions</h2>
+        <p class="bva-section-sub">Everything you need to know about booking a vet on Petaloons.</p>
+      </div>
+      <div class="bva-faq-list" id="bva-faq-list">
+
+        <div class="bva-faq-item">
+          <button class="bva-faq-q" aria-expanded="false">
+            How do I book a vet appointment online on Petaloons?
+            <span class="bva-faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="bva-faq-a">
+            <p>Simply browse our verified vets, choose a specialist, pick a time slot, and confirm your booking. The entire process takes under 2 minutes. You can also filter by speciality, pet type, or availability.</p>
+          </div>
+        </div>
+
+        <div class="bva-faq-item">
+          <button class="bva-faq-q" aria-expanded="false">
+            Are Petaloons veterinarians certified?
+            <span class="bva-faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="bva-faq-a">
+            <p>Yes. Every vet on Petaloons is a licensed professional verified by our team. All hold valid veterinary practice licences and are reviewed regularly for quality of care.</p>
+          </div>
+        </div>
+
+        <div class="bva-faq-item">
+          <button class="bva-faq-q" aria-expanded="false">
+            Which pets are covered for online vet consultation?
+            <span class="bva-faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="bva-faq-a">
+            <p>We cover dogs, cats, birds, rabbits, guinea pigs, and small animals. Exotic pet specialists are also available on request for reptiles and other less common pets.</p>
+          </div>
+        </div>
+
+        <div class="bva-faq-item">
+          <button class="bva-faq-q" aria-expanded="false">
+            Can I get a prescription from an online vet?
+            <span class="bva-faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="bva-faq-a">
+            <p>Yes, our licensed vets can issue digital prescriptions for most non-emergency conditions during the online consultation. Prescriptions are sent to your registered email immediately after the session.</p>
+          </div>
+        </div>
+
+        <div class="bva-faq-item">
+          <button class="bva-faq-q" aria-expanded="false">
+            What is the cost of an online vet consultation?
+            <span class="bva-faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="bva-faq-a">
+            <p>Consultation fees vary by specialist and session duration. All prices are displayed transparently on each vet's profile before you book — no hidden fees or surprises.</p>
+          </div>
+        </div>
+
+        <div class="bva-faq-item">
+          <button class="bva-faq-q" aria-expanded="false">
+            Can I book an emergency vet appointment?
+            <span class="bva-faq-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="bva-faq-a">
+            <p>Yes. We have emergency-available vets for urgent situations. Look for the green "Available Now" badge on vet profiles for immediate consultations, available around the clock.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FINAL CTA BANNER
+  ════════════════════════════════════════════ -->
+  <section class="bva-cta-banner">
+    <div class="bva-cta-banner__inner">
+      <div class="bva-cta-banner__paw" aria-hidden="true">🐾</div>
+      <h2 class="bva-cta-banner__title">Your Pet's Health Can't Wait</h2>
+      <p class="bva-cta-banner__sub">Talk to a certified vet in minutes — from the comfort of your home.</p>
+      <div class="bva-cta-banner__actions">
+        <a href="/collections/doctors-for-veterinary-services" class="bva-btn bva-btn--primary bva-btn--lg">
+          Book Vet Appointment Now
+        </a>
+        <a href="/pages/ai-pet-diet-planner" class="bva-btn bva-btn--ghost bva-btn--lg">
+          Try AI Diet Planner
+        </a>
+      </div>
+      <p class="bva-cta-banner__note">✓ No registration required &nbsp;·&nbsp; ✓ Transparent pricing &nbsp;·&nbsp; ✓ Certified vets only</p>
+    </div>
+  </section>
+
+</div><!-- /bva-page -->
+
+
+<style>
+/* ================================================================
+   BOOK VET APPOINTMENT — All styles scoped to .bva-*
+   Petaloons brand: #121212 | #334fb4 | #fea910 | #f3f3f3
+   Font: Assistant (matches theme)
+   Mobile-first breakpoint: 768px
+   ================================================================ */
+
+.bva-page {
+  font-family: 'Assistant', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #121212;
+  line-height: 1.6;
+}
+
+/* ── Shared utilities ── */
+.bva-section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.bva-eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #334fb4;
+  background: #eff6ff;
+  padding: 4px 12px;
+  border-radius: 40px;
+  margin-bottom: 12px;
+}
+
+.bva-eyebrow--light {
+  color: #fea910;
+  background: rgba(254,169,16,.15);
+}
+
+.bva-section-header {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.bva-section-title {
+  font-size: clamp(26px, 4vw, 38px);
+  font-weight: 800;
+  margin: 0 0 12px;
+  letter-spacing: -.02em;
+}
+
+.bva-section-sub {
+  font-size: 16px;
+  color: #666;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ── Buttons ── */
+.bva-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 13px 28px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform .18s, box-shadow .18s, background .18s;
+  cursor: pointer;
+  border: none;
+}
+
+.bva-btn:hover,
+.bva-btn:focus-visible {
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.bva-btn--primary {
+  background: #fea910;
+  color: #121212;
+  box-shadow: 0 4px 20px rgba(254,169,16,.3);
+}
+
+.bva-btn--primary:hover { background: #ffbe3d; box-shadow: 0 8px 28px rgba(254,169,16,.45); }
+
+.bva-btn--white {
+  background: #fff;
+  color: #121212;
+  box-shadow: 0 2px 12px rgba(0,0,0,.1);
+}
+
+.bva-btn--white:hover { box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+
+.bva-btn--ghost {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,.5);
+}
+
+.bva-btn--ghost:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+.bva-btn--lg { font-size: 16px; padding: 16px 36px; }
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.bva-hero {
+  position: relative;
+  background: linear-gradient(140deg, #0d1117 0%, #1a2238 55%, #0f172a 100%);
+  color: #fff;
+  padding: 90px 20px 100px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.bva-hero__inner {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.bva-hero__decor {
+  position: absolute;
+  top: -40px;
+  right: -60px;
+  width: 340px;
+  height: 340px;
+  color: #334fb4;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bva-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.bva-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 40px;
+  letter-spacing: .02em;
+}
+
+.bva-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: bva-pulse 2s infinite;
+}
+
+@keyframes bva-pulse {
+  0%,100% { opacity: 1; transform: scale(1); }
+  50% { opacity: .5; transform: scale(1.35); }
+}
+
+.bva-badge--green { background: rgba(34,197,94,.15); color: #4ade80; border: 1px solid rgba(34,197,94,.25); }
+.bva-badge--blue  { background: rgba(51,79,180,.25); color: #93c5fd; border: 1px solid rgba(51,79,180,.35); }
+.bva-badge--amber { background: rgba(254,169,16,.15); color: #fbbf24; border: 1px solid rgba(254,169,16,.3); }
+
+.bva-hero__title {
+  font-size: clamp(34px, 6vw, 58px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+.bva-hero__title-highlight {
+  background: linear-gradient(90deg, #fea910, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bva-hero__subtitle {
+  font-size: clamp(15px, 2.5vw, 18px);
+  color: rgba(255,255,255,.65);
+  max-width: 540px;
+  margin: 0 auto 36px;
+}
+
+/* Search bar */
+.bva-search-bar {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 50px;
+  padding: 6px 6px 6px 20px;
+  max-width: 580px;
+  margin: 0 auto 20px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.3);
+  gap: 10px;
+}
+
+.bva-search-bar__icon { color: #aaa; flex-shrink: 0; }
+
+.bva-search-bar__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #121212;
+  font-family: inherit;
+  background: transparent;
+  min-width: 0;
+}
+
+.bva-search-bar__input::placeholder { color: #aaa; }
+
+.bva-search-bar__btn {
+  background: #121212;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 12px 24px;
+  border-radius: 40px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background .18s;
+  flex-shrink: 0;
+}
+
+.bva-search-bar__btn:hover { background: #334fb4; }
+
+/* Quick pills */
+.bva-quick-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.bva-quick-label {
+  font-size: 13px;
+  color: rgba(255,255,255,.45);
+}
+
+.bva-quick-pill {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  color: rgba(255,255,255,.8);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 40px;
+  text-decoration: none;
+  transition: background .18s, border-color .18s;
+}
+
+.bva-quick-pill:hover {
+  background: rgba(254,169,16,.2);
+  border-color: rgba(254,169,16,.5);
+  color: #fbbf24;
+}
+
+/* ══════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════ */
+.bva-stats {
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 28px 20px;
+}
+
+.bva-stats__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.bva-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.bva-stat strong {
+  font-size: 22px;
+  font-weight: 800;
+  color: #121212;
+}
+
+.bva-stat span {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+.bva-stat__divider {
+  width: 1px;
+  height: 36px;
+  background: #e8e8e8;
+}
+
+/* ══════════════════════════════════════
+   HOW IT WORKS
+══════════════════════════════════════ */
+.bva-how {
+  background: #f7f5f2;
+  padding: 80px 20px;
+}
+
+.bva-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+
+.bva-step {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+  max-width: 280px;
+  box-shadow: 0 2px 16px rgba(0,0,0,.06);
+  position: relative;
+}
+
+.bva-step__number {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #334fb4;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bva-step__icon {
+  width: 60px;
+  height: 60px;
+  background: #eff6ff;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #334fb4;
+  margin: 0 auto 16px;
+}
+
+.bva-step__title {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.bva-step__desc {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.bva-step__connector {
+  font-size: 24px;
+  color: #ccc;
+  flex-shrink: 0;
+}
+
+.bva-how__cta { text-align: center; }
+
+/* ══════════════════════════════════════
+   SPECIALITIES
+══════════════════════════════════════ */
+.bva-specialities {
+  background: #fff;
+  padding: 80px 20px;
+}
+
+.bva-spec-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.bva-spec-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 20px;
+  border: 1.5px solid #ede8e0;
+  border-radius: 16px;
+  background: #fafafa;
+  text-decoration: none;
+  color: #121212;
+  transition: transform .2s, box-shadow .2s, border-color .2s, background .2s;
+}
+
+.bva-spec-card:hover,
+.bva-spec-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 32px rgba(0,0,0,.1);
+  border-color: transparent;
+  outline: none;
+}
+
+.bva-spec-card strong { font-size: 15px; font-weight: 700; }
+.bva-spec-card span { font-size: 13px; color: #777; }
+
+.bva-spec-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bva-spec-card__icon--blue   { background: #eff6ff; color: #334fb4; }
+.bva-spec-card__icon--green  { background: #f0fdf4; color: #16a34a; }
+.bva-spec-card__icon--amber  { background: #fff8ed; color: #d97706; }
+.bva-spec-card__icon--red    { background: #fef2f2; color: #dc2626; }
+.bva-spec-card__icon--purple { background: #faf5ff; color: #7c3aed; }
+.bva-spec-card__icon--teal   { background: #f0fdfa; color: #0d9488; }
+.bva-spec-card__icon--pink   { background: #fdf2f8; color: #db2777; }
+.bva-spec-card__icon--dark   { background: #f3f3f3; color: #121212; }
+
+.bva-spec-card--view-all { border-style: dashed; }
+.bva-spec-card--view-all:hover { background: #121212; color: #fff; border-color: transparent; }
+.bva-spec-card--view-all:hover .bva-spec-card__icon--dark { background: rgba(255,255,255,.1); color: #fff; }
+.bva-spec-card--view-all:hover span { color: rgba(255,255,255,.65); }
+
+/* ══════════════════════════════════════
+   WHY PETALOONS
+══════════════════════════════════════ */
+.bva-why {
+  background: linear-gradient(135deg, #1a2238 0%, #0f172a 100%);
+  color: #fff;
+  padding: 80px 20px;
+}
+
+.bva-why__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.bva-why__title {
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  margin: 0 0 16px;
+  line-height: 1.15;
+}
+
+.bva-why__desc {
+  font-size: 16px;
+  color: rgba(255,255,255,.65);
+  margin: 0 0 32px;
+}
+
+.bva-why__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bva-why__item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.bva-why__item-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(254,169,16,.2);
+  color: #fea910;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.bva-why__item strong { font-size: 15px; display: block; margin-bottom: 3px; }
+.bva-why__item p { font-size: 14px; color: rgba(255,255,255,.6); margin: 0; }
+
+.bva-why__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.bva-trust-card {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: background .2s;
+}
+
+.bva-trust-card:hover { background: rgba(255,255,255,.1); }
+
+.bva-trust-card__icon { font-size: 28px; }
+.bva-trust-card strong { font-size: 15px; font-weight: 700; }
+.bva-trust-card span { font-size: 13px; color: rgba(255,255,255,.55); }
+
+/* ══════════════════════════════════════
+   REVIEWS
+══════════════════════════════════════ */
+.bva-reviews {
+  background: #f7f5f2;
+  padding: 80px 20px;
+}
+
+.bva-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.bva-review-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 28px 24px;
+  border: 1px solid #ede8e0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.bva-review-card--featured {
+  background: #121212;
+  border-color: transparent;
+  color: #fff;
+  transform: scale(1.03);
+  box-shadow: 0 12px 40px rgba(0,0,0,.2);
+}
+
+.bva-review-card__stars { color: #fea910; font-size: 18px; letter-spacing: 2px; }
+
+.bva-review-card__text {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: inherit;
+  margin: 0;
+  flex: 1;
+}
+
+.bva-review-card--featured .bva-review-card__text { color: rgba(255,255,255,.8); }
+
+.bva-review-card__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.bva-review-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #334fb4;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.bva-review-card--featured .bva-review-card__avatar { background: #fea910; color: #121212; }
+
+.bva-review-card__author strong { font-size: 14px; display: block; }
+.bva-review-card__author span { font-size: 12px; color: #888; }
+.bva-review-card--featured .bva-review-card__author span { color: rgba(255,255,255,.5); }
+
+/* ══════════════════════════════════════
+   FAQ
+══════════════════════════════════════ */
+.bva-faq {
+  background: #fff;
+  padding: 80px 20px;
+}
+
+.bva-faq-list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bva-faq-item {
+  border: 1.5px solid #ede8e0;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: border-color .2s;
+}
+
+.bva-faq-item.bva-faq-item--open { border-color: #334fb4; }
+
+.bva-faq-q {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  color: #121212;
+  text-align: left;
+  transition: color .18s;
+}
+
+.bva-faq-item--open .bva-faq-q { color: #334fb4; }
+
+.bva-faq-icon {
+  font-size: 22px;
+  font-weight: 300;
+  flex-shrink: 0;
+  transition: transform .25s;
+  color: #999;
+}
+
+.bva-faq-item--open .bva-faq-icon { transform: rotate(45deg); color: #334fb4; }
+
+.bva-faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .3s ease, padding .3s ease;
+  padding: 0 20px;
+}
+
+.bva-faq-item--open .bva-faq-a {
+  max-height: 200px;
+  padding: 0 20px 18px;
+}
+
+.bva-faq-a p {
+  font-size: 14.5px;
+  color: #555;
+  margin: 0;
+  line-height: 1.7;
+}
+
+/* ══════════════════════════════════════
+   CTA BANNER
+══════════════════════════════════════ */
+.bva-cta-banner {
+  background: linear-gradient(135deg, #334fb4 0%, #1e3a8a 100%);
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.bva-cta-banner__inner {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.bva-cta-banner__paw {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.bva-cta-banner__title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 12px;
+  letter-spacing: -.02em;
+}
+
+.bva-cta-banner__sub {
+  font-size: 17px;
+  color: rgba(255,255,255,.7);
+  margin: 0 0 36px;
+}
+
+.bva-cta-banner__actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.bva-cta-banner__note {
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  margin: 0;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 900px) {
+  .bva-spec-grid { grid-template-columns: repeat(2, 1fr); }
+  .bva-why__layout { grid-template-columns: 1fr; gap: 40px; }
+  .bva-reviews-grid { grid-template-columns: 1fr; }
+  .bva-review-card--featured { transform: none; }
+}
+
+@media (max-width: 640px) {
+  .bva-hero { padding: 70px 16px 80px; }
+  .bva-stats__inner { gap: 14px; }
+  .bva-stat__divider { display: none; }
+  .bva-steps { flex-direction: column; }
+  .bva-step__connector { transform: rotate(90deg); }
+  .bva-spec-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .bva-spec-card { padding: 18px 14px; }
+  .bva-why__cards { grid-template-columns: 1fr 1fr; }
+  .bva-search-bar { padding: 6px 6px 6px 14px; }
+  .bva-search-bar__btn { padding: 10px 16px; font-size: 13px; }
+}
+</style>
+
+
+<script>
+(function () {
+  'use strict';
+
+  /* FAQ accordion */
+  document.querySelectorAll('.bva-faq-q').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var item = this.closest('.bva-faq-item');
+      var isOpen = item.classList.contains('bva-faq-item--open');
+      /* Close all */
+      document.querySelectorAll('.bva-faq-item').forEach(function (el) {
+        el.classList.remove('bva-faq-item--open');
+        el.querySelector('.bva-faq-q').setAttribute('aria-expanded', 'false');
+      });
+      /* Open clicked if it was closed */
+      if (!isOpen) {
+        item.classList.add('bva-faq-item--open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  /* Search bar — redirect to vet collection on Enter */
+  var searchInput = document.getElementById('bva-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        window.location.href = '/collections/doctors-for-veterinary-services';
+      }
+    });
+  }
+
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Book Vet Appointment",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Book Vet Appointment"
+    }
+  ]
+}
+{% endschema %}
