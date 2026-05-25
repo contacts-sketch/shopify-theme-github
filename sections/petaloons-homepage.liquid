@@ -78,46 +78,101 @@
 
   <!-- ══ HERO ══ -->
   <section class="phm-hero" aria-label="Petaloons — India's #1 Dog Fashion Brand">
-    <div class="phm-hero__decor phm-hero__decor--tl" aria-hidden="true">
-      <svg viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="1" stroke-dasharray="8 6" opacity=".15"/><circle cx="100" cy="100" r="50" stroke="currentColor" stroke-width="1" opacity=".1"/><circle cx="100" cy="100" r="20" fill="currentColor" opacity=".05"/></svg>
-    </div>
-    <div class="phm-hero__decor phm-hero__decor--br" aria-hidden="true">
-      <svg viewBox="0 0 200 200" fill="none"><path d="M40 40 L160 40 L160 160 L40 160 Z" stroke="currentColor" stroke-width="1" stroke-dasharray="6 4" opacity=".12"/><path d="M60 60 L140 60 L140 140 L60 140 Z" stroke="currentColor" stroke-width="1" opacity=".08"/></svg>
+    <div class="phm-hero__glow phm-hero__glow--tl" aria-hidden="true"></div>
+    <div class="phm-hero__glow phm-hero__glow--br" aria-hidden="true"></div>
+    <div class="phm-hero__pattern" aria-hidden="true">
+      <svg width="100%" height="100%" viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice"><defs><pattern id="paw-grid" width="60" height="60" patternUnits="userSpaceOnUse"><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.08)"/><circle cx="30" cy="30" r="8" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(#paw-grid)"/></svg>
     </div>
 
     <div class="phm-hero__inner">
-      <div class="phm-hero__badges">
-        <span class="phm-badge phm-badge--amber">🇮🇳 Made in India</span>
-        <span class="phm-badge phm-badge--green"><span class="phm-badge__dot"></span>10,000+ Happy Pet Parents</span>
-        <span class="phm-badge phm-badge--blue">⭐ 4.8 Rated Brand</span>
+      <!-- LEFT: Text content -->
+      <div class="phm-hero__content">
+        <div class="phm-hero__badges">
+          <span class="phm-badge phm-badge--frosted">🇮🇳 Made in India</span>
+          <span class="phm-badge phm-badge--frosted"><span class="phm-badge__dot"></span>10,000+ Happy Pet Parents</span>
+          <span class="phm-badge phm-badge--gold">⭐ 4.8 Rated</span>
+        </div>
+
+        <h1 class="phm-hero__title">
+          Dress Your Dog<br>
+          <span class="phm-hero__title-shine">Like Royalty</span>
+        </h1>
+
+        <p class="phm-hero__sub">India's finest handcrafted dog lehengas, sherwanis &amp; t-shirts. Premium quality, every breed, pan-India delivery. 🐾</p>
+
+        <div class="phm-hero__kw-row">
+          <a href="/collections/dog-lehengas" class="phm-hero__kw-pill">👗 Dog Lehenga</a>
+          <a href="/collections/dog-sherwani-collection-india" class="phm-hero__kw-pill">🤵 Dog Sherwani</a>
+          <a href="/collections/dog-t-shirts" class="phm-hero__kw-pill">👕 Dog T-Shirts</a>
+        </div>
+
+        <div class="phm-hero__ctas">
+          <a href="/collections/dog-lehengas" class="phm-btn phm-btn--hero-primary">
+            Shop Now →
+          </a>
+          <a href="/collections/all" class="phm-btn phm-btn--hero-secondary">View All Outfits</a>
+        </div>
+
+        <div class="phm-hero__trust">
+          <div class="phm-trust-item"><span>✓</span> Free Shipping ₹999+</div>
+          <div class="phm-trust-item"><span>✓</span> Easy Returns</div>
+          <div class="phm-trust-item"><span>✓</span> Secure Payments</div>
+          <div class="phm-trust-item"><span>✓</span> Pan-India Delivery</div>
+        </div>
       </div>
 
-      <h1 class="phm-hero__title">
-        India's #1 <span class="phm-hero__title-line">Dog Fashion Brand</span>
-      </h1>
-      <p class="phm-hero__kw">
-        <a href="/collections/dog-lehengas" class="phm-hero__kw-link">Dog Lehenga</a>
-        <span class="phm-hero__kw-dot">·</span>
-        <a href="/collections/dog-sherwani-collection-india" class="phm-hero__kw-link">Dog Sherwani</a>
-        <span class="phm-hero__kw-dot">·</span>
-        <a href="/collections/dog-t-shirts" class="phm-hero__kw-link">Dog T-Shirts</a>
-      </p>
-      <p class="phm-hero__sub">Handcrafted ethnic &amp; casual wear for dogs — from grand wedding sherwanis to festive lehengas and everyday tees. Your pet deserves to dress like royalty. 🐾</p>
+      <!-- RIGHT: Product image showcase -->
+      <div class="phm-hero__showcase" aria-label="Featured dog fashion outfits">
+        <div class="phm-hero__showcase-main">
+          <a href="/collections/dog-lehengas" class="phm-hpc phm-hpc--lehenga" aria-label="Shop Dog Lehenga">
+            <div class="phm-hpc__img-wrap">
+              <img src="https://cdn.shopify.com/s/files/1/0611/1107/4890/files/1_f1002a56-141b-4b90-bb08-71278dd3a339.png?v=1751111331"
+                   alt="Shih Tzu wearing designer gold dog lehenga by Petaloons"
+                   loading="eager" fetchpriority="high" width="400" height="500">
+            </div>
+            <div class="phm-hpc__label">
+              <span class="phm-hpc__cat">👗 Dog Lehenga</span>
+              <span class="phm-hpc__cta">Shop →</span>
+            </div>
+          </a>
+        </div>
 
-      <div class="phm-hero__ctas">
-        <a href="/collections/dog-lehengas" class="phm-btn phm-btn--amber phm-btn--lg">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Shop Dog Lehenga
-        </a>
-        <a href="/collections/dog-sherwani-collection-india" class="phm-btn phm-btn--white phm-btn--lg">Shop Dog Sherwani</a>
-        <a href="/collections/dog-t-shirts" class="phm-btn phm-btn--ghost phm-btn--lg">Shop T-Shirts</a>
-      </div>
+        <div class="phm-hero__showcase-side">
+          <a href="/collections/dog-sherwani-collection-india" class="phm-hpc phm-hpc--sherwani" aria-label="Shop Dog Sherwani">
+            <div class="phm-hpc__img-wrap">
+              <img src="https://cdn.shopify.com/s/files/1/0611/1107/4890/files/2_46f7ba19-e4ea-4982-aafb-6d74e5c22a09.png?v=1774954499"
+                   alt="Dog wearing maroon velvet sherwani for wedding by Petaloons"
+                   loading="eager" fetchpriority="high" width="320" height="380">
+            </div>
+            <div class="phm-hpc__label">
+              <span class="phm-hpc__cat">🤵 Dog Sherwani</span>
+              <span class="phm-hpc__cta">Shop →</span>
+            </div>
+          </a>
 
-      <div class="phm-hero__trust">
-        <div class="phm-trust-item"><span>✓</span> Free Shipping ₹999+</div>
-        <div class="phm-trust-item"><span>✓</span> Easy Returns</div>
-        <div class="phm-trust-item"><span>✓</span> Secure Payments</div>
-        <div class="phm-trust-item"><span>✓</span> Pan-India Delivery</div>
+          <a href="/collections/dog-t-shirts" class="phm-hpc phm-hpc--tshirt" aria-label="Shop Dog T-Shirts">
+            <div class="phm-hpc__img-wrap">
+              <img src="https://cdn.shopify.com/s/files/1/0611/1107/4890/files/baseball-style-t-shirt-for-dogs-_2.jpg?v=1749023686"
+                   alt="Dog wearing sports jersey t-shirt by Petaloons"
+                   loading="lazy" width="320" height="280">
+            </div>
+            <div class="phm-hpc__label">
+              <span class="phm-hpc__cat">👕 Dog T-Shirt</span>
+              <span class="phm-hpc__cta">Shop →</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- Floating rating pill -->
+        <div class="phm-hero__fpill phm-hero__fpill--rating" aria-label="Customer rating">
+          <span class="phm-hero__fstars">★★★★★</span>
+          <span>4.8 · 2,000+ Reviews</span>
+        </div>
+
+        <!-- Floating new badge -->
+        <div class="phm-hero__fnew" aria-hidden="true">
+          ✨ New<br>Collection<br>2026
+        </div>
       </div>
     </div>
   </section>
@@ -602,30 +657,67 @@
 .phm-btn--ghost:hover { border-color:#fff; background:rgba(255,255,255,.08); }
 .phm-btn--lg { font-size:16px; padding:15px 34px; }
 
-/* ── HERO ── */
-.phm-hero { position:relative; background:linear-gradient(140deg,#0d1117 0%,#1a2238 50%,#0f172a 100%); color:#fff; padding:100px 24px 110px; text-align:center; overflow:hidden; }
-.phm-hero__decor { position:absolute; width:280px; height:280px; pointer-events:none; color:#334fb4; }
-.phm-hero__decor--tl { top:-60px; left:-60px; }
-.phm-hero__decor--br { bottom:-60px; right:-60px; transform:rotate(45deg); }
-.phm-hero__inner { position:relative; z-index:2; max-width:780px; margin:0 auto; }
-.phm-hero__badges { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:28px; }
+/* ── HERO (Orange/Saffron Theme) ── */
+.phm-hero { position:relative; background:linear-gradient(140deg,#6b2200 0%,#b84500 28%,#de7200 58%,#fea910 82%,#ffd438 100%); color:#fff; padding:76px 24px 90px; overflow:hidden; }
+.phm-hero__glow { position:absolute; border-radius:50%; pointer-events:none; }
+.phm-hero__glow--tl { width:700px; height:700px; top:-280px; left:-200px; background:radial-gradient(circle,rgba(255,255,255,.10) 0%,transparent 65%); }
+.phm-hero__glow--br { width:500px; height:500px; bottom:-200px; right:-150px; background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 65%); }
+.phm-hero__pattern { position:absolute; inset:0; pointer-events:none; z-index:0; }
+.phm-hero__inner { position:relative; z-index:2; max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; }
+.phm-hero__content { display:flex; flex-direction:column; gap:0; }
+/* Badges */
+.phm-hero__badges { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px; }
 .phm-badge { display:inline-flex; align-items:center; gap:6px; font-size:12.5px; font-weight:600; padding:6px 14px; border-radius:40px; }
-.phm-badge__dot { width:8px; height:8px; border-radius:50%; background:currentColor; animation:phm-pulse 2s infinite; }
-@keyframes phm-pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.35)} }
-.phm-badge--amber { background:rgba(254,169,16,.15); color:#fbbf24; border:1px solid rgba(254,169,16,.3); }
-.phm-badge--green  { background:rgba(34,197,94,.15); color:#4ade80; border:1px solid rgba(34,197,94,.25); }
-.phm-badge--blue   { background:rgba(51,79,180,.25); color:#93c5fd; border:1px solid rgba(51,79,180,.35); }
-.phm-hero__title { font-size:clamp(36px,6vw,64px); font-weight:900; line-height:1.05; letter-spacing:-.03em; margin:0 0 12px; color:#fff; }
-.phm-hero__title-line { display:block; background:linear-gradient(90deg,#fea910,#f97316); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.phm-hero__kw { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; margin:0 0 20px; font-size:16px; font-weight:600; }
-.phm-hero__kw-link { color:rgba(255,255,255,.75); text-decoration:none; transition:color .18s; }
-.phm-hero__kw-link:hover { color:#fea910; }
-.phm-hero__kw-dot { color:rgba(255,255,255,.25); }
-.phm-hero__sub { font-size:clamp(15px,2.5vw,18px); color:rgba(255,255,255,.65); max-width:600px; margin:0 auto 36px; }
-.phm-hero__ctas { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:32px; }
-.phm-hero__trust { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
-.phm-trust-item { font-size:13px; color:rgba(255,255,255,.5); display:flex; align-items:center; gap:6px; }
-.phm-trust-item span { color:#4ade80; font-weight:700; }
+.phm-badge__dot { width:7px; height:7px; border-radius:50%; background:currentColor; animation:phm-pulse 2s infinite; }
+@keyframes phm-pulse { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)} }
+.phm-badge--frosted { background:rgba(0,0,0,.22); color:#fff; border:1px solid rgba(255,255,255,.28); backdrop-filter:blur(8px); }
+.phm-badge--gold    { background:rgba(255,220,50,.25); color:#fff8c0; border:1px solid rgba(255,220,50,.45); }
+/* Title */
+.phm-hero__title { font-size:clamp(38px,5.5vw,72px); font-weight:900; line-height:1.0; letter-spacing:-.03em; margin:0 0 16px; color:#fff; text-shadow:0 3px 24px rgba(0,0,0,.25); }
+.phm-hero__title-shine { display:block; background:linear-gradient(90deg,#fff8c0,#ffe870,#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+/* Subtitle */
+.phm-hero__sub { font-size:clamp(15px,2vw,18px); color:rgba(255,255,255,.88); margin:0 0 26px; line-height:1.65; max-width:480px; }
+/* Keyword pills */
+.phm-hero__kw-row { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+.phm-hero__kw-pill { background:rgba(0,0,0,.22); color:#fff; padding:7px 16px; border-radius:50px; font-size:13px; font-weight:700; text-decoration:none; border:1.5px solid rgba(255,255,255,.32); backdrop-filter:blur(6px); transition:background .18s,border-color .18s; }
+.phm-hero__kw-pill:hover { background:rgba(0,0,0,.38); border-color:rgba(255,255,255,.6); }
+/* CTAs */
+.phm-hero__ctas { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:30px; }
+.phm-btn--hero-primary { background:#fff; color:#9a3500; font-weight:800; font-size:15px; padding:14px 34px; border-radius:50px; text-decoration:none; box-shadow:0 10px 32px rgba(0,0,0,.22); transition:transform .18s,box-shadow .18s; display:inline-flex; align-items:center; gap:7px; }
+.phm-btn--hero-primary:hover { transform:translateY(-3px); box-shadow:0 16px 40px rgba(0,0,0,.3); background:#fff8f0; }
+.phm-btn--hero-secondary { background:rgba(0,0,0,.22); color:#fff; font-weight:700; font-size:15px; padding:14px 28px; border-radius:50px; text-decoration:none; border:2px solid rgba(255,255,255,.38); backdrop-filter:blur(6px); transition:background .18s,border-color .18s; display:inline-flex; align-items:center; }
+.phm-btn--hero-secondary:hover { background:rgba(0,0,0,.38); border-color:#fff; }
+/* Trust */
+.phm-hero__trust { display:flex; gap:18px; flex-wrap:wrap; }
+.phm-trust-item { font-size:13px; color:rgba(255,255,255,.72); display:flex; align-items:center; gap:5px; }
+.phm-trust-item span { color:#fff; font-weight:800; }
+
+/* ── HERO PRODUCT SHOWCASE ── */
+.phm-hero__showcase { position:relative; display:grid; grid-template-columns:1.1fr 0.9fr; gap:14px; align-items:start; }
+.phm-hero__showcase-side { display:flex; flex-direction:column; gap:14px; }
+/* Product cards */
+.phm-hpc { display:block; border-radius:20px; overflow:hidden; background:#fff; text-decoration:none; box-shadow:0 20px 54px rgba(0,0,0,.28); border:3px solid rgba(255,255,255,.75); transition:transform .28s ease,box-shadow .28s ease; position:relative; }
+.phm-hpc:hover { box-shadow:0 28px 66px rgba(0,0,0,.35); }
+.phm-hpc--lehenga { transform:rotate(-2.5deg); }
+.phm-hpc--lehenga:hover { transform:rotate(0deg) scale(1.03) translateY(-5px); }
+.phm-hpc--sherwani { transform:rotate(2deg); }
+.phm-hpc--sherwani:hover { transform:rotate(0deg) scale(1.03) translateY(-5px); }
+.phm-hpc--tshirt { transform:rotate(-1.5deg); }
+.phm-hpc--tshirt:hover { transform:rotate(0deg) scale(1.03) translateY(-5px); }
+.phm-hpc__img-wrap { width:100%; overflow:hidden; }
+.phm-hpc__img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
+.phm-hpc:hover .phm-hpc__img-wrap img { transform:scale(1.06); }
+.phm-hpc--lehenga .phm-hpc__img-wrap { height:310px; }
+.phm-hpc--sherwani .phm-hpc__img-wrap { height:208px; }
+.phm-hpc--tshirt .phm-hpc__img-wrap { height:162px; object-fit:contain; }
+.phm-hpc__label { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:#fff; }
+.phm-hpc__cat { font-size:13px; font-weight:700; color:#333; }
+.phm-hpc__cta { font-size:12px; font-weight:800; color:#b84500; }
+/* Floating pills */
+.phm-hero__fpill { position:absolute; background:#fff; border-radius:50px; display:flex; align-items:center; gap:8px; font-size:13px; font-weight:700; color:#121212; box-shadow:0 8px 28px rgba(0,0,0,.18); white-space:nowrap; z-index:10; }
+.phm-hero__fpill--rating { bottom:-14px; left:-16px; padding:10px 16px; }
+.phm-hero__fstars { color:#fea910; font-size:14px; letter-spacing:1px; }
+.phm-hero__fnew { position:absolute; top:-14px; right:-8px; background:linear-gradient(135deg,#ffe566,#fea910); color:#6b2200; font-size:11px; font-weight:900; line-height:1.45; text-align:center; padding:10px 14px; border-radius:14px; box-shadow:0 6px 20px rgba(254,169,16,.55); border:2px solid rgba(255,255,255,.75); z-index:10; }
 
 /* ── STATS BAR ── */
 .phm-stats-bar { background:#fff; border-bottom:1px solid #ede8e0; padding:24px 0; }
@@ -790,6 +882,10 @@
 @media (max-width:1100px) {
   .phm-occasions__grid { grid-template-columns:repeat(3,1fr); }
   .phm-why__grid { grid-template-columns:repeat(2,1fr); }
+  .phm-hero__inner { gap:36px; }
+  .phm-hpc--lehenga .phm-hpc__img-wrap { height:260px; }
+  .phm-hpc--sherwani .phm-hpc__img-wrap { height:170px; }
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:136px; }
 }
 @media (max-width:900px) {
   .phm-prod-grid { grid-template-columns:repeat(2,1fr); gap:16px; }
@@ -799,12 +895,27 @@
   .phm-collection-hd { flex-direction:column; align-items:flex-start; gap:16px; }
   .phm-stat__div { display:none; }
   .phm-services__grid { grid-template-columns:1fr; }
+  /* Hero stacks on tablet */
+  .phm-hero { padding:60px 20px 72px; }
+  .phm-hero__inner { grid-template-columns:1fr; gap:44px; }
+  .phm-hero__showcase { grid-template-columns:repeat(3,1fr); }
+  .phm-hero__showcase-main,.phm-hero__showcase-side { display:contents; }
+  .phm-hpc--lehenga .phm-hpc__img-wrap { height:200px; }
+  .phm-hpc--sherwani .phm-hpc__img-wrap { height:200px; }
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:200px; }
+  .phm-hero__fpill--rating { bottom:-10px; left:10px; }
+  .phm-hero__fnew { top:-10px; right:10px; }
 }
 @media (max-width:768px) {
-  .phm-hero { padding:64px 16px 72px; }
-  .phm-hero__ctas { flex-direction:column; align-items:center; gap:10px; }
-  .phm-btn--lg { width:100%; max-width:320px; justify-content:center; }
+  .phm-hero { padding:52px 16px 64px; }
+  .phm-hero__ctas { flex-direction:column; align-items:flex-start; gap:10px; }
+  .phm-btn--hero-primary,.phm-btn--hero-secondary { width:100%; max-width:320px; justify-content:center; }
   .phm-hero__trust { gap:12px; }
+  .phm-hero__showcase { grid-template-columns:repeat(3,1fr); gap:10px; }
+  .phm-hpc--lehenga,.phm-hpc--sherwani,.phm-hpc--tshirt { transform:none !important; }
+  .phm-hpc--lehenga .phm-hpc__img-wrap,
+  .phm-hpc--sherwani .phm-hpc__img-wrap,
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:160px; }
   .phm-occasions__grid { grid-template-columns:repeat(3,1fr); gap:10px; }
   .phm-occ-card { padding:20px 10px; }
   .phm-occ-card__icon { font-size:24px; }
@@ -818,7 +929,15 @@
   .phm-section-inner { padding:0 16px; }
 }
 @media (max-width:640px) {
-  .phm-hero { padding:52px 14px 60px; }
+  .phm-hero { padding:44px 14px 56px; }
+  .phm-hero__showcase { grid-template-columns:repeat(3,1fr); gap:8px; }
+  .phm-hpc--lehenga .phm-hpc__img-wrap,
+  .phm-hpc--sherwani .phm-hpc__img-wrap,
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:130px; }
+  .phm-hpc__label { padding:7px 10px; }
+  .phm-hpc__cat { font-size:11px; }
+  .phm-hero__fpill { font-size:11px; padding:7px 12px; }
+  .phm-hero__fnew { font-size:10px; padding:7px 10px; }
   .phm-occasions__grid { grid-template-columns:repeat(2,1fr); }
   .phm-prod-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
   .phm-prod-card__body { padding:12px; gap:6px; }
