@@ -12,6 +12,7 @@
 {%- assign couple_col = collections['dog-couple-dress'] -%}
 {%- assign tuxedo_col = collections['dog-tuxedos'] -%}
 {%- assign harness_col = collections['harness'] -%}
+{%- assign bandana_col = collections['dog-bandanas'] -%}
 
 {%- comment -%} Build sameAs array safely (no trailing comma) {%- endcomment -%}
 {%- assign phm_same_as = '' -%}
@@ -295,6 +296,11 @@
           <strong>Birthday</strong>
           <span>19+ styles</span>
         </a>
+        <a href="/collections/dog-bandanas" class="phm-occ-card phm-occ-card--7">
+          <div class="phm-occ-card__icon">🧣</div>
+          <strong>Dog Bandanas</strong>
+          <span>{{ bandana_col.products_count }}+ styles</span>
+        </a>
       </div>
     </div>
   </section>
@@ -457,6 +463,33 @@
       </div>
       <div class="phm-collection-cta">
         <a href="/collections/harness" class="phm-btn phm-btn--primary">Shop All Harnesses →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ DOG BANDANAS ══ -->
+  <section class="phm-collection-section phm-section--bandana" id="dog-bandanas">
+    <div class="phm-section-inner">
+      <div class="phm-collection-hd">
+        <div>
+          <span class="phm-eyebrow phm-eyebrow--violet">Accessorise 🐾</span>
+          <h2 class="phm-section-title">Dog Bandanas — Style Around the Neck</h2>
+          <p class="phm-section-sub">The easiest way to make your dog look adorable instantly. Soft, washable bandanas in festive, casual and seasonal prints — for every mood and every breed.</p>
+        </div>
+        <a href="/collections/dog-bandanas" class="phm-btn phm-btn--outline phm-view-all">View All {{ bandana_col.products_count }} Bandanas →</a>
+      </div>
+      <div class="phm-prod-grid">
+        {%- for product in bandana_col.products limit: 4 -%}
+          {%- assign badge = '' -%}
+          {%- if forloop.index == 1 -%}{%- assign badge = 'Bestseller' -%}{%- endif -%}
+          {%- if product.compare_at_price > product.price -%}{%- assign badge = 'Sale' -%}{%- endif -%}
+          {%- render 'phm-product-card', product: product, badge: badge -%}
+        {%- else -%}
+          <p class="phm-empty">No products found.</p>
+        {%- endfor -%}
+      </div>
+      <div class="phm-collection-cta">
+        <a href="/collections/dog-bandanas" class="phm-btn phm-btn--violet">Shop All Dog Bandanas →</a>
       </div>
     </div>
   </section>
@@ -794,7 +827,7 @@
 
 /* ── OCCASIONS ── */
 .phm-occasions { background:#f7f5f2; padding:72px 0 80px; }
-.phm-occasions__grid { display:grid; grid-template-columns:repeat(6,1fr); gap:14px; }
+.phm-occasions__grid { display:grid; grid-template-columns:repeat(7,1fr); gap:14px; }
 .phm-occ-card { display:flex; flex-direction:column; align-items:center; gap:8px; padding:28px 16px; border-radius:18px; text-decoration:none; color:#121212; border:1.5px solid transparent; text-align:center; transition:transform .2s,box-shadow .2s,border-color .2s; }
 .phm-occ-card:hover { transform:translateY(-5px); box-shadow:0 10px 30px rgba(0,0,0,.09); }
 .phm-occ-card__icon { font-size:30px; }
@@ -914,6 +947,13 @@
 .phm-section--warm { background:#fff8f2; }
 .phm-eyebrow--rose { color:#be123c; background:#fff1f2; }
 
+/* ── BANDANA SECTION ── */
+.phm-section--bandana { background:linear-gradient(135deg,#faf5ff,#f0fdf4); }
+.phm-eyebrow--violet { color:#6d28d9; background:#f3e8ff; }
+.phm-btn--violet { background:linear-gradient(135deg,#7c3aed,#6d28d9); color:#fff; box-shadow:0 4px 18px rgba(109,40,217,.3); }
+.phm-btn--violet:hover { background:linear-gradient(135deg,#6d28d9,#5b21b6); transform:translateY(-2px); box-shadow:0 8px 24px rgba(109,40,217,.4); }
+.phm-occ-card--7 { background:linear-gradient(135deg,#faf5ff,#fff); border-color:#ddd6fe; }
+
 /* ── OOS badge ── */
 .phm-prod-card__badge--oos { background:#6b7280; color:#fff; }
 
@@ -945,7 +985,7 @@
    RESPONSIVE
 ══════════════════════════════════════ */
 @media (max-width:1100px) {
-  .phm-occasions__grid { grid-template-columns:repeat(3,1fr); }
+  .phm-occasions__grid { grid-template-columns:repeat(4,1fr); }
   .phm-why__grid { grid-template-columns:repeat(2,1fr); }
   .phm-hero__inner { gap:36px; }
   .phm-hpc--lehenga .phm-hpc__img-wrap { height:290px; }
@@ -981,7 +1021,7 @@
   .phm-hpc--lehenga .phm-hpc__img-wrap,
   .phm-hpc--sherwani .phm-hpc__img-wrap,
   .phm-hpc--tshirt .phm-hpc__img-wrap { height:180px; }
-  .phm-occasions__grid { grid-template-columns:repeat(3,1fr); gap:10px; }
+  .phm-occasions__grid { grid-template-columns:repeat(4,1fr); gap:10px; }
   .phm-occ-card { padding:20px 10px; }
   .phm-occ-card__icon { font-size:24px; }
   .phm-prod-grid { grid-template-columns:repeat(2,1fr); gap:12px; }
@@ -1003,7 +1043,7 @@
   .phm-hpc__cat { font-size:11px; }
   .phm-hero__fpill { font-size:11px; padding:7px 12px; }
   .phm-hero__fnew { font-size:10px; padding:7px 10px; }
-  .phm-occasions__grid { grid-template-columns:repeat(2,1fr); }
+  .phm-occasions__grid { grid-template-columns:repeat(4,1fr); }
   .phm-prod-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
   .phm-prod-card__body { padding:12px; gap:6px; }
   .phm-prod-card__title { font-size:13px; }
@@ -1015,7 +1055,7 @@
   .phm-svc-card__cta { width:100%; justify-content:center; }
 }
 @media (max-width:400px) {
-  .phm-occasions__grid { grid-template-columns:repeat(2,1fr); }
+  .phm-occasions__grid { grid-template-columns:repeat(4,1fr); }
   .phm-prod-grid { grid-template-columns:1fr 1fr; }
 }
 </style>
