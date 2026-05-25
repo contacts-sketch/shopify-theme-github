@@ -13,6 +13,20 @@
 {%- assign tuxedo_col = collections['dog-tuxedos'] -%}
 {%- assign harness_col = collections['harness'] -%}
 
+{%- comment -%} Build sameAs array safely (no trailing comma) {%- endcomment -%}
+{%- assign phm_same_as = '' -%}
+{%- if settings.social_instagram_link != blank -%}
+  {%- assign phm_same_as = phm_same_as | append: '"' | append: settings.social_instagram_link | append: '"' -%}
+{%- endif -%}
+{%- if settings.social_facebook_link != blank -%}
+  {%- if phm_same_as != '' -%}{%- assign phm_same_as = phm_same_as | append: ',' -%}{%- endif -%}
+  {%- assign phm_same_as = phm_same_as | append: '"' | append: settings.social_facebook_link | append: '"' -%}
+{%- endif -%}
+{%- if settings.social_youtube_link != blank -%}
+  {%- if phm_same_as != '' -%}{%- assign phm_same_as = phm_same_as | append: ',' -%}{%- endif -%}
+  {%- assign phm_same_as = phm_same_as | append: '"' | append: settings.social_youtube_link | append: '"' -%}
+{%- endif -%}
+
 <!-- ══ STRUCTURED DATA ══ -->
 <script type="application/ld+json">
 {
@@ -20,21 +34,59 @@
   "@graph": [
     {
       "@type": "Organization",
+      "@id": "{{ shop.url }}/#organization",
       "name": "Petaloons",
       "url": "{{ shop.url }}",
-      "logo": {%- if settings.logo != blank -%}"{{ settings.logo | image_url: width: 400 }}"{%- else -%}"{{ shop.url }}/cdn/shop/files/petaloons-logo.png"{%- endif -%},
+      "logo": {
+        "@type": "ImageObject",
+        "url": {%- if settings.logo != blank -%}"{{ settings.logo | image_url: width: 400 }}"{%- else -%}"{{ shop.url }}/cdn/shop/files/petaloons-logo.png"{%- endif -%},
+        "width": 400,
+        "height": 100
+      },
       "description": "India's #1 dog fashion brand. Buy dog lehenga, dog sherwani and dog t-shirts handcrafted in India. Premium pet clothing for weddings, festivals and everyday wear.",
-      "contactPoint": { "@type": "ContactPoint", "contactType": "customer service", "availableLanguage": "English" },
-      "sameAs": [
-        {%- if settings.social_instagram_link != blank -%}"{{ settings.social_instagram_link }}",{%- endif -%}
-        {%- if settings.social_facebook_link != blank -%}"{{ settings.social_facebook_link }}"{%- endif -%}
-      ]
+      "foundingDate": "2020",
+      "areaServed": { "@type": "Country", "name": "India" },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "2000",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "availableLanguage": ["English", "Hindi"],
+        "areaServed": "IN"
+      },
+      "sameAs": [{{ phm_same_as }}]
     },
     {
       "@type": "WebSite",
+      "@id": "{{ shop.url }}/#website",
       "name": "Petaloons — Dog Lehenga, Dog Sherwani & Dog T-Shirts",
       "url": "{{ shop.url }}",
-      "potentialAction": { "@type": "SearchAction", "target": { "@type": "EntryPoint", "urlTemplate": "{{ shop.url }}/search?q={query}" }, "query-input": "required name=query" }
+      "description": "India's #1 dog fashion brand. Shop handcrafted dog lehenga, dog sherwani and dog t-shirts online with pan-India delivery.",
+      "inLanguage": "en-IN",
+      "publisher": { "@id": "{{ shop.url }}/#organization" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": { "@type": "EntryPoint", "urlTemplate": "{{ shop.url }}/search?q={query}" },
+        "query-input": "required name=query"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ shop.url }}/#webpage",
+      "url": "{{ shop.url }}",
+      "name": "Dog Lehenga, Dog Sherwani & Dog T-Shirt | Petaloons — India's #1 Pet Fashion",
+      "description": "Shop India's best dog lehenga, dog sherwani & dog t-shirts at Petaloons. Handcrafted for all breeds, pan-India delivery. Free shipping ₹999+. 10,000+ happy pet parents.",
+      "isPartOf": { "@id": "{{ shop.url }}/#website" },
+      "about": { "@id": "{{ shop.url }}/#organization" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" }]
+      }
     },
     {
       "@type": "ItemList",
@@ -44,7 +96,7 @@
       "numberOfItems": {{ lehenga_col.products_count }},
       "itemListElement": [
         {%- for product in lehenga_col.products limit: 6 -%}
-        { "@type": "ListItem", "position": {{ forloop.index }}, "name": "{{ product.title | escape }}", "url": "{{ shop.url }}{{ product.url }}", "item": { "@type": "Product", "name": "{{ product.title | escape }}", "offers": { "@type": "Offer", "price": "{{ product.price | money_without_currency }}", "priceCurrency": "INR", "availability": "{%- if product.available -%}https://schema.org/InStock{%- else -%}https://schema.org/OutOfStock{%- endif -%}" } } }{% unless forloop.last %},{% endunless %}
+        { "@type": "ListItem", "position": {{ forloop.index }}, "name": "{{ product.title | escape }}", "url": "{{ shop.url }}{{ product.url }}", "item": { "@type": "Product", "name": "{{ product.title | escape }}", "brand": { "@type": "Brand", "name": "Petaloons" }, "offers": { "@type": "Offer", "price": "{{ product.price | divided_by: 100.0 }}", "priceCurrency": "INR", "availability": "{%- if product.available -%}https://schema.org/InStock{%- else -%}https://schema.org/OutOfStock{%- endif -%}", "seller": { "@type": "Organization", "name": "Petaloons" } } } }{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
       ]
     },
@@ -56,18 +108,31 @@
       "numberOfItems": {{ sherwani_col.products_count }},
       "itemListElement": [
         {%- for product in sherwani_col.products limit: 6 -%}
-        { "@type": "ListItem", "position": {{ forloop.index }}, "name": "{{ product.title | escape }}", "url": "{{ shop.url }}{{ product.url }}", "item": { "@type": "Product", "name": "{{ product.title | escape }}", "offers": { "@type": "Offer", "price": "{{ product.price | money_without_currency }}", "priceCurrency": "INR", "availability": "{%- if product.available -%}https://schema.org/InStock{%- else -%}https://schema.org/OutOfStock{%- endif -%}" } } }{% unless forloop.last %},{% endunless %}
+        { "@type": "ListItem", "position": {{ forloop.index }}, "name": "{{ product.title | escape }}", "url": "{{ shop.url }}{{ product.url }}", "item": { "@type": "Product", "name": "{{ product.title | escape }}", "brand": { "@type": "Brand", "name": "Petaloons" }, "offers": { "@type": "Offer", "price": "{{ product.price | divided_by: 100.0 }}", "priceCurrency": "INR", "availability": "{%- if product.available -%}https://schema.org/InStock{%- else -%}https://schema.org/OutOfStock{%- endif -%}", "seller": { "@type": "Organization", "name": "Petaloons" } } } }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    },
+    {
+      "@type": "ItemList",
+      "name": "Dog T-Shirt Collection — Petaloons",
+      "description": "Shop comfortable dog t-shirts for all breeds. Casual, printed and sporty dog t-shirts available in XS–XXL. Pan-India delivery.",
+      "url": "{{ shop.url }}/collections/dog-t-shirts",
+      "numberOfItems": {{ tshirt_col.products_count }},
+      "itemListElement": [
+        {%- for product in tshirt_col.products limit: 6 -%}
+        { "@type": "ListItem", "position": {{ forloop.index }}, "name": "{{ product.title | escape }}", "url": "{{ shop.url }}{{ product.url }}", "item": { "@type": "Product", "name": "{{ product.title | escape }}", "brand": { "@type": "Brand", "name": "Petaloons" }, "offers": { "@type": "Offer", "price": "{{ product.price | divided_by: 100.0 }}", "priceCurrency": "INR", "availability": "{%- if product.available -%}https://schema.org/InStock{%- else -%}https://schema.org/OutOfStock{%- endif -%}", "seller": { "@type": "Organization", "name": "Petaloons" } } } }{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
       ]
     },
     {
       "@type": "FAQPage",
       "mainEntity": [
-        { "@type": "Question", "name": "Where can I buy a dog lehenga in India?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons is India's #1 dog lehenga brand. Shop 24+ handcrafted dog lehengas for weddings, Diwali and festivals online at petaloons.com with pan-India delivery." } },
-        { "@type": "Question", "name": "Where to buy dog sherwani for wedding in India?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons offers 30+ premium dog sherwanis for weddings and festivals. Each sherwani is handcrafted in India with premium fabric. Shop online at petaloons.com/collections/dog-sherwani-collection-india." } },
-        { "@type": "Question", "name": "What size dog t-shirt should I buy?", "acceptedAnswer": { "@type": "Answer", "text": "Measure your dog's chest girth, neck and back length. Petaloons dog t-shirts are available in XS–XXL to fit all breeds from Chihuahua to Golden Retriever. Check our size guide for exact measurements." } },
-        { "@type": "Question", "name": "Are Petaloons dog clothes safe and comfortable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! All Petaloons dog clothes are made from pet-safe, skin-friendly fabrics. They are tested by real dog parents and designed for comfort, mobility and style." } },
-        { "@type": "Question", "name": "Does Petaloons deliver across India?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons delivers pan-India including Mumbai, Delhi, Bangalore, Chennai, Hyderabad, Pune, Kolkata and all major cities. Free shipping on orders above ₹999." } }
+        { "@type": "Question", "name": "Where can I buy a dog lehenga in India?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons is India's #1 dog lehenga brand. Shop 24+ handcrafted dog lehengas for weddings, Diwali and festivals online at petaloons.com with pan-India delivery. We ship to Mumbai, Delhi, Bangalore, Pune and all major Indian cities." } },
+        { "@type": "Question", "name": "Where to buy dog sherwani for wedding in India?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons offers 30+ premium dog sherwanis for weddings and festivals. Each dog sherwani is handcrafted in India with premium brocade fabric. Shop online at petaloons.com/collections/dog-sherwani-collection-india with free shipping above ₹999." } },
+        { "@type": "Question", "name": "What size dog t-shirt should I buy for my dog?", "acceptedAnswer": { "@type": "Answer", "text": "Measure your dog's chest girth, neck circumference and back length. Petaloons dog t-shirts are available in XS–XXL to fit all breeds from Chihuahua to Golden Retriever. Each product page includes a size chart for reference." } },
+        { "@type": "Question", "name": "Are Petaloons dog clothes safe and comfortable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! All Petaloons dog clothes are made from pet-safe, skin-friendly fabrics with non-toxic dyes. They are tested by real dog parents for comfort and mobility before every launch." } },
+        { "@type": "Question", "name": "Does Petaloons deliver across India?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons delivers pan-India including Mumbai, Delhi, Bangalore, Chennai, Hyderabad, Pune, Kolkata, Jaipur and all major cities. Free shipping on all orders above ₹999. Express delivery available in metro cities." } },
+        { "@type": "Question", "name": "Can I return a dog outfit if it doesn't fit?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons has an easy 7-day return policy. If a dog lehenga, dog sherwani or dog t-shirt doesn't fit, contact our team within 7 days of delivery. We recommend using our detailed size guide before ordering." } }
       ]
     }
   ]
@@ -94,11 +159,11 @@
         </div>
 
         <h1 class="phm-hero__title">
-          Dress Your Dog<br>
-          <span class="phm-hero__title-shine">Like Royalty</span>
+          India's #1 Dog Fashion<br>
+          <span class="phm-hero__title-shine">Dog Lehenga · Sherwani · T-Shirt</span>
         </h1>
 
-        <p class="phm-hero__sub">India's finest handcrafted dog lehengas, sherwanis &amp; t-shirts. Premium quality, every breed, pan-India delivery. 🐾</p>
+        <p class="phm-hero__sub">Shop India's finest handcrafted <strong>dog lehengas</strong>, <strong>dog sherwanis</strong> &amp; <strong>dog t-shirts</strong>. Premium quality, every breed, pan-India delivery. 🐾</p>
 
         <div class="phm-hero__kw-row">
           <a href="/collections/dog-lehengas" class="phm-hero__kw-pill">👗 Dog Lehenga</a>

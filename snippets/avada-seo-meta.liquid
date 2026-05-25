@@ -1,19 +1,19 @@
 {%- if request.page_type == 'product' -%}
 {%- unless avada_seo_ovr_product_ids contains product.id -%}
-{%- capture avada_seo_meta_title -%}{{ product.title }}{%- endcapture -%}
-{%- capture avada_seo_meta_description -%}Shop {{ product.title }} at {{ shop.name }} — premium quality pet wear with fast delivery across {{ shop.address.country }}. Read reviews and order today.{%- endcapture -%}
+{%- capture avada_seo_meta_title -%}{{ product.title }} | Petaloons® Dog Fashion India{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}Buy {{ product.title }} at Petaloons — India's #1 dog fashion brand. Premium quality, pet-safe fabrics, all breeds. Free shipping above ₹999. Pan-India delivery. Shop now.{%- endcapture -%}
 {%- endunless -%}
 {%- endif -%}
 {%- if request.page_type == 'collection' -%}
 {%- unless avada_seo_ovr_collection_ids contains collection.id -%}
-{%- capture avada_seo_meta_title -%}{{ collection.title }}{%- endcapture -%}
-{%- capture avada_seo_meta_description -%}Buy {{ collection.title }} at {{ shop.name }}. Check Price and Buy Online. ✓ Free Shipping ✓ Cash on Delivery ✓ Best Offers.{%- endcapture -%}
+{%- capture avada_seo_meta_title -%}{{ collection.title }} — Buy Online India | Petaloons®{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}Shop {{ collection.title }} at Petaloons — India's #1 pet fashion brand. {{ collection.products_count }}+ designs, handcrafted in India. Free shipping ₹999+, easy returns, pan-India delivery. Order today.{%- endcapture -%}
 {%- endunless -%}
 {%- endif -%}
 {%- if request.page_type == 'article' -%}
 {%- unless avada_seo_ovr_article_ids contains article.id -%}
-{%- capture avada_seo_meta_title -%}{{ article.title }}{%- endcapture -%}
-{%- capture avada_seo_meta_description -%}{{ article.excerpt_or_content }}{%- endcapture -%}
+{%- capture avada_seo_meta_title -%}{{ article.title }} | Petaloons Pet Care Blog{%- endcapture -%}
+{%- capture avada_seo_meta_description -%}{%- if article.excerpt != blank -%}{{ article.excerpt | strip_html | strip | truncate: 155 }}{%- else -%}{{ article.content | strip_html | strip | truncate: 155 }}{%- endif -%}{%- endcapture -%}
 {%- endunless -%}
 {%- endif -%}
 {%- if avada_seo_meta_title -%}

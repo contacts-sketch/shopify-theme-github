@@ -22,14 +22,23 @@
     <link rel="dns-prefetch" href="https://judge.me">
     <link rel="dns-prefetch" href="https://instafeedapp.com">
 
-    {%- comment -%} FIX 3: Preconnect for active app domains {%- endcomment -%}
+    {%- comment -%} Preconnect for active app domains {%- endcomment -%}
     <link rel="preconnect" href="https://widget.tidio.co" crossorigin>
     <link rel="dns-prefetch" href="https://widget.tidio.co">
     <link rel="dns-prefetch" href="https://static.whatsapp.net">
     <link rel="dns-prefetch" href="https://s3.amazonaws.com">
 
-    {%- comment -%} FIX 1: Preload LCP hero image — cuts mobile LCP by 300–800ms {%- endcomment -%}
+    {%- comment -%} Preconnect for Petaloons CDN domain used in hero images {%- endcomment -%}
+    <link rel="preconnect" href="https://www.petaloons.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.petaloons.com">
+
+    {%- comment -%} LCP preload: Petaloons homepage hero lehenga image {%- endcomment -%}
     {%- if request.page_type == 'index' -%}
+      <link rel="preload" as="image" href="https://www.petaloons.com/cdn/shop/files/1.0.png?v=1777115848" fetchpriority="high">
+    {%- endif -%}
+
+    {%- comment -%} LCP preload for slideshow/image-banner sections {%- endcomment -%}
+    {%- unless request.page_type == 'index' -%}
       {%- for section in sections -%}
         {%- if section.type == 'slideshow' or section.type == 'image-banner' -%}
           {%- assign hero_block = section.blocks | first -%}
@@ -51,7 +60,7 @@
           {%- break -%}
         {%- endif -%}
       {%- endfor -%}
-    {%- endif -%}
+    {%- endunless -%}
 
     <title>
       {{ page_title }}
@@ -62,7 +71,17 @@
 
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
+    {% elsif request.page_type == 'index' %}
+      <meta name="description" content="Shop India's best dog lehenga, dog sherwani & dog t-shirts at Petaloons — India's #1 pet fashion brand. Handcrafted for all breeds, pan-India delivery. Free shipping ₹999+.">
     {% endif %}
+
+    {%- comment -%} Homepage OG image fallback {%- endcomment -%}
+    {%- if request.page_type == 'index' and page_image == blank -%}
+      <meta property="og:image" content="https://www.petaloons.com/cdn/shop/files/1.0.png?v=1777115848">
+      <meta property="og:image:width" content="480">
+      <meta property="og:image:height" content="600">
+      <meta name="twitter:image" content="https://www.petaloons.com/cdn/shop/files/1.0.png?v=1777115848">
+    {%- endif -%}
 
     {% render 'meta-tags' %}
 
