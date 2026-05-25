@@ -126,9 +126,9 @@
         <div class="phm-hero__showcase-main">
           <a href="/collections/dog-lehengas" class="phm-hpc phm-hpc--lehenga" aria-label="Shop Dog Lehenga">
             <div class="phm-hpc__img-wrap">
-              <img src="https://cdn.shopify.com/s/files/1/0611/1107/4890/files/1_f1002a56-141b-4b90-bb08-71278dd3a339.png?v=1751111331"
-                   alt="Shih Tzu wearing designer gold dog lehenga by Petaloons"
-                   loading="eager" fetchpriority="high" width="400" height="500">
+              <img src="https://www.petaloons.com/cdn/shop/files/1.0.png?v=1777115848"
+                   alt="Dog wearing festive pink lehenga — Dog Lehenga by Petaloons"
+                   loading="eager" fetchpriority="high" width="480" height="600">
             </div>
             <div class="phm-hpc__label">
               <span class="phm-hpc__cat">👗 Dog Lehenga</span>
@@ -704,12 +704,12 @@
 .phm-hpc--sherwani:hover { transform:rotate(0deg) scale(1.03) translateY(-5px); }
 .phm-hpc--tshirt { transform:rotate(-1.5deg); }
 .phm-hpc--tshirt:hover { transform:rotate(0deg) scale(1.03) translateY(-5px); }
-.phm-hpc__img-wrap { width:100%; overflow:hidden; }
-.phm-hpc__img-wrap img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
-.phm-hpc:hover .phm-hpc__img-wrap img { transform:scale(1.06); }
-.phm-hpc--lehenga .phm-hpc__img-wrap { height:310px; }
-.phm-hpc--sherwani .phm-hpc__img-wrap { height:208px; }
-.phm-hpc--tshirt .phm-hpc__img-wrap { height:162px; object-fit:contain; }
+.phm-hpc__img-wrap { width:100%; overflow:hidden; display:flex; align-items:center; justify-content:center; }
+.phm-hpc__img-wrap img { width:100%; height:100%; object-fit:contain; object-position:center bottom; display:block; transition:transform .4s ease; }
+.phm-hpc:hover .phm-hpc__img-wrap img { transform:scale(1.04); }
+.phm-hpc--lehenga .phm-hpc__img-wrap { height:340px; background:linear-gradient(160deg,#fff5ee,#ffeedd); }
+.phm-hpc--sherwani .phm-hpc__img-wrap { height:230px; background:linear-gradient(160deg,#f5f0ff,#ede0ff); }
+.phm-hpc--tshirt .phm-hpc__img-wrap { height:190px; background:linear-gradient(160deg,#f0f7ff,#e0efff); }
 .phm-hpc__label { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; background:#fff; }
 .phm-hpc__cat { font-size:13px; font-weight:700; color:#333; }
 .phm-hpc__cta { font-size:12px; font-weight:800; color:#b84500; }
@@ -883,9 +883,9 @@
   .phm-occasions__grid { grid-template-columns:repeat(3,1fr); }
   .phm-why__grid { grid-template-columns:repeat(2,1fr); }
   .phm-hero__inner { gap:36px; }
-  .phm-hpc--lehenga .phm-hpc__img-wrap { height:260px; }
-  .phm-hpc--sherwani .phm-hpc__img-wrap { height:170px; }
-  .phm-hpc--tshirt .phm-hpc__img-wrap { height:136px; }
+  .phm-hpc--lehenga .phm-hpc__img-wrap { height:290px; }
+  .phm-hpc--sherwani .phm-hpc__img-wrap { height:195px; }
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:160px; }
 }
 @media (max-width:900px) {
   .phm-prod-grid { grid-template-columns:repeat(2,1fr); gap:16px; }
@@ -900,9 +900,9 @@
   .phm-hero__inner { grid-template-columns:1fr; gap:44px; }
   .phm-hero__showcase { grid-template-columns:repeat(3,1fr); }
   .phm-hero__showcase-main,.phm-hero__showcase-side { display:contents; }
-  .phm-hpc--lehenga .phm-hpc__img-wrap { height:200px; }
-  .phm-hpc--sherwani .phm-hpc__img-wrap { height:200px; }
-  .phm-hpc--tshirt .phm-hpc__img-wrap { height:200px; }
+  .phm-hpc--lehenga .phm-hpc__img-wrap { height:220px; }
+  .phm-hpc--sherwani .phm-hpc__img-wrap { height:220px; }
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:220px; }
   .phm-hero__fpill--rating { bottom:-10px; left:10px; }
   .phm-hero__fnew { top:-10px; right:10px; }
 }
@@ -915,7 +915,7 @@
   .phm-hpc--lehenga,.phm-hpc--sherwani,.phm-hpc--tshirt { transform:none !important; }
   .phm-hpc--lehenga .phm-hpc__img-wrap,
   .phm-hpc--sherwani .phm-hpc__img-wrap,
-  .phm-hpc--tshirt .phm-hpc__img-wrap { height:160px; }
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:180px; }
   .phm-occasions__grid { grid-template-columns:repeat(3,1fr); gap:10px; }
   .phm-occ-card { padding:20px 10px; }
   .phm-occ-card__icon { font-size:24px; }
@@ -933,7 +933,7 @@
   .phm-hero__showcase { grid-template-columns:repeat(3,1fr); gap:8px; }
   .phm-hpc--lehenga .phm-hpc__img-wrap,
   .phm-hpc--sherwani .phm-hpc__img-wrap,
-  .phm-hpc--tshirt .phm-hpc__img-wrap { height:130px; }
+  .phm-hpc--tshirt .phm-hpc__img-wrap { height:150px; }
   .phm-hpc__label { padding:7px 10px; }
   .phm-hpc__cat { font-size:11px; }
   .phm-hero__fpill { font-size:11px; padding:7px 12px; }
