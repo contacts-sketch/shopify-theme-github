@@ -420,30 +420,203 @@
 .bva-cta-banner__actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:20px; }
 .bva-cta-banner__note { font-size:13px; color:rgba(255,255,255,.5); margin:0; }
 
-/* RESPONSIVE */
-@media (max-width:1024px) { .bva-doctors-grid { grid-template-columns:repeat(3,1fr); } }
+/* ================================================================
+   RESPONSIVE — full mobile & tablet coverage
+   Breakpoints: 1100 · 900 · 768 · 640 · 480 · 380
+   ================================================================ */
+
+/* ── Tablet landscape ≤ 1100px ── */
+@media (max-width:1100px) {
+  .bva-doctors-grid { grid-template-columns:repeat(3,1fr); gap:16px; }
+  .bva-why__layout  { gap:40px; }
+}
+
+/* ── Tablet portrait ≤ 900px ── */
 @media (max-width:900px) {
-  .bva-why__layout { grid-template-columns:1fr; gap:40px; }
-  .bva-reviews-grid { grid-template-columns:1fr; }
-  .bva-review-card--featured { transform:none; }
-  .bva-doctors-grid { grid-template-columns:repeat(2,1fr); }
-}
-@media (max-width:640px) {
-  .bva-hero { padding:70px 16px 80px; }
-  .bva-stats__inner { gap:14px; }
+  /* Section padding */
+  .bva-how,.bva-doctors,.bva-why,.bva-reviews,.bva-faq,.bva-cta-banner { padding-top:64px; padding-bottom:64px; }
+
+  /* Steps — stack vertically */
+  .bva-steps { flex-direction:column; align-items:center; }
+  .bva-step  { min-width:0; width:100%; max-width:420px; }
+  .bva-step__connector { transform:rotate(90deg); font-size:20px; }
+
+  /* Why Petaloons */
+  .bva-why__layout { grid-template-columns:1fr; gap:44px; }
+  .bva-why__cards  { grid-template-columns:1fr 1fr; gap:14px; }
+
+  /* Reviews */
+  .bva-reviews-grid { grid-template-columns:1fr; max-width:520px; margin-left:auto; margin-right:auto; }
+  .bva-review-card--featured { transform:none; box-shadow:none; }
+
+  /* Doctors */
+  .bva-doctors-grid { grid-template-columns:repeat(2,1fr); gap:14px; }
+
+  /* Stats — hide thin dividers, let items wrap to 2 rows */
   .bva-stat__divider { display:none; }
-  .bva-steps { flex-direction:column; }
-  .bva-step__connector { transform:rotate(90deg); }
-  .bva-why__cards { grid-template-columns:1fr 1fr; }
-  .bva-doctors-grid { grid-template-columns:1fr 1fr; gap:12px; }
-  .bva-filter-row { flex-direction:column; align-items:stretch; }
-  .bva-doctor-search-wrap { width:100%; box-sizing:border-box; }
-  .bva-doctor-search { width:100%; }
-  .bva-search-bar { padding:6px 6px 6px 14px; }
-  .bva-search-bar__btn { padding:10px 16px; font-size:13px; }
+  .bva-stats__inner  { gap:18px 32px; }
 }
-@media (max-width:400px) {
-  .bva-doctors-grid { grid-template-columns:1fr; }
+
+/* ── Large mobile / small tablet ≤ 768px ── */
+@media (max-width:768px) {
+  /* Hero */
+  .bva-hero { padding:56px 16px 68px; }
+  .bva-hero__decor { width:180px; height:180px; top:-10px; right:-20px; opacity:.5; }
+  .bva-hero__badges { gap:8px; margin-bottom:20px; }
+
+  /* Hero search bar — stack button below input */
+  .bva-search-bar {
+    flex-wrap:wrap;
+    border-radius:18px;
+    padding:12px 14px;
+    gap:8px;
+    max-width:100%;
+  }
+  .bva-search-bar__icon { display:none; }
+  .bva-search-bar__input { width:100%; font-size:15px; }
+  .bva-search-bar__btn {
+    width:100%;
+    border-radius:10px;
+    padding:12px;
+    text-align:center;
+    justify-content:center;
+    font-size:14px;
+  }
+
+  /* Hero quick pills — horizontal scroll */
+  .bva-quick-pills {
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    justify-content:flex-start;
+    padding-bottom:4px;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    gap:8px;
+  }
+  .bva-quick-pills::-webkit-scrollbar { display:none; }
+
+  /* Stats — 3-column mini grid */
+  .bva-stats { padding:20px 16px; }
+  .bva-stats__inner {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    text-align:center;
+  }
+  .bva-stat__divider { display:none; }
+  .bva-stat strong  { font-size:19px; }
+  .bva-stat span    { font-size:11px; }
+
+  /* Filter row — stacked */
+  .bva-filter-row { flex-direction:column; gap:10px; align-items:stretch; }
+  .bva-filter-tabs {
+    overflow-x:auto;
+    padding-bottom:4px;
+    gap:6px;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+  }
+  .bva-filter-tabs::-webkit-scrollbar { display:none; }
+  .bva-filter-tab { font-size:12px; padding:7px 14px; }
+  .bva-doctor-search-wrap { width:100%; box-sizing:border-box; }
+  .bva-doctor-search { flex:1; min-width:0; }
+
+  /* Results meta */
+  .bva-results-meta { flex-direction:column; align-items:flex-start; gap:6px; }
+
+  /* How It Works — section padding */
+  .bva-how { padding:56px 16px; }
+
+  /* CTA Banner — stack buttons */
+  .bva-cta-banner__actions { flex-direction:column; align-items:center; gap:12px; }
+  .bva-btn--lg { width:100%; max-width:320px; justify-content:center; }
+
+  /* Why trust cards */
+  .bva-why__cards { grid-template-columns:1fr 1fr; }
+
+  /* Section inner horizontal padding */
+  .bva-section-inner { padding:0 16px; }
+}
+
+/* ── Mobile ≤ 640px ── */
+@media (max-width:640px) {
+  .bva-how,.bva-doctors,.bva-why,.bva-reviews,.bva-faq,.bva-cta-banner { padding-top:52px; padding-bottom:52px; }
+  .bva-section-header { margin-bottom:32px; }
+  .bva-section-sub { font-size:15px; }
+
+  /* Hero */
+  .bva-hero { padding:48px 14px 56px; }
+  .bva-badge { font-size:11.5px; padding:5px 11px; }
+
+  /* Stats — 2-col */
+  .bva-stats__inner { grid-template-columns:repeat(2,1fr); gap:10px 16px; }
+  .bva-stat strong { font-size:17px; }
+
+  /* Steps connector — hidden on mobile (vertical flow is obvious) */
+  .bva-step__connector { display:none; }
+  .bva-step { padding:24px 20px; max-width:100%; }
+
+  /* Doctor cards — 2 col tight */
+  .bva-doctors-grid { grid-template-columns:1fr 1fr; gap:10px; }
+  .bva-doc-card { padding:16px 12px; gap:10px; }
+  .bva-doc-card__name { font-size:13.5px; }
+  .bva-doc-card__spec { font-size:11px; }
+  .bva-doc-card__fee  { font-size:13px; }
+  .bva-doc-card__book { font-size:12.5px; padding:9px 0; }
+  .bva-doc-card__avatar { width:44px; height:44px; font-size:15px; }
+  .bva-doc-card__details { gap:6px; font-size:11.5px; }
+
+  /* Why Petaloons — trust cards 1 col */
+  .bva-why__cards { grid-template-columns:1fr; gap:12px; }
+  .bva-why__desc  { font-size:15px; }
+
+  /* Reviews */
+  .bva-reviews-grid { max-width:100%; }
+  .bva-review-card { padding:22px 18px; }
+  .bva-review-card__text { font-size:14px; }
+
+  /* FAQ */
+  .bva-faq-q { font-size:14px; padding:16px; }
+  .bva-faq-a p { font-size:14px; }
+
+  /* CTA */
+  .bva-cta-banner__sub { font-size:15px; }
+  .bva-cta-banner__note { font-size:12px; }
+}
+
+/* ── Small mobile ≤ 480px ── */
+@media (max-width:480px) {
+  /* Doctor cards — single column */
+  .bva-doctors-grid { grid-template-columns:1fr; gap:10px; }
+  .bva-doc-card { padding:18px 16px; gap:12px; }
+  .bva-doc-card__name { font-size:15px; }
+  .bva-doc-card__spec { font-size:12px; }
+
+  /* Stats — 2 col */
+  .bva-stats__inner { grid-template-columns:repeat(2,1fr); }
+
+  /* Hero badges — wrap + center */
+  .bva-hero__badges { flex-wrap:wrap; justify-content:center; }
+
+  /* Why list items */
+  .bva-why__item strong { font-size:14.5px; }
+
+  /* Load more button */
+  .bva-btn--outline { width:100%; max-width:280px; justify-content:center; }
+  .bva-load-more-wrap { padding:0 16px; }
+}
+
+/* ── Extra small ≤ 380px ── */
+@media (max-width:380px) {
+  .bva-hero { padding:40px 12px 48px; }
+  .bva-hero__title { letter-spacing:-.03em; }
+  .bva-badge { font-size:11px; padding:4px 10px; }
+  .bva-stats__inner { gap:8px; }
+  .bva-stat strong { font-size:16px; }
+  .bva-filter-tab { font-size:11.5px; padding:6px 12px; }
+  .bva-section-inner { padding:0 12px; }
+  .bva-faq-q { font-size:13.5px; }
+  .bva-review-card { padding:18px 14px; }
 }
 </style>
 
