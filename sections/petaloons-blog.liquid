@@ -1,0 +1,713 @@
+{%- comment -%}
+  Petaloons Blog — Premium magazine-style blog listing
+  Template: templates/blog.petaloons.json
+  CSS scope: .plb-*
+{%- endcomment -%}
+
+{%- assign all_tags = blog.all_tags -%}
+
+{%- paginate blog.articles by 9 -%}
+
+<!-- ═══ HERO ═══ -->
+<section class="plb-hero">
+  <div class="plb-hero__inner">
+    <span class="plb-eyebrow">✍️ Petaloons Blog</span>
+    <h1 class="plb-hero__title">Pet Care Tips, Fashion<br>&amp; Expert Advice</h1>
+    <p class="plb-hero__sub">Trusted guides for every pet parent — health, nutrition, style &amp; everything in between.</p>
+    <div class="plb-hero__stats">
+      <span><strong>{{ blog.articles_count }}+</strong> Articles</span>
+      <span class="plb-hero__dot">·</span>
+      <span><strong>Weekly</strong> Updates</span>
+      <span class="plb-hero__dot">·</span>
+      <span><strong>Expert</strong> Verified</span>
+    </div>
+  </div>
+  <div class="plb-hero__decor" aria-hidden="true">
+    <svg viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="150" r="120" stroke="currentColor" stroke-width="1" opacity=".06"/>
+      <circle cx="150" cy="150" r="80"  stroke="currentColor" stroke-width="1" opacity=".05"/>
+      <ellipse cx="80"  cy="70"  rx="22" ry="28" fill="currentColor" opacity=".07"/>
+      <ellipse cx="220" cy="70"  rx="22" ry="28" fill="currentColor" opacity=".06"/>
+      <ellipse cx="50"  cy="160" rx="17" ry="22" fill="currentColor" opacity=".05"/>
+      <ellipse cx="250" cy="160" rx="17" ry="22" fill="currentColor" opacity=".05"/>
+      <path d="M150 260 C80 220 30 170 50 130 C70 90 130 100 150 140 C170 100 230 90 250 130 C270 170 220 220 150 260Z" fill="currentColor" opacity=".08"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ CATEGORY FILTER ═══ -->
+{%- if all_tags.size > 0 -%}
+<div class="plb-cats-wrap">
+  <div class="plb-inner">
+    <div class="plb-cats" id="plb-cats" role="tablist">
+      <a href="{{ blog.url }}"
+         class="plb-cat{% unless current_tags %} plb-cat--active{% endunless %}"
+         role="tab">All Posts</a>
+      {%- for tag in all_tags -%}
+        <a href="{{ blog.url }}/tagged/{{ tag | handle }}"
+           class="plb-cat{% if current_tags contains tag %} plb-cat--active{% endif %}"
+           role="tab">{{ tag }}</a>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- endif -%}
+
+<!-- ═══ ARTICLES ═══ -->
+<section class="plb-section">
+  <div class="plb-inner">
+
+    {%- if blog.articles.size > 0 -%}
+
+      <!-- FEATURED: first article, full-width hero card -->
+      {%- assign featured = blog.articles[0] -%}
+      {%- if paginate.current_page == 1 -%}
+      <article class="plb-featured" itemscope itemtype="https://schema.org/BlogPosting">
+        <a href="{{ featured.url }}" class="plb-featured__img-wrap" aria-hidden="true" tabindex="-1">
+          {%- if featured.image -%}
+            <img
+              src="{{ featured.image | image_url: width: 1200 }}"
+              alt="{{ featured.image.alt | default: featured.title | escape }}"
+              width="1200" height="600"
+              loading="eager"
+              class="plb-featured__img"
+              itemprop="image"
+            >
+          {%- else -%}
+            <div class="plb-featured__img-placeholder plb-gradient--1">
+              <svg class="plb-placeholder-paw" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <ellipse cx="22" cy="18" rx="9" ry="12" fill="currentColor" opacity=".3"/>
+                <ellipse cx="58" cy="18" rx="9" ry="12" fill="currentColor" opacity=".3"/>
+                <ellipse cx="10" cy="42" rx="7" ry="10" fill="currentColor" opacity=".25"/>
+                <ellipse cx="70" cy="42" rx="7" ry="10" fill="currentColor" opacity=".25"/>
+                <path d="M40 36c-14 0-24 9-24 20 0 8 7 14 24 14s24-6 24-14c0-11-10-20-24-20z" fill="currentColor" opacity=".3"/>
+              </svg>
+            </div>
+          {%- endif -%}
+          <div class="plb-featured__overlay"></div>
+        </a>
+        <div class="plb-featured__body">
+          <div class="plb-featured__meta">
+            {%- if featured.tags.size > 0 -%}
+              <span class="plb-tag plb-tag--amber">{{ featured.tags[0] }}</span>
+            {%- endif -%}
+            <span class="plb-featured__badge">⭐ Featured</span>
+          </div>
+          <h2 class="plb-featured__title" itemprop="headline">
+            <a href="{{ featured.url }}" itemprop="url">{{ featured.title | escape }}</a>
+          </h2>
+          {%- if featured.excerpt.size > 0 -%}
+            <p class="plb-featured__excerpt" itemprop="description">{{ featured.excerpt | strip_html | truncate: 180 }}</p>
+          {%- endif -%}
+          <div class="plb-featured__footer">
+            <div class="plb-author">
+              <div class="plb-author__avatar" aria-hidden="true">{{ featured.author | slice: 0 }}</div>
+              <div>
+                <span class="plb-author__name" itemprop="author">{{ featured.author }}</span>
+                <span class="plb-author__date" itemprop="datePublished">{{ featured.published_at | date: '%b %d, %Y' }}</span>
+              </div>
+            </div>
+            <a href="{{ featured.url }}" class="plb-featured__cta" itemprop="url">Read Article →</a>
+          </div>
+        </div>
+      </article>
+      {%- endif -%}
+
+      <!-- ARTICLE GRID -->
+      <div class="plb-grid" id="plb-grid">
+        {%- for article in blog.articles -%}
+          {%- if forloop.first and paginate.current_page == 1 -%}{%- continue -%}{%- endif -%}
+          {%- assign grad_index = forloop.index | modulo: 5 | plus: 1 -%}
+          <article class="plb-card" itemscope itemtype="https://schema.org/BlogPosting">
+            <a href="{{ article.url }}" class="plb-card__img-wrap" aria-hidden="true" tabindex="-1">
+              {%- if article.image -%}
+                <img
+                  src="{{ article.image | image_url: width: 600 }}"
+                  alt="{{ article.image.alt | default: article.title | escape }}"
+                  width="600" height="360"
+                  loading="lazy"
+                  class="plb-card__img"
+                  itemprop="image"
+                >
+              {%- else -%}
+                <div class="plb-card__img-placeholder plb-gradient--{{ grad_index }}">
+                  <svg class="plb-placeholder-paw" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <ellipse cx="22" cy="18" rx="9" ry="12" fill="currentColor" opacity=".25"/>
+                    <ellipse cx="58" cy="18" rx="9" ry="12" fill="currentColor" opacity=".25"/>
+                    <ellipse cx="10" cy="42" rx="7" ry="10" fill="currentColor" opacity=".2"/>
+                    <ellipse cx="70" cy="42" rx="7" ry="10" fill="currentColor" opacity=".2"/>
+                    <path d="M40 36c-14 0-24 9-24 20 0 8 7 14 24 14s24-6 24-14c0-11-10-20-24-20z" fill="currentColor" opacity=".25"/>
+                  </svg>
+                </div>
+              {%- endif -%}
+              {%- if article.tags.size > 0 -%}
+                <span class="plb-card__tag">{{ article.tags[0] }}</span>
+              {%- endif -%}
+            </a>
+            <div class="plb-card__body">
+              <h3 class="plb-card__title" itemprop="headline">
+                <a href="{{ article.url }}" itemprop="url">{{ article.title | escape }}</a>
+              </h3>
+              {%- if article.excerpt.size > 0 -%}
+                <p class="plb-card__excerpt" itemprop="description">{{ article.excerpt | strip_html | truncate: 110 }}</p>
+              {%- endif -%}
+              <div class="plb-card__footer">
+                <div class="plb-card__author">
+                  <div class="plb-card__avatar" aria-hidden="true">{{ article.author | slice: 0 }}</div>
+                  <div>
+                    <span class="plb-card__author-name" itemprop="author">{{ article.author }}</span>
+                    <span class="plb-card__date" itemprop="datePublished">{{ article.published_at | date: '%b %d, %Y' }}</span>
+                  </div>
+                </div>
+                <a href="{{ article.url }}" class="plb-card__read" aria-label="Read {{ article.title | escape }}">Read →</a>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      <!-- NEWSLETTER INLINE -->
+      <div class="plb-newsletter-inline">
+        <div class="plb-newsletter-inline__body">
+          <div class="plb-newsletter-inline__icon">🐾</div>
+          <div class="plb-newsletter-inline__text">
+            <strong>Never miss a pet care tip</strong>
+            <span>Weekly expert guides straight to your inbox.</span>
+          </div>
+        </div>
+        {%- form 'customer', id: 'PlbNewsletter', class: 'plb-newsletter-inline__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          {%- if form.posted_successfully? -%}
+            <p class="plb-newsletter-inline__success">🎉 You're in! Welcome to the pack.</p>
+          {%- else -%}
+            <div class="plb-newsletter-inline__fields">
+              <input type="email" name="contact[email]" placeholder="your@email.com" aria-label="Email address" required
+                class="plb-newsletter-inline__input"
+                {%- if form.errors %} aria-invalid="true"{%- endif %}>
+              <button type="submit" class="plb-newsletter-inline__btn">Subscribe</button>
+            </div>
+            {%- if form.errors -%}
+              <p class="plb-newsletter-inline__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+
+      <!-- PAGINATION -->
+      {%- if paginate.pages > 1 -%}
+        <nav class="plb-pagination" aria-label="Blog pagination">
+          {%- if paginate.previous -%}
+            <a href="{{ paginate.previous.url }}" class="plb-page-btn">← Newer Posts</a>
+          {%- else -%}
+            <span class="plb-page-btn plb-page-btn--disabled">← Newer Posts</span>
+          {%- endif -%}
+          <div class="plb-page-numbers">
+            {%- for part in paginate.parts -%}
+              {%- if part.is_link -%}
+                <a href="{{ part.url }}" class="plb-page-num">{{ part.title }}</a>
+              {%- else -%}
+                {%- if part.title == paginate.current_page -%}
+                  <span class="plb-page-num plb-page-num--active">{{ part.title }}</span>
+                {%- else -%}
+                  <span class="plb-page-num plb-page-num--ellipsis">{{ part.title }}</span>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          {%- if paginate.next -%}
+            <a href="{{ paginate.next.url }}" class="plb-page-btn">Older Posts →</a>
+          {%- else -%}
+            <span class="plb-page-btn plb-page-btn--disabled">Older Posts →</span>
+          {%- endif -%}
+        </nav>
+      {%- endif -%}
+
+    {%- else -%}
+      <div class="plb-empty">
+        <div class="plb-empty__icon">🐾</div>
+        <h2 class="plb-empty__title">Coming Soon</h2>
+        <p class="plb-empty__text">We're crafting expert pet care articles for you. Check back soon!</p>
+        <a href="/" class="plb-btn">Back to Homepage</a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+<!-- ═══ TOPICS SECTION ═══ -->
+<section class="plb-topics">
+  <div class="plb-inner">
+    <div class="plb-topics__header">
+      <span class="plb-eyebrow plb-eyebrow--dark">Browse by Topic</span>
+      <h2 class="plb-topics__title">What Are You Looking For?</h2>
+    </div>
+    <div class="plb-topics__grid">
+      <a href="{{ blog.url }}/tagged/nutrition" class="plb-topic-card plb-topic-card--1">
+        <div class="plb-topic-card__icon">🥗</div>
+        <strong>Nutrition &amp; Diet</strong>
+        <span>What to feed, how much &amp; when</span>
+      </a>
+      <a href="{{ blog.url }}/tagged/health" class="plb-topic-card plb-topic-card--2">
+        <div class="plb-topic-card__icon">🩺</div>
+        <strong>Pet Health</strong>
+        <span>Symptoms, care guides &amp; vet tips</span>
+      </a>
+      <a href="{{ blog.url }}/tagged/fashion" class="plb-topic-card plb-topic-card--3">
+        <div class="plb-topic-card__icon">👗</div>
+        <strong>Pet Fashion</strong>
+        <span>Outfits, styling &amp; seasonal looks</span>
+      </a>
+      <a href="{{ blog.url }}/tagged/training" class="plb-topic-card plb-topic-card--4">
+        <div class="plb-topic-card__icon">🎓</div>
+        <strong>Training &amp; Behaviour</strong>
+        <span>Tips from certified trainers</span>
+      </a>
+      <a href="{{ blog.url }}/tagged/grooming" class="plb-topic-card plb-topic-card--5">
+        <div class="plb-topic-card__icon">✂️</div>
+        <strong>Grooming</strong>
+        <span>Coat care, baths &amp; nail trims</span>
+      </a>
+      <a href="{{ blog.url }}/tagged/breeds" class="plb-topic-card plb-topic-card--6">
+        <div class="plb-topic-card__icon">🐶</div>
+        <strong>Dog Breeds</strong>
+        <span>Breed guides, traits &amp; care needs</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA STRIP ═══ -->
+<section class="plb-cta-strip">
+  <div class="plb-inner plb-cta-strip__inner">
+    <div class="plb-cta-strip__text">
+      <strong>Need personalised advice for your pet?</strong>
+      <span>Talk to a certified vet or get a custom diet plan — for free.</span>
+    </div>
+    <div class="plb-cta-strip__actions">
+      <a href="/pages/book-vet-appointment" class="plb-btn plb-btn--primary">🩺 Book a Vet</a>
+      <a href="/pages/ai-pet-diet-planner"  class="plb-btn plb-btn--outline">🐾 AI Diet Planner</a>
+    </div>
+  </div>
+</section>
+
+{%- endpaginate -%}
+
+
+<style>
+/* ================================================================
+   PETALOONS BLOG — Scoped to .plb-*
+   Brand: #121212 · #334fb4 · #fea910 · #f7f5f2
+   ================================================================ */
+
+.plb-inner { max-width:1140px; margin:0 auto; padding:0 24px; }
+
+/* Eyebrow */
+.plb-eyebrow {
+  display:inline-block; font-size:12px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:#334fb4; background:#eff6ff;
+  padding:4px 14px; border-radius:40px; margin-bottom:14px;
+}
+.plb-eyebrow--dark { color:#334fb4; background:#eff6ff; }
+
+/* ── HERO ── */
+.plb-hero {
+  position:relative;
+  background:linear-gradient(140deg,#0d1117 0%,#1a2238 55%,#0f172a 100%);
+  color:#fff; padding:100px 24px 110px; text-align:center; overflow:hidden;
+}
+.plb-hero__inner { position:relative; z-index:2; max-width:680px; margin:0 auto; }
+.plb-hero__decor {
+  position:absolute; top:-60px; right:-80px;
+  width:380px; height:380px; color:#334fb4; pointer-events:none; z-index:1;
+}
+.plb-hero__title {
+  font-size:clamp(32px,5.5vw,56px); font-weight:800;
+  line-height:1.1; letter-spacing:-.025em; margin:0 0 16px;
+}
+.plb-hero__sub {
+  font-size:clamp(15px,2.5vw,18px); color:rgba(255,255,255,.65);
+  max-width:500px; margin:0 auto 28px;
+}
+.plb-hero__stats {
+  display:inline-flex; align-items:center; gap:14px;
+  background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.12);
+  border-radius:40px; padding:10px 22px; font-size:14px;
+  color:rgba(255,255,255,.7);
+}
+.plb-hero__stats strong { color:#fff; }
+.plb-hero__dot { color:rgba(255,255,255,.25); }
+
+/* ── CATEGORY PILLS ── */
+.plb-cats-wrap {
+  background:#fff; border-bottom:1px solid #ede8e0;
+  padding:14px 0; position:sticky; top:0; z-index:50;
+}
+.plb-cats {
+  display:flex; gap:8px; overflow-x:auto; align-items:center;
+  scrollbar-width:none; -ms-overflow-style:none;
+  -webkit-overflow-scrolling:touch;
+}
+.plb-cats::-webkit-scrollbar { display:none; }
+.plb-cat {
+  flex-shrink:0; white-space:nowrap;
+  font-size:13.5px; font-weight:600; color:#555;
+  background:#f3f3f3; border:1.5px solid transparent;
+  padding:8px 20px; border-radius:40px;
+  text-decoration:none;
+  transition:all .18s; cursor:pointer;
+}
+.plb-cat:hover { background:#eff6ff; color:#334fb4; border-color:#c7d9ff; }
+.plb-cat--active { background:#121212; color:#fff; border-color:#121212; }
+
+/* ── MAIN SECTION ── */
+.plb-section { background:#f7f5f2; padding:72px 0 80px; }
+
+/* ── FEATURED CARD ── */
+.plb-featured {
+  display:grid; grid-template-columns:1.15fr 1fr;
+  background:#fff; border-radius:24px; overflow:hidden;
+  border:1px solid #ede8e0;
+  box-shadow:0 4px 32px rgba(0,0,0,.07);
+  margin-bottom:56px;
+  transition:box-shadow .25s;
+}
+.plb-featured:hover { box-shadow:0 12px 48px rgba(0,0,0,.13); }
+.plb-featured__img-wrap {
+  position:relative; display:block; overflow:hidden; aspect-ratio:16/10;
+}
+.plb-featured__img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .5s ease;
+}
+.plb-featured:hover .plb-featured__img { transform:scale(1.04); }
+.plb-featured__img-placeholder {
+  width:100%; height:100%; display:flex;
+  align-items:center; justify-content:center;
+}
+.plb-featured__overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.35) 100%);
+}
+.plb-featured__body {
+  padding:40px 36px; display:flex; flex-direction:column; justify-content:center; gap:16px;
+}
+.plb-featured__meta { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.plb-featured__badge {
+  font-size:12px; font-weight:700; color:#334fb4;
+  background:#eff6ff; padding:4px 12px; border-radius:40px;
+}
+.plb-featured__title {
+  font-size:clamp(22px,2.5vw,30px); font-weight:800;
+  letter-spacing:-.02em; line-height:1.2; margin:0;
+}
+.plb-featured__title a { color:#121212; text-decoration:none; transition:color .18s; }
+.plb-featured__title a:hover { color:#334fb4; }
+.plb-featured__excerpt { font-size:15px; color:#555; line-height:1.7; margin:0; }
+.plb-featured__footer {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding-top:16px; border-top:1px solid #ede8e0; margin-top:auto;
+}
+.plb-featured__cta {
+  font-size:14px; font-weight:700; color:#334fb4;
+  text-decoration:none; white-space:nowrap;
+  transition:gap .18s, color .18s;
+}
+.plb-featured__cta:hover { color:#fea910; }
+
+/* ── TAG PILL ── */
+.plb-tag {
+  display:inline-block; font-size:11.5px; font-weight:700;
+  text-transform:uppercase; letter-spacing:.07em;
+  padding:3px 10px; border-radius:20px;
+}
+.plb-tag--amber { background:rgba(254,169,16,.15); color:#b45309; }
+.plb-tag--blue  { background:#eff6ff; color:#334fb4; }
+
+/* ── ARTICLE GRID ── */
+.plb-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  margin-bottom:56px;
+}
+
+/* ── ARTICLE CARD ── */
+.plb-card {
+  background:#fff; border-radius:20px; overflow:hidden;
+  border:1px solid #ede8e0;
+  display:flex; flex-direction:column;
+  transition:transform .22s, box-shadow .22s, border-color .22s;
+  animation:plb-card-in .3s ease both;
+}
+@keyframes plb-card-in { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.plb-card:hover { transform:translateY(-6px); box-shadow:0 14px 44px rgba(0,0,0,.1); border-color:#c7d9ff; }
+
+.plb-card__img-wrap {
+  position:relative; display:block; overflow:hidden; aspect-ratio:16/10;
+}
+.plb-card__img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .45s ease;
+}
+.plb-card:hover .plb-card__img { transform:scale(1.06); }
+.plb-card__img-placeholder {
+  width:100%; height:100%; display:flex;
+  align-items:center; justify-content:center;
+}
+.plb-card__tag {
+  position:absolute; top:14px; left:14px;
+  font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+  background:rgba(255,255,255,.92); color:#334fb4;
+  padding:4px 10px; border-radius:20px;
+  backdrop-filter:blur(4px);
+}
+
+.plb-card__body { padding:22px 20px 20px; display:flex; flex-direction:column; flex:1; gap:10px; }
+.plb-card__title {
+  font-size:17px; font-weight:700; line-height:1.3;
+  letter-spacing:-.01em; margin:0;
+}
+.plb-card__title a { color:#121212; text-decoration:none; transition:color .18s; }
+.plb-card__title a:hover { color:#334fb4; }
+.plb-card__excerpt { font-size:13.5px; color:#666; line-height:1.65; margin:0; flex:1; }
+.plb-card__footer {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:8px; padding-top:14px; border-top:1px solid #f0ece6; margin-top:auto;
+}
+.plb-card__read {
+  font-size:13px; font-weight:700; color:#334fb4;
+  text-decoration:none; white-space:nowrap; transition:color .18s;
+}
+.plb-card__read:hover { color:#fea910; }
+
+/* ── AUTHOR ── */
+.plb-author, .plb-card__author {
+  display:flex; align-items:center; gap:10px;
+}
+.plb-author__avatar, .plb-card__avatar {
+  width:34px; height:34px; border-radius:50%;
+  background:linear-gradient(135deg,#334fb4,#7c3aed);
+  color:#fff; font-size:14px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.plb-author__name, .plb-card__author-name {
+  font-size:13px; font-weight:600; color:#121212; display:block;
+}
+.plb-author__date, .plb-card__date {
+  font-size:12px; color:#aaa; display:block;
+}
+
+/* ── GRADIENT PLACEHOLDERS ── */
+.plb-placeholder-paw { width:64px; height:64px; color:#fff; }
+.plb-gradient--1 { background:linear-gradient(135deg,#334fb4 0%,#7c3aed 100%); }
+.plb-gradient--2 { background:linear-gradient(135deg,#fea910 0%,#f97316 100%); }
+.plb-gradient--3 { background:linear-gradient(135deg,#16a34a 0%,#0d9488 100%); }
+.plb-gradient--4 { background:linear-gradient(135deg,#dc2626 0%,#db2777 100%); }
+.plb-gradient--5 { background:linear-gradient(135deg,#0284c7 0%,#334fb4 100%); }
+
+/* ── NEWSLETTER INLINE ── */
+.plb-newsletter-inline {
+  background:linear-gradient(135deg,#121212 0%,#1e2a4a 100%);
+  border-radius:20px; padding:36px 40px;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; flex-wrap:wrap; margin-bottom:56px;
+}
+.plb-newsletter-inline__body {
+  display:flex; align-items:center; gap:16px;
+}
+.plb-newsletter-inline__icon { font-size:32px; flex-shrink:0; }
+.plb-newsletter-inline__text strong {
+  display:block; font-size:18px; font-weight:700; color:#fff; margin-bottom:4px;
+}
+.plb-newsletter-inline__text span { font-size:14px; color:rgba(255,255,255,.55); }
+.plb-newsletter-inline__form { display:flex; flex-direction:column; gap:6px; }
+.plb-newsletter-inline__fields { display:flex; gap:8px; align-items:center; }
+.plb-newsletter-inline__input {
+  border:none; border-radius:40px; padding:12px 20px;
+  font-size:14px; font-family:inherit;
+  background:rgba(255,255,255,.1); color:#fff; outline:none;
+  width:240px; transition:background .2s;
+}
+.plb-newsletter-inline__input::placeholder { color:rgba(255,255,255,.4); }
+.plb-newsletter-inline__input:focus { background:rgba(255,255,255,.18); }
+.plb-newsletter-inline__btn {
+  background:#fea910; color:#121212; border:none;
+  border-radius:40px; padding:12px 24px;
+  font-size:14px; font-weight:700; font-family:inherit;
+  cursor:pointer; white-space:nowrap;
+  transition:background .18s, transform .15s;
+}
+.plb-newsletter-inline__btn:hover { background:#ffbe3d; transform:translateY(-1px); }
+.plb-newsletter-inline__success { color:#bbf7d0; font-size:14px; font-weight:600; margin:0; }
+.plb-newsletter-inline__error   { color:#fca5a5; font-size:12px; margin:0; }
+
+/* ── PAGINATION ── */
+.plb-pagination {
+  display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap;
+}
+.plb-page-btn {
+  font-size:14px; font-weight:600; color:#334fb4;
+  background:#fff; border:1.5px solid #dde8ff;
+  border-radius:40px; padding:10px 22px;
+  text-decoration:none; transition:all .18s;
+}
+.plb-page-btn:hover { background:#334fb4; color:#fff; border-color:#334fb4; }
+.plb-page-btn--disabled { color:#ccc; border-color:#eee; cursor:default; pointer-events:none; }
+.plb-page-numbers { display:flex; gap:6px; }
+.plb-page-num {
+  width:38px; height:38px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:600; color:#555;
+  text-decoration:none; transition:all .18s;
+  background:#fff; border:1.5px solid #ede8e0;
+}
+.plb-page-num:hover { background:#eff6ff; border-color:#c7d9ff; color:#334fb4; }
+.plb-page-num--active { background:#121212; color:#fff; border-color:#121212; }
+.plb-page-num--ellipsis { border:none; background:transparent; pointer-events:none; }
+
+/* ── EMPTY STATE ── */
+.plb-empty { text-align:center; padding:80px 20px; }
+.plb-empty__icon { font-size:56px; margin-bottom:16px; }
+.plb-empty__title { font-size:28px; font-weight:800; margin:0 0 10px; }
+.plb-empty__text { font-size:16px; color:#666; margin:0 0 28px; }
+
+/* ── BUTTONS ── */
+.plb-btn {
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:14px; font-weight:700; padding:12px 26px;
+  border-radius:40px; text-decoration:none;
+  transition:transform .18s, box-shadow .18s, background .18s;
+  border:none; cursor:pointer; font-family:inherit;
+}
+.plb-btn:hover { transform:translateY(-2px); }
+.plb-btn--primary { background:#fea910; color:#121212; box-shadow:0 4px 18px rgba(254,169,16,.3); }
+.plb-btn--primary:hover { background:#ffbe3d; box-shadow:0 8px 24px rgba(254,169,16,.4); }
+.plb-btn--outline { background:#fff; color:#121212; border:2px solid #e0e0e0; }
+.plb-btn--outline:hover { border-color:#121212; }
+
+/* ── TOPICS SECTION ── */
+.plb-topics { background:#fff; padding:80px 0; border-top:1px solid #ede8e0; }
+.plb-topics__header { text-align:center; margin-bottom:48px; }
+.plb-topics__title {
+  font-size:clamp(24px,3.5vw,36px); font-weight:800;
+  letter-spacing:-.02em; margin:0;
+}
+.plb-topics__grid {
+  display:grid; grid-template-columns:repeat(6,1fr); gap:16px;
+}
+.plb-topic-card {
+  display:flex; flex-direction:column; gap:8px;
+  padding:24px 18px; border-radius:18px;
+  text-decoration:none; color:#121212;
+  border:1.5px solid #ede8e0;
+  transition:transform .2s, box-shadow .2s, border-color .2s;
+  text-align:center;
+}
+.plb-topic-card:hover { transform:translateY(-5px); box-shadow:0 10px 32px rgba(0,0,0,.08); border-color:#c7d9ff; }
+.plb-topic-card__icon { font-size:28px; }
+.plb-topic-card strong { font-size:14px; font-weight:700; }
+.plb-topic-card span { font-size:12px; color:#888; line-height:1.5; }
+
+.plb-topic-card--1 { background:linear-gradient(135deg,#fffbeb,#fff); border-color:#fde68a; }
+.plb-topic-card--2 { background:linear-gradient(135deg,#f0fdf4,#fff); border-color:#bbf7d0; }
+.plb-topic-card--3 { background:linear-gradient(135deg,#fdf2f8,#fff); border-color:#f9a8d4; }
+.plb-topic-card--4 { background:linear-gradient(135deg,#eff6ff,#fff); border-color:#bfdbfe; }
+.plb-topic-card--5 { background:linear-gradient(135deg,#faf5ff,#fff); border-color:#e9d5ff; }
+.plb-topic-card--6 { background:linear-gradient(135deg,#fff7ed,#fff); border-color:#fed7aa; }
+
+/* ── CTA STRIP ── */
+.plb-cta-strip { background:linear-gradient(135deg,#1a2238 0%,#334fb4 100%); padding:40px 0; }
+.plb-cta-strip__inner {
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; flex-wrap:wrap;
+}
+.plb-cta-strip__text strong {
+  display:block; font-size:18px; font-weight:700; color:#fff; margin-bottom:4px;
+}
+.plb-cta-strip__text span { font-size:14px; color:rgba(255,255,255,.6); }
+.plb-cta-strip__actions { display:flex; gap:12px; flex-wrap:wrap; }
+
+/* ════════════════════════════════════════
+   RESPONSIVE
+   ════════════════════════════════════════ */
+
+/* ≤1100px */
+@media (max-width:1100px) {
+  .plb-topics__grid { grid-template-columns:repeat(3,1fr); }
+}
+
+/* ≤900px */
+@media (max-width:900px) {
+  .plb-hero { padding:80px 20px 90px; }
+  .plb-featured { grid-template-columns:1fr; }
+  .plb-featured__img-wrap { aspect-ratio:16/8; }
+  .plb-featured__body { padding:28px 28px; }
+  .plb-grid { grid-template-columns:repeat(2,1fr); gap:18px; }
+  .plb-topics__grid { grid-template-columns:repeat(2,1fr); }
+  .plb-newsletter-inline { flex-direction:column; align-items:flex-start; padding:28px 28px; }
+  .plb-cta-strip__inner { flex-direction:column; align-items:flex-start; }
+}
+
+/* ≤768px */
+@media (max-width:768px) {
+  .plb-inner { padding:0 16px; }
+  .plb-hero { padding:64px 16px 72px; }
+  .plb-hero__decor { width:200px; height:200px; top:-20px; right:-20px; opacity:.4; }
+  .plb-hero__stats { flex-wrap:wrap; justify-content:center; }
+  .plb-section { padding:52px 0 60px; }
+  .plb-topics { padding:56px 0; }
+  .plb-featured__body { padding:24px 20px; gap:12px; }
+  .plb-featured__title { font-size:22px; }
+  .plb-grid { grid-template-columns:1fr 1fr; gap:14px; margin-bottom:40px; }
+  .plb-newsletter-inline { padding:24px 20px; }
+  .plb-newsletter-inline__input { width:180px; }
+  .plb-topics__grid { grid-template-columns:repeat(2,1fr); gap:12px; }
+  .plb-cta-strip { padding:32px 0; }
+}
+
+/* ≤640px */
+@media (max-width:640px) {
+  .plb-hero { padding:52px 14px 60px; }
+  .plb-hero__stats { gap:10px; font-size:13px; padding:8px 16px; }
+  .plb-featured { border-radius:16px; margin-bottom:36px; }
+  .plb-featured__body { padding:20px 18px; }
+  .plb-featured__excerpt { display:none; }
+  .plb-featured__title { font-size:20px; }
+  .plb-grid { grid-template-columns:1fr; gap:14px; margin-bottom:32px; }
+  .plb-card__excerpt { display:none; }
+  .plb-card__body { padding:18px 16px 16px; }
+  .plb-newsletter-inline__fields { flex-direction:column; width:100%; }
+  .plb-newsletter-inline__input { width:100%; }
+  .plb-newsletter-inline__btn { width:100%; text-align:center; border-radius:12px; }
+  .plb-topics__grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+  .plb-topic-card { padding:18px 12px; }
+  .plb-topic-card__icon { font-size:22px; }
+  .plb-topic-card strong { font-size:13px; }
+  .plb-cta-strip__actions { flex-direction:column; width:100%; }
+  .plb-cta-strip__actions .plb-btn { justify-content:center; text-align:center; }
+  .plb-pagination { gap:10px; }
+  .plb-page-btn { padding:8px 16px; font-size:13px; }
+}
+
+/* ≤400px */
+@media (max-width:400px) {
+  .plb-topics__grid { grid-template-columns:1fr 1fr; }
+  .plb-cats { gap:6px; }
+  .plb-cat { font-size:12.5px; padding:7px 14px; }
+}
+</style>
+
+
+{% schema %}
+{
+  "name": "Petaloons Blog",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Petaloons Blog"
+    }
+  ]
+}
+{% endschema %}
