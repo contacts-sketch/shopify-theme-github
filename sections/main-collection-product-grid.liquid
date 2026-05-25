@@ -2,6 +2,243 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 
+<style>
+  /* =============================================
+     Petaloons Collection Product Grid Overrides
+     ============================================= */
+
+  /* ── Card wrapper ── */
+  .collection .card-wrapper {
+    border-radius: 14px;
+    overflow: visible;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .collection .card-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 40px rgba(180, 69, 0, 0.14), 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  /* ── Card ── */
+  .collection .card {
+    border-radius: 14px;
+    border: 1px solid #f5ece3;
+    background: #fff;
+    overflow: hidden;
+    transition: border-color 0.25s ease;
+  }
+  .collection .card-wrapper:hover .card {
+    border-color: #f0c080;
+  }
+
+  /* ── Card image ── */
+  .collection .card__media {
+    border-radius: 13px 13px 0 0;
+    overflow: hidden;
+  }
+  .collection .card__media .media img {
+    transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .collection .card-wrapper:hover .card__media .media img {
+    transform: scale(1.06);
+  }
+
+  /* ── Sold out + badge overlay ── */
+  .collection .card__badge .badge--sold-out {
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: none;
+  }
+  .collection .card__badge .badge--sale {
+    background: linear-gradient(90deg, #b84500, #de7200);
+    color: #fff;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border: none;
+  }
+
+  /* ── Card info area ── */
+  .collection .card__information {
+    padding: 12px 14px 8px;
+  }
+  .collection .card__heading {
+    margin: 0 0 6px;
+  }
+  .collection .card__heading a {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.4;
+    text-decoration: none;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.2s;
+  }
+  .collection .card__heading a:hover { color: #b84500; }
+
+  /* ── Price ── */
+  .collection .price__regular .price-item--regular,
+  .collection .price--on-sale .price-item--sale {
+    color: #b84500;
+    font-size: 14.5px;
+    font-weight: 700;
+  }
+  .collection .price--on-sale .price-item--regular {
+    color: #aaa;
+    font-size: 11.5px;
+    font-weight: 400;
+  }
+  .collection .price__badges .badge {
+    font-size: 10px;
+    font-weight: 700;
+    background: linear-gradient(90deg, #b84500, #de7200);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 6px;
+  }
+
+  /* ── Quick Add button ── */
+  .collection .quick-add__submit.button--primary,
+  .collection .card__footer .button--primary {
+    background: linear-gradient(90deg, #b84500 0%, #de7200 100%) !important;
+    border: none !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+    padding: 10px 16px !important;
+    transition: opacity 0.2s ease, transform 0.15s ease !important;
+    box-shadow: 0 4px 12px rgba(184, 69, 0, 0.3) !important;
+  }
+  .collection .quick-add__submit.button--primary:hover,
+  .collection .card__footer .button--primary:hover {
+    opacity: 0.88 !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 18px rgba(184, 69, 0, 0.4) !important;
+  }
+  .collection .quick-add__submit.button--primary svg {
+    fill: #fff !important;
+  }
+
+  /* ── Rating stars ── */
+  .collection .rating-star path { fill: #fea910; }
+  .collection .rating-star--empty path { fill: #e0d5c8; }
+
+  /* ── Vertical filter sidebar ── */
+  .facets-wrapper {
+    border-right: 1px solid #f0e8e0 !important;
+  }
+  .facets__summary {
+    padding: 14px 0 !important;
+    border-bottom: 1px solid #f0e8e0 !important;
+  }
+  .facets__heading {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #6b2200 !important;
+  }
+  /* Checkbox accent */
+  .facet-checkbox:checked + .facet-checkbox__label::before {
+    background-color: #b84500 !important;
+    border-color: #b84500 !important;
+  }
+  .facet-checkbox:checked + .facet-checkbox__label::after {
+    border-color: #fff !important;
+  }
+  .facet-checkbox:focus + .facet-checkbox__label::before {
+    box-shadow: 0 0 0 3px rgba(184, 69, 0, 0.2) !important;
+  }
+  /* Active filter pill */
+  .active-facets__button {
+    border: 1px solid #f0c080 !important;
+    color: #b84500 !important;
+    border-radius: 20px !important;
+    font-size: 11.5px !important;
+  }
+  .active-facets__button:hover {
+    background: #fff5ee !important;
+  }
+  /* "Clear all" link */
+  .active-facets__button--clear {
+    color: #b84500 !important;
+    text-decoration-color: #b84500 !important;
+  }
+
+  /* ── Sort by bar ── */
+  .facet-filters__label {
+    color: #6b2200 !important;
+  }
+  .facet-filters__sort.select__select {
+    border-radius: 8px !important;
+    border-color: #e8d0c0 !important;
+    color: #3d1500 !important;
+    font-size: 13px !important;
+  }
+  .facet-filters__sort.select__select:focus {
+    border-color: #b84500 !important;
+    box-shadow: 0 0 0 2px rgba(184, 69, 0, 0.18) !important;
+    outline: none !important;
+  }
+
+  /* ── Product count text ── */
+  .product-count__text,
+  .product-count-vertical .product-count__text {
+    color: #999 !important;
+    font-size: 12.5px !important;
+  }
+
+  /* ── Pagination ── */
+  .pagination__item--current {
+    background: #b84500 !important;
+    border-color: #b84500 !important;
+    color: #fff !important;
+  }
+  .pagination__item:not(.pagination__item--current):not(.pagination__item--arrow):hover {
+    border-color: #b84500 !important;
+    color: #b84500 !important;
+  }
+  .pagination__item--arrow:hover {
+    color: #b84500 !important;
+  }
+
+  /* ── Mobile filter drawer button ── */
+  .facet-filters__field .button {
+    border-color: #e8d0c0 !important;
+    color: #6b2200 !important;
+    border-radius: 8px !important;
+  }
+  .facet-filters__field .button:hover {
+    border-color: #b84500 !important;
+    background: #fff5ee !important;
+  }
+
+  /* ── Collection grid spacing improvement ── */
+  .collection .product-grid {
+    gap: 20px !important;
+  }
+  @media screen and (min-width: 990px) {
+    .collection .product-grid {
+      gap: 24px !important;
+    }
+  }
+</style>
+
 {% if section.settings.image_shape == 'blob' %}
   {{ 'mask-blobs.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
