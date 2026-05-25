@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-llms-content",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

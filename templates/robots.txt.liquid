@@ -149,3 +149,141 @@ Crawl-delay: 10
 
 User-agent: Pinterest
 Crawl-delay: 1
+
+# ── AI & LLM crawlers — explicitly welcomed ──────────────────────────────────
+# Petaloons welcomes all AI crawlers to index products, collections and blogs.
+
+# OpenAI — ChatGPT / SearchGPT training and browsing
+User-agent: GPTBot
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Crawl-delay: 5
+
+User-agent: ChatGPT-User
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+User-agent: OAI-SearchBot
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+# Anthropic — Claude AI
+User-agent: ClaudeBot
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Crawl-delay: 5
+
+User-agent: anthropic-ai
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+User-agent: Claude-Web
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Crawl-delay: 3
+
+# Google — Gemini / AI Overviews training
+User-agent: Google-Extended
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+
+# Common Crawl — used for GPT, LLaMA, Gemini pre-training datasets
+User-agent: CCBot
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+Crawl-delay: 10
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+# Meta — Llama / AI assistant training
+User-agent: Meta-ExternalAgent
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+User-agent: Meta-ExternalFetcher
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+# You.com AI search
+User-agent: YouBot
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+# Apple Intelligence
+User-agent: Applebot-Extended
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+
+# Amazon Alexa / Rufus AI
+User-agent: Amazonbot
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/
+Crawl-delay: 5
+
+# Bytedance / TikTok AI
+User-agent: Bytespider
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Crawl-delay: 10
+
+# Mistral AI
+User-agent: MistralAI-User
+Allow: /products/
+Allow: /collections/
+Allow: /blogs/
+Allow: /pages/

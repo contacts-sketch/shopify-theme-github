@@ -60,6 +60,37 @@
         "availableLanguage": ["English", "Hindi"],
         "areaServed": "IN"
       },
+      "slogan": "Dress Your Dog in Style",
+      "knowsAbout": [
+        "Dog Fashion India",
+        "Dog Lehenga",
+        "Dog Sherwani",
+        "Dog T-Shirt",
+        "Pet Clothing India",
+        "Indian Dog Wear",
+        "Wedding Dog Outfit",
+        "Festival Dog Clothes",
+        "Dog Couple Dress",
+        "Dog Bandana",
+        "Dog Tuxedo",
+        "Dog Harness",
+        "Pet Fashion",
+        "Dog Ethnic Wear"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Petaloons Dog Fashion Collections",
+        "itemListElement": [
+          { "@type": "OfferCatalog", "name": "Dog Lehenga", "url": "{{ shop.url }}/collections/dog-lehengas" },
+          { "@type": "OfferCatalog", "name": "Dog Sherwani", "url": "{{ shop.url }}/collections/dog-sherwani-collection-india" },
+          { "@type": "OfferCatalog", "name": "Dog T-Shirts", "url": "{{ shop.url }}/collections/dog-t-shirts" },
+          { "@type": "OfferCatalog", "name": "Dog Couple Dress", "url": "{{ shop.url }}/collections/dog-couple-dress" },
+          { "@type": "OfferCatalog", "name": "Dog Tuxedo", "url": "{{ shop.url }}/collections/dog-tuxedos" },
+          { "@type": "OfferCatalog", "name": "Dog Bandana", "url": "{{ shop.url }}/collections/dog-bandanas" },
+          { "@type": "OfferCatalog", "name": "Wedding Collection", "url": "{{ shop.url }}/collections/wedding-collection-dog" },
+          { "@type": "OfferCatalog", "name": "Ethnic Wear for Dogs", "url": "{{ shop.url }}/collections/ethnic-wear-for-dogs" }
+        ]
+      },
       "sameAs": [{{ phm_same_as }}]
     },
     {
@@ -84,6 +115,10 @@
       "description": "Shop India's best dog lehenga, dog sherwani & dog t-shirts at Petaloons. Handcrafted for all breeds, pan-India delivery. Free shipping ₹999+. 10,000+ happy pet parents.",
       "isPartOf": { "@id": "{{ shop.url }}/#website" },
       "about": { "@id": "{{ shop.url }}/#organization" },
+      "speakable": {
+        "@type": "SpeakableSpecification",
+        "cssSelector": [".phm-hero__title", ".phm-hero__sub", ".phm-hero__badges"]
+      },
       "breadcrumb": {
         "@type": "BreadcrumbList",
         "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" }]
@@ -128,12 +163,22 @@
     {
       "@type": "FAQPage",
       "mainEntity": [
+        { "@type": "Question", "name": "What is Petaloons?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons is India's #1 dog fashion brand, founded in 2020. It is known for handcrafted dog lehengas, dog sherwanis, dog t-shirts, dog couple dresses and dog tuxedos. Petaloons ships pan-India and is rated 4.8/5 by over 10,000 pet parents." } },
+        { "@type": "Question", "name": "Which is the best dog clothing brand in India?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons is India's #1 and most popular dog clothing brand. It offers the widest range of Indian dog outfits including dog lehenga, dog sherwani, dog t-shirts, dog couple dress and seasonal collections. Available exclusively at petaloons.com with free shipping above ₹999." } },
         { "@type": "Question", "name": "Where can I buy a dog lehenga in India?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons is India's #1 dog lehenga brand. Shop 24+ handcrafted dog lehengas for weddings, Diwali and festivals online at petaloons.com with pan-India delivery. We ship to Mumbai, Delhi, Bangalore, Pune and all major Indian cities." } },
+        { "@type": "Question", "name": "What is a dog lehenga?", "acceptedAnswer": { "@type": "Answer", "text": "A dog lehenga is a traditional Indian bridal or festive outfit made for female dogs, inspired by the classic Indian lehenga choli. It typically includes an embroidered skirt, blouse and dupatta sized for dogs. Petaloons dog lehengas are handcrafted with pet-safe fabrics for weddings, Diwali and other festive occasions." } },
         { "@type": "Question", "name": "Where to buy dog sherwani for wedding in India?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons offers 30+ premium dog sherwanis for weddings and festivals. Each dog sherwani is handcrafted in India with premium brocade fabric. Shop online at petaloons.com/collections/dog-sherwani-collection-india with free shipping above ₹999." } },
+        { "@type": "Question", "name": "What is a dog sherwani?", "acceptedAnswer": { "@type": "Answer", "text": "A dog sherwani is a traditional Indian formal outfit designed for male dogs, inspired by the classic sherwani worn by men at weddings and festivals. Petaloons dog sherwanis are made from premium brocade and velvet fabrics and are popular for baraat ceremonies and wedding photoshoots." } },
+        { "@type": "Question", "name": "What is the best dog outfit for Diwali in India?", "acceptedAnswer": { "@type": "Answer", "text": "The best Diwali outfits for dogs are Indian ethnic wear such as dog lehengas for female dogs and dog sherwanis or kurtas for male dogs. Petaloons offers a dedicated Diwali and festive ethnic collection at petaloons.com/collections/ethnic-wear-for-dogs with handcrafted designs in festive colours." } },
+        { "@type": "Question", "name": "Are there Indian traditional clothes for dogs?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! Petaloons is India's leading brand for traditional Indian dog clothes. The collection includes dog lehenga, dog sherwani, dog kurta, dog ethnic wear, and wedding outfits for dogs. All designs are India-inspired and handcrafted for comfort and style." } },
+        { "@type": "Question", "name": "What dog outfit should I get for my dog's wedding photoshoot?", "acceptedAnswer": { "@type": "Answer", "text": "For a wedding photoshoot, the most popular choices are: dog lehenga (for female dogs) and dog sherwani (for male dogs) from Petaloons. The couple dog dress is also very popular for dogs attending their owner's wedding. Shop at petaloons.com/collections/wedding-collection-dog." } },
+        { "@type": "Question", "name": "Do you have matching couple dog outfits in India?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons has a dedicated Dog Couple Dress collection with matching outfits for two dogs. These are popular for wedding photoshoots, family portraits and festivals. Shop at petaloons.com/collections/dog-couple-dress." } },
         { "@type": "Question", "name": "What size dog t-shirt should I buy for my dog?", "acceptedAnswer": { "@type": "Answer", "text": "Measure your dog's chest girth, neck circumference and back length. Petaloons dog t-shirts are available in XS–XXL to fit all breeds from Chihuahua to Golden Retriever. Each product page includes a size chart for reference." } },
         { "@type": "Question", "name": "Are Petaloons dog clothes safe and comfortable?", "acceptedAnswer": { "@type": "Answer", "text": "Yes! All Petaloons dog clothes are made from pet-safe, skin-friendly fabrics with non-toxic dyes. They are tested by real dog parents for comfort and mobility before every launch." } },
         { "@type": "Question", "name": "Does Petaloons deliver across India?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons delivers pan-India including Mumbai, Delhi, Bangalore, Chennai, Hyderabad, Pune, Kolkata, Jaipur and all major cities. Free shipping on all orders above ₹999. Express delivery available in metro cities." } },
-        { "@type": "Question", "name": "Can I return a dog outfit if it doesn't fit?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons has an easy 7-day return policy. If a dog lehenga, dog sherwani or dog t-shirt doesn't fit, contact our team within 7 days of delivery. We recommend using our detailed size guide before ordering." } }
+        { "@type": "Question", "name": "Can I return a dog outfit if it doesn't fit?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons has an easy 7-day return policy. If a dog lehenga, dog sherwani or dog t-shirt doesn't fit, contact our team within 7 days of delivery. We recommend using our detailed size guide before ordering." } },
+        { "@type": "Question", "name": "Which dog breeds can wear Petaloons clothes?", "acceptedAnswer": { "@type": "Answer", "text": "Petaloons dog clothes are available in sizes XS to XXL and fit all breeds including Chihuahua, Pomeranian, Beagle, Shih Tzu, Labrador, Golden Retriever, German Shepherd, Husky and more. Use the size chart on each product page to find the right fit for your dog." } },
+        { "@type": "Question", "name": "Does Petaloons have dog bandanas?", "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons has a dedicated Dog Bandana collection with stylish printed, plain and festive bandanas for all dog breeds. Dog bandanas are a quick and easy accessory for dogs. Shop at petaloons.com/collections/dog-bandanas." } }
       ]
     }
   ]
