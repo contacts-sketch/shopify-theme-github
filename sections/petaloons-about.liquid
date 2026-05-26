@@ -1,0 +1,910 @@
+{%- comment -%}
+  Petaloons About Us Page Section
+  CSS scope: .pab-*
+  SEO: AboutPage + Organization JSON-LD, semantic H1/H2/H3, rich brand content
+{%- endcomment -%}
+
+<!-- ══ STRUCTURED DATA ══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "{{ shop.url }}/pages/about-us#webpage",
+      "url": "{{ shop.url }}/pages/about-us",
+      "name": "About Petaloons — India's #1 Dog Fashion Brand",
+      "description": "Learn about Petaloons — India's leading dog fashion brand founded in 2020. We handcraft dog lehengas, sherwanis, t-shirts and accessories for all dog breeds across India.",
+      "isPartOf": { "@id": "{{ shop.url }}/#website" },
+      "about": { "@id": "{{ shop.url }}/#organization" },
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" },
+          { "@type": "ListItem", "position": 2, "name": "About Us", "item": "{{ shop.url }}/pages/about-us" }
+        ]
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "{{ shop.url }}/#organization",
+      "name": "Petaloons",
+      "url": "{{ shop.url }}",
+      "foundingDate": "2020",
+      "description": "India's #1 dog fashion brand. Handcrafted dog lehengas, sherwanis, t-shirts and accessories for all dog breeds with pan-India delivery.",
+      "slogan": "Dress Your Dog in Style",
+      "areaServed": { "@type": "Country", "name": "India" },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "2000",
+        "bestRating": "5"
+      }
+    }
+  ]
+}
+</script>
+
+<style>
+  /* =============================================
+     Petaloons About Us Page — .pab-*
+     ============================================= */
+
+  /* ── Hero ── */
+  .pab-hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6b2200 0%, #b84500 28%, #de7200 58%, #fea910 82%, #ffd438 100%);
+    padding: 80px 40px 72px;
+    text-align: center;
+  }
+  .pab-hero__pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Ctext x='25' y='65' font-size='36' opacity='0.06' fill='%23fff'%3E🐾%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat;
+    pointer-events: none;
+  }
+  .pab-hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #ffd438, #fea910, #de7200, #b84500);
+  }
+  .pab-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .pab-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.92);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 24px;
+    margin-bottom: 20px;
+  }
+  .pab-hero__title {
+    font-size: clamp(30px, 5vw, 54px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+    margin: 0 0 18px;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.25);
+    letter-spacing: -0.01em;
+  }
+  .pab-hero__title span {
+    display: block;
+    font-size: 0.72em;
+    font-weight: 400;
+    opacity: 0.88;
+    margin-top: 6px;
+    letter-spacing: 0;
+  }
+  .pab-hero__subtitle {
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.65;
+    margin: 0 0 32px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pab-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #fff;
+    color: #b84500;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  .pab-hero__cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+    color: #6b2200;
+  }
+
+  /* ── Breadcrumb ── */
+  .pab-breadcrumb {
+    background: #fff8f2;
+    border-bottom: 1px solid #f0e0d0;
+    padding: 11px 40px;
+  }
+  .pab-breadcrumb__inner {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12.5px;
+    color: #999;
+  }
+  .pab-breadcrumb__inner a { color: #b84500; text-decoration: none; }
+  .pab-breadcrumb__inner a:hover { text-decoration: underline; }
+  .pab-breadcrumb__inner span[aria-hidden] { opacity: 0.4; }
+  @media (max-width: 749px) {
+    .pab-breadcrumb { padding: 10px 20px; }
+  }
+
+  /* ── Shared container ── */
+  .pab-section {
+    padding: 72px 40px;
+  }
+  .pab-section--alt {
+    background: #fff8f2;
+  }
+  .pab-section--dark {
+    background: linear-gradient(135deg, #6b2200 0%, #b84500 50%, #de7200 100%);
+    color: #fff;
+  }
+  .pab-inner {
+    max-width: var(--page-width, 1200px);
+    margin: 0 auto;
+  }
+  .pab-section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff5ee;
+    border: 1px solid #f0c080;
+    color: #b84500;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 24px;
+    margin-bottom: 14px;
+  }
+  .pab-section--dark .pab-section-label {
+    background: rgba(255,255,255,0.16);
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
+  }
+  .pab-section-title {
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 800;
+    color: #1a1a1a;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .pab-section--dark .pab-section-title { color: #fff; }
+  .pab-section-sub {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.7;
+    max-width: 580px;
+    margin: 0;
+  }
+  .pab-section--dark .pab-section-sub { color: rgba(255,255,255,0.8); }
+  .pab-section-header {
+    margin-bottom: 48px;
+  }
+  .pab-section-header--center {
+    text-align: center;
+  }
+  .pab-section-header--center .pab-section-sub { margin: 0 auto; }
+
+  /* ── Stats band ── */
+  .pab-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 48px;
+  }
+  .pab-stat {
+    background: rgba(255,255,255,0.1);
+    padding: 28px 24px;
+    text-align: center;
+    backdrop-filter: blur(4px);
+  }
+  .pab-stat__num {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 900;
+    color: #ffd438;
+    line-height: 1;
+    margin-bottom: 6px;
+    letter-spacing: -0.02em;
+  }
+  .pab-stat__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.4;
+  }
+
+  /* ── Story section ── */
+  .pab-story {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .pab-story__visual {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(145deg, #fff5ee, #ffe8d0);
+    aspect-ratio: 4/5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 20px 60px rgba(180,69,0,0.15);
+  }
+  .pab-story__visual-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .pab-story__visual-placeholder {
+    font-size: 96px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+  .pab-story__badge {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(90deg, #b84500, #de7200);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 24px;
+    box-shadow: 0 4px 16px rgba(184,69,0,0.4);
+  }
+  .pab-story__content {}
+  .pab-story__body {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.75;
+    margin: 0 0 24px;
+  }
+  .pab-story__body strong { color: #b84500; font-weight: 700; }
+  .pab-story__milestones {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .pab-milestone {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .pab-milestone__year {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #b84500, #de7200);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  .pab-milestone__text h4 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 3px;
+  }
+  .pab-milestone__text p {
+    font-size: 13px;
+    color: #777;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── Value cards ── */
+  .pab-values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .pab-value-card {
+    background: #fff;
+    border: 1px solid #f0e8e0;
+    border-radius: 18px;
+    padding: 32px 28px;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .pab-value-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(180,69,0,0.12);
+    border-color: #f0c080;
+  }
+  .pab-value-card__icon {
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, #fff5ee, #ffe8d0);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+  .pab-value-card__title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+  .pab-value-card__desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── Mission / Vision strip ── */
+  .pab-mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .pab-mission-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px;
+    border: 1px solid #f0e8e0;
+    position: relative;
+    overflow: hidden;
+  }
+  .pab-mission-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #b84500, #de7200, #fea910);
+  }
+  .pab-mission-card__icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .pab-mission-card__title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #b84500;
+    margin: 0 0 12px;
+  }
+  .pab-mission-card__text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* ── Collections quick-link ── */
+  .pab-collections {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  .pab-collection-card {
+    background: #fff;
+    border: 1.5px solid #f0e8e0;
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s, background 0.22s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .pab-collection-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(180,69,0,0.12);
+    border-color: #f0c080;
+    background: #fff9f4;
+  }
+  .pab-collection-card__emoji {
+    font-size: 36px;
+    line-height: 1;
+  }
+  .pab-collection-card__name {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #1a1a1a;
+    line-height: 1.3;
+  }
+  .pab-collection-card__arrow {
+    font-size: 11px;
+    color: #b84500;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+
+  /* ── Commitment list ── */
+  .pab-commitments {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .pab-commit {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 14px;
+    padding: 22px 20px;
+    backdrop-filter: blur(4px);
+  }
+  .pab-commit__icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+  }
+  .pab-commit__title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 5px;
+  }
+  .pab-commit__text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  /* ── Final CTA ── */
+  .pab-cta-section {
+    background: #fff8f2;
+    border-top: 4px solid;
+    border-image: linear-gradient(90deg, #ffd438, #fea910, #de7200, #b84500) 1;
+    padding: 72px 40px;
+    text-align: center;
+  }
+  .pab-cta-section .pab-section-title { color: #1a1a1a; }
+  .pab-cta-section .pab-section-sub { color: #666; margin: 0 auto 36px; }
+  .pab-cta__buttons {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pab-cta__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .pab-cta__btn--primary {
+    background: linear-gradient(90deg, #b84500, #de7200);
+    color: #fff;
+    box-shadow: 0 4px 18px rgba(184,69,0,0.35);
+  }
+  .pab-cta__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px rgba(184,69,0,0.45);
+    color: #fff;
+  }
+  .pab-cta__btn--secondary {
+    background: #fff;
+    color: #b84500;
+    border: 2px solid #f0c080;
+  }
+  .pab-cta__btn--secondary:hover {
+    background: #fff5ee;
+    border-color: #b84500;
+    transform: translateY(-2px);
+    color: #b84500;
+  }
+
+  /* ── Responsive ── */
+  @media screen and (max-width: 989px) {
+    .pab-story { grid-template-columns: 1fr; gap: 40px; }
+    .pab-story__visual { aspect-ratio: 16/9; }
+    .pab-values { grid-template-columns: repeat(2, 1fr); }
+    .pab-collections { grid-template-columns: repeat(2, 1fr); }
+    .pab-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media screen and (max-width: 749px) {
+    .pab-hero { padding: 56px 20px 52px; }
+    .pab-section { padding: 52px 20px; }
+    .pab-cta-section { padding: 52px 20px; }
+    .pab-values { grid-template-columns: 1fr; }
+    .pab-mission-grid { grid-template-columns: 1fr; }
+    .pab-commitments { grid-template-columns: 1fr; }
+    .pab-stats { grid-template-columns: repeat(2, 1fr); }
+    .pab-collections { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+
+<!-- ══ BREADCRUMB ══ -->
+<nav class="pab-breadcrumb" aria-label="Breadcrumb">
+  <div class="pab-breadcrumb__inner">
+    <a href="/">Home</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">About Us</span>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="pab-hero" aria-label="About Petaloons">
+  <div class="pab-hero__pattern" aria-hidden="true"></div>
+  <div class="pab-hero__inner">
+    <div class="pab-hero__eyebrow" aria-hidden="true">🐾 Our Story</div>
+    <h1 class="pab-hero__title">
+      India's #1 Dog Fashion Brand
+      <span>Born from a love for dogs &amp; Indian craft</span>
+    </h1>
+    <p class="pab-hero__subtitle">
+      We started Petaloons because every dog deserves to feel as special as they make us feel.
+      From handcrafted dog lehengas to sherwanis — we make your furry family look royal. 🐕
+    </p>
+    <a href="/collections/all" class="pab-hero__cta">
+      <span>Shop All Collections</span> <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- ══ STATS BAND ══ -->
+<section class="pab-section pab-section--dark" aria-label="Petaloons by the numbers">
+  <div class="pab-inner">
+    <div class="pab-section-header pab-section-header--center">
+      <div class="pab-section-label">🏆 Petaloons by the Numbers</div>
+      <h2 class="pab-section-title">Trusted by pet parents across India</h2>
+      <p class="pab-section-sub">From the lanes of Jaipur to the streets of Mumbai — India's dogs trust Petaloons.</p>
+    </div>
+    <div class="pab-stats" role="list">
+      <div class="pab-stat" role="listitem">
+        <div class="pab-stat__num">10K+</div>
+        <div class="pab-stat__label">Happy Pet Parents</div>
+      </div>
+      <div class="pab-stat" role="listitem">
+        <div class="pab-stat__num">4.8★</div>
+        <div class="pab-stat__label">Average Rating<br><span style="font-size:11px;opacity:0.7">2,000+ Reviews</span></div>
+      </div>
+      <div class="pab-stat" role="listitem">
+        <div class="pab-stat__num">200+</div>
+        <div class="pab-stat__label">Unique Designs</div>
+      </div>
+      <div class="pab-stat" role="listitem">
+        <div class="pab-stat__num">Pan‑India</div>
+        <div class="pab-stat__label">Delivery<br><span style="font-size:11px;opacity:0.7">Free shipping ₹999+</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BRAND STORY ══ -->
+<section class="pab-section" aria-labelledby="pab-story-heading">
+  <div class="pab-inner">
+    <div class="pab-story">
+
+      <!-- Visual -->
+      <div class="pab-story__visual" aria-hidden="true">
+        <img
+          class="pab-story__visual-img"
+          src="https://www.petaloons.com/cdn/shop/files/1.0.png?v=1777115848"
+          alt="Dog wearing a festive lehenga by Petaloons — India's #1 dog fashion brand"
+          loading="lazy"
+          width="480"
+          height="600"
+        >
+        <div class="pab-story__badge">🇮🇳 Proudly Made in India</div>
+      </div>
+
+      <!-- Text -->
+      <div class="pab-story__content">
+        <div class="pab-section-label">📖 Our Story</div>
+        <h2 class="pab-section-title" id="pab-story-heading">We started with one simple belief</h2>
+        <p class="pab-story__body">
+          <strong>Dogs are family.</strong> And family deserves to look good at every celebration.
+        </p>
+        <p class="pab-story__body">
+          Petaloons was born in 2020 when we noticed a huge gap — Indian dog parents wanted outfits for festivals, weddings and Diwali, but there was nothing that truly felt <strong>Indian, premium and safe</strong> for their pets.
+        </p>
+        <p class="pab-story__body">
+          We set out to change that. Working with local artisans, we started handcrafting
+          <strong>dog lehengas, dog sherwanis, dog t-shirts</strong> and accessories — all made from
+          pet-safe, skin-friendly fabrics tested by real dog parents.
+        </p>
+        <p class="pab-story__body">
+          Today, Petaloons is India's most loved dog fashion brand, trusted by over
+          <strong>10,000 pet parents</strong> across every city in India. 🐾
+        </p>
+
+        <!-- Milestones -->
+        <div class="pab-story__milestones" aria-label="Brand milestones">
+          <div class="pab-milestone">
+            <div class="pab-milestone__year" aria-hidden="true">2020</div>
+            <div class="pab-milestone__text">
+              <h3>Petaloons Founded</h3>
+              <p>First handcrafted dog lehenga collection launched to overwhelming response.</p>
+            </div>
+          </div>
+          <div class="pab-milestone">
+            <div class="pab-milestone__year" aria-hidden="true">2022</div>
+            <div class="pab-milestone__text">
+              <h3>Reached 1,000+ Customers</h3>
+              <p>Dog sherwanis and wedding collections launched. Expanded to pan-India delivery.</p>
+            </div>
+          </div>
+          <div class="pab-milestone">
+            <div class="pab-milestone__year" aria-hidden="true">2024</div>
+            <div class="pab-milestone__text">
+              <h3>India's #1 Dog Fashion Brand</h3>
+              <p>10,000+ happy pet parents, 200+ designs, 4.8-star rating across 2,000+ reviews.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MISSION & VISION ══ -->
+<section class="pab-section pab-section--alt" aria-labelledby="pab-mission-heading">
+  <div class="pab-inner">
+    <div class="pab-section-header pab-section-header--center">
+      <div class="pab-section-label">🎯 Purpose</div>
+      <h2 class="pab-section-title" id="pab-mission-heading">Why we do what we do</h2>
+      <p class="pab-section-sub">More than just dog clothes — we're on a mission to celebrate the bond between pets and their parents.</p>
+    </div>
+    <div class="pab-mission-grid">
+      <div class="pab-mission-card">
+        <span class="pab-mission-card__icon" aria-hidden="true">🎯</span>
+        <h3 class="pab-mission-card__title">Our Mission</h3>
+        <p class="pab-mission-card__text">
+          To make every dog in India look and feel royal — through premium handcrafted fashion that's safe, comfortable and uniquely Indian. We believe pet fashion should reflect the same love and care you put into your own wardrobe.
+        </p>
+      </div>
+      <div class="pab-mission-card">
+        <span class="pab-mission-card__icon" aria-hidden="true">🌟</span>
+        <h3 class="pab-mission-card__title">Our Vision</h3>
+        <p class="pab-mission-card__text">
+          To become the most trusted pet fashion brand in Asia — where Indian craftsmanship meets modern pet parent sensibilities. We dream of a world where no dog misses out on the joy of a festive outfit, regardless of breed or size.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHY PETALOONS ══ -->
+<section class="pab-section" aria-labelledby="pab-values-heading">
+  <div class="pab-inner">
+    <div class="pab-section-header pab-section-header--center">
+      <div class="pab-section-label">💛 Why Petaloons</div>
+      <h2 class="pab-section-title" id="pab-values-heading">What makes us different</h2>
+      <p class="pab-section-sub">We obsess over every stitch, every fabric, every size — so your dog is always comfortable, safe and stylish.</p>
+    </div>
+    <div class="pab-values">
+      <div class="pab-value-card">
+        <div class="pab-value-card__icon" aria-hidden="true">🧵</div>
+        <h3 class="pab-value-card__title">Handcrafted in India</h3>
+        <p class="pab-value-card__desc">Every Petaloons outfit is handcrafted by skilled artisans using traditional Indian techniques. No mass-produced fast fashion — just thoughtful, quality workmanship.</p>
+      </div>
+      <div class="pab-value-card">
+        <div class="pab-value-card__icon" aria-hidden="true">🌿</div>
+        <h3 class="pab-value-card__title">Pet-Safe Fabrics</h3>
+        <p class="pab-value-card__desc">We use only non-toxic, skin-friendly fabrics tested for pet safety. No harsh dyes, no scratchy materials — only soft, breathable textiles your dog will love wearing.</p>
+      </div>
+      <div class="pab-value-card">
+        <div class="pab-value-card__icon" aria-hidden="true">📏</div>
+        <h3 class="pab-value-card__title">All Breeds Welcome</h3>
+        <p class="pab-value-card__desc">From Chihuahua to German Shepherd, our sizes range from XS to XXL. Every outfit comes with a detailed size chart so you get the perfect fit for your dog, every time.</p>
+      </div>
+      <div class="pab-value-card">
+        <div class="pab-value-card__icon" aria-hidden="true">👗</div>
+        <h3 class="pab-value-card__title">Uniquely Indian Designs</h3>
+        <p class="pab-value-card__desc">Dog lehengas, sherwanis, bandhanis, bandanas — our collections draw inspiration from India's rich textile traditions, adapted thoughtfully for your furry companion.</p>
+      </div>
+      <div class="pab-value-card">
+        <div class="pab-value-card__icon" aria-hidden="true">🚚</div>
+        <h3 class="pab-value-card__title">Pan-India Delivery</h3>
+        <p class="pab-value-card__desc">We deliver to every corner of India — from metros like Mumbai, Delhi and Bangalore to tier-2 cities. Free shipping on all orders above ₹999 with easy 7-day returns.</p>
+      </div>
+      <div class="pab-value-card">
+        <div class="pab-value-card__icon" aria-hidden="true">⭐</div>
+        <h3 class="pab-value-card__title">Loved by 10,000+ Families</h3>
+        <p class="pab-value-card__desc">With a 4.8/5 rating from over 2,000 reviews, Petaloons has earned the trust of India's most passionate pet parents. Their dogs' smiles are our greatest reward.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SHOP OUR COLLECTIONS ══ -->
+<section class="pab-section pab-section--alt" aria-labelledby="pab-collections-heading">
+  <div class="pab-inner">
+    <div class="pab-section-header pab-section-header--center">
+      <div class="pab-section-label">🛍️ Shop Now</div>
+      <h2 class="pab-section-title" id="pab-collections-heading">Explore our collections</h2>
+      <p class="pab-section-sub">Handcrafted Indian dog fashion for every occasion — weddings, festivals, everyday wear and more.</p>
+    </div>
+    <div class="pab-collections">
+      <a href="/collections/dog-lehengas" class="pab-collection-card" aria-label="Shop Dog Lehenga Collection">
+        <div class="pab-collection-card__emoji" aria-hidden="true">👗</div>
+        <div class="pab-collection-card__name">Dog Lehenga</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+      <a href="/collections/dog-sherwani-collection-india" class="pab-collection-card" aria-label="Shop Dog Sherwani Collection">
+        <div class="pab-collection-card__emoji" aria-hidden="true">🤵</div>
+        <div class="pab-collection-card__name">Dog Sherwani</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+      <a href="/collections/dog-t-shirts" class="pab-collection-card" aria-label="Shop Dog T-Shirts">
+        <div class="pab-collection-card__emoji" aria-hidden="true">👕</div>
+        <div class="pab-collection-card__name">Dog T-Shirts</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+      <a href="/collections/wedding-collection-dog" class="pab-collection-card" aria-label="Shop Wedding Collection for Dogs">
+        <div class="pab-collection-card__emoji" aria-hidden="true">💍</div>
+        <div class="pab-collection-card__name">Wedding Collection</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+      <a href="/collections/dog-couple-dress" class="pab-collection-card" aria-label="Shop Dog Couple Dress">
+        <div class="pab-collection-card__emoji" aria-hidden="true">👫</div>
+        <div class="pab-collection-card__name">Dog Couple Dress</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+      <a href="/collections/dog-tuxedos" class="pab-collection-card" aria-label="Shop Dog Tuxedos">
+        <div class="pab-collection-card__emoji" aria-hidden="true">🎩</div>
+        <div class="pab-collection-card__name">Dog Tuxedo</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+      <a href="/collections/dog-bandanas" class="pab-collection-card" aria-label="Shop Dog Bandanas">
+        <div class="pab-collection-card__emoji" aria-hidden="true">🧣</div>
+        <div class="pab-collection-card__name">Dog Bandana</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+      <a href="/collections/ethnic-wear-for-dogs" class="pab-collection-card" aria-label="Shop Ethnic Wear for Dogs">
+        <div class="pab-collection-card__emoji" aria-hidden="true">🪔</div>
+        <div class="pab-collection-card__name">Ethnic Wear</div>
+        <div class="pab-collection-card__arrow">Shop →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ OUR COMMITMENTS ══ -->
+<section class="pab-section pab-section--dark" aria-labelledby="pab-commit-heading">
+  <div class="pab-inner">
+    <div class="pab-section-header pab-section-header--center">
+      <div class="pab-section-label">🤝 Our Promise</div>
+      <h2 class="pab-section-title" id="pab-commit-heading">What we promise every pet parent</h2>
+      <p class="pab-section-sub">Our commitments go beyond just selling dog clothes — we care about your dog's wellbeing.</p>
+    </div>
+    <div class="pab-commitments">
+      <div class="pab-commit">
+        <div class="pab-commit__icon" aria-hidden="true">🌿</div>
+        <div>
+          <div class="pab-commit__title">100% Pet-Safe Materials</div>
+          <p class="pab-commit__text">All fabrics are tested for pet safety — no toxic dyes, no sharp edges, no uncomfortable seams. Your dog's comfort is our non-negotiable.</p>
+        </div>
+      </div>
+      <div class="pab-commit">
+        <div class="pab-commit__icon" aria-hidden="true">🔄</div>
+        <div>
+          <div class="pab-commit__title">Easy 7-Day Returns</div>
+          <p class="pab-commit__text">Didn't fit right? No worries. Our hassle-free 7-day return policy means you can shop with complete confidence.</p>
+        </div>
+      </div>
+      <div class="pab-commit">
+        <div class="pab-commit__icon" aria-hidden="true">✂️</div>
+        <div>
+          <div class="pab-commit__title">Handcrafted Quality</div>
+          <p class="pab-commit__text">Every outfit is stitched by hand by skilled Indian artisans. No two pieces are identical — each carries the warmth of human craftsmanship.</p>
+        </div>
+      </div>
+      <div class="pab-commit">
+        <div class="pab-commit__icon" aria-hidden="true">📦</div>
+        <div>
+          <div class="pab-commit__title">Fast Pan-India Delivery</div>
+          <p class="pab-commit__text">We deliver to all 28 states and 8 union territories. Free shipping on orders above ₹999. Express delivery available in metro cities.</p>
+        </div>
+      </div>
+      <div class="pab-commit">
+        <div class="pab-commit__icon" aria-hidden="true">💬</div>
+        <div>
+          <div class="pab-commit__title">Real Customer Support</div>
+          <p class="pab-commit__text">Real people, not bots. Our team speaks English and Hindi and is always ready to help with sizing, orders or any concern you have.</p>
+        </div>
+      </div>
+      <div class="pab-commit">
+        <div class="pab-commit__icon" aria-hidden="true">🇮🇳</div>
+        <div>
+          <div class="pab-commit__title">Supporting Indian Artisans</div>
+          <p class="pab-commit__text">Every purchase supports local craftsmen and craftswomen across India. When you buy Petaloons, you're investing in Indian talent and heritage.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FINAL CTA ══ -->
+<section class="pab-cta-section" aria-label="Shop Petaloons">
+  <div class="pab-inner">
+    <div class="pab-section-label" style="display:inline-flex;margin-bottom:14px;">🐾 Ready to Shop?</div>
+    <h2 class="pab-section-title">Make your dog the best-dressed pup in the room</h2>
+    <p class="pab-section-sub">Explore 200+ handcrafted outfits, accessories and more. Free shipping above ₹999. Easy returns. Pan-India delivery.</p>
+    <div class="pab-cta__buttons">
+      <a href="/collections/dog-lehengas" class="pab-cta__btn pab-cta__btn--primary">
+        <span aria-hidden="true">👗</span> Shop Dog Lehenga
+      </a>
+      <a href="/collections/dog-sherwani-collection-india" class="pab-cta__btn pab-cta__btn--primary">
+        <span aria-hidden="true">🤵</span> Shop Dog Sherwani
+      </a>
+      <a href="/collections/all" class="pab-cta__btn pab-cta__btn--secondary">
+        View All Collections →
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Petaloons About Us",
+  "class": "section",
+  "settings": []
+}
+{% endschema %}
