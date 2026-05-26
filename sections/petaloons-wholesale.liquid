@@ -1,0 +1,980 @@
+{% comment %}
+  Petaloons Wholesale / B2B Partner Page
+  CSS scope: .pws-*
+  URL: /pages/wholesale
+{% endcomment %}
+
+<style>
+  .pws-wrap * { box-sizing: border-box; }
+  .pws-wrap { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; }
+
+  /* ─── Hero ─────────────────────────────────────── */
+  .pws-hero {
+    position: relative;
+    background: linear-gradient(135deg, #0f1117 0%, #1e3a8a 45%, #b84500 100%);
+    padding: 80px 24px 100px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .pws-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='40' cy='40' r='5'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .pws-hero__breadcrumb {
+    position: relative;
+    font-size: 13px;
+    color: rgba(255,255,255,.65);
+    margin-bottom: 24px;
+  }
+  .pws-hero__breadcrumb a { color: rgba(255,255,255,.8); text-decoration: none; }
+  .pws-hero__breadcrumb a:hover { color: #fff; text-decoration: underline; }
+  .pws-hero__badge {
+    position: relative;
+    display: inline-block;
+    background: rgba(254,169,16,.2);
+    border: 1px solid rgba(254,169,16,.5);
+    color: #fea910;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+  .pws-hero__title {
+    position: relative;
+    font-size: clamp(2rem, 5.5vw, 3.6rem);
+    font-weight: 900;
+    color: #fff;
+    margin: 0 0 16px;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+  }
+  .pws-hero__title span { color: #fea910; }
+  .pws-hero__sub {
+    position: relative;
+    font-size: 1.1rem;
+    color: rgba(255,255,255,.8);
+    max-width: 580px;
+    margin: 0 auto 36px;
+    line-height: 1.65;
+  }
+  .pws-hero__cta-group {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+  .pws-hero__cta {
+    padding: 15px 32px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pws-hero__cta--primary { background: #fea910; color: #0f1117; }
+  .pws-hero__cta--primary:hover { background: #ffbe3d; transform: translateY(-2px); text-decoration: none; }
+  .pws-hero__cta--outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); }
+  .pws-hero__cta--outline:hover { background: rgba(255,255,255,.1); border-color: #fff; text-decoration: none; }
+  .pws-hero__stats {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,.1);
+    padding-top: 36px;
+  }
+  .pws-hero__stat {
+    padding: 0 40px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,.12);
+  }
+  .pws-hero__stat:last-child { border-right: none; }
+  .pws-hero__stat-val {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fea910;
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .pws-hero__stat-label { font-size: 12.5px; color: rgba(255,255,255,.6); font-weight: 500; }
+  .pws-hero__wave {
+    position: absolute;
+    bottom: -2px; left: 0; width: 100%; line-height: 0;
+  }
+
+  /* ─── Benefits ──────────────────────────────────── */
+  .pws-benefits {
+    background: #fdf9f6;
+    padding: 80px 24px;
+  }
+  .pws-benefits__inner { max-width: 1100px; margin: 0 auto; }
+  .pws-section-head { text-align: center; margin-bottom: 52px; }
+  .pws-section-head__eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #b84500;
+    margin-bottom: 12px;
+  }
+  .pws-section-head__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0 0 12px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .pws-section-head__sub {
+    font-size: 15px;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .pws-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .pws-benefit-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 28px;
+    border: 1.5px solid #f0e8e0;
+    box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    transition: transform .22s, box-shadow .22s, border-color .22s;
+    position: relative;
+    overflow: hidden;
+  }
+  .pws-benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #b84500, #fea910);
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .pws-benefit-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(184,69,0,.14); border-color: #b84500; }
+  .pws-benefit-card:hover::before { opacity: 1; }
+  .pws-benefit-icon {
+    width: 56px; height: 56px;
+    background: linear-gradient(135deg, #fff3eb, #ffe0cc);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .pws-benefit-card h3 { font-size: 1.05rem; font-weight: 800; color: #1a1a1a; margin: 0 0 10px; }
+  .pws-benefit-card p { font-size: 14px; color: #555; line-height: 1.65; margin: 0; }
+
+  /* ─── How It Works ──────────────────────────────── */
+  .pws-how {
+    background: #fff;
+    padding: 80px 24px;
+    border-top: 1px solid #f0e8e0;
+  }
+  .pws-how__inner { max-width: 900px; margin: 0 auto; }
+  .pws-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    position: relative;
+    margin-top: 52px;
+  }
+  .pws-steps::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: calc(16.66% + 18px);
+    width: calc(66.66% - 36px);
+    height: 2px;
+    background: linear-gradient(90deg, #b84500, #fea910);
+    z-index: 0;
+  }
+  .pws-step {
+    text-align: center;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+  .pws-step__num {
+    width: 72px; height: 72px;
+    background: linear-gradient(135deg, #b84500, #de7200);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 20px;
+    box-shadow: 0 6px 20px rgba(184,69,0,.3);
+  }
+  .pws-step h3 { font-size: 1rem; font-weight: 800; color: #1a1a1a; margin: 0 0 8px; }
+  .pws-step p { font-size: 13.5px; color: #666; line-height: 1.6; margin: 0; }
+
+  /* ─── Pricing Tiers ─────────────────────────────── */
+  .pws-tiers {
+    background: #0f1117;
+    padding: 80px 24px;
+  }
+  .pws-tiers__inner { max-width: 1100px; margin: 0 auto; }
+  .pws-tiers .pws-section-head__title { color: #fff; }
+  .pws-tiers .pws-section-head__sub   { color: rgba(255,255,255,.6); }
+  .pws-tiers .pws-section-head__eyebrow { color: #fea910; }
+  .pws-tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 52px;
+  }
+  .pws-tier-card {
+    background: rgba(255,255,255,.05);
+    border: 1.5px solid rgba(255,255,255,.1);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    position: relative;
+    transition: transform .2s, border-color .2s;
+  }
+  .pws-tier-card:hover { transform: translateY(-5px); border-color: rgba(254,169,16,.5); }
+  .pws-tier-card--featured {
+    background: linear-gradient(135deg, rgba(184,69,0,.25), rgba(222,114,0,.15));
+    border-color: #b84500;
+    transform: scale(1.04);
+  }
+  .pws-tier-card--featured:hover { transform: scale(1.04) translateY(-4px); }
+  .pws-tier-badge {
+    position: absolute;
+    top: -14px; left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, #b84500, #fea910);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  .pws-tier-icon { font-size: 40px; margin-bottom: 14px; display: block; }
+  .pws-tier-name { font-size: 1.1rem; font-weight: 800; color: #fff; margin: 0 0 6px; }
+  .pws-tier-moq { font-size: 13px; color: rgba(255,255,255,.5); margin: 0 0 20px; }
+  .pws-tier-discount {
+    font-size: 3rem;
+    font-weight: 900;
+    color: #fea910;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pws-tier-discount-label { font-size: 13px; color: rgba(255,255,255,.55); margin-bottom: 24px; }
+  .pws-tier-features {
+    list-style: none; padding: 0; margin: 0 0 28px;
+    text-align: left;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .pws-tier-features li {
+    font-size: 13.5px;
+    color: rgba(255,255,255,.75);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .pws-tier-features li::before {
+    content: '✓';
+    color: #fea910;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .pws-tier-cta {
+    display: block;
+    background: linear-gradient(90deg, #b84500, #de7200);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    padding: 13px 24px;
+    border-radius: 10px;
+    transition: opacity .2s, transform .18s;
+  }
+  .pws-tier-cta:hover { opacity: .9; transform: translateY(-1px); text-decoration: none; }
+  .pws-tier-card--featured .pws-tier-cta { background: linear-gradient(90deg, #fea910, #ff9500); color: #0f1117; }
+
+  /* ─── Products Grid ─────────────────────────────── */
+  .pws-products {
+    background: #fdf9f6;
+    padding: 80px 24px;
+  }
+  .pws-products__inner { max-width: 1100px; margin: 0 auto; }
+  .pws-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+  }
+  .pws-product-chip {
+    background: #fff;
+    border: 1.5px solid #f0e8e0;
+    border-radius: 14px;
+    padding: 20px 16px;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all .2s;
+    display: block;
+  }
+  .pws-product-chip:hover {
+    border-color: #b84500;
+    box-shadow: 0 6px 24px rgba(184,69,0,.12);
+    transform: translateY(-3px);
+    text-decoration: none;
+  }
+  .pws-product-chip__icon { font-size: 30px; display: block; margin-bottom: 10px; }
+  .pws-product-chip__name { font-size: 13.5px; font-weight: 700; color: #1a1a1a; display: block; margin-bottom: 4px; }
+  .pws-product-chip__moq { font-size: 12px; color: #b84500; font-weight: 600; }
+
+  /* ─── Form Section ──────────────────────────────── */
+  .pws-form-section {
+    background: #fff;
+    padding: 80px 24px;
+    border-top: 1px solid #f0e8e0;
+  }
+  .pws-form-section__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 460px;
+    gap: 60px;
+    align-items: center;
+  }
+  .pws-form-left__title {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0 0 16px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .pws-form-left__sub { font-size: 15px; color: #555; line-height: 1.7; margin: 0 0 28px; }
+  .pws-form-left__trust { display: flex; flex-direction: column; gap: 14px; }
+  .pws-trust-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 18px;
+    background: #fdf9f6;
+    border-radius: 12px;
+    border: 1px solid #f0e8e0;
+  }
+  .pws-trust-item__icon { font-size: 22px; flex-shrink: 0; }
+  .pws-trust-item__text strong { display: block; font-size: 14px; font-weight: 700; color: #1a1a1a; }
+  .pws-trust-item__text span  { font-size: 13px; color: #666; }
+
+  /* Form panel */
+  .pws-form-panel {
+    background: #fff;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 8px 48px rgba(0,0,0,.1);
+    border: 1.5px solid #f0e8e0;
+  }
+  .pws-form-panel__title { font-size: 1.25rem; font-weight: 800; color: #1a1a1a; margin: 0 0 6px; }
+  .pws-form-panel__sub { font-size: 13.5px; color: #777; margin: 0 0 28px; }
+  .pws-field { position: relative; margin-bottom: 16px; }
+  .pws-field label { display: block; font-size: 12.5px; font-weight: 700; color: #3a2010; margin-bottom: 6px; letter-spacing: .2px; }
+  .pws-field label span { color: #b84500; }
+  .pws-field input,
+  .pws-field select,
+  .pws-field textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #e5d8ce;
+    border-radius: 10px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #1a1a1a;
+    background: #fff;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .pws-field input:focus,
+  .pws-field select:focus,
+  .pws-field textarea:focus {
+    border-color: #b84500;
+    box-shadow: 0 0 0 3px rgba(184,69,0,.1);
+  }
+  .pws-field textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
+  .pws-field select {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%23b84500' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+  }
+  .pws-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .pws-submit-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #b84500, #de7200);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 24px;
+    font-size: 15px;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: opacity .2s, transform .18s;
+    margin-top: 8px;
+  }
+  .pws-submit-btn:hover { opacity: .92; transform: translateY(-1px); }
+  .pws-success-msg {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 12px;
+    padding: 18px 22px;
+    color: #166534;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  /* ─── FAQ ────────────────────────────────────────── */
+  .pws-faq {
+    background: #fdf9f6;
+    padding: 80px 24px;
+    border-top: 1px solid #f0e8e0;
+  }
+  .pws-faq__inner { max-width: 780px; margin: 0 auto; }
+  .pws-faq__item { border-bottom: 1px solid #f0e8e0; }
+  .pws-faq__item:last-child { border-bottom: none; }
+  .pws-faq__q {
+    width: 100%; background: none; border: none; text-align: left;
+    padding: 18px 0; font-size: 15px; font-weight: 700; color: #1a1a1a;
+    cursor: pointer; display: flex; justify-content: space-between;
+    align-items: center; gap: 16px; font-family: inherit; transition: color .2s;
+  }
+  .pws-faq__q:hover, .pws-faq__q.open { color: #b84500; }
+  .pws-faq__chevron {
+    width: 22px; height: 22px;
+    border: 2px solid currentColor; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: transform .25s; font-size: 12px;
+  }
+  .pws-faq__q.open .pws-faq__chevron { transform: rotate(180deg); }
+  .pws-faq__a {
+    max-height: 0; overflow: hidden;
+    transition: max-height .3s ease, padding .3s ease;
+    font-size: 14px; color: #555; line-height: 1.75;
+  }
+  .pws-faq__a.open { max-height: 300px; padding-bottom: 18px; }
+  .pws-faq__a a { color: #b84500; font-weight: 600; text-decoration: none; }
+  .pws-faq__a a:hover { text-decoration: underline; }
+
+  /* ─── CTA Strip ──────────────────────────────────── */
+  .pws-cta {
+    background: linear-gradient(135deg, #0f1117, #1e3a8a 50%, #b84500);
+    padding: 64px 24px;
+    text-align: center;
+  }
+  .pws-cta__inner { max-width: 640px; margin: 0 auto; }
+  .pws-cta__title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; color: #fff; margin: 0 0 12px; }
+  .pws-cta__sub { font-size: 15px; color: rgba(255,255,255,.8); margin-bottom: 30px; line-height: 1.6; }
+  .pws-cta__btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .pws-cta__btn {
+    padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 800;
+    text-decoration: none; transition: all .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pws-cta__btn:hover { transform: translateY(-2px); text-decoration: none; opacity: .92; }
+  .pws-cta__btn--gold { background: #fea910; color: #0f1117; }
+  .pws-cta__btn--wa   { background: #25d366; color: #fff; }
+
+  /* ─── Responsive ─────────────────────────────────── */
+  @media (max-width: 989px) {
+    .pws-benefits-grid  { grid-template-columns: repeat(2, 1fr); }
+    .pws-tiers-grid     { grid-template-columns: 1fr; max-width: 420px; margin: 52px auto 0; }
+    .pws-tier-card--featured { transform: scale(1); }
+    .pws-tier-card--featured:hover { transform: translateY(-5px); }
+    .pws-products-grid  { grid-template-columns: repeat(2, 1fr); }
+    .pws-steps          { grid-template-columns: 1fr; gap: 40px; }
+    .pws-steps::before  { display: none; }
+    .pws-form-section__inner { grid-template-columns: 1fr; }
+    .pws-hero__stat     { padding: 0 20px; }
+  }
+  @media (max-width: 749px) {
+    .pws-hero { padding: 60px 20px 80px; }
+    .pws-hero__stats { gap: 20px; }
+    .pws-hero__stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,.12); padding: 16px 0; width: 50%; }
+    .pws-hero__stat:nth-child(even) { border-right: none; }
+    .pws-benefits-grid { grid-template-columns: 1fr; }
+    .pws-products-grid { grid-template-columns: repeat(2, 1fr); }
+    .pws-form-panel { padding: 24px 18px; }
+    .pws-field-row { grid-template-columns: 1fr; }
+    .pws-cta__btns { flex-direction: column; align-items: center; }
+  }
+</style>
+
+<div class="pws-wrap">
+
+  <!-- ═══ HERO ════════════════════════════════════════ -->
+  <div class="pws-hero">
+    <nav class="pws-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a> ›
+      <span>Wholesale</span>
+    </nav>
+    <div class="pws-hero__badge">🏷️ B2B &amp; Wholesale Program</div>
+    <h1 class="pws-hero__title">
+      Grow Your Business with<br>
+      <span>Petaloons Wholesale</span>
+    </h1>
+    <p class="pws-hero__sub">
+      India's #1 dog fashion brand is now open for wholesale partners. Stock premium dog outfits — lehengas, sherwanis, tuxedos, and more — at unbeatable bulk prices.
+    </p>
+    <div class="pws-hero__cta-group">
+      <a href="#wholesale-form" class="pws-hero__cta pws-hero__cta--primary">
+        🤝 Apply to Partner
+      </a>
+      <a href="https://wa.me/918625075493?text=Hi%20Petaloons!%20I%20am%20interested%20in%20your%20wholesale%20program." class="pws-hero__cta pws-hero__cta--outline" target="_blank" rel="noopener">
+        💬 WhatsApp Us
+      </a>
+    </div>
+    <div class="pws-hero__stats">
+      <div class="pws-hero__stat">
+        <span class="pws-hero__stat-val">200+</span>
+        <span class="pws-hero__stat-label">Active Partners</span>
+      </div>
+      <div class="pws-hero__stat">
+        <span class="pws-hero__stat-val">40%</span>
+        <span class="pws-hero__stat-label">Max Discount</span>
+      </div>
+      <div class="pws-hero__stat">
+        <span class="pws-hero__stat-val">10+</span>
+        <span class="pws-hero__stat-label">Product Categories</span>
+      </div>
+      <div class="pws-hero__stat">
+        <span class="pws-hero__stat-val">48hrs</span>
+        <span class="pws-hero__stat-label">Onboarding Time</span>
+      </div>
+    </div>
+    <div class="pws-hero__wave">
+      <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 48L1440 48L1440 12C1200 44 960 4 720 20C480 36 240 0 0 12L0 48Z" fill="#fdf9f6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ═══ BENEFITS ════════════════════════════════════ -->
+  <div class="pws-benefits">
+    <div class="pws-benefits__inner">
+      <div class="pws-section-head">
+        <div class="pws-section-head__eyebrow">Why Partner With Us</div>
+        <h2 class="pws-section-head__title">Everything Your Business Needs</h2>
+        <p class="pws-section-head__sub">From exclusive pricing to dedicated support, we make wholesale easy.</p>
+      </div>
+      <div class="pws-benefits-grid">
+        <div class="pws-benefit-card">
+          <div class="pws-benefit-icon">💰</div>
+          <h3>Upto 40% Off Retail</h3>
+          <p>Get significant margin on every piece you sell. Our tiered pricing rewards higher volume with deeper discounts — Bronze, Silver, and Gold levels.</p>
+        </div>
+        <div class="pws-benefit-card">
+          <div class="pws-benefit-icon">📦</div>
+          <h3>Priority Stock Access</h3>
+          <p>Wholesale partners get early access to new collections and festival launches — before they go live on the retail store.</p>
+        </div>
+        <div class="pws-benefit-card">
+          <div class="pws-benefit-icon">🎨</div>
+          <h3>Custom Branding & Labels</h3>
+          <p>Gold-tier partners can add their own labels and custom packaging on select products, perfect for boutique pet stores.</p>
+        </div>
+        <div class="pws-benefit-card">
+          <div class="pws-benefit-icon">🚚</div>
+          <h3>Nationwide B2B Shipping</h3>
+          <p>Fast, tracked bulk shipping anywhere in India. Consolidated orders dispatched within 3–5 business days of confirmation.</p>
+        </div>
+        <div class="pws-benefit-card">
+          <div class="pws-benefit-icon">📸</div>
+          <h3>Free Marketing Assets</h3>
+          <p>Access a library of professional product photos, videos, and social media creatives — ready to use on your channels.</p>
+        </div>
+        <div class="pws-benefit-card">
+          <div class="pws-benefit-icon">🤝</div>
+          <h3>Dedicated Account Manager</h3>
+          <p>Every wholesale partner gets a personal point of contact on WhatsApp for order tracking, restock alerts, and support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ HOW IT WORKS ════════════════════════════════ -->
+  <div class="pws-how">
+    <div class="pws-how__inner">
+      <div class="pws-section-head">
+        <div class="pws-section-head__eyebrow">Simple Onboarding</div>
+        <h2 class="pws-section-head__title">Start Selling in 3 Easy Steps</h2>
+      </div>
+      <div class="pws-steps">
+        <div class="pws-step">
+          <div class="pws-step__num">📋</div>
+          <h3>1. Apply Online</h3>
+          <p>Fill in the enquiry form below with your business details. We review all applications within 24 hours.</p>
+        </div>
+        <div class="pws-step">
+          <div class="pws-step__num">✅</div>
+          <h3>2. Get Approved</h3>
+          <p>Our team contacts you to discuss product range, MOQ, pricing tier, and shipping arrangements.</p>
+        </div>
+        <div class="pws-step">
+          <div class="pws-step__num">🚀</div>
+          <h3>3. Start Selling!</h3>
+          <p>Place your first order and receive your stock within 3–5 days. Start selling India's best dog fashion!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PRICING TIERS ════════════════════════════════ -->
+  <div class="pws-tiers">
+    <div class="pws-tiers__inner">
+      <div class="pws-section-head">
+        <div class="pws-section-head__eyebrow">Wholesale Pricing</div>
+        <h2 class="pws-section-head__title">Choose Your Partner Tier</h2>
+        <p class="pws-section-head__sub">The more you order, the more you save. All prices are off MRP.</p>
+      </div>
+      <div class="pws-tiers-grid">
+
+        <div class="pws-tier-card">
+          <span class="pws-tier-icon">🥉</span>
+          <div class="pws-tier-name">Bronze Partner</div>
+          <div class="pws-tier-moq">Min. 10 pieces per order</div>
+          <div class="pws-tier-discount">20%</div>
+          <div class="pws-tier-discount-label">off retail price</div>
+          <ul class="pws-tier-features">
+            <li>All product categories</li>
+            <li>Standard shipping rates</li>
+            <li>Email support</li>
+            <li>Product catalogue access</li>
+            <li>Basic marketing assets</li>
+          </ul>
+          <a href="#wholesale-form" class="pws-tier-cta">Apply for Bronze →</a>
+        </div>
+
+        <div class="pws-tier-card pws-tier-card--featured">
+          <div class="pws-tier-badge">Most Popular</div>
+          <span class="pws-tier-icon">🥈</span>
+          <div class="pws-tier-name">Silver Partner</div>
+          <div class="pws-tier-moq">Min. 25 pieces per order</div>
+          <div class="pws-tier-discount">30%</div>
+          <div class="pws-tier-discount-label">off retail price</div>
+          <ul class="pws-tier-features">
+            <li>All product categories</li>
+            <li>Free shipping above ₹5,000</li>
+            <li>WhatsApp + Email support</li>
+            <li>Early collection access</li>
+            <li>Full marketing asset library</li>
+          </ul>
+          <a href="#wholesale-form" class="pws-tier-cta">Apply for Silver →</a>
+        </div>
+
+        <div class="pws-tier-card">
+          <span class="pws-tier-icon">🥇</span>
+          <div class="pws-tier-name">Gold Partner</div>
+          <div class="pws-tier-moq">Min. 50 pieces per order</div>
+          <div class="pws-tier-discount">40%</div>
+          <div class="pws-tier-discount-label">off retail price</div>
+          <ul class="pws-tier-features">
+            <li>All product categories</li>
+            <li>Free shipping always</li>
+            <li>Dedicated account manager</li>
+            <li>Custom branding &amp; labels</li>
+            <li>Exclusive festival pre-orders</li>
+          </ul>
+          <a href="#wholesale-form" class="pws-tier-cta">Apply for Gold →</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PRODUCT CATEGORIES ══════════════════════════ -->
+  <div class="pws-products">
+    <div class="pws-products__inner">
+      <div class="pws-section-head">
+        <div class="pws-section-head__eyebrow">What You Can Stock</div>
+        <h2 class="pws-section-head__title">10+ Product Categories Available</h2>
+        <p class="pws-section-head__sub">From festival ethnic wear to everyday casual — we have it all for your store.</p>
+      </div>
+      <div class="pws-products-grid">
+        <a href="/collections/dog-lehengas" class="pws-product-chip">
+          <span class="pws-product-chip__icon">👗</span>
+          <span class="pws-product-chip__name">Dog Lehengas</span>
+          <span class="pws-product-chip__moq">MOQ: 5 pcs</span>
+        </a>
+        <a href="/collections/dog-sherwani-collection-india" class="pws-product-chip">
+          <span class="pws-product-chip__icon">🎩</span>
+          <span class="pws-product-chip__name">Dog Sherwanis</span>
+          <span class="pws-product-chip__moq">MOQ: 5 pcs</span>
+        </a>
+        <a href="/collections/dog-tuxedos" class="pws-product-chip">
+          <span class="pws-product-chip__icon">🤵</span>
+          <span class="pws-product-chip__name">Dog Tuxedos</span>
+          <span class="pws-product-chip__moq">MOQ: 5 pcs</span>
+        </a>
+        <a href="/collections/dog-t-shirts" class="pws-product-chip">
+          <span class="pws-product-chip__icon">👕</span>
+          <span class="pws-product-chip__name">Dog T-Shirts</span>
+          <span class="pws-product-chip__moq">MOQ: 10 pcs</span>
+        </a>
+        <a href="/collections/dog-couple-dress" class="pws-product-chip">
+          <span class="pws-product-chip__icon">👫</span>
+          <span class="pws-product-chip__name">Couple Outfits</span>
+          <span class="pws-product-chip__moq">MOQ: 5 sets</span>
+        </a>
+        <a href="/collections/dog-bandanas" class="pws-product-chip">
+          <span class="pws-product-chip__icon">🎀</span>
+          <span class="pws-product-chip__name">Bandanas</span>
+          <span class="pws-product-chip__moq">MOQ: 20 pcs</span>
+        </a>
+        <a href="/collections/ethnic-wear-for-dogs" class="pws-product-chip">
+          <span class="pws-product-chip__icon">🪔</span>
+          <span class="pws-product-chip__name">Ethnic Wear</span>
+          <span class="pws-product-chip__moq">MOQ: 5 pcs</span>
+        </a>
+        <a href="/collections/all" class="pws-product-chip">
+          <span class="pws-product-chip__icon">🛍️</span>
+          <span class="pws-product-chip__name">View All</span>
+          <span class="pws-product-chip__moq">Full catalogue →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ INQUIRY FORM ════════════════════════════════ -->
+  <div class="pws-form-section" id="wholesale-form">
+    <div class="pws-form-section__inner">
+
+      <!-- Left: Info -->
+      <div class="pws-form-left">
+        <h2 class="pws-form-left__title">Ready to Stock India's Best Dog Fashion?</h2>
+        <p class="pws-form-left__sub">Fill in the form and our wholesale team will get back to you within 24 hours with pricing, catalogue, and next steps.</p>
+        <div class="pws-form-left__trust">
+          <div class="pws-trust-item">
+            <span class="pws-trust-item__icon">⚡</span>
+            <div class="pws-trust-item__text">
+              <strong>24-hr Response Guarantee</strong>
+              <span>We review every application within one business day</span>
+            </div>
+          </div>
+          <div class="pws-trust-item">
+            <span class="pws-trust-item__icon">🔒</span>
+            <div class="pws-trust-item__text">
+              <strong>No Commitment Required</strong>
+              <span>Enquiring is free — no obligation to place an order</span>
+            </div>
+          </div>
+          <div class="pws-trust-item">
+            <span class="pws-trust-item__icon">💬</span>
+            <div class="pws-trust-item__text">
+              <strong>Prefer WhatsApp?</strong>
+              <span>
+                <a href="https://wa.me/918625075493?text=Hi%20Petaloons!%20I%20want%20to%20enquire%20about%20wholesale." target="_blank" rel="noopener" style="color:#b84500;font-weight:700;text-decoration:none;">Message us at +91 86250 75493 →</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="pws-form-panel">
+        <div class="pws-form-panel__title">Wholesale Enquiry Form</div>
+        <p class="pws-form-panel__sub">All fields marked <span style="color:#b84500">*</span> are required</p>
+
+        {%- form 'contact', id: 'PetalWholesaleForm' -%}
+
+          {%- if form.posted_successfully? -%}
+            <div class="pws-success-msg" role="alert">
+              🎉 <div><strong>Application received!</strong><br><span style="font-weight:400">Our wholesale team will contact you within 24 hours.</span></div>
+            </div>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[Subject]" value="Wholesale Enquiry">
+          <input type="hidden" name="contact[Type]" value="B2B / Wholesale Application">
+
+          <div class="pws-field-row">
+            <div class="pws-field">
+              <label for="PwsName">Contact Name <span>*</span></label>
+              <input type="text" id="PwsName" name="contact[Name]" placeholder="Your full name" required
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}">
+            </div>
+            <div class="pws-field">
+              <label for="PwsPhone">Phone Number <span>*</span></label>
+              <input type="tel" id="PwsPhone" name="contact[Phone]" placeholder="+91 XXXXX XXXXX" required
+                value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+            </div>
+          </div>
+
+          <div class="pws-field">
+            <label for="PwsEmail">Business Email <span>*</span></label>
+            <input type="email" id="PwsEmail" name="contact[email]" placeholder="you@yourbusiness.com"
+              autocomplete="email" required
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}">
+          </div>
+
+          <div class="pws-field">
+            <label for="PwsBusiness">Business / Store Name <span>*</span></label>
+            <input type="text" id="PwsBusiness" name="contact[Business Name]" placeholder="e.g. Paws &amp; Claws Pet Store" required>
+          </div>
+
+          <div class="pws-field-row">
+            <div class="pws-field">
+              <label for="PwsCity">City &amp; State <span>*</span></label>
+              <input type="text" id="PwsCity" name="contact[City and State]" placeholder="e.g. Mumbai, MH" required>
+            </div>
+            <div class="pws-field">
+              <label for="PwsTier">Interested Tier</label>
+              <select id="PwsTier" name="contact[Wholesale Tier]">
+                <option value="">Select tier…</option>
+                <option value="Bronze (10+ pcs, 20% off)">Bronze — 10+ pcs</option>
+                <option value="Silver (25+ pcs, 30% off)" selected>Silver — 25+ pcs</option>
+                <option value="Gold (50+ pcs, 40% off)">Gold — 50+ pcs</option>
+                <option value="Not sure yet">Not sure yet</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pws-field">
+            <label for="PwsType">Business Type</label>
+            <select id="PwsType" name="contact[Business Type]">
+              <option value="">Select type…</option>
+              <option value="Pet Store / Grooming Salon">Pet Store / Grooming Salon</option>
+              <option value="Online Seller (Amazon / Meesho / Flipkart)">Online Seller (Amazon / Meesho / Flipkart)</option>
+              <option value="Boutique / Gift Shop">Boutique / Gift Shop</option>
+              <option value="Veterinary Clinic">Veterinary Clinic</option>
+              <option value="Dog Kennel / Daycare">Dog Kennel / Daycare</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="pws-field">
+            <label for="PwsMsg">Additional Message</label>
+            <textarea id="PwsMsg" name="contact[Message]" placeholder="Tell us about your store, the products you're interested in, or any questions you have…">{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="pws-submit-btn">
+            🤝 Submit Wholesale Enquiry
+          </button>
+
+        {%- endform -%}
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ FAQ ══════════════════════════════════════════ -->
+  <div class="pws-faq">
+    <div class="pws-faq__inner">
+      <div class="pws-section-head">
+        <div class="pws-section-head__eyebrow">Wholesale FAQs</div>
+        <h2 class="pws-section-head__title">Common Questions Answered</h2>
+      </div>
+
+      {%- assign wfaqs = "What is the minimum order quantity (MOQ) to become a wholesale partner?,Do I need a GST number to apply?,How long does it take to receive my wholesale order?,Can I mix products across categories in one order?,Do you offer sample products before I place a bulk order?,Is the wholesale pricing available for online resellers like Amazon & Meesho?" | split: "," -%}
+      {%- assign wans = "The minimum order for Bronze tier is 10 pieces. Silver requires 25 pieces and Gold requires 50 pieces. Pieces can be mixed across different styles and sizes within a category.,A GST number is preferred for business-to-business invoicing but is not mandatory to apply. Provide your GST number during onboarding if available.,Wholesale orders are dispatched within 3–5 business days of order confirmation and payment. Delivery to most locations takes an additional 2–4 days.,Yes! You can mix products across different categories within a single order as long as the total piece count meets your tier's MOQ.,Yes, we offer a sample kit (up to 3 products) at 10% discount before you commit to a bulk order. Contact us on WhatsApp to request samples.,Absolutely! We actively partner with Amazon, Meesho, Flipkart, and independent online sellers. Our product images and descriptions are available for download to all wholesale partners." | split: "," -%}
+
+      {%- for wfaq in wfaqs -%}
+        <div class="pws-faq__item">
+          <button class="pws-faq__q{% if forloop.first %} open{% endif %}" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+            {{ wfaq }}
+            <span class="pws-faq__chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="pws-faq__a{% if forloop.first %} open{% endif %}" role="region">{{ wans[forloop.index0] }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <!-- ═══ CTA ═══════════════════════════════════════════ -->
+  <div class="pws-cta">
+    <div class="pws-cta__inner">
+      <div class="pws-cta__title">Join 200+ Wholesale Partners Across India</div>
+      <p class="pws-cta__sub">Stock India's most loved dog fashion brand and delight your customers. Apply now or reach us directly on WhatsApp.</p>
+      <div class="pws-cta__btns">
+        <a href="#wholesale-form" class="pws-cta__btn pws-cta__btn--gold">🤝 Apply Now</a>
+        <a href="https://wa.me/918625075493?text=Hi!%20I%20want%20to%20know%20more%20about%20Petaloons%20wholesale." class="pws-cta__btn pws-cta__btn--wa" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /pws-wrap -->
+
+<!-- ═══ STRUCTURED DATA ══════════════════════════════ -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Wholesale Dog Fashion | Bulk Dog Outfits | Petaloons B2B",
+    "description": "Join Petaloons' wholesale program and stock India's #1 dog fashion brand. Get upto 40% off retail price on bulk orders of dog lehengas, sherwanis, tuxedos and more.",
+    "url": "{{ shop.url }}/pages/wholesale",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"{{ shop.url }}"},
+        {"@type":"ListItem","position":2,"name":"Wholesale","item":"{{ shop.url }}/pages/wholesale"}
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the minimum order quantity for Petaloons wholesale?",
+        "acceptedAnswer": {"@type":"Answer","text":"Bronze tier starts at 10 pieces, Silver at 25 pieces, and Gold at 50 pieces. Pieces can be mixed across styles and sizes."}
+      },
+      {
+        "@type": "Question",
+        "name": "How much discount does Petaloons offer on wholesale?",
+        "acceptedAnswer": {"@type":"Answer","text":"Petaloons offers 20% off (Bronze), 30% off (Silver), and 40% off (Gold) retail price depending on order volume."}
+      },
+      {
+        "@type": "Question",
+        "name": "Can online resellers like Amazon and Meesho sellers apply for Petaloons wholesale?",
+        "acceptedAnswer": {"@type":"Answer","text":"Yes, Petaloons actively partners with Amazon, Meesho, Flipkart and independent online sellers across India."}
+      }
+    ]
+  }
+]
+</script>
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.pws-faq__q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var ans = btn.nextElementSibling;
+      var isOpen = btn.classList.contains('open');
+      btn.closest('.pws-faq__inner').querySelectorAll('.pws-faq__q').forEach(function(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      btn.closest('.pws-faq__inner').querySelectorAll('.pws-faq__a').forEach(function(a){ a.classList.remove('open'); });
+      if (!isOpen) { btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); ans.classList.add('open'); }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Petaloons Wholesale Page",
+  "settings": [],
+  "presets": [{ "name": "Petaloons Wholesale Page" }]
+}
+{% endschema %}

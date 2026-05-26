@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-wholesale",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
