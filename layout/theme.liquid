@@ -10,18 +10,6 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
-    {%- comment -%} Noindex utility, privacy and duplicate-content pages {%- endcomment -%}
-    {%- assign noindex_page = false -%}
-    {%- if request.path contains 'data-sharing-opt-out'
-        or request.path contains 'avada-sitemap'
-        or request.path contains 'html-sitemap'
-        or request.path contains 'product-videos' -%}
-      {%- assign noindex_page = true -%}
-    {%- endif -%}
-    {%- if noindex_page -%}
-      <meta name="robots" content="noindex, nofollow">
-    {%- endif -%}
-
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
