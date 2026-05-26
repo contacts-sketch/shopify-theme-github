@@ -1,0 +1,895 @@
+{% comment %}
+  Petaloons Contact Page — Beautiful branded contact section
+  CSS scope: .pco-*
+  URL: /pages/contact
+{% endcomment %}
+
+<style>
+  /* ─── Reset & Base ─────────────────────────────── */
+  .pco-wrap * { box-sizing: border-box; }
+  .pco-wrap { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; }
+
+  /* ─── Hero ─────────────────────────────────────── */
+  .pco-hero {
+    position: relative;
+    background: linear-gradient(135deg, #5a1d00 0%, #b84500 55%, #de7200 100%);
+    padding: 72px 24px 80px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .pco-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .pco-hero__breadcrumb {
+    position: relative;
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+    letter-spacing: 0.3px;
+  }
+  .pco-hero__breadcrumb a { color: rgba(255,255,255,0.8); text-decoration: none; }
+  .pco-hero__breadcrumb a:hover { color: #fff; text-decoration: underline; }
+  .pco-hero__eyebrow {
+    position: relative;
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+  }
+  .pco-hero__title {
+    position: relative;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    color: #fff;
+    margin: 0 0 16px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  .pco-hero__sub {
+    position: relative;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.88);
+    max-width: 520px;
+    margin: 0 auto 32px;
+    line-height: 1.6;
+  }
+  .pco-hero__chips {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .pco-hero__chip {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 18px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pco-hero__wave {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    line-height: 0;
+  }
+
+  /* ─── Quick Contact Cards ───────────────────────── */
+  .pco-cards-section {
+    background: #fff;
+    padding: 0 24px;
+  }
+  .pco-cards {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    transform: translateY(-44px);
+  }
+  .pco-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    border: 1.5px solid transparent;
+    display: block;
+  }
+  .pco-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 48px rgba(184,69,0,0.15);
+    border-color: #b84500;
+    text-decoration: none;
+  }
+  .pco-card__icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 0 auto 16px;
+  }
+  .pco-card__icon--wa  { background: #e7f9ee; }
+  .pco-card__icon--mail { background: #fff3eb; }
+  .pco-card__icon--ig  { background: #fdf0f8; }
+  .pco-card__label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 6px;
+  }
+  .pco-card__value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+  .pco-card__note {
+    font-size: 12.5px;
+    color: #666;
+    line-height: 1.4;
+  }
+  .pco-card__cta {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 20px;
+    border-radius: 30px;
+    transition: opacity 0.2s;
+  }
+  .pco-card__cta--wa   { background: #25d366; color: #fff; }
+  .pco-card__cta--mail { background: #b84500; color: #fff; }
+  .pco-card__cta--ig   { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+  .pco-card:hover .pco-card__cta { opacity: 0.88; }
+
+  /* ─── Main Section ──────────────────────────────── */
+  .pco-main {
+    background: #fdf9f6;
+    padding: 0 24px 80px;
+  }
+  .pco-main__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ─── Form Panel ────────────────────────────────── */
+  .pco-form-panel {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    border: 1px solid #f0e8e0;
+  }
+  .pco-form-panel__title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0 0 6px;
+  }
+  .pco-form-panel__sub {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 32px;
+    line-height: 1.5;
+  }
+
+  /* Subject tabs */
+  .pco-subject-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .pco-subject-tab {
+    background: #f5efe9;
+    border: 1.5px solid transparent;
+    border-radius: 30px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b3a2a;
+    cursor: pointer;
+    transition: all 0.18s;
+    user-select: none;
+  }
+  .pco-subject-tab:hover,
+  .pco-subject-tab.active {
+    background: #b84500;
+    color: #fff;
+    border-color: #b84500;
+  }
+
+  /* Form fields */
+  .pco-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .pco-field {
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .pco-field--full { grid-column: 1 / -1; }
+  .pco-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: #3a2010;
+    margin-bottom: 7px;
+    letter-spacing: 0.2px;
+  }
+  .pco-field label span { color: #b84500; }
+  .pco-field input,
+  .pco-field textarea,
+  .pco-field select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid #e5d8ce;
+    border-radius: 10px;
+    font-size: 14.5px;
+    font-family: inherit;
+    color: #1a1a1a;
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .pco-field input:focus,
+  .pco-field textarea:focus,
+  .pco-field select:focus {
+    border-color: #b84500;
+    box-shadow: 0 0 0 3px rgba(184,69,0,0.1);
+  }
+  .pco-field textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+  .pco-field select {
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 7L11 1' stroke='%23b84500' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+  }
+  .pco-field input::placeholder,
+  .pco-field textarea::placeholder { color: #b0a09a; font-size: 14px; }
+
+  /* Submit button */
+  .pco-submit-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #b84500 0%, #de7200 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: opacity 0.2s, transform 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .pco-submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  .pco-submit-btn:active { transform: translateY(0); }
+
+  /* Success / error */
+  .pco-success-msg {
+    background: #f0fdf4;
+    border: 1.5px solid #86efac;
+    border-radius: 12px;
+    padding: 20px 24px;
+    color: #166534;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .pco-error-msg {
+    background: #fff1f2;
+    border: 1.5px solid #fca5a5;
+    border-radius: 12px;
+    padding: 16px 24px;
+    color: #991b1b;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  /* ─── Info Panel ────────────────────────────────── */
+  .pco-info-panel { display: flex; flex-direction: column; gap: 20px; }
+
+  .pco-info-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 24px;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.07);
+    border: 1px solid #f0e8e0;
+  }
+  .pco-info-card__head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .pco-info-card__icon {
+    width: 40px;
+    height: 40px;
+    background: #fff3eb;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .pco-info-card__title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #1a1a1a;
+    margin: 0;
+  }
+  .pco-info-card__body { font-size: 14px; color: #444; line-height: 1.65; }
+  .pco-info-card__body a { color: #b84500; text-decoration: none; font-weight: 600; }
+  .pco-info-card__body a:hover { text-decoration: underline; }
+
+  /* Hours table */
+  .pco-hours { width: 100%; font-size: 13.5px; border-collapse: collapse; }
+  .pco-hours tr { border-bottom: 1px solid #f0e8e0; }
+  .pco-hours tr:last-child { border-bottom: none; }
+  .pco-hours td { padding: 7px 0; color: #444; }
+  .pco-hours td:last-child { text-align: right; font-weight: 600; color: #1a1a1a; }
+  .pco-hours .open { color: #16a34a; }
+
+  /* Response time badge */
+  .pco-response-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(90deg, #b84500, #de7200);
+    border-radius: 12px;
+    padding: 16px 20px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .pco-response-badge span { font-size: 22px; }
+
+  /* Social links */
+  .pco-socials {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .pco-social-btn {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 9px 16px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    flex: 1;
+    justify-content: center;
+  }
+  .pco-social-btn:hover { opacity: 0.85; text-decoration: none; }
+  .pco-social-btn--wa { background: #25d366; color: #fff; }
+  .pco-social-btn--ig { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366); color: #fff; }
+
+  /* ─── FAQ Strip ──────────────────────────────────── */
+  .pco-faq {
+    background: #fff;
+    padding: 64px 24px;
+    border-top: 1px solid #f0e8e0;
+  }
+  .pco-faq__inner { max-width: 780px; margin: 0 auto; }
+  .pco-faq__header { text-align: center; margin-bottom: 40px; }
+  .pco-faq__eyebrow {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #b84500;
+    margin-bottom: 10px;
+  }
+  .pco-faq__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 900;
+    color: #1a1a1a;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .pco-faq__item {
+    border-bottom: 1px solid #f0e8e0;
+  }
+  .pco-faq__q {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 20px 0;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: #1a1a1a;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    font-family: inherit;
+    transition: color 0.2s;
+  }
+  .pco-faq__q:hover { color: #b84500; }
+  .pco-faq__q.open { color: #b84500; }
+  .pco-faq__chevron {
+    width: 22px;
+    height: 22px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.25s;
+    font-size: 13px;
+  }
+  .pco-faq__q.open .pco-faq__chevron { transform: rotate(180deg); }
+  .pco-faq__a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    font-size: 14.5px;
+    color: #555;
+    line-height: 1.7;
+    padding: 0;
+  }
+  .pco-faq__a.open {
+    max-height: 300px;
+    padding-bottom: 20px;
+  }
+  .pco-faq__a a { color: #b84500; font-weight: 600; text-decoration: none; }
+  .pco-faq__a a:hover { text-decoration: underline; }
+
+  /* ─── Responsive ─────────────────────────────────── */
+  @media (max-width: 989px) {
+    .pco-cards { grid-template-columns: repeat(3, 1fr); gap: 14px; transform: translateY(-32px); }
+    .pco-main__inner { grid-template-columns: 1fr; }
+    .pco-info-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  }
+  @media (max-width: 749px) {
+    .pco-hero { padding: 52px 20px 64px; }
+    .pco-cards { grid-template-columns: 1fr; transform: translateY(-24px); }
+    .pco-form-panel { padding: 28px 20px; }
+    .pco-field-row { grid-template-columns: 1fr; }
+    .pco-info-panel { grid-template-columns: 1fr; }
+    .pco-socials { flex-direction: column; }
+  }
+  @media (max-width: 480px) {
+    .pco-hero__chips { gap: 8px; }
+    .pco-hero__chip { font-size: 12px; padding: 6px 14px; }
+  }
+</style>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<div class="pco-wrap">
+  <div class="pco-hero">
+    <nav class="pco-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a>
+      <span aria-hidden="true"> › </span>
+      <span>Contact Us</span>
+    </nav>
+    <div class="pco-hero__eyebrow">🐾 We Love Hearing From You</div>
+    <h1 class="pco-hero__title">Get in Touch With Us</h1>
+    <p class="pco-hero__sub">
+      Have a question about sizing, custom outfits, or your order? Our dog fashion experts are here to help — every single day.
+    </p>
+    <div class="pco-hero__chips">
+      <div class="pco-hero__chip">⚡ Reply in &lt; 2 Hours</div>
+      <div class="pco-hero__chip">💬 WhatsApp Support</div>
+      <div class="pco-hero__chip">🇮🇳 India's #1 Dog Fashion Brand</div>
+    </div>
+    <div class="pco-hero__wave">
+      <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 48L1440 48L1440 12C1200 44 960 4 720 20C480 36 240 0 0 12L0 48Z" fill="#fdf9f6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       QUICK CONTACT CARDS
+  ═══════════════════════════════════════════ -->
+  <div class="pco-cards-section">
+    <div class="pco-cards">
+
+      <a href="https://wa.me/919999999999?text=Hi%20Petaloons!%20I%20have%20a%20question%20about%20dog%20outfits." class="pco-card" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <div class="pco-card__icon pco-card__icon--wa">💬</div>
+        <div class="pco-card__label">Fastest Response</div>
+        <div class="pco-card__value">WhatsApp Chat</div>
+        <div class="pco-card__note">Chat with us instantly. Available 9am–9pm IST, 7 days a week.</div>
+        <span class="pco-card__cta pco-card__cta--wa">Chat Now →</span>
+      </a>
+
+      <a href="mailto:hello@petaloons.com" class="pco-card" aria-label="Send Email">
+        <div class="pco-card__icon pco-card__icon--mail">✉️</div>
+        <div class="pco-card__label">Email Us</div>
+        <div class="pco-card__value">hello@petaloons.com</div>
+        <div class="pco-card__note">For orders, returns, bulk queries & partnerships.</div>
+        <span class="pco-card__cta pco-card__cta--mail">Send Email →</span>
+      </a>
+
+      <a href="https://www.instagram.com/petaloons" class="pco-card" target="_blank" rel="noopener" aria-label="DM on Instagram">
+        <div class="pco-card__icon pco-card__icon--ig">📸</div>
+        <div class="pco-card__label">Instagram DM</div>
+        <div class="pco-card__value">@petaloons</div>
+        <div class="pco-card__note">Send us a DM — we love seeing your pup's photos too!</div>
+        <span class="pco-card__cta pco-card__cta--ig">DM Us →</span>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN: FORM + INFO
+  ═══════════════════════════════════════════ -->
+  <div class="pco-main">
+    <div class="pco-main__inner">
+
+      <!-- Contact Form -->
+      <div class="pco-form-panel">
+        <h2 class="pco-form-panel__title">Send Us a Message</h2>
+        <p class="pco-form-panel__sub">Fill in the form below and we'll get back to you within 2 hours on business days.</p>
+
+        <!-- Subject Tabs (cosmetic, sets hidden field) -->
+        <div class="pco-subject-tabs" role="group" aria-label="Select subject">
+          <button type="button" class="pco-subject-tab active" data-subject="General Enquiry">🐾 General</button>
+          <button type="button" class="pco-subject-tab" data-subject="Order & Shipping">📦 Order / Shipping</button>
+          <button type="button" class="pco-subject-tab" data-subject="Custom Sizing">📏 Custom Sizing</button>
+          <button type="button" class="pco-subject-tab" data-subject="Returns & Exchange">🔄 Returns</button>
+          <button type="button" class="pco-subject-tab" data-subject="Bulk / Wholesale">🏷️ Bulk / Wholesale</button>
+        </div>
+
+        {%- form 'contact', id: 'PetaloonContactForm' -%}
+
+          {%- if form.posted_successfully? -%}
+            <div class="pco-success-msg" role="alert">
+              <span>🎉</span>
+              <div>
+                <strong>Message sent successfully!</strong><br>
+                <span style="font-weight:400;font-size:14px;">We've received your message and will reply within 2 hours. Check your email inbox!</span>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div class="pco-error-msg" role="alert">
+              ⚠️ Please check the fields below and try again. Make sure your email address is correct.
+            </div>
+          {%- endif -%}
+
+          <!-- Hidden subject field -->
+          <input type="hidden" id="pco-subject-hidden" name="contact[Subject]" value="General Enquiry">
+
+          <div class="pco-field-row">
+            <div class="pco-field">
+              <label for="PcoContactName">Your Name</label>
+              <input
+                type="text"
+                id="PcoContactName"
+                name="contact[Name]"
+                autocomplete="name"
+                placeholder="e.g. Priya Sharma"
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              >
+            </div>
+            <div class="pco-field">
+              <label for="PcoContactPhone">Phone Number</label>
+              <input
+                type="tel"
+                id="PcoContactPhone"
+                name="contact[Phone]"
+                autocomplete="tel"
+                placeholder="e.g. +91 98765 43210"
+                value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                pattern="[0-9+\-\s]*"
+              >
+            </div>
+          </div>
+
+          <div class="pco-field">
+            <label for="PcoContactEmail">Email Address <span>*</span></label>
+            <input
+              type="email"
+              id="PcoContactEmail"
+              name="contact[email]"
+              autocomplete="email"
+              spellcheck="false"
+              autocapitalize="off"
+              placeholder="e.g. priya@email.com"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              aria-required="true"
+              {% if form.errors contains 'email' %}aria-invalid="true"{% endif %}
+              required
+            >
+          </div>
+
+          <div class="pco-field">
+            <label for="PcoContactDog">Dog Breed (optional)</label>
+            <input
+              type="text"
+              id="PcoContactDog"
+              name="contact[Dog Breed]"
+              placeholder="e.g. Golden Retriever, Shih Tzu, Indie..."
+            >
+          </div>
+
+          <div class="pco-field">
+            <label for="PcoContactMsg">Your Message <span>*</span></label>
+            <textarea
+              id="PcoContactMsg"
+              name="contact[Message]"
+              placeholder="Tell us what you need — outfit type, size, event, budget… We'll suggest the perfect look for your pup! 🐶"
+              required
+            >{{ form.body }}</textarea>
+          </div>
+
+          <button type="submit" class="pco-submit-btn">
+            <span>🚀</span> Send Message
+          </button>
+
+        {%- endform -%}
+      </div>
+
+      <!-- Info Panel -->
+      <div class="pco-info-panel">
+
+        <!-- Response Time -->
+        <div class="pco-response-badge">
+          <span>⚡</span>
+          <div>
+            <div style="font-size:16px;font-weight:900;">Average Reply: &lt;2 Hours</div>
+            <div style="font-weight:400;font-size:13px;opacity:0.9;">Mon–Sun, 9 AM – 9 PM IST</div>
+          </div>
+        </div>
+
+        <!-- Support Hours -->
+        <div class="pco-info-card">
+          <div class="pco-info-card__head">
+            <div class="pco-info-card__icon">🕐</div>
+            <h3 class="pco-info-card__title">Support Hours</h3>
+          </div>
+          <div class="pco-info-card__body">
+            <table class="pco-hours" aria-label="Support hours">
+              <tr><td>Monday – Friday</td><td class="open">9 AM – 9 PM</td></tr>
+              <tr><td>Saturday</td><td class="open">10 AM – 7 PM</td></tr>
+              <tr><td>Sunday</td><td class="open">10 AM – 6 PM</td></tr>
+              <tr><td>Public Holidays</td><td style="color:#888;">Limited Support</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- Order Support -->
+        <div class="pco-info-card">
+          <div class="pco-info-card__head">
+            <div class="pco-info-card__icon">📦</div>
+            <h3 class="pco-info-card__title">Order Support</h3>
+          </div>
+          <div class="pco-info-card__body">
+            Track, modify or return your order easily.<br><br>
+            <strong>Order Tracking:</strong> Check your email for the shipment link.<br><br>
+            <strong>Easy Returns:</strong> 7-day hassle-free return policy.<br><br>
+            <a href="{{ routes.account_url }}">View My Orders →</a>
+          </div>
+        </div>
+
+        <!-- Connect With Us -->
+        <div class="pco-info-card">
+          <div class="pco-info-card__head">
+            <div class="pco-info-card__icon">❤️</div>
+            <h3 class="pco-info-card__title">Connect With Us</h3>
+          </div>
+          <div class="pco-info-card__body">
+            Join 10,000+ dog parents who tag <strong>@petaloons</strong> on Instagram every day!
+            <div class="pco-socials">
+              <a href="https://wa.me/919999999999" class="pco-social-btn pco-social-btn--wa" target="_blank" rel="noopener" aria-label="WhatsApp">
+                💬 WhatsApp
+              </a>
+              <a href="https://www.instagram.com/petaloons" class="pco-social-btn pco-social-btn--ig" target="_blank" rel="noopener" aria-label="Instagram">
+                📸 Instagram
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /info panel -->
+    </div>
+  </div><!-- /pco-main -->
+
+  <!-- ═══════════════════════════════════════════
+       FAQ STRIP
+  ═══════════════════════════════════════════ -->
+  <div class="pco-faq">
+    <div class="pco-faq__inner">
+      <div class="pco-faq__header">
+        <div class="pco-faq__eyebrow">Got Questions?</div>
+        <h2 class="pco-faq__title">Frequently Asked Questions</h2>
+      </div>
+
+      {%- assign faqs = "How do I find the right size for my dog?,Do you ship across India?,Can I get a custom outfit for my dog?,What is your return policy?,How long does delivery take?,Do you make matching outfits for dogs and owners?" | split: "," -%}
+      {%- assign answers = "We have a detailed size chart on every product page. Just measure your dog's chest, neck, and back length. If you're unsure, WhatsApp us with the measurements and we'll suggest the perfect size!,Yes! We ship pan-India with free shipping on orders above ₹999. Express delivery is also available in major cities.,Absolutely! We love creating custom outfits for special occasions like weddings, Diwali, photoshoots and birthdays. Drop us a message with the event details and your dog's measurements.,We offer a 7-day hassle-free return policy. If the size doesn't fit or you receive a damaged item, contact us and we'll arrange a replacement or refund.,Standard delivery takes 4–7 business days. Express delivery (1–3 days) is available for an additional charge. You'll receive a tracking link via email and SMS.,Yes! Our matching dog-owner collection is one of our bestsellers. Browse the <a href='/collections/dog-couple-outfits'>Couple Collection</a> or contact us for custom matching sets." | split: "," -%}
+
+      {% for faq in faqs %}
+        <div class="pco-faq__item">
+          <button class="pco-faq__q{% if forloop.first %} open{% endif %}" type="button" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+            {{ faq }}
+            <span class="pco-faq__chevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="pco-faq__a{% if forloop.first %} open{% endif %}" role="region">
+            {{ answers[forloop.index0] }}
+          </div>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+</div><!-- /pco-wrap -->
+
+<!-- ═══════════════════════════════════════════
+     STRUCTURED DATA (SEO)
+═══════════════════════════════════════════ -->
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Petaloons — India's #1 Dog Fashion Brand",
+    "description": "Contact Petaloons for dog outfit queries, custom sizing, order support, returns, and wholesale enquiries. We reply within 2 hours.",
+    "url": "{{ shop.url }}/pages/contact",
+    "inLanguage": "en-IN",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"{{ shop.url }}"},
+        {"@type":"ListItem","position":2,"name":"Contact Us","item":"{{ shop.url }}/pages/contact"}
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Petaloons",
+    "description": "India's #1 dog fashion and pet clothing brand. Premium dog lehengas, sherwanis, tuxedos, and ethnic wear.",
+    "url": "{{ shop.url }}",
+    "logo": "{{ 'logo.png' | asset_url }}",
+    "image": "{{ 'og-image.jpg' | asset_url }}",
+    "telephone": "+91-9999999999",
+    "email": "hello@petaloons.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "IN"
+    },
+    "openingHoursSpecification": [
+      {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:00","closes":"21:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"10:00","closes":"19:00"},
+      {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"10:00","closes":"18:00"}
+    ],
+    "sameAs": [
+      "https://www.instagram.com/petaloons",
+      "https://www.facebook.com/petaloons"
+    ],
+    "priceRange": "₹₹",
+    "currenciesAccepted": "INR",
+    "paymentAccepted": "Credit Card, Debit Card, UPI, Net Banking, COD",
+    "areaServed": "IN"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I find the right size for my dog?",
+        "acceptedAnswer": {"@type":"Answer","text":"We have a detailed size chart on every product page. Measure your dog's chest, neck, and back length. WhatsApp us with measurements for a personalised recommendation."}
+      },
+      {
+        "@type": "Question",
+        "name": "Does Petaloons ship across India?",
+        "acceptedAnswer": {"@type":"Answer","text":"Yes! Petaloons ships pan-India with free shipping on orders above ₹999. Express delivery is available in major cities."}
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get a custom dog outfit?",
+        "acceptedAnswer": {"@type":"Answer","text":"Yes! We create custom outfits for weddings, Diwali, photoshoots and birthdays. Contact us with event details and your dog's measurements."}
+      },
+      {
+        "@type": "Question",
+        "name": "What is Petaloons return policy?",
+        "acceptedAnswer": {"@type":"Answer","text":"We offer a 7-day hassle-free return policy. If the size doesn't fit or you receive a damaged item, contact us for a replacement or refund."}
+      },
+      {
+        "@type": "Question",
+        "name": "How long does Petaloons delivery take?",
+        "acceptedAnswer": {"@type":"Answer","text":"Standard delivery takes 4–7 business days. Express delivery (1–3 days) is available at an additional charge. Tracking link sent via email and SMS."}
+      }
+    ]
+  }
+]
+</script>
+
+<script>
+  // Subject tab switcher
+  document.querySelectorAll('.pco-subject-tab').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.pco-subject-tab').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var hidden = document.getElementById('pco-subject-hidden');
+      if (hidden) hidden.value = btn.getAttribute('data-subject');
+    });
+  });
+
+  // FAQ accordion
+  document.querySelectorAll('.pco-faq__q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var answer = btn.nextElementSibling;
+      var isOpen = btn.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.pco-faq__q').forEach(function(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      document.querySelectorAll('.pco-faq__a').forEach(function(a){ a.classList.remove('open'); });
+      // Open clicked if it was closed
+      if (!isOpen) {
+        btn.classList.add('open');
+        btn.setAttribute('aria-expanded','true');
+        answer.classList.add('open');
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Petaloons Contact Page",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Petaloons Contact Page"
+    }
+  ]
+}
+{% endschema %}
