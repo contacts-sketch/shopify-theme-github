@@ -36,6 +36,27 @@
     </div>
   </div>
 
+  <!-- SVG filter: removes white background from logo image while keeping all other colours -->
+  <svg style="display:none;position:absolute;width:0;height:0" aria-hidden="true" focusable="false">
+    <defs>
+      <filter id="pft-remove-white" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
+        <!--
+          Alpha channel formula: A_out = -R - G - B + 3
+          White  (1,1,1) → A = -1-1-1+3 = 0  → fully transparent ✓
+          Orange (1,0.66,0.06) → A = -1.72+3 = 1.28 → capped at 1 (opaque) ✓
+          Near-white antialias pixels → semi-transparent (smooth edges) ✓
+        -->
+        <feColorMatrix
+          type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                 -1 -1 -1 0 3"
+        />
+      </filter>
+    </defs>
+  </svg>
+
   <!-- ══ MAIN FOOTER BODY ══ -->
   <div class="pft-body">
     <div class="pft-inner pft-grid">
@@ -339,8 +360,10 @@
   max-width: 160px;
   height: auto;
   display: block;
-  border-radius: 8px;
-  /* No destructive filter — render logo as-is */
+  border-radius: 0;
+  /* SVG feColorMatrix filter: turns white pixels transparent,
+     keeps all other colours (orange/amber/brown) fully opaque */
+  filter: url(#pft-remove-white);
 }
 
 .pft-logo-link {
