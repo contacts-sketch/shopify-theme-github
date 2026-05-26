@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-policy",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
