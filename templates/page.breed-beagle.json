@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-breed",
+      "settings": {
+        "breed_name": "Beagle",
+        "breed_emoji": "🐕",
+        "breed_blurb": "Curious, merry and utterly photogenic — Beagles look dapper in both casual wear and festive ethnic outfits.",
+        "breed_weight": "9–14 kg",
+        "sz_recommended": "S / M",
+        "sz_chest": "42–52 cm",
+        "sz_neck": "30–36 cm",
+        "sz_back": "34–42 cm",
+        "tip_lehenga": "Medium-length flared lehengas with elastic waistbands suit a Beagle's athletic build — they love to run so comfort is key.",
+        "tip_sherwani": "A fitted sherwani with contrast piping looks incredibly dapper on a Beagle's compact body. Try classic ivory or midnight blue.",
+        "tip_tshirt": "Graphic tees with fun prints look great on Beagles. Choose S or M and measure the chest for the best fit.",
+        "tip_colours": "Earthy tones like rust, mustard and olive complement the Beagle's tricolour coat. Bright red is also a classic look."
+      }
+    }
+  },
+  "order": ["main"]
+}

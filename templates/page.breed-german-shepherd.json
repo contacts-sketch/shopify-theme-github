@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-breed",
+      "settings": {
+        "breed_name": "German Shepherd",
+        "breed_emoji": "🦮",
+        "breed_blurb": "Noble, intelligent and commanding — German Shepherds wear ethnic outfits with unmistakable regal authority.",
+        "breed_weight": "30–45 kg",
+        "sz_recommended": "XL",
+        "sz_chest": "66–76 cm",
+        "sz_neck": "46–54 cm",
+        "sz_back": "58–68 cm",
+        "tip_lehenga": "Choose full lehengas with wide neck openings and good shoulder room — German Shepherds have a deep chest and strong shoulders.",
+        "tip_sherwani": "A classic long sherwani in deep navy or black looks commanding on a German Shepherd. Ensure the back length is at least 62–65 cm.",
+        "tip_tshirt": "Stretchy XL tees with a relaxed fit are ideal. Avoid anything too fitted around the chest or shoulders.",
+        "tip_colours": "Black, charcoal, deep burgundy and midnight blue look stunning against the German Shepherd's black-and-tan coat."
+      }
+    }
+  },
+  "order": ["main"]
+}

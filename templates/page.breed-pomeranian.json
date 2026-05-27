@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-breed",
+      "settings": {
+        "breed_name": "Pomeranian",
+        "breed_emoji": "🦊",
+        "breed_blurb": "Tiny, fluffy and impossibly cute — Pomeranians are natural fashionistas who look adorable in every Petaloons creation.",
+        "breed_weight": "1.5–3.5 kg",
+        "sz_recommended": "XS",
+        "sz_chest": "28–34 cm",
+        "sz_neck": "20–26 cm",
+        "sz_back": "18–26 cm",
+        "tip_lehenga": "Mini lehengas in XS look absolutely magical on a Pomeranian's fluffy frame. Choose light fabrics that won't mat their coat.",
+        "tip_sherwani": "Tiny embroidered sherwanis in XS with a loose neck fitting look incredibly regal on a Pomeranian. A true show-stopper.",
+        "tip_tshirt": "XS sleeveless or short-sleeve tees are ideal so they don't weigh down or tangle the Pomeranian's thick double coat.",
+        "tip_colours": "Pure white, baby pink, lavender and gold look spectacular against the Pomeranian's fluffy orange, white or sable coat."
+      }
+    }
+  },
+  "order": ["main"]
+}
