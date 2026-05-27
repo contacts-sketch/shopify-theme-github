@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-breed",
+      "settings": {
+        "breed_name": "Pug",
+        "breed_emoji": "🐾",
+        "breed_blurb": "Compact, comical and irresistibly charming — Pugs are natural entertainers who steal every spotlight in their tiny outfits.",
+        "breed_weight": "6–9 kg",
+        "sz_recommended": "XS / S",
+        "sz_chest": "34–42 cm",
+        "sz_neck": "26–32 cm",
+        "sz_back": "24–32 cm",
+        "tip_lehenga": "Choose lehengas with wide, flexible neck openings — Pugs have short necks and flat faces so airflow is essential.",
+        "tip_sherwani": "Short-length sherwanis with a V-neck or open collar look adorable and keep Pugs comfortable. Avoid tight collars.",
+        "tip_tshirt": "Loose, breathable tees are a must for Pugs who overheat easily. Choose lightweight fabric in cooler colours.",
+        "tip_colours": "Bright pinks, yellows and turquoise pop beautifully against a Pug's fawn or black coat and make for the cutest photos."
+      }
+    }
+  },
+  "order": ["main"]
+}

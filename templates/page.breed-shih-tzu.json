@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-breed",
+      "settings": {
+        "breed_name": "Shih Tzu",
+        "breed_emoji": "🐩",
+        "breed_blurb": "Glamorous, silky and effortlessly stylish — Shih Tzus were born for the spotlight and look exquisite in every outfit.",
+        "breed_weight": "4–8 kg",
+        "sz_recommended": "XS / S",
+        "sz_chest": "34–42 cm",
+        "sz_neck": "24–30 cm",
+        "sz_back": "24–32 cm",
+        "tip_lehenga": "Lightweight silk or chiffon lehengas complement the Shih Tzu's flowing coat beautifully. Keep back length under 32 cm for comfort.",
+        "tip_sherwani": "Embroidered mini sherwanis in gold or ivory look absolutely regal on a Shih Tzu. Pair with a matching pagri for wedding photos.",
+        "tip_tshirt": "Soft jersey tees in XS keep a Shih Tzu cosy on cooler days without matting their long coat.",
+        "tip_colours": "White, gold, blush pink and baby blue look stunning against the Shih Tzu's multi-toned silky coat."
+      }
+    }
+  },
+  "order": ["main"]
+}
