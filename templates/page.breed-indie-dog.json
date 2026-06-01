@@ -1,0 +1,22 @@
+{
+  "sections": {
+    "main": {
+      "type": "petaloons-breed",
+      "settings": {
+        "breed_name": "Indie Dog",
+        "breed_emoji": "🇮🇳",
+        "breed_blurb": "India's original desi dog — resilient, loving and full of character. Indie dogs deserve the same style and love as any pedigree.",
+        "breed_weight": "15–30 kg",
+        "sz_recommended": "M / L",
+        "sz_chest": "46–60 cm",
+        "sz_neck": "32–42 cm",
+        "sz_back": "38–52 cm",
+        "tip_lehenga": "Indian street dogs vary widely in size — measure carefully. Most Indie dogs fit S to L. Choose breathable cotton for comfort.",
+        "tip_sherwani": "A classic sherwani in a warm earthy tone celebrates the Indie dog's desi heritage beautifully. Perfect for Diwali and festive shoots.",
+        "tip_tshirt": "Lightweight cotton tees are ideal for Indie dogs who are used to Indian weather. S/M sizes work for most Indie body types.",
+        "tip_colours": "Earthy tones like terracotta, turmeric yellow and forest green look stunning and celebrate the Indie dog's natural Indian aesthetic."
+      }
+    }
+  },
+  "order": ["main"]
+}
