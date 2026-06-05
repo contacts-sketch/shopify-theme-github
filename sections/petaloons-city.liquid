@@ -1,0 +1,733 @@
+{% comment %}
+  Petaloons City Landing Pages
+  Auto-adapts content based on page handle (mumbai / delhi / bangalore)
+  CSS scope: .pcity-*
+  Handles: dog-clothes-mumbai | dog-clothes-delhi | dog-clothes-bangalore
+{% endcomment %}
+
+{%- liquid
+  assign city_handle = page.handle | downcase
+  assign city_name   = 'India'
+  assign city_sub    = 'Delivering pan-India'
+  assign city_hero_color = '#5a1d00'
+  assign city_emoji  = '🇮🇳'
+  assign delivery_time = '4–7 days'
+  assign delivery_badge = 'Pan-India Shipping'
+  assign zone_label  = 'Standard Zone'
+
+  if city_handle contains 'mumbai'
+    assign city_name   = 'Mumbai'
+    assign city_emoji  = '🌊'
+    assign city_sub    = 'India\'s most dog-friendly city'
+    assign city_hero_color = '#0c2a4a'
+    assign delivery_time = '1–3 days'
+    assign delivery_badge = 'Express Delivery Available'
+    assign zone_label  = 'Metro Zone — Fastest Delivery'
+  elsif city_handle contains 'delhi'
+    assign city_name   = 'Delhi'
+    assign city_emoji  = '🏛️'
+    assign city_sub    = 'The capital city\'s favourite dog fashion brand'
+    assign city_hero_color = '#2d0a40'
+    assign delivery_time = '1–3 days'
+    assign delivery_badge = 'Express Delivery Available'
+    assign zone_label  = 'Metro Zone — Fastest Delivery'
+  elsif city_handle contains 'bangalore'
+    assign city_name   = 'Bangalore'
+    assign city_emoji  = '🌿'
+    assign city_sub    = 'The pet-loving capital of India'
+    assign city_hero_color = '#0a3020'
+    assign delivery_time = '1–3 days'
+    assign delivery_badge = 'Express Delivery Available'
+    assign zone_label  = 'Metro Zone — Fastest Delivery'
+  elsif city_handle contains 'hyderabad'
+    assign city_name   = 'Hyderabad'
+    assign city_emoji  = '💎'
+    assign city_sub    = 'The City of Nawabs loves its dogs in style'
+    assign city_hero_color = '#2a1a00'
+    assign delivery_time = '2–4 days'
+    assign delivery_badge = 'Fast Delivery'
+    assign zone_label  = 'Metro Zone'
+  elsif city_handle contains 'chennai'
+    assign city_name   = 'Chennai'
+    assign city_emoji  = '🌊'
+    assign city_sub    = 'South India\'s dog fashion destination'
+    assign city_hero_color = '#1a0a2e'
+    assign delivery_time = '2–4 days'
+    assign delivery_badge = 'Fast Delivery'
+    assign zone_label  = 'Metro Zone'
+  elsif city_handle contains 'pune'
+    assign city_name   = 'Pune'
+    assign city_emoji  = '🎓'
+    assign city_sub    = 'Oxford of the East loves stylish dogs'
+    assign city_hero_color = '#1a2a0a'
+    assign delivery_time = '2–4 days'
+    assign delivery_badge = 'Fast Delivery'
+    assign zone_label  = 'Metro Zone'
+  endif
+-%}
+
+<style>
+  .pcity-wrap * { box-sizing: border-box; }
+  .pcity-wrap { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; }
+
+  /* ── Hero ─────────────────────────────── */
+  .pcity-hero {
+    position: relative;
+    background: linear-gradient(135deg, {{ city_hero_color }} 0%, #b84500 60%, #de7200 100%);
+    padding: 72px 24px 96px;
+    text-align: center;
+    overflow: hidden;
+  }
+  .pcity-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  }
+  .pcity-hero__breadcrumb {
+    position: relative;
+    font-size: 13px; color: rgba(255,255,255,.65); margin-bottom: 20px;
+  }
+  .pcity-hero__breadcrumb a { color: rgba(255,255,255,.8); text-decoration: none; }
+  .pcity-hero__breadcrumb a:hover { color: #fff; }
+  .pcity-hero__badge {
+    position: relative;
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 6px 20px; border-radius: 30px; margin-bottom: 18px;
+  }
+  .pcity-hero__title {
+    position: relative;
+    font-size: clamp(2rem, 5.5vw, 3.6rem);
+    font-weight: 900; color: #fff;
+    margin: 0 0 14px; line-height: 1.1; letter-spacing: -1.5px;
+  }
+  .pcity-hero__title span { color: #fea910; }
+  .pcity-hero__sub {
+    position: relative;
+    font-size: 1.05rem; color: rgba(255,255,255,.85);
+    max-width: 560px; margin: 0 auto 32px; line-height: 1.65;
+  }
+  .pcity-hero__btns {
+    position: relative;
+    display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 48px;
+  }
+  .pcity-hero__btn {
+    padding: 14px 30px; border-radius: 10px; font-size: 15px; font-weight: 800;
+    text-decoration: none; transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .pcity-hero__btn:hover { transform: translateY(-2px); opacity: .92; text-decoration: none; }
+  .pcity-hero__btn--primary { background: #fea910; color: #1a1a1a; }
+  .pcity-hero__btn--outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); }
+  .pcity-hero__btn--outline:hover { background: rgba(255,255,255,.1); }
+  .pcity-hero__stats {
+    position: relative;
+    display: flex; justify-content: center; gap: 0;
+    border-top: 1px solid rgba(255,255,255,.12); padding-top: 36px;
+  }
+  .pcity-hero__stat {
+    padding: 0 36px; text-align: center;
+    border-right: 1px solid rgba(255,255,255,.12);
+  }
+  .pcity-hero__stat:last-child { border-right: none; }
+  .pcity-hero__stat-val { font-size: 1.9rem; font-weight: 900; color: #fea910; display: block; line-height: 1; margin-bottom: 5px; }
+  .pcity-hero__stat-label { font-size: 12px; color: rgba(255,255,255,.6); font-weight: 500; }
+  .pcity-hero__wave { position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0; }
+
+  /* ── Trust Bar ──────────────────────────── */
+  .pcity-trust {
+    background: #fff; padding: 0 24px;
+  }
+  .pcity-trust__inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    transform: translateY(-40px);
+  }
+  .pcity-trust-card {
+    background: #fff; border-radius: 16px; padding: 22px 18px;
+    box-shadow: 0 6px 32px rgba(0,0,0,.09);
+    border: 1.5px solid #f0e8e0;
+    text-align: center;
+    transition: transform .2s, border-color .2s;
+  }
+  .pcity-trust-card:hover { transform: translateY(-4px); border-color: #b84500; }
+  .pcity-trust-card__icon { font-size: 28px; margin-bottom: 8px; display: block; }
+  .pcity-trust-card__val { font-size: 1.15rem; font-weight: 900; color: #b84500; margin-bottom: 4px; }
+  .pcity-trust-card__label { font-size: 12px; color: #666; font-weight: 500; }
+
+  /* ── Intro ──────────────────────────────── */
+  .pcity-intro {
+    background: #fdf9f6;
+    padding: 0 24px 72px;
+  }
+  .pcity-intro__inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 440px; gap: 56px; align-items: center;
+  }
+  .pcity-intro__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #b84500; margin-bottom: 12px; }
+  .pcity-intro__title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: #1a1a1a; margin: 0 0 18px; line-height: 1.2; letter-spacing: -.5px; }
+  .pcity-intro__body { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 24px; }
+  .pcity-intro__list { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 12px; }
+  .pcity-intro__list li { font-size: 14.5px; color: #444; display: flex; align-items: center; gap: 10px; }
+  .pcity-intro__list li::before { content: '✓'; color: #b84500; font-weight: 800; font-size: 16px; flex-shrink: 0; }
+  .pcity-intro__cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(90deg, #b84500, #de7200);
+    color: #fff; text-decoration: none; font-weight: 800; font-size: 14.5px;
+    padding: 13px 26px; border-radius: 10px; transition: opacity .2s;
+  }
+  .pcity-intro__cta:hover { opacity: .9; text-decoration: none; }
+  .pcity-delivery-card {
+    background: #fff; border-radius: 20px; padding: 32px;
+    box-shadow: 0 6px 32px rgba(0,0,0,.08); border: 1.5px solid #f0e8e0;
+  }
+  .pcity-delivery-card__title { font-size: 1rem; font-weight: 800; color: #1a1a1a; margin: 0 0 20px; padding-bottom: 14px; border-bottom: 2px solid #f0e8e0; }
+  .pcity-delivery-row {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0; border-bottom: 1px solid #f5ede6;
+  }
+  .pcity-delivery-row:last-child { border-bottom: none; }
+  .pcity-delivery-row__icon { font-size: 22px; flex-shrink: 0; }
+  .pcity-delivery-row__label { font-size: 12px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+  .pcity-delivery-row__val { font-size: 14.5px; font-weight: 700; color: #1a1a1a; }
+  .pcity-delivery-badge {
+    margin-top: 20px;
+    background: linear-gradient(90deg, #b84500, #de7200);
+    border-radius: 10px; padding: 14px 18px;
+    color: #fff; font-size: 13.5px; font-weight: 700;
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  /* ── Collections ────────────────────────── */
+  .pcity-collections {
+    background: #fff; padding: 72px 24px;
+    border-top: 1px solid #f0e8e0;
+  }
+  .pcity-collections__inner { max-width: 1100px; margin: 0 auto; }
+  .pcity-section-head { text-align: center; margin-bottom: 48px; }
+  .pcity-section-head__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #b84500; margin-bottom: 10px; }
+  .pcity-section-head__title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; color: #1a1a1a; margin: 0; letter-spacing: -.5px; }
+  .pcity-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .pcity-col-card {
+    background: #fdf9f6; border-radius: 16px; padding: 28px 22px;
+    border: 1.5px solid #f0e8e0; text-align: center;
+    text-decoration: none; color: inherit;
+    transition: all .22s; display: block;
+  }
+  .pcity-col-card:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(184,69,0,.14); border-color: #b84500; text-decoration: none; }
+  .pcity-col-card__icon { font-size: 36px; margin-bottom: 12px; display: block; }
+  .pcity-col-card__name { font-size: 1rem; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
+  .pcity-col-card__desc { font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 14px; }
+  .pcity-col-card__link { font-size: 13px; font-weight: 700; color: #b84500; }
+
+  /* ── City Spotlight ─────────────────────── */
+  .pcity-spotlight {
+    background: #0f1117; padding: 72px 24px;
+  }
+  .pcity-spotlight__inner { max-width: 1100px; margin: 0 auto; }
+  .pcity-spotlight__title { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; color: #fff; margin: 0 0 12px; }
+  .pcity-spotlight__sub { font-size: 15px; color: rgba(255,255,255,.65); margin-bottom: 40px; line-height: 1.6; max-width: 680px; }
+  .pcity-spots {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .pcity-spot {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 14px; padding: 22px 20px;
+    transition: border-color .2s, background .2s;
+  }
+  .pcity-spot:hover { border-color: #b84500; background: rgba(184,69,0,.1); }
+  .pcity-spot__icon { font-size: 26px; margin-bottom: 10px; display: block; }
+  .pcity-spot__name { font-size: 14.5px; font-weight: 800; color: #fff; margin-bottom: 5px; }
+  .pcity-spot__desc { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.5; }
+
+  /* ── FAQ ────────────────────────────────── */
+  .pcity-faq { background: #fdf9f6; padding: 72px 24px; border-top: 1px solid #f0e8e0; }
+  .pcity-faq__inner { max-width: 780px; margin: 0 auto; }
+  .pcity-faq__item { border-bottom: 1px solid #f0e8e0; }
+  .pcity-faq__item:last-child { border-bottom: none; }
+  .pcity-faq__q {
+    width: 100%; background: none; border: none; text-align: left;
+    padding: 18px 0; font-size: 15px; font-weight: 700; color: #1a1a1a;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; font-family: inherit; transition: color .2s;
+  }
+  .pcity-faq__q:hover, .pcity-faq__q.open { color: #b84500; }
+  .pcity-faq__chevron { width: 22px; height: 22px; border: 2px solid currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .25s; font-size: 12px; }
+  .pcity-faq__q.open .pcity-faq__chevron { transform: rotate(180deg); }
+  .pcity-faq__a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease; font-size: 14px; color: #555; line-height: 1.75; }
+  .pcity-faq__a.open { max-height: 300px; padding-bottom: 18px; }
+  .pcity-faq__a a { color: #b84500; font-weight: 600; text-decoration: none; }
+
+  /* ── CTA ────────────────────────────────── */
+  .pcity-cta {
+    background: linear-gradient(135deg, {{ city_hero_color }}, #b84500);
+    padding: 64px 24px; text-align: center;
+  }
+  .pcity-cta__inner { max-width: 580px; margin: 0 auto; }
+  .pcity-cta__title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 900; color: #fff; margin: 0 0 12px; }
+  .pcity-cta__sub { font-size: 15px; color: rgba(255,255,255,.85); margin-bottom: 28px; line-height: 1.6; }
+  .pcity-cta__btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .pcity-cta__btn { padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 800; text-decoration: none; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; }
+  .pcity-cta__btn:hover { transform: translateY(-2px); opacity: .92; text-decoration: none; }
+  .pcity-cta__btn--primary { background: #fea910; color: #1a1a1a; }
+  .pcity-cta__btn--wa { background: #25d366; color: #fff; }
+
+  /* ── Responsive ─────────────────────────── */
+  @media (max-width: 989px) {
+    .pcity-trust__inner { grid-template-columns: repeat(2, 1fr); transform: translateY(-28px); }
+    .pcity-intro__inner { grid-template-columns: 1fr; }
+    .pcity-grid { grid-template-columns: repeat(2, 1fr); }
+    .pcity-spots { grid-template-columns: repeat(2, 1fr); }
+    .pcity-hero__stat { padding: 0 18px; }
+  }
+  @media (max-width: 749px) {
+    .pcity-hero { padding: 52px 20px 76px; }
+    .pcity-trust__inner { grid-template-columns: repeat(2, 1fr); }
+    .pcity-hero__stats { flex-wrap: wrap; }
+    .pcity-hero__stat { width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,.1); padding: 14px 0; }
+    .pcity-grid { grid-template-columns: 1fr; }
+    .pcity-spots { grid-template-columns: 1fr; }
+    .pcity-cta__btns { flex-direction: column; align-items: center; }
+  }
+</style>
+
+<div class="pcity-wrap">
+
+  <!-- ═══ HERO ════════════════════════════════ -->
+  <div class="pcity-hero">
+    <nav class="pcity-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a> ›
+      <a href="/collections/all">Dog Clothes</a> ›
+      <span>{{ city_name }}</span>
+    </nav>
+    <div class="pcity-hero__badge">{{ city_emoji }} {{ city_name }} | Free Shipping Above ₹999</div>
+    <h1 class="pcity-hero__title">
+      Dog Clothes in <span>{{ city_name }}</span><br>
+      Delivered to Your Door
+    </h1>
+    <p class="pcity-hero__sub">
+      Shop India's #1 dog fashion brand from the comfort of your {{ city_name }} home. Premium lehengas, sherwanis, bandanas, and more — delivered in {{ delivery_time }}.
+    </p>
+    <div class="pcity-hero__btns">
+      <a href="/collections/all" class="pcity-hero__btn pcity-hero__btn--primary">🛍️ Shop Now</a>
+      <a href="https://wa.me/918625075493?text=Hi%20Petaloons!%20I%27m%20from%20{{ city_name }}%20and%20want%20to%20order." class="pcity-hero__btn pcity-hero__btn--outline" target="_blank" rel="noopener">💬 WhatsApp Order</a>
+    </div>
+    <div class="pcity-hero__stats">
+      <div class="pcity-hero__stat">
+        <span class="pcity-hero__stat-val">{{ delivery_time }}</span>
+        <span class="pcity-hero__stat-label">Delivery to {{ city_name }}</span>
+      </div>
+      <div class="pcity-hero__stat">
+        <span class="pcity-hero__stat-val">FREE</span>
+        <span class="pcity-hero__stat-label">Shipping above ₹999</span>
+      </div>
+      <div class="pcity-hero__stat">
+        <span class="pcity-hero__stat-val">10K+</span>
+        <span class="pcity-hero__stat-label">Happy Customers</span>
+      </div>
+      <div class="pcity-hero__stat">
+        <span class="pcity-hero__stat-val">4.8★</span>
+        <span class="pcity-hero__stat-label">Average Rating</span>
+      </div>
+    </div>
+    <div class="pcity-hero__wave">
+      <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 48L1440 48L1440 12C1200 44 960 4 720 20C480 36 240 0 0 12L0 48Z" fill="#fdf9f6"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ═══ TRUST CARDS ══════════════════════════ -->
+  <div class="pcity-trust">
+    <div class="pcity-trust__inner">
+      <div class="pcity-trust-card">
+        <span class="pcity-trust-card__icon">🚀</span>
+        <div class="pcity-trust-card__val">{{ delivery_time }}</div>
+        <div class="pcity-trust-card__label">Delivery to {{ city_name }}</div>
+      </div>
+      <div class="pcity-trust-card">
+        <span class="pcity-trust-card__icon">🎁</span>
+        <div class="pcity-trust-card__val">Free Shipping</div>
+        <div class="pcity-trust-card__label">On orders above ₹999</div>
+      </div>
+      <div class="pcity-trust-card">
+        <span class="pcity-trust-card__icon">🔄</span>
+        <div class="pcity-trust-card__val">7-Day Returns</div>
+        <div class="pcity-trust-card__label">Hassle-free policy</div>
+      </div>
+      <div class="pcity-trust-card">
+        <span class="pcity-trust-card__icon">🇮🇳</span>
+        <div class="pcity-trust-card__val">Made in India</div>
+        <div class="pcity-trust-card__label">Handcrafted with love</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ INTRO + DELIVERY ══════════════════════ -->
+  <div class="pcity-intro">
+    <div class="pcity-intro__inner">
+      <div>
+        <div class="pcity-intro__eyebrow">Why {{ city_name }} Dog Parents Choose Petaloons</div>
+        <h2 class="pcity-intro__title">
+          India's #1 Dog Fashion Brand,<br>Now at Your {{ city_name }} Doorstep
+        </h2>
+
+        {%- if city_handle contains 'mumbai' -%}
+        <p class="pcity-intro__body">
+          Mumbai's dog parent community is one of the most passionate in India. From Bandra to Powai, from Juhu to Thane — Petaloons outfits are spotted at dog parks, beach walks, and birthday pawties all across the city. We've served thousands of Mumbai dog parents with premium ethnic wear, casual tees, and festival outfits, all delivered express to your door.
+        </p>
+        <ul class="pcity-intro__list">
+          <li>Express delivery in 1–3 days to all Mumbai pin codes</li>
+          <li>Free shipping on orders above ₹999 — no exceptions</li>
+          <li>Perfect for Ganesh Chaturthi, Diwali, and Mumbai's vibrant festival calendar</li>
+          <li>COD available across Mumbai, Navi Mumbai, and Thane</li>
+          <li>Returns pickup directly from your door</li>
+        </ul>
+        {%- elsif city_handle contains 'delhi' -%}
+        <p class="pcity-intro__body">
+          Delhi's dog parents are among the most style-conscious in India. From South Delhi's upscale parks to Noida's booming pet community and Gurugram's corporate dog parents — Petaloons delivers premium dog fashion across the entire NCR region. Whether it's a Diwali lehenga in Defence Colony or a sherwani for a Gurgaon wedding, we've got Delhi covered.
+        </p>
+        <ul class="pcity-intro__list">
+          <li>Express delivery 1–3 days to Delhi, Noida, Gurugram, Faridabad, Ghaziabad</li>
+          <li>Free shipping on orders above ₹999 across Delhi NCR</li>
+          <li>Ideal for Delhi's wedding season, Diwali, and Eid celebrations</li>
+          <li>COD available across all Delhi NCR pin codes</li>
+          <li>Hassle-free 7-day returns with doorstep pickup</li>
+        </ul>
+        {%- elsif city_handle contains 'bangalore' -%}
+        <p class="pcity-intro__body">
+          Bangalore is India's most pet-friendly city and has one of the country's most engaged dog parent communities. From Indiranagar to Koramangala, from Whitefield to Jayanagar — Petaloons is beloved across Bangalore's vibrant dog culture. With India's largest collection of dog ethnic wear, casual outfits, and accessories, we ship to every Bangalore pin code in 1–3 days.
+        </p>
+        <ul class="pcity-intro__list">
+          <li>Express delivery 1–3 days across all Bangalore pin codes</li>
+          <li>Free shipping on orders above ₹999</li>
+          <li>Perfect for Bangalore's growing dog café culture and community events</li>
+          <li>COD available across Bangalore Urban and Bangalore Rural</li>
+          <li>Easy 7-day returns with doorstep pickup</li>
+        </ul>
+        {%- else -%}
+        <p class="pcity-intro__body">
+          {{ city_name }}'s dog parents deserve India's best dog fashion brand. Petaloons delivers premium dog ethnic wear, casual outfits, bandanas, harnesses, and accessories across {{ city_name }} with fast shipping and free delivery above ₹999. Join thousands of happy dog parents across India who trust Petaloons for every occasion.
+        </p>
+        <ul class="pcity-intro__list">
+          <li>Fast delivery to all {{ city_name }} pin codes</li>
+          <li>Free shipping on orders above ₹999</li>
+          <li>Premium quality handcrafted outfits</li>
+          <li>COD available at most pin codes</li>
+          <li>7-day hassle-free returns</li>
+        </ul>
+        {%- endif -%}
+
+        <a href="/collections/all" class="pcity-intro__cta">🛍️ Shop Dog Clothes — Ship to {{ city_name }} →</a>
+      </div>
+
+      <div class="pcity-delivery-card">
+        <div class="pcity-delivery-card__title">📦 Delivery Details for {{ city_name }}</div>
+        <div class="pcity-delivery-row">
+          <span class="pcity-delivery-row__icon">⚡</span>
+          <div>
+            <div class="pcity-delivery-row__label">Standard Delivery</div>
+            <div class="pcity-delivery-row__val">{{ delivery_time }}</div>
+          </div>
+        </div>
+        <div class="pcity-delivery-row">
+          <span class="pcity-delivery-row__icon">🚀</span>
+          <div>
+            <div class="pcity-delivery-row__label">Express Delivery</div>
+            <div class="pcity-delivery-row__val">Next Day (select areas)</div>
+          </div>
+        </div>
+        <div class="pcity-delivery-row">
+          <span class="pcity-delivery-row__icon">🎁</span>
+          <div>
+            <div class="pcity-delivery-row__label">Free Shipping From</div>
+            <div class="pcity-delivery-row__val">₹999 and above</div>
+          </div>
+        </div>
+        <div class="pcity-delivery-row">
+          <span class="pcity-delivery-row__icon">💳</span>
+          <div>
+            <div class="pcity-delivery-row__label">Payment Options</div>
+            <div class="pcity-delivery-row__val">UPI, Cards, COD, Net Banking</div>
+          </div>
+        </div>
+        <div class="pcity-delivery-row">
+          <span class="pcity-delivery-row__icon">🔄</span>
+          <div>
+            <div class="pcity-delivery-row__label">Returns Policy</div>
+            <div class="pcity-delivery-row__val">7 days, doorstep pickup</div>
+          </div>
+        </div>
+        <div class="pcity-delivery-badge">
+          <span>🏆</span>
+          <div>
+            <div style="font-size:13px;font-weight:900;">{{ zone_label }}</div>
+            <div style="font-weight:400;font-size:12px;opacity:.9;">{{ delivery_badge }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ COLLECTIONS ═══════════════════════════ -->
+  <div class="pcity-collections">
+    <div class="pcity-collections__inner">
+      <div class="pcity-section-head">
+        <div class="pcity-section-head__eyebrow">Shop by Category</div>
+        <h2 class="pcity-section-head__title">Dog Fashion Collections — Delivered to {{ city_name }}</h2>
+      </div>
+      <div class="pcity-grid">
+        <a href="/collections/dog-lehengas" class="pcity-col-card">
+          <span class="pcity-col-card__icon">👗</span>
+          <div class="pcity-col-card__name">Dog Lehengas</div>
+          <div class="pcity-col-card__desc">Traditional Indian lehengas for Diwali, Navratri, weddings & photoshoots</div>
+          <span class="pcity-col-card__link">Shop Lehengas →</span>
+        </a>
+        <a href="/collections/dog-sherwani-collection-india" class="pcity-col-card">
+          <span class="pcity-col-card__icon">🎩</span>
+          <div class="pcity-col-card__name">Dog Sherwanis</div>
+          <div class="pcity-col-card__desc">Premium sherwanis for weddings, Eid, and all formal occasions</div>
+          <span class="pcity-col-card__link">Shop Sherwanis →</span>
+        </a>
+        <a href="/collections/dog-tuxedos" class="pcity-col-card">
+          <span class="pcity-col-card__icon">🤵</span>
+          <div class="pcity-col-card__name">Dog Tuxedos</div>
+          <div class="pcity-col-card__desc">Sharp formal tuxedos for weddings, parties & photoshoots</div>
+          <span class="pcity-col-card__link">Shop Tuxedos →</span>
+        </a>
+        <a href="/collections/dog-t-shirts" class="pcity-col-card">
+          <span class="pcity-col-card__icon">👕</span>
+          <div class="pcity-col-card__name">Dog T-Shirts</div>
+          <div class="pcity-col-card__desc">Casual everyday cotton tees — perfect for morning walks</div>
+          <span class="pcity-col-card__link">Shop Tees →</span>
+        </a>
+        <a href="/collections/dog-bandanas" class="pcity-col-card">
+          <span class="pcity-col-card__icon">🎀</span>
+          <div class="pcity-col-card__name">Dog Bandanas</div>
+          <div class="pcity-col-card__desc">India's most popular dog accessory — easy, stylish, versatile</div>
+          <span class="pcity-col-card__link">Shop Bandanas →</span>
+        </a>
+        <a href="/collections/ethnic-wear-for-dogs" class="pcity-col-card">
+          <span class="pcity-col-card__icon">🪔</span>
+          <div class="pcity-col-card__name">Dog Ethnic Wear</div>
+          <div class="pcity-col-card__desc">Kurtas, sarees, and traditional Indian ethnic outfits</div>
+          <span class="pcity-col-card__link">Shop Ethnic Wear →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CITY SPOTLIGHT ════════════════════════ -->
+  <div class="pcity-spotlight">
+    <div class="pcity-spotlight__inner">
+      {%- if city_handle contains 'mumbai' -%}
+      <div class="pcity-section-head" style="text-align:left;">
+        <div class="pcity-section-head__eyebrow" style="color:#fea910;">🌊 Mumbai Dog Community</div>
+        <h2 class="pcity-spotlight__title">Where Mumbai Dog Parents Show Off Their Style</h2>
+        <p class="pcity-spotlight__sub">Petaloons outfits have been spotted at the best dog-friendly spots across Mumbai. Here's where the city's most stylish dogs hang out.</p>
+      </div>
+      <div class="pcity-spots">
+        <div class="pcity-spot"><span class="pcity-spot__icon">🌊</span><div class="pcity-spot__name">Juhu Beach</div><div class="pcity-spot__desc">Mumbai's most iconic dog-friendly beach. Morning walks with bandanas are a daily tradition here.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🌳</span><div class="pcity-spot__name">Bandra Dog Park</div><div class="pcity-spot__desc">The social hub for Bandra's passionate dog community. Weekly meetups and spontaneous fashion shows.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🏡</span><div class="pcity-spot__name">Powai Lake Walk</div><div class="pcity-spot__desc">A scenic lakeside path beloved by Hiranandani and Powai dog parents for morning and evening walks.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">☕</span><div class="pcity-spot__name">Dog-Friendly Cafés</div><div class="pcity-spot__desc">Khar, Bandra, and Andheri are full of pet-welcoming cafés where outfits get serious compliments.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🎉</span><div class="pcity-spot__name">Ganesh Chaturthi</div><div class="pcity-spot__desc">Mumbai's biggest festival calls for the most spectacular ethnic dog outfits. Our saffron sherwanis are a Mumbai Chaturthi staple.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">📸</span><div class="pcity-spot__name">Marine Drive</div><div class="pcity-spot__desc">The Queen's Necklace backdrop makes for stunning sunset dog portraits. Our customers use it for their best Petaloons shoots.</div></div>
+      </div>
+      {%- elsif city_handle contains 'delhi' -%}
+      <div class="pcity-section-head" style="text-align:left;">
+        <div class="pcity-section-head__eyebrow" style="color:#fea910;">🏛️ Delhi Dog Community</div>
+        <h2 class="pcity-spotlight__title">Where Delhi's Most Stylish Dogs Are Spotted</h2>
+        <p class="pcity-spotlight__sub">Petaloons outfits are a familiar sight across Delhi NCR's best dog-friendly destinations. Here's where Delhi dog parents take their style game.</p>
+      </div>
+      <div class="pcity-spots">
+        <div class="pcity-spot"><span class="pcity-spot__icon">🌸</span><div class="pcity-spot__name">Lodi Garden</div><div class="pcity-spot__desc">Delhi's most beautiful morning walk destination. The heritage monuments make a spectacular backdrop for dog fashion photos.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🏡</span><div class="pcity-spot__name">Hauz Khas Village</div><div class="pcity-spot__desc">The artsy hub of South Delhi is full of dog-friendly cafés and park spaces where stylish dogs are the norm.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🌳</span><div class="pcity-spot__name">Sanjay Lake Park</div><div class="pcity-spot__desc">One of East Delhi's most popular dog walking destinations with a vibrant morning dog community.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🏢</span><div class="pcity-spot__name">Gurugram Dog Parks</div><div class="pcity-spot__desc">DLF phases and Sector areas have a thriving, fashion-forward dog parent community that loves Petaloons.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🎊</span><div class="pcity-spot__name">Delhi Wedding Season</div><div class="pcity-spot__desc">Delhi's legendary wedding culture means dog sherwanis and lehengas for the family dog are increasingly common.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🌙</span><div class="pcity-spot__name">Eid & Diwali</div><div class="pcity-spot__desc">Delhi's diverse festival calendar — Diwali in South Delhi, Eid in Old Delhi areas — creates constant demand for ethnic dog wear.</div></div>
+      </div>
+      {%- elsif city_handle contains 'bangalore' -%}
+      <div class="pcity-section-head" style="text-align:left;">
+        <div class="pcity-section-head__eyebrow" style="color:#fea910;">🌿 Bangalore Dog Community</div>
+        <h2 class="pcity-spotlight__title">Why Bangalore is India's Dog Fashion Capital</h2>
+        <p class="pcity-spotlight__sub">Bangalore has India's most vibrant dog café culture and pet community. Petaloons is a household name among Bangalore's passionate dog parents.</p>
+      </div>
+      <div class="pcity-spots">
+        <div class="pcity-spot"><span class="pcity-spot__icon">🌳</span><div class="pcity-spot__name">Cubbon Park</div><div class="pcity-spot__desc">The green heart of Bangalore is a dog paradise. Weekend mornings at Cubbon Park are a runway show for stylishly dressed Bangalore dogs.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🍺</span><div class="pcity-spot__name">Indiranagar Dog Cafés</div><div class="pcity-spot__desc">Bangalore's most pet-friendly neighbourhood. Multiple dog cafés on 100 Feet Road welcome dogs of all sizes.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">☕</span><div class="pcity-spot__name">Koramangala Scene</div><div class="pcity-spot__desc">Koramangala's brunch culture is thoroughly dog-inclusive. Our customers in this area are among our most stylish.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🏡</span><div class="pcity-spot__name">Whitefield Community</div><div class="pcity-spot__desc">East Bangalore's large apartment communities have active dog parent groups where Petaloons outfits are a regular topic.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🐕</span><div class="pcity-spot__name">HSR Layout Park</div><div class="pcity-spot__desc">One of Bangalore's best-maintained dog parks with a growing fashion-forward dog community.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🎉</span><div class="pcity-spot__name">Bangalore Pet Expos</div><div class="pcity-spot__desc">Bangalore hosts some of India's best pet events. Our customers bring their Petaloons-dressed dogs to every one.</div></div>
+      </div>
+      {%- else -%}
+      <div class="pcity-section-head" style="text-align:left;">
+        <div class="pcity-section-head__eyebrow" style="color:#fea910;">{{ city_emoji }} {{ city_name }} Dog Community</div>
+        <h2 class="pcity-spotlight__title">{{ city_name }}'s Dog Parents Love Petaloons</h2>
+        <p class="pcity-spotlight__sub">Join the growing community of {{ city_name }} dog parents who dress their beloved pups in India's #1 dog fashion brand.</p>
+      </div>
+      <div class="pcity-spots">
+        <div class="pcity-spot"><span class="pcity-spot__icon">🚀</span><div class="pcity-spot__name">{{ delivery_time }} Delivery</div><div class="pcity-spot__desc">Fast, tracked shipping to all {{ city_name }} pin codes.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">🎁</span><div class="pcity-spot__name">Free Shipping</div><div class="pcity-spot__desc">Free standard shipping on all orders above ₹999.</div></div>
+        <div class="pcity-spot"><span class="pcity-spot__icon">💬</span><div class="pcity-spot__name">WhatsApp Support</div><div class="pcity-spot__desc">Our team replies within 2 hours, 7 days a week.</div></div>
+      </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- ═══ FAQ ═══════════════════════════════════ -->
+  <div class="pcity-faq">
+    <div class="pcity-faq__inner">
+      <div class="pcity-section-head">
+        <div class="pcity-section-head__eyebrow">Questions from {{ city_name }}</div>
+        <h2 class="pcity-section-head__title">Frequently Asked by {{ city_name }} Dog Parents</h2>
+      </div>
+
+      <div class="pcity-faq__item">
+        <button class="pcity-faq__q open" type="button" aria-expanded="true">
+          How fast does Petaloons deliver to {{ city_name }}?
+          <span class="pcity-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pcity-faq__a open">
+          {%- if city_handle contains 'mumbai' or city_handle contains 'delhi' or city_handle contains 'bangalore' -%}
+          Petaloons delivers to {{ city_name }} in 1–3 business days via express courier. Standard delivery typically takes 2 days. Once dispatched, you'll receive a tracking link via SMS and email.
+          {%- else -%}
+          Petaloons delivers to {{ city_name }} in {{ delivery_time }}. Once dispatched, you'll receive a tracking link via SMS and email.
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="pcity-faq__item">
+        <button class="pcity-faq__q" type="button" aria-expanded="false">
+          Is free shipping available in {{ city_name }}?
+          <span class="pcity-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pcity-faq__a">
+          Yes! Free standard shipping is available on all orders above ₹999, including all orders to {{ city_name }}. For orders below ₹999, a nominal shipping fee of ₹49 applies.
+        </div>
+      </div>
+
+      <div class="pcity-faq__item">
+        <button class="pcity-faq__q" type="button" aria-expanded="false">
+          Is Cash on Delivery (COD) available in {{ city_name }}?
+          <span class="pcity-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pcity-faq__a">
+          Yes! COD is available on orders up to ₹5,000 across {{ city_name }}. A small convenience fee may apply. We also accept UPI, credit/debit cards, and net banking.
+        </div>
+      </div>
+
+      <div class="pcity-faq__item">
+        <button class="pcity-faq__q" type="button" aria-expanded="false">
+          Can I return or exchange if the size doesn't fit?
+          <span class="pcity-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pcity-faq__a">
+          Absolutely. Petaloons offers a 7-day hassle-free return policy. If the size doesn't fit or the product is damaged, contact us within 7 days of delivery and we'll arrange a doorstep pickup in {{ city_name }} and process a replacement or full refund.
+        </div>
+      </div>
+
+      <div class="pcity-faq__item">
+        <button class="pcity-faq__q" type="button" aria-expanded="false">
+          How do I find the right size for my dog?
+          <span class="pcity-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pcity-faq__a">
+          Measure your dog's chest girth, neck girth, and back length. Compare with the size chart on each product page. If you're unsure, <a href="https://wa.me/918625075493">WhatsApp us at +91 86250 75493</a> with your dog's measurements and our team will recommend the perfect size.
+        </div>
+      </div>
+
+      <div class="pcity-faq__item">
+        <button class="pcity-faq__q" type="button" aria-expanded="false">
+          Does Petaloons offer custom dog outfits in {{ city_name }}?
+          <span class="pcity-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pcity-faq__a">
+          Yes! We offer custom sizing and bespoke outfits for special occasions like weddings and birthday parties. <a href="/pages/contact">Contact us</a> with your requirements and we'll create a unique outfit delivered to your {{ city_name }} address.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ CTA ════════════════════════════════════ -->
+  <div class="pcity-cta">
+    <div class="pcity-cta__inner">
+      <div class="pcity-cta__title">{{ city_emoji }} Order Now — Delivered to {{ city_name }} in {{ delivery_time }}</div>
+      <p class="pcity-cta__sub">Join thousands of {{ city_name }} dog parents who trust Petaloons for every occasion — from morning walks to Diwali celebrations.</p>
+      <div class="pcity-cta__btns">
+        <a href="/collections/all" class="pcity-cta__btn pcity-cta__btn--primary">🛍️ Shop Now</a>
+        <a href="https://wa.me/918625075493?text=Hi!%20I%27m%20from%20{{ city_name }}%20and%20want%20to%20order." class="pcity-cta__btn pcity-cta__btn--wa" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /pcity-wrap -->
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Buy Dog Clothes in {{ city_name }} | Free Shipping | Petaloons",
+    "description": "Shop India's #1 dog fashion brand in {{ city_name }}. Premium dog lehengas, sherwanis, tuxedos, bandanas and ethnic wear. Free shipping on orders above ₹999. Delivered in {{ delivery_time }}.",
+    "url": "{{ shop.url }}/pages/{{ page.handle }}",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"{{ shop.url }}"},
+        {"@type":"ListItem","position":2,"name":"Dog Clothes","item":"{{ shop.url }}/collections/all"},
+        {"@type":"ListItem","position":3,"name":"Dog Clothes in {{ city_name }}","item":"{{ shop.url }}/pages/{{ page.handle }}"}
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How fast does Petaloons deliver to {{ city_name }}?",
+        "acceptedAnswer": {"@type":"Answer","text":"Petaloons delivers to {{ city_name }} in {{ delivery_time }}. Tracking link sent via SMS and email once dispatched."}
+      },
+      {
+        "@type": "Question",
+        "name": "Is free shipping available for dog clothes in {{ city_name }}?",
+        "acceptedAnswer": {"@type":"Answer","text":"Yes! Free shipping on all Petaloons orders above ₹999, including {{ city_name }}."}
+      },
+      {
+        "@type": "Question",
+        "name": "Is COD available for dog clothes delivery in {{ city_name }}?",
+        "acceptedAnswer": {"@type":"Answer","text":"Yes, Cash on Delivery is available on orders up to ₹5,000 across {{ city_name }}."}
+      }
+    ]
+  }
+]
+</script>
+
+<script>
+  document.querySelectorAll('.pcity-faq__q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var ans = btn.nextElementSibling;
+      var isOpen = btn.classList.contains('open');
+      btn.closest('.pcity-faq__inner').querySelectorAll('.pcity-faq__q').forEach(function(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      btn.closest('.pcity-faq__inner').querySelectorAll('.pcity-faq__a').forEach(function(a){ a.classList.remove('open'); });
+      if (!isOpen) { btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); ans.classList.add('open'); }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Petaloons City Page",
+  "settings": [],
+  "presets": [{ "name": "Petaloons City Page" }]
+}
+{% endschema %}
