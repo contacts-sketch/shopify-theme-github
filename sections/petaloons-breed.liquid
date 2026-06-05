@@ -1,1234 +1,637 @@
-{%- comment -%}
-  Petaloons Breed-Specific Landing Page
-  CSS scope: .pbr-*
-  URL pattern: /pages/dog-clothes-for-[breed-handle]
-  Configure each breed page via section settings in the theme editor.
-{%- endcomment -%}
+{% comment %}
+  Petaloons Breed Landing Pages
+  Auto-adapts per breed based on page handle
+  CSS scope: .pbreed-*
+  Handles: dog-clothes-shih-tzu | dog-clothes-pug | dog-clothes-labrador
+           dog-clothes-golden-retriever | dog-clothes-german-shepherd
+           dog-clothes-pomeranian | dog-clothes-beagle | dog-clothes-husky
+           dog-clothes-dachshund | dog-clothes-indie
+{% endcomment %}
 
-{%- assign breed_name    = section.settings.breed_name | default: 'Golden Retriever' -%}
-{%- assign breed_handle  = breed_name | handleize -%}
-{%- assign breed_size    = section.settings.breed_size | default: 'L–XXL' -%}
-{%- assign breed_weight  = section.settings.breed_weight | default: '25–40 kg' -%}
-{%- assign breed_blurb   = section.settings.breed_blurb | default: 'Friendly, energetic and always camera-ready — Golden Retrievers love dressing up for every occasion.' -%}
-{%- assign breed_emoji   = section.settings.breed_emoji | default: '🐕' -%}
-{%- assign breed_tag     = section.settings.breed_tag | default: '' -%}
+{%- liquid
+  assign bh = page.handle | downcase
 
-{%- comment -%} Size chart rows from settings {%- endcomment -%}
-{%- assign sz_chest   = section.settings.sz_chest   | default: '60–72 cm' -%}
-{%- assign sz_neck    = section.settings.sz_neck    | default: '42–50 cm' -%}
-{%- assign sz_back    = section.settings.sz_back    | default: '52–62 cm' -%}
-{%- assign sz_recommended = section.settings.sz_recommended | default: 'L / XL' -%}
+  assign breed_name   = 'Dog'
+  assign breed_emoji  = '🐶'
+  assign hero_color   = '#5a1d00'
+  assign typical_size = 'S – M'
+  assign coat_type    = 'Short'
+  assign key_tip      = 'Measure chest girth first'
+  assign best_outfits = 'Bandanas, cotton tees, ethnic kurtas'
+  assign avoid        = 'Heavy layered fabrics'
+  assign size_note    = ''
 
-{%- comment -%} Collections {%- endcomment -%}
-{%- assign lehenga_col  = collections['dog-lehengas'] -%}
-{%- assign sherwani_col = collections['dog-sherwani-collection-india'] -%}
-{%- assign tshirt_col   = collections['dog-t-shirts'] -%}
+  if bh contains 'shih-tzu'
+    assign breed_name   = 'Shih Tzu'
+    assign breed_emoji  = '🦁'
+    assign hero_color   = '#3b0764'
+    assign typical_size = 'XS – S'
+    assign coat_type    = 'Long, silky, flowing'
+    assign key_tip      = "Shih Tzus are barrel-chested — always size by chest girth, not weight alone"
+    assign best_outfits = 'Lehengas, embroidered sherwanis, floral dresses, silk kurtas'
+    assign avoid        = "Anything with small buttons or loose threads that can catch in the long coat"
+    assign size_note    = "Most adult Shih Tzus wear XS or S. Measure chest girth — it is often wider than weight suggests."
 
-<!-- ══ STRUCTURED DATA ══ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebPage",
-      "@id": "{{ shop.url }}{{ page.url }}#webpage",
-      "url": "{{ shop.url }}{{ page.url }}",
-      "name": "Dog Clothes for {{ breed_name }} — Lehenga, Sherwani & T-Shirts | Petaloons",
-      "description": "Shop handcrafted dog lehenga, dog sherwani and dog t-shirts for {{ breed_name }}. Size guide, styling tips and curated outfits for {{ breed_name }} dogs. Pan-India delivery.",
-      "isPartOf": { "@id": "{{ shop.url }}/#website" },
-      "about": { "@id": "{{ shop.url }}/#organization" },
-      "breadcrumb": {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ shop.url }}" },
-          { "@type": "ListItem", "position": 2, "name": "Breeds", "item": "{{ shop.url }}/pages/dog-breed-guides" },
-          { "@type": "ListItem", "position": 3, "name": "{{ breed_name }}", "item": "{{ shop.url }}{{ page.url }}" }
-        ]
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What size dog clothes does a {{ breed_name }} need?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Most {{ breed_name }} dogs fit {{ sz_recommended }} in the Petaloons size chart. Measure your dog's chest girth ({{ sz_chest }}), neck ({{ sz_neck }}) and back length ({{ sz_back }}) for the perfect fit. Always check the size guide on each product page." }
-        },
-        {
-          "@type": "Question",
-          "name": "Which Petaloons outfits are best for a {{ breed_name }}?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Golden Retrievers and large breeds look stunning in our Dog Lehenga and Dog Sherwani for weddings and festivals. Our Dog T-Shirts are perfect for casual everyday wear. All styles are available in sizes that fit {{ breed_name }} dogs." }
-        },
-        {
-          "@type": "Question",
-          "name": "Are Petaloons dog clothes safe for {{ breed_name }} dogs?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes! All Petaloons outfits use pet-safe, breathable fabrics with non-toxic dyes — tested by real dog parents. They are designed for comfort and full range of motion so your {{ breed_name }} can move freely." }
-        },
-        {
-          "@type": "Question",
-          "name": "Does Petaloons deliver dog clothes for {{ breed_name }} across India?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes, Petaloons delivers pan-India including Mumbai, Delhi, Bangalore, Chennai, Hyderabad and all major cities. Free shipping on orders above ₹999. Express delivery available in metro cities." }
-        }
-      ]
-    }
-  ]
-}
-</script>
+  elsif bh contains 'pug'
+    assign breed_name   = 'Pug'
+    assign breed_emoji  = '🐾'
+    assign hero_color   = '#7c2d12'
+    assign typical_size = 'XS – S'
+    assign coat_type    = 'Short, fine'
+    assign key_tip      = "Pugs overheat very easily — keep outdoor outfit time under 10 minutes in summer. Natural fabrics only."
+    assign best_outfits = 'Lightweight cotton tees, bandanas, light cotton kurtas (indoors only)'
+    assign avoid        = "Anything that restricts the chest or breathing. Never use tight collars with Pugs."
+    assign size_note    = "Most adult Pugs wear S. Measure chest AND neck — Pugs have wide necks relative to weight."
+
+  elsif bh contains 'labrador'
+    assign breed_name   = 'Labrador'
+    assign breed_emoji  = '🐕'
+    assign hero_color   = '#1e3a5f'
+    assign typical_size = 'L – XL'
+    assign coat_type    = 'Short, dense double coat'
+    assign key_tip      = "Labs are barrel-chested — if between sizes, always size up. Size by chest girth, never weight alone."
+    assign best_outfits = 'Bold cotton tees, bandanas, kurtas and sherwanis for occasions'
+    assign avoid        = 'Restrictive armhole designs — Labs need full shoulder mobility'
+    assign size_note    = "Most adult Labs wear L or XL. Female Labs are typically one size smaller than males."
+
+  elsif bh contains 'golden-retriever'
+    assign breed_name   = 'Golden Retriever'
+    assign breed_emoji  = '🌟'
+    assign hero_color   = '#78350f'
+    assign typical_size = 'L – XL'
+    assign coat_type    = 'Long, flowing double coat'
+    assign key_tip      = "Avoid fabrics that create static or mat the beautiful flowing coat. Smooth cotton and silk blends work best."
+    assign best_outfits = 'Rich embroidered sherwanis and kurtas, jewel-tone bandanas'
+    assign avoid        = 'Heavy synthetic fabrics that trap heat under the double coat'
+    assign size_note    = "Most Goldens wear L or XL. Measure chest and back length — the flowing coat can add apparent bulk."
+
+  elsif bh contains 'german-shepherd'
+    assign breed_name   = 'German Shepherd'
+    assign breed_emoji  = '🛡️'
+    assign hero_color   = '#1a2e1a'
+    assign typical_size = 'L – XL'
+    assign coat_type    = 'Medium double coat'
+    assign key_tip      = "Keep designs clean and structured — GSDs carry themselves with natural authority. Let the breed shine."
+    assign best_outfits = 'Clean bandanas, structured kurtas, sports harness vests'
+    assign avoid        = 'Overly fussy or frilly designs that clash with the breed character'
+    assign size_note    = "Most adult GSDs wear L (female) or XL (male). Always measure chest girth individually."
+
+  elsif bh contains 'pomeranian'
+    assign breed_name   = 'Pomeranian'
+    assign breed_emoji  = '🧸'
+    assign hero_color   = '#92400e'
+    assign typical_size = 'XS'
+    assign coat_type    = 'Thick, fluffy double coat'
+    assign key_tip      = "Choose lightweight fabrics that frame the fluffy coat without hiding or flattening it."
+    assign best_outfits = 'Frilly dresses, princess lehengas, sparkly tees, floral bandanas'
+    assign avoid        = 'Heavy thick fabrics that flatten the coat or cause overheating in summer'
+    assign size_note    = "Most Pomeranians wear XS. Measure chest girth carefully — do not size by weight alone."
+
+  elsif bh contains 'beagle'
+    assign breed_name   = 'Beagle'
+    assign breed_emoji  = '🔍'
+    assign hero_color   = '#1e3a5f'
+    assign typical_size = 'S – M'
+    assign coat_type    = 'Short, dense'
+    assign key_tip      = "Beagles love to run and sniff — choose non-restrictive, washable outfits that survive outdoor adventures."
+    assign best_outfits = 'Plaid cotton tees, bright bandanas, casual sports vests'
+    assign avoid        = 'Floor-length outfits that restrict movement during outdoor activity'
+    assign size_note    = "Most Beagles wear S or M. Check chest girth — Beagles are stocky relative to their height."
+
+  elsif bh contains 'husky'
+    assign breed_name   = 'Husky'
+    assign breed_emoji  = '❄️'
+    assign hero_color   = '#0f172a'
+    assign typical_size = 'M – L'
+    assign coat_type    = 'Thick double coat'
+    assign key_tip      = "Huskies already have a built-in fur coat — keep clothing minimal, light, and for short durations only."
+    assign best_outfits = 'Simple bandanas, monochrome tees for photos only, mesh vests'
+    assign avoid        = 'Heavy or thick outfits — Huskies overheat very easily, especially in Indian summers'
+    assign size_note    = "Most Huskies wear M or L. Female Huskies are typically S or M."
+
+  elsif bh contains 'dachshund'
+    assign breed_name   = 'Dachshund'
+    assign breed_emoji  = '🌭'
+    assign hero_color   = '#7c2d12'
+    assign typical_size = 'XS – S'
+    assign coat_type    = 'Short (standard) or long'
+    assign key_tip      = "Dachshunds need extra back-length in outfits — their bodies are much longer than their weight suggests."
+    assign best_outfits = 'Stretchy cotton tees, bandanas, simple tube dresses'
+    assign avoid        = 'Tight leg holes — Dachshunds have very short legs with limited clearance'
+    assign size_note    = "Measure back length carefully. Dachshunds are much longer than their weight suggests — standard sizing may not work."
+
+  elsif bh contains 'indie'
+    assign breed_name   = 'Indie Dog'
+    assign breed_emoji  = '🇮🇳'
+    assign hero_color   = '#4a1942'
+    assign typical_size = 'S – L (varies widely)'
+    assign coat_type    = 'Short to medium'
+    assign key_tip      = "Indies come in all shapes and sizes — always measure fresh as body shapes vary greatly between individuals."
+    assign best_outfits = 'Cotton kurtas, bandanas, sports tees — ethnic collection looks especially stunning on Indies'
+    assign avoid        = 'Nothing — Indies look amazing in everything!'
+    assign size_note    = "No standard size for Indie dogs. Measure chest, neck, and back length every time you order."
+  endif
+-%}
 
 <style>
-  /* ══ Petaloons Breed Page — .pbr-* ══ */
-  .pbr-wrap *, .pbr-wrap *::before, .pbr-wrap *::after { box-sizing: border-box; }
-  .pbr-wrap {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    color: #1a1a1a;
-  }
+  .pbreed-wrap * { box-sizing: border-box; }
+  .pbreed-wrap { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #1a1a1a; }
 
-  /* ── Hero ── */
-  .pbr-hero {
+  /* ── Hero ─────────────────────────────────── */
+  .pbreed-hero {
     position: relative;
-    background: linear-gradient(135deg, #6b2200 0%, #b84500 30%, #de7200 62%, #fea910 100%);
-    padding: 72px 24px 88px;
-    text-align: center;
-    overflow: hidden;
+    background: linear-gradient(135deg, {{ hero_color }} 0%, #b84500 55%, #de7200 100%);
+    padding: 72px 24px 96px;
+    text-align: center; overflow: hidden;
   }
-  .pbr-hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='3' fill='%23ffffff' fill-opacity='0.04'/%3E%3C/svg%3E");
+  .pbreed-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/svg%3E");
   }
-  .pbr-hero__breadcrumb {
+  .pbreed-hero__breadcrumb { position: relative; font-size: 13px; color: rgba(255,255,255,.65); margin-bottom: 20px; }
+  .pbreed-hero__breadcrumb a { color: rgba(255,255,255,.8); text-decoration: none; }
+  .pbreed-hero__breadcrumb a:hover { color: #fff; }
+  .pbreed-hero__badge {
+    position: relative; display: inline-block;
+    background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3);
+    color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 1.5px;
+    text-transform: uppercase; padding: 6px 20px; border-radius: 30px; margin-bottom: 18px;
+  }
+  .pbreed-hero__title {
     position: relative;
-    font-size: 12px;
-    color: rgba(255,255,255,.65);
-    margin-bottom: 20px;
+    font-size: clamp(2rem, 5.5vw, 3.5rem);
+    font-weight: 900; color: #fff; margin: 0 0 14px; line-height: 1.1; letter-spacing: -1.5px;
   }
-  .pbr-hero__breadcrumb a { color: rgba(255,255,255,.8); text-decoration: none; }
-  .pbr-hero__breadcrumb a:hover { color: #fff; }
-  .pbr-hero__badge {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(255,255,255,.15);
-    border: 1px solid rgba(255,255,255,.35);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 6px 18px;
-    border-radius: 30px;
-    margin-bottom: 18px;
+  .pbreed-hero__title span { color: #fea910; }
+  .pbreed-hero__sub { position: relative; font-size: 1.05rem; color: rgba(255,255,255,.85); max-width: 560px; margin: 0 auto 32px; line-height: 1.65; }
+  .pbreed-hero__btns { position: relative; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 44px; }
+  .pbreed-hero__btn {
+    padding: 14px 30px; border-radius: 10px; font-size: 15px; font-weight: 800;
+    text-decoration: none; transition: all .2s; display: inline-flex; align-items: center; gap: 8px;
   }
-  .pbr-hero__title {
-    position: relative;
-    font-size: clamp(2rem, 5.5vw, 3.4rem);
-    font-weight: 900;
-    color: #fff;
-    line-height: 1.1;
-    letter-spacing: -1.5px;
-    margin: 0 0 14px;
+  .pbreed-hero__btn:hover { transform: translateY(-2px); opacity: .92; text-decoration: none; }
+  .pbreed-hero__btn--gold { background: #fea910; color: #1a1a1a; }
+  .pbreed-hero__btn--outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4); }
+  .pbreed-hero__btn--outline:hover { background: rgba(255,255,255,.1); }
+  .pbreed-hero__chips { position: relative; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+  .pbreed-hero__chip {
+    background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.25);
+    color: #fff; font-size: 13px; font-weight: 600; padding: 7px 16px; border-radius: 30px;
   }
-  .pbr-hero__title span { color: #ffd438; }
-  .pbr-hero__sub {
-    position: relative;
-    font-size: 1.05rem;
-    color: rgba(255,255,255,.85);
-    max-width: 560px;
-    margin: 0 auto 32px;
-    line-height: 1.65;
-  }
-  .pbr-hero__pills {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 40px;
-  }
-  .pbr-hero__pill {
-    background: rgba(255,255,255,.18);
-    border: 1px solid rgba(255,255,255,.35);
-    color: #fff;
-    padding: 9px 20px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: background .2s, border-color .2s;
-  }
-  .pbr-hero__pill:hover { background: rgba(255,255,255,.3); border-color: #fff; text-decoration: none; }
-  .pbr-hero__stats {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 0;
-    flex-wrap: wrap;
-    border-top: 1px solid rgba(255,255,255,.18);
-    padding-top: 32px;
-  }
-  .pbr-hero__stat {
-    padding: 0 36px;
-    text-align: center;
-    border-right: 1px solid rgba(255,255,255,.15);
-  }
-  .pbr-hero__stat:last-child { border-right: none; }
-  .pbr-hero__stat-num {
-    display: block;
-    font-size: 1.9rem;
-    font-weight: 900;
-    color: #ffd438;
-    line-height: 1;
-  }
-  .pbr-hero__stat-label {
-    font-size: 11px;
-    color: rgba(255,255,255,.7);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 4px;
-    display: block;
-  }
-  @media (max-width: 600px) {
-    .pbr-hero { padding: 56px 16px 64px; }
-    .pbr-hero__stat { padding: 0 20px; }
-    .pbr-hero__stat-num { font-size: 1.4rem; }
-  }
+  .pbreed-hero__wave { position: absolute; bottom: -2px; left: 0; width: 100%; line-height: 0; }
 
-  /* ── Section layout ── */
-  .pbr-section { padding: 64px 24px; }
-  .pbr-section--grey { background: #f8f6f3; }
-  .pbr-container { max-width: 1100px; margin: 0 auto; }
-  .pbr-section-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: #b84500;
-    margin-bottom: 10px;
+  /* ── Trust strip ──────────────────────────── */
+  .pbreed-trust { background: #fff; padding: 0 24px; }
+  .pbreed-trust__inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    transform: translateY(-40px);
   }
-  .pbr-section-title {
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    font-weight: 900;
-    color: #1a1a1a;
-    margin: 0 0 10px;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
+  .pbreed-trust-card {
+    background: #fff; border-radius: 16px; padding: 22px 18px;
+    box-shadow: 0 6px 32px rgba(0,0,0,.09); border: 1.5px solid #f0e8e0;
+    text-align: center; transition: transform .2s, border-color .2s;
   }
-  .pbr-section-sub {
-    font-size: .95rem;
-    color: #666;
-    max-width: 540px;
-    line-height: 1.6;
-    margin: 0 0 36px;
-  }
+  .pbreed-trust-card:hover { transform: translateY(-4px); border-color: #b84500; }
+  .pbreed-trust-card__icon { font-size: 26px; margin-bottom: 8px; display: block; }
+  .pbreed-trust-card__val { font-size: 1.1rem; font-weight: 900; color: #b84500; margin-bottom: 4px; }
+  .pbreed-trust-card__label { font-size: 12px; color: #666; }
 
-  /* ── Breed profile card ── */
-  .pbr-profile {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    align-items: start;
-  }
-  .pbr-profile__card {
-    background: #fff;
-    border: 1px solid #e8e3dc;
-    border-radius: 16px;
-    padding: 32px;
-    box-shadow: 0 2px 16px rgba(184,69,0,.07);
-  }
-  .pbr-profile__emoji {
-    font-size: 3rem;
-    margin-bottom: 12px;
-    display: block;
-  }
-  .pbr-profile__name {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: #b84500;
-    margin: 0 0 8px;
-  }
-  .pbr-profile__blurb {
-    font-size: .95rem;
-    color: #555;
-    line-height: 1.65;
-    margin: 0 0 24px;
-  }
-  .pbr-profile__stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-  .pbr-profile__stat {
-    background: #fff8f0;
-    border: 1px solid #f0d9c0;
-    border-radius: 10px;
-    padding: 14px 16px;
-  }
-  .pbr-profile__stat-label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #b84500;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  .pbr-profile__stat-val {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #1a1a1a;
-  }
-  .pbr-style-tips {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .pbr-tip {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    background: #fff;
-    border: 1px solid #e8e3dc;
-    border-radius: 12px;
-    padding: 18px 20px;
-  }
-  .pbr-tip__icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .pbr-tip__body {}
-  .pbr-tip__title { font-size: .9rem; font-weight: 800; color: #1a1a1a; margin: 0 0 3px; }
-  .pbr-tip__desc  { font-size: .85rem; color: #666; line-height: 1.5; margin: 0; }
-  @media (max-width: 768px) {
-    .pbr-profile { grid-template-columns: 1fr; }
-  }
+  /* ── Main layout ──────────────────────────── */
+  .pbreed-body { background: #fdf9f6; padding: 0 24px 72px; }
+  .pbreed-body__inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
 
-  /* ── Size guide ── */
-  .pbr-size-guide { overflow-x: auto; }
-  .pbr-size-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: .9rem;
-  }
-  .pbr-size-table th {
-    background: #b84500;
-    color: #fff;
-    padding: 12px 16px;
-    text-align: left;
-    font-weight: 700;
-    font-size: .8rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-  .pbr-size-table th:first-child { border-radius: 8px 0 0 0; }
-  .pbr-size-table th:last-child  { border-radius: 0 8px 0 0; }
-  .pbr-size-table td {
-    padding: 13px 16px;
-    border-bottom: 1px solid #ede8e1;
-    color: #1a1a1a;
-    white-space: nowrap;
-  }
-  .pbr-size-table tr:nth-child(even) td { background: #fdfaf7; }
-  .pbr-size-table tr.pbr-size-table__highlight td {
-    background: #fff8f0;
-    font-weight: 700;
-    color: #b84500;
-  }
-  .pbr-size-badge {
-    display: inline-block;
-    background: #fea910;
-    color: #0f1117;
-    font-size: 10px;
-    font-weight: 800;
-    padding: 2px 8px;
-    border-radius: 20px;
-    margin-left: 6px;
-    vertical-align: middle;
-    text-transform: uppercase;
-    letter-spacing: .8px;
-  }
-  .pbr-size-note {
-    margin-top: 14px;
-    font-size: .82rem;
-    color: #888;
-    line-height: 1.55;
-  }
-  .pbr-size-note strong { color: #b84500; }
+  .pbreed-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #b84500; margin-bottom: 10px; }
+  .pbreed-h2 { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 900; color: #1a1a1a; margin: 0 0 18px; line-height: 1.2; letter-spacing: -.5px; }
+  .pbreed-intro-text { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 24px; }
 
-  /* ── Outfit category tabs ── */
-  .pbr-outfit-tabs {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-  }
-  .pbr-outfit-tab {
-    padding: 10px 22px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    border: 2px solid #e0d6cc;
-    background: #fff;
-    color: #666;
-    transition: all .18s;
-    text-decoration: none;
-  }
-  .pbr-outfit-tab:hover,
-  .pbr-outfit-tab--active {
-    background: #b84500;
-    border-color: #b84500;
-    color: #fff;
-    text-decoration: none;
-  }
+  .pbreed-highlights { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+  .pbreed-highlight { background: #fff; border-radius: 12px; padding: 16px; border: 1.5px solid #f0e8e0; }
+  .pbreed-highlight__label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: #b84500; margin-bottom: 5px; }
+  .pbreed-highlight__val { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.4; }
 
-  /* ── Product grid ── */
-  .pbr-prod-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+  .pbreed-tip {
+    background: #fff8f0; border-left: 4px solid #b84500; border-radius: 0 12px 12px 0;
+    padding: 16px 20px; margin-bottom: 28px; font-size: 14px; color: #555; line-height: 1.6;
   }
-  @media (max-width: 900px) { .pbr-prod-grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 480px) { .pbr-prod-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+  .pbreed-tip strong { color: #b84500; }
 
-  .pbr-card {
-    background: #fff;
-    border: 1px solid #ede8e1;
-    border-radius: 14px;
-    overflow: hidden;
-    transition: box-shadow .2s, transform .2s;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
+  .pbreed-outfit-list { display: flex; flex-direction: column; gap: 12px; }
+  .pbreed-outfit-item {
+    background: #fff; border-radius: 12px; padding: 16px 18px;
+    border: 1.5px solid #f0e8e0; display: flex; align-items: center; gap: 14px;
+    text-decoration: none; color: inherit; transition: all .2s;
   }
-  .pbr-card:hover { box-shadow: 0 8px 28px rgba(184,69,0,.12); transform: translateY(-3px); text-decoration: none; }
-  .pbr-card__img-wrap {
-    position: relative;
-    padding-top: 100%;
-    background: #f8f5f0;
-    overflow: hidden;
-  }
-  .pbr-card__img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform .4s;
-  }
-  .pbr-card:hover .pbr-card__img { transform: scale(1.05); }
-  .pbr-card__badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #b84500;
-    color: #fff;
-    font-size: 10px;
-    font-weight: 800;
-    padding: 3px 9px;
-    border-radius: 20px;
-    letter-spacing: .8px;
-    text-transform: uppercase;
-  }
-  .pbr-card__body { padding: 14px 16px 18px; flex: 1; display: flex; flex-direction: column; }
-  .pbr-card__title { font-size: .88rem; font-weight: 700; color: #1a1a1a; margin: 0 0 6px; line-height: 1.3; }
-  .pbr-card__price { font-size: 1rem; font-weight: 900; color: #b84500; margin: auto 0 0; }
-  .pbr-card__compare { font-size: .8rem; color: #aaa; text-decoration: line-through; margin-left: 6px; font-weight: 400; }
-  .pbr-card__sizes {
-    display: flex;
-    gap: 4px;
-    flex-wrap: wrap;
-    margin-top: 8px;
-  }
-  .pbr-card__sz {
-    font-size: 9px;
-    font-weight: 700;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 2px 5px;
-    color: #777;
-    text-transform: uppercase;
-  }
-  .pbr-view-all {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 28px;
-    padding: 13px 28px;
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 800;
-    border: 2px solid #b84500;
-    color: #b84500;
-    text-decoration: none;
-    transition: all .18s;
-  }
-  .pbr-view-all:hover { background: #b84500; color: #fff; text-decoration: none; }
+  .pbreed-outfit-item:hover { border-color: #b84500; transform: translateX(4px); text-decoration: none; }
+  .pbreed-outfit-item__icon { font-size: 24px; flex-shrink: 0; }
+  .pbreed-outfit-item__name { font-size: 14.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+  .pbreed-outfit-item__desc { font-size: 12.5px; color: #777; }
+  .pbreed-outfit-item__arrow { margin-left: auto; color: #b84500; font-weight: 700; flex-shrink: 0; }
 
-  /* ── Occasion cards ── */
-  .pbr-occasions {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
-  @media (max-width: 700px) { .pbr-occasions { grid-template-columns: 1fr; } }
-  .pbr-occ-card {
-    position: relative;
-    border-radius: 16px;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    background: #1a1a1a;
-    text-decoration: none;
-    display: flex;
-    align-items: flex-end;
-  }
-  .pbr-occ-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-  }
-  .pbr-occ-card--wedding::before { background: linear-gradient(160deg, #6b220044 0%, #b8450099 100%); }
-  .pbr-occ-card--festival::before { background: linear-gradient(160deg, #1e3a8a44 0%, #0f111799 100%); }
-  .pbr-occ-card--casual::before { background: linear-gradient(160deg, #1a4d3544 0%, #0d2d1f99 100%); }
-  .pbr-occ-body {
-    position: relative;
-    z-index: 2;
-    padding: 24px;
-    width: 100%;
-  }
-  .pbr-occ-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,.75);
-    margin-bottom: 4px;
-  }
-  .pbr-occ-title { font-size: 1.15rem; font-weight: 900; color: #fff; margin: 0 0 6px; }
-  .pbr-occ-link {
-    font-size: 12px;
-    color: #fea910;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: .5px;
-  }
-  .pbr-occ-emoji {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    font-size: 2rem;
-    z-index: 2;
-  }
+  /* ── Sidebar ──────────────────────────────── */
+  .pbreed-sidebar { display: flex; flex-direction: column; gap: 20px; position: sticky; top: 100px; }
+  .pbreed-card { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(0,0,0,.07); border: 1px solid #f0e8e0; }
+  .pbreed-card__title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin: 0 0 16px; padding-bottom: 12px; border-bottom: 2px solid #f0e8e0; }
+  .pbreed-size-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pbreed-size-table thead tr { background: linear-gradient(90deg, #b84500, #de7200); color: #fff; }
+  .pbreed-size-table th { padding: 9px 10px; text-align: left; font-weight: 700; }
+  .pbreed-size-table tbody tr { border-bottom: 1px solid #f0e8e0; }
+  .pbreed-size-table tbody tr:last-child { border-bottom: none; }
+  .pbreed-size-table td { padding: 9px 10px; color: #444; }
+  .pbreed-size-table td:first-child { font-weight: 700; color: #b84500; }
+  .pbreed-size-note { font-size: 12px; color: #888; margin-top: 12px; line-height: 1.5; font-style: italic; }
 
-  /* ── FAQ ── */
-  .pbr-faqs { display: flex; flex-direction: column; gap: 12px; max-width: 780px; }
-  .pbr-faq {
-    background: #fff;
-    border: 1px solid #e8e3dc;
-    border-radius: 12px;
-    overflow: hidden;
-  }
-  .pbr-faq__q {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 18px 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: .95rem;
-    font-weight: 700;
-    color: #1a1a1a;
-    text-align: left;
-    line-height: 1.4;
-  }
-  .pbr-faq__q:hover { color: #b84500; }
-  .pbr-faq__icon { font-size: 1rem; flex-shrink: 0; color: #b84500; transition: transform .2s; }
-  .pbr-faq__a {
-    display: none;
-    padding: 0 20px 18px;
-    font-size: .9rem;
-    color: #555;
-    line-height: 1.65;
-  }
-  .pbr-faq--open .pbr-faq__a { display: block; }
-  .pbr-faq--open .pbr-faq__icon { transform: rotate(45deg); }
+  .pbreed-wa-card { background: linear-gradient(135deg, #b84500, #de7200); border-radius: 16px; padding: 24px; color: #fff; text-align: center; }
+  .pbreed-wa-card__icon { font-size: 32px; margin-bottom: 10px; }
+  .pbreed-wa-card__title { font-size: 15px; font-weight: 800; margin-bottom: 8px; }
+  .pbreed-wa-card__text { font-size: 13px; opacity: .9; margin-bottom: 16px; line-height: 1.5; }
+  .pbreed-wa-card__btn { display: block; background: #fff; color: #b84500; text-decoration: none; font-weight: 800; font-size: 13.5px; padding: 11px 20px; border-radius: 30px; transition: opacity .2s; margin-bottom: 8px; }
+  .pbreed-wa-card__btn:hover { opacity: .9; text-decoration: none; }
+  .pbreed-wa-card__wa { display: block; background: #25d366; color: #fff; text-decoration: none; font-weight: 800; font-size: 13px; padding: 10px 20px; border-radius: 30px; transition: opacity .2s; }
+  .pbreed-wa-card__wa:hover { opacity: .9; text-decoration: none; }
 
-  /* ── Related breeds ── */
-  .pbr-related {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 16px;
+  /* ── Collections grid ────────────────────── */
+  .pbreed-collections { background: #fff; padding: 72px 24px; border-top: 1px solid #f0e8e0; }
+  .pbreed-collections__inner { max-width: 1100px; margin: 0 auto; }
+  .pbreed-col-head { text-align: center; margin-bottom: 44px; }
+  .pbreed-col-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .pbreed-col-item {
+    background: #fdf9f6; border-radius: 16px; padding: 26px 20px;
+    border: 1.5px solid #f0e8e0; text-align: center;
+    text-decoration: none; color: inherit; display: block; transition: all .22s;
   }
-  @media (max-width: 768px) { .pbr-related { grid-template-columns: repeat(3, 1fr); } }
-  @media (max-width: 480px) { .pbr-related { grid-template-columns: repeat(2, 1fr); } }
-  .pbr-rel-card {
-    background: #fff;
-    border: 1px solid #ede8e1;
-    border-radius: 14px;
-    padding: 20px 12px;
-    text-align: center;
-    text-decoration: none;
-    transition: box-shadow .2s, border-color .2s;
-  }
-  .pbr-rel-card:hover { box-shadow: 0 4px 16px rgba(184,69,0,.1); border-color: #b84500; text-decoration: none; }
-  .pbr-rel-card__emoji { font-size: 2rem; display: block; margin-bottom: 8px; }
-  .pbr-rel-card__name { font-size: .8rem; font-weight: 700; color: #1a1a1a; line-height: 1.3; }
-  .pbr-rel-card__size { font-size: .72rem; color: #b84500; font-weight: 600; margin-top: 2px; }
+  .pbreed-col-item:hover { transform: translateY(-5px); box-shadow: 0 12px 36px rgba(184,69,0,.14); border-color: #b84500; text-decoration: none; }
+  .pbreed-col-item__icon { font-size: 32px; margin-bottom: 10px; display: block; }
+  .pbreed-col-item__name { font-size: .95rem; font-weight: 800; color: #1a1a1a; margin-bottom: 5px; }
+  .pbreed-col-item__sub { font-size: 12.5px; color: #666; line-height: 1.4; margin-bottom: 12px; }
+  .pbreed-col-item__link { font-size: 12.5px; font-weight: 700; color: #b84500; }
 
-  /* ── Sticky CTA bar ── */
-  .pbr-sticky {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    background: #0f1117;
-    border-top: 2px solid #b84500;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    box-shadow: 0 -4px 24px rgba(0,0,0,.25);
-    transform: translateY(100%);
-    transition: transform .3s ease;
+  /* ── FAQ ─────────────────────────────────── */
+  .pbreed-faq { background: #fdf9f6; padding: 72px 24px; border-top: 1px solid #f0e8e0; }
+  .pbreed-faq__inner { max-width: 780px; margin: 0 auto; }
+  .pbreed-faq__item { border-bottom: 1px solid #f0e8e0; }
+  .pbreed-faq__item:last-child { border-bottom: none; }
+  .pbreed-faq__q {
+    width: 100%; background: none; border: none; text-align: left;
+    padding: 18px 0; font-size: 15px; font-weight: 700; color: #1a1a1a;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; font-family: inherit; transition: color .2s;
   }
-  .pbr-sticky--visible { transform: translateY(0); }
-  .pbr-sticky__text { font-size: .88rem; color: rgba(255,255,255,.8); font-weight: 500; }
-  .pbr-sticky__text strong { color: #fea910; font-weight: 800; }
-  .pbr-sticky__btns { display: flex; gap: 10px; flex-shrink: 0; }
-  .pbr-sticky__btn {
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 800;
-    text-decoration: none;
-    transition: opacity .15s;
+  .pbreed-faq__q:hover, .pbreed-faq__q.open { color: #b84500; }
+  .pbreed-faq__chevron { width: 22px; height: 22px; border: 2px solid currentColor; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform .25s; font-size: 12px; }
+  .pbreed-faq__q.open .pbreed-faq__chevron { transform: rotate(180deg); }
+  .pbreed-faq__a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s ease; font-size: 14px; color: #555; line-height: 1.75; }
+  .pbreed-faq__a.open { max-height: 300px; padding-bottom: 18px; }
+  .pbreed-faq__a a { color: #b84500; font-weight: 600; text-decoration: none; }
+
+  /* ── CTA ─────────────────────────────────── */
+  .pbreed-cta { background: linear-gradient(135deg, {{ hero_color }}, #b84500); padding: 64px 24px; text-align: center; }
+  .pbreed-cta__inner { max-width: 580px; margin: 0 auto; }
+  .pbreed-cta__title { font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 900; color: #fff; margin: 0 0 12px; }
+  .pbreed-cta__sub { font-size: 15px; color: rgba(255,255,255,.85); margin-bottom: 28px; line-height: 1.6; }
+  .pbreed-cta__btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .pbreed-cta__btn { padding: 14px 28px; border-radius: 10px; font-size: 15px; font-weight: 800; text-decoration: none; transition: all .2s; display: inline-flex; align-items: center; gap: 8px; }
+  .pbreed-cta__btn:hover { transform: translateY(-2px); opacity: .92; text-decoration: none; }
+  .pbreed-cta__btn--gold { background: #fea910; color: #1a1a1a; }
+  .pbreed-cta__btn--wa { background: #25d366; color: #fff; }
+
+  /* ── Responsive ─────────────────────────── */
+  @media (max-width: 989px) {
+    .pbreed-trust__inner { grid-template-columns: repeat(2, 1fr); transform: translateY(-28px); }
+    .pbreed-body__inner { grid-template-columns: 1fr; }
+    .pbreed-sidebar { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .pbreed-col-grid { grid-template-columns: repeat(2, 1fr); }
   }
-  .pbr-sticky__btn:hover { opacity: .85; text-decoration: none; }
-  .pbr-sticky__btn--gold { background: #fea910; color: #0f1117; }
-  .pbr-sticky__btn--outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.4); }
-  @media (max-width: 520px) {
-    .pbr-sticky__text { display: none; }
-    .pbr-sticky__btns { width: 100%; }
-    .pbr-sticky__btn { flex: 1; text-align: center; }
+  @media (max-width: 749px) {
+    .pbreed-hero { padding: 52px 20px 76px; }
+    .pbreed-trust__inner { grid-template-columns: repeat(2, 1fr); }
+    .pbreed-highlights { grid-template-columns: 1fr; }
+    .pbreed-sidebar { grid-template-columns: 1fr; }
+    .pbreed-col-grid { grid-template-columns: 1fr; }
+    .pbreed-cta__btns { flex-direction: column; align-items: center; }
   }
 </style>
 
-<div class="pbr-wrap">
+<div class="pbreed-wrap">
 
-  <!-- ══ HERO ══ -->
-  <section class="pbr-hero">
-    <p class="pbr-hero__breadcrumb">
-      <a href="/">Home</a> &rsaquo;
-      <a href="/pages/dog-breed-guides">Breed Guides</a> &rsaquo;
-      {{ breed_name }}
-    </p>
-    <div class="pbr-hero__badge">{{ breed_emoji }} Breed Guide</div>
-    <h1 class="pbr-hero__title">
-      Dog Clothes for<br><span>{{ breed_name }}</span>
+  <!-- HERO -->
+  <div class="pbreed-hero">
+    <nav class="pbreed-hero__breadcrumb" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">Home</a> ›
+      <a href="/collections/all">Dog Clothes</a> ›
+      <span>{{ breed_name }} Outfits</span>
+    </nav>
+    <div class="pbreed-hero__badge">{{ breed_emoji }} {{ breed_name }} | India's #1 Dog Fashion Brand</div>
+    <h1 class="pbreed-hero__title">
+      <span>{{ breed_name }}</span> Clothes & Outfits<br>India | Petaloons
     </h1>
-    <p class="pbr-hero__sub">{{ breed_blurb }}</p>
-    <div class="pbr-hero__pills">
-      <a href="#lehengas"  class="pbr-hero__pill">👗 Dog Lehenga</a>
-      <a href="#sherwanis" class="pbr-hero__pill">🤵 Dog Sherwani</a>
-      <a href="#tshirts"   class="pbr-hero__pill">👕 Dog T-Shirts</a>
-      <a href="#size-guide" class="pbr-hero__pill">📏 Size Guide</a>
+    <p class="pbreed-hero__sub">
+      Premium handcrafted outfits designed for {{ breed_name }}s — lehengas, sherwanis, bandanas, tees and more. Free shipping across India on orders above ₹999.
+    </p>
+    <div class="pbreed-hero__btns">
+      <a href="/collections/all" class="pbreed-hero__btn pbreed-hero__btn--gold">🛍️ Shop {{ breed_name }} Outfits</a>
+      <a href="https://wa.me/918625075493?text=Hi%20Petaloons!%20I%20need%20an%20outfit%20for%20my%20{{ breed_name }}." class="pbreed-hero__btn pbreed-hero__btn--outline" target="_blank" rel="noopener">💬 Ask an Expert</a>
     </div>
-    <div class="pbr-hero__stats">
-      <div class="pbr-hero__stat">
-        <span class="pbr-hero__stat-num">{{ sz_recommended }}</span>
-        <span class="pbr-hero__stat-label">Best size fit</span>
-      </div>
-      <div class="pbr-hero__stat">
-        <span class="pbr-hero__stat-num">{{ breed_weight }}</span>
-        <span class="pbr-hero__stat-label">Typical weight</span>
-      </div>
-      <div class="pbr-hero__stat">
-        <span class="pbr-hero__stat-num">4.8★</span>
-        <span class="pbr-hero__stat-label">Happy pet parents</span>
-      </div>
-      <div class="pbr-hero__stat">
-        <span class="pbr-hero__stat-num">₹999+</span>
-        <span class="pbr-hero__stat-label">Free shipping</span>
-      </div>
+    <div class="pbreed-hero__chips">
+      <div class="pbreed-hero__chip">✨ Typical Size: {{ typical_size }}</div>
+      <div class="pbreed-hero__chip">🚚 Free Shipping ₹999+</div>
+      <div class="pbreed-hero__chip">🔄 7-Day Returns</div>
     </div>
-  </section>
-
-  <!-- ══ BREED PROFILE + STYLE TIPS ══ -->
-  <section class="pbr-section">
-    <div class="pbr-container">
-      <div class="pbr-profile">
-        <div>
-          <p class="pbr-section-label">Breed Profile</p>
-          <h2 class="pbr-section-title">Meet the {{ breed_name }}</h2>
-          <p class="pbr-section-sub">Know your dog's style personality before you shop.</p>
-          <div class="pbr-profile__card">
-            <span class="pbr-profile__emoji">{{ breed_emoji }}</span>
-            <h3 class="pbr-profile__name">{{ breed_name }}</h3>
-            <p class="pbr-profile__blurb">{{ breed_blurb }}</p>
-            <div class="pbr-profile__stats">
-              <div class="pbr-profile__stat">
-                <div class="pbr-profile__stat-label">Typical weight</div>
-                <div class="pbr-profile__stat-val">{{ breed_weight }}</div>
-              </div>
-              <div class="pbr-profile__stat">
-                <div class="pbr-profile__stat-label">Recommended size</div>
-                <div class="pbr-profile__stat-val">{{ sz_recommended }}</div>
-              </div>
-              <div class="pbr-profile__stat">
-                <div class="pbr-profile__stat-label">Chest girth</div>
-                <div class="pbr-profile__stat-val">{{ sz_chest }}</div>
-              </div>
-              <div class="pbr-profile__stat">
-                <div class="pbr-profile__stat-label">Back length</div>
-                <div class="pbr-profile__stat-val">{{ sz_back }}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <p class="pbr-section-label">Styling Tips</p>
-          <h2 class="pbr-section-title">How to Dress a {{ breed_name }}</h2>
-          <p class="pbr-section-sub">Curated styling advice for your breed.</p>
-          <div class="pbr-style-tips">
-            <div class="pbr-tip">
-              <span class="pbr-tip__icon">👗</span>
-              <div class="pbr-tip__body">
-                <p class="pbr-tip__title">Lehenga for Festive Occasions</p>
-                <p class="pbr-tip__desc">{{ section.settings.tip_lehenga | default: 'Flared lehengas with broad yokes look stunning on this breed — choose fabrics that allow free leg movement.' }}</p>
-              </div>
-            </div>
-            <div class="pbr-tip">
-              <span class="pbr-tip__icon">🤵</span>
-              <div class="pbr-tip__body">
-                <p class="pbr-tip__title">Sherwani for Weddings</p>
-                <p class="pbr-tip__desc">{{ section.settings.tip_sherwani | default: 'A structured sherwani with a neck band accentuates this breed\'s natural elegance. Deep jewel tones work beautifully.' }}</p>
-              </div>
-            </div>
-            <div class="pbr-tip">
-              <span class="pbr-tip__icon">👕</span>
-              <div class="pbr-tip__body">
-                <p class="pbr-tip__title">T-Shirts for Everyday Wear</p>
-                <p class="pbr-tip__desc">{{ section.settings.tip_tshirt | default: 'Lightweight cotton tees are ideal for summer walks. Choose printed or graphic styles for a playful everyday look.' }}</p>
-              </div>
-            </div>
-            <div class="pbr-tip">
-              <span class="pbr-tip__icon">🎨</span>
-              <div class="pbr-tip__body">
-                <p class="pbr-tip__title">Best Colours for This Breed</p>
-                <p class="pbr-tip__desc">{{ section.settings.tip_colours | default: 'Warm oranges, royal blues and jewel-toned burgundies contrast beautifully with this breed\'s coat colour.' }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="pbreed-hero__wave">
+      <svg viewBox="0 0 1440 48" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M0 48L1440 48L1440 12C1200 44 960 4 720 20C480 36 240 0 0 12L0 48Z" fill="#fdf9f6"/>
+      </svg>
     </div>
-  </section>
-
-  <!-- ══ SIZE GUIDE ══ -->
-  <section class="pbr-section pbr-section--grey" id="size-guide">
-    <div class="pbr-container">
-      <p class="pbr-section-label">📏 Size Guide</p>
-      <h2 class="pbr-section-title">{{ breed_name }} Size Chart</h2>
-      <p class="pbr-section-sub">Measure your dog's chest, neck and back before ordering. Highlighted row = recommended size for most {{ breed_name }} dogs.</p>
-
-      <div class="pbr-size-guide">
-        <table class="pbr-size-table">
-          <thead>
-            <tr>
-              <th>Size</th>
-              <th>Chest Girth</th>
-              <th>Neck Girth</th>
-              <th>Back Length</th>
-              <th>Est. Dog Weight</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>XS</td><td>28–34 cm</td><td>22–26 cm</td><td>20–26 cm</td><td>1–4 kg</td></tr>
-            <tr><td>S</td><td>34–42 cm</td><td>26–32 cm</td><td>26–34 cm</td><td>4–8 kg</td></tr>
-            <tr><td>M</td><td>42–52 cm</td><td>32–38 cm</td><td>34–42 cm</td><td>8–15 kg</td></tr>
-            <tr><td>L</td><td>52–62 cm</td><td>38–44 cm</td><td>42–52 cm</td><td>15–25 kg</td></tr>
-            {%- if sz_recommended contains 'XL' -%}
-            <tr class="pbr-size-table__highlight">
-              <td>XL <span class="pbr-size-badge">Best for {{ breed_name }}</span></td>
-              <td>62–72 cm</td><td>44–50 cm</td><td>52–62 cm</td><td>25–35 kg</td>
-            </tr>
-            <tr><td>XXL</td><td>72–84 cm</td><td>50–58 cm</td><td>62–72 cm</td><td>35–50 kg</td></tr>
-            {%- elsif sz_recommended contains 'L' -%}
-            <tr class="pbr-size-table__highlight">
-              <td>L <span class="pbr-size-badge">Best for {{ breed_name }}</span></td>
-              <td>52–62 cm</td><td>38–44 cm</td><td>42–52 cm</td><td>15–25 kg</td>
-            </tr>
-            <tr><td>XL</td><td>62–72 cm</td><td>44–50 cm</td><td>52–62 cm</td><td>25–35 kg</td></tr>
-            <tr><td>XXL</td><td>72–84 cm</td><td>50–58 cm</td><td>62–72 cm</td><td>35–50 kg</td></tr>
-            {%- elsif sz_recommended contains 'M' -%}
-            <tr class="pbr-size-table__highlight">
-              <td>M <span class="pbr-size-badge">Best for {{ breed_name }}</span></td>
-              <td>42–52 cm</td><td>32–38 cm</td><td>34–42 cm</td><td>8–15 kg</td>
-            </tr>
-            <tr><td>L</td><td>52–62 cm</td><td>38–44 cm</td><td>42–52 cm</td><td>15–25 kg</td></tr>
-            <tr><td>XL</td><td>62–72 cm</td><td>44–50 cm</td><td>52–62 cm</td><td>25–35 kg</td></tr>
-            {%- elsif sz_recommended contains 'S' -%}
-            <tr class="pbr-size-table__highlight">
-              <td>S <span class="pbr-size-badge">Best for {{ breed_name }}</span></td>
-              <td>34–42 cm</td><td>26–32 cm</td><td>26–34 cm</td><td>4–8 kg</td>
-            </tr>
-            <tr><td>M</td><td>42–52 cm</td><td>32–38 cm</td><td>34–42 cm</td><td>8–15 kg</td></tr>
-            {%- else -%}
-            <tr><td>XL</td><td>62–72 cm</td><td>44–50 cm</td><td>52–62 cm</td><td>25–35 kg</td></tr>
-            <tr><td>XXL</td><td>72–84 cm</td><td>50–58 cm</td><td>62–72 cm</td><td>35–50 kg</td></tr>
-            {%- endif -%}
-          </tbody>
-        </table>
-      </div>
-      <p class="pbr-size-note"><strong>Tip:</strong> If your dog is between two sizes, size up for comfort. All Petaloons outfits are designed with a comfortable fit — not too tight. <a href="/pages/size-guide" style="color:#b84500;">Full size guide →</a></p>
-    </div>
-  </section>
-
-  <!-- ══ SHOP LEHENGAS ══ -->
-  <section class="pbr-section" id="lehengas">
-    <div class="pbr-container">
-      <p class="pbr-section-label">👗 Dog Lehenga</p>
-      <h2 class="pbr-section-title">Lehengas for {{ breed_name }}</h2>
-      <p class="pbr-section-sub">Handcrafted ethnic lehengas — perfect for weddings, puja and festive celebrations. Available in {{ sz_recommended }}.</p>
-
-      <div class="pbr-prod-grid">
-        {%- for product in lehenga_col.products limit: 4 -%}
-        <a href="{{ product.url }}" class="pbr-card" aria-label="{{ product.title }}">
-          <div class="pbr-card__img-wrap">
-            {%- if product.featured_image -%}
-            <img
-              class="pbr-card__img"
-              src="{{ product.featured_image | image_url: width: 600 }}"
-              alt="{{ product.featured_image.alt | default: product.title | escape }}"
-              width="600" height="600"
-              loading="lazy"
-            >
-            {%- else -%}
-            <div class="pbr-card__img" style="background:#f0e8e0;display:flex;align-items:center;justify-content:center;font-size:3rem;">👗</div>
-            {%- endif -%}
-            <span class="pbr-card__badge">Lehenga</span>
-          </div>
-          <div class="pbr-card__body">
-            <p class="pbr-card__title">{{ product.title }}</p>
-            <div class="pbr-card__sizes">
-              {%- for variant in product.variants limit: 5 -%}
-              <span class="pbr-card__sz">{{ variant.title | split: ' / ' | first }}</span>
-              {%- endfor -%}
-            </div>
-            <p class="pbr-card__price">
-              {{ product.price | money }}
-              {%- if product.compare_at_price > product.price -%}
-              <span class="pbr-card__compare">{{ product.compare_at_price | money }}</span>
-              {%- endif -%}
-            </p>
-          </div>
-        </a>
-        {%- else -%}
-        <p style="color:#888;grid-column:1/-1;">No lehengas found — check back soon!</p>
-        {%- endfor -%}
-      </div>
-      <a href="/collections/dog-lehengas" class="pbr-view-all">View All Lehengas →</a>
-    </div>
-  </section>
-
-  <!-- ══ SHOP SHERWANIS ══ -->
-  <section class="pbr-section pbr-section--grey" id="sherwanis">
-    <div class="pbr-container">
-      <p class="pbr-section-label">🤵 Dog Sherwani</p>
-      <h2 class="pbr-section-title">Sherwanis for {{ breed_name }}</h2>
-      <p class="pbr-section-sub">Regal handcrafted sherwanis — make your {{ breed_name }} the star of every baraat and wedding. Available in {{ sz_recommended }}.</p>
-
-      <div class="pbr-prod-grid">
-        {%- for product in sherwani_col.products limit: 4 -%}
-        <a href="{{ product.url }}" class="pbr-card" aria-label="{{ product.title }}">
-          <div class="pbr-card__img-wrap">
-            {%- if product.featured_image -%}
-            <img
-              class="pbr-card__img"
-              src="{{ product.featured_image | image_url: width: 600 }}"
-              alt="{{ product.featured_image.alt | default: product.title | escape }}"
-              width="600" height="600"
-              loading="lazy"
-            >
-            {%- else -%}
-            <div class="pbr-card__img" style="background:#f0e8e0;display:flex;align-items:center;justify-content:center;font-size:3rem;">🤵</div>
-            {%- endif -%}
-            <span class="pbr-card__badge">Sherwani</span>
-          </div>
-          <div class="pbr-card__body">
-            <p class="pbr-card__title">{{ product.title }}</p>
-            <div class="pbr-card__sizes">
-              {%- for variant in product.variants limit: 5 -%}
-              <span class="pbr-card__sz">{{ variant.title | split: ' / ' | first }}</span>
-              {%- endfor -%}
-            </div>
-            <p class="pbr-card__price">
-              {{ product.price | money }}
-              {%- if product.compare_at_price > product.price -%}
-              <span class="pbr-card__compare">{{ product.compare_at_price | money }}</span>
-              {%- endif -%}
-            </p>
-          </div>
-        </a>
-        {%- else -%}
-        <p style="color:#888;grid-column:1/-1;">No sherwanis found — check back soon!</p>
-        {%- endfor -%}
-      </div>
-      <a href="/collections/dog-sherwani-collection-india" class="pbr-view-all">View All Sherwanis →</a>
-    </div>
-  </section>
-
-  <!-- ══ SHOP T-SHIRTS ══ -->
-  <section class="pbr-section" id="tshirts">
-    <div class="pbr-container">
-      <p class="pbr-section-label">👕 Dog T-Shirts</p>
-      <h2 class="pbr-section-title">T-Shirts for {{ breed_name }}</h2>
-      <p class="pbr-section-sub">Comfy printed and graphic tees for daily walks, playdates and chill days at home. Available in {{ sz_recommended }}.</p>
-
-      <div class="pbr-prod-grid">
-        {%- for product in tshirt_col.products limit: 4 -%}
-        <a href="{{ product.url }}" class="pbr-card" aria-label="{{ product.title }}">
-          <div class="pbr-card__img-wrap">
-            {%- if product.featured_image -%}
-            <img
-              class="pbr-card__img"
-              src="{{ product.featured_image | image_url: width: 600 }}"
-              alt="{{ product.featured_image.alt | default: product.title | escape }}"
-              width="600" height="600"
-              loading="lazy"
-            >
-            {%- else -%}
-            <div class="pbr-card__img" style="background:#f0e8e0;display:flex;align-items:center;justify-content:center;font-size:3rem;">👕</div>
-            {%- endif -%}
-            <span class="pbr-card__badge">T-Shirt</span>
-          </div>
-          <div class="pbr-card__body">
-            <p class="pbr-card__title">{{ product.title }}</p>
-            <div class="pbr-card__sizes">
-              {%- for variant in product.variants limit: 5 -%}
-              <span class="pbr-card__sz">{{ variant.title | split: ' / ' | first }}</span>
-              {%- endfor -%}
-            </div>
-            <p class="pbr-card__price">
-              {{ product.price | money }}
-              {%- if product.compare_at_price > product.price -%}
-              <span class="pbr-card__compare">{{ product.compare_at_price | money }}</span>
-              {%- endif -%}
-            </p>
-          </div>
-        </a>
-        {%- else -%}
-        <p style="color:#888;grid-column:1/-1;">No t-shirts found — check back soon!</p>
-        {%- endfor -%}
-      </div>
-      <a href="/collections/dog-t-shirts" class="pbr-view-all">View All T-Shirts →</a>
-    </div>
-  </section>
-
-  <!-- ══ SHOP BY OCCASION ══ -->
-  <section class="pbr-section pbr-section--grey">
-    <div class="pbr-container">
-      <p class="pbr-section-label">Shop by Occasion</p>
-      <h2 class="pbr-section-title">Every Moment, Perfectly Dressed</h2>
-      <p class="pbr-section-sub">From grand weddings to casual park walks — Petaloons has the perfect outfit for every occasion.</p>
-
-      <div class="pbr-occasions">
-        <a href="/collections/wedding-collection-dog" class="pbr-occ-card pbr-occ-card--wedding">
-          <span class="pbr-occ-emoji">💍</span>
-          <div class="pbr-occ-body">
-            <p class="pbr-occ-label">Occasion</p>
-            <h3 class="pbr-occ-title">Wedding &amp; Baraat</h3>
-            <span class="pbr-occ-link">Shop Looks →</span>
-          </div>
-        </a>
-        <a href="/collections/ethnic-wear-for-dogs" class="pbr-occ-card pbr-occ-card--festival">
-          <span class="pbr-occ-emoji">🪔</span>
-          <div class="pbr-occ-body">
-            <p class="pbr-occ-label">Occasion</p>
-            <h3 class="pbr-occ-title">Diwali &amp; Festivals</h3>
-            <span class="pbr-occ-link">Shop Looks →</span>
-          </div>
-        </a>
-        <a href="/collections/dog-t-shirts" class="pbr-occ-card pbr-occ-card--casual">
-          <span class="pbr-occ-emoji">🐾</span>
-          <div class="pbr-occ-body">
-            <p class="pbr-occ-label">Occasion</p>
-            <h3 class="pbr-occ-title">Everyday &amp; Walks</h3>
-            <span class="pbr-occ-link">Shop Looks →</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ FAQ ══ -->
-  <section class="pbr-section">
-    <div class="pbr-container">
-      <p class="pbr-section-label">FAQs</p>
-      <h2 class="pbr-section-title">{{ breed_name }} Dog Clothes — Frequently Asked Questions</h2>
-      <p class="pbr-section-sub">Everything pet parents ask before ordering for their {{ breed_name }}.</p>
-
-      <div class="pbr-faqs">
-        <div class="pbr-faq">
-          <button class="pbr-faq__q" aria-expanded="false">
-            What size dog clothes does a {{ breed_name }} need?
-            <span class="pbr-faq__icon">+</span>
-          </button>
-          <div class="pbr-faq__a">
-            Most {{ breed_name }} dogs fit <strong>{{ sz_recommended }}</strong> in the Petaloons size chart. Measure your dog's chest girth ({{ sz_chest }}), neck ({{ sz_neck }}) and back length ({{ sz_back }}) for the perfect fit. Always check the size guide on each product page.
-          </div>
-        </div>
-        <div class="pbr-faq">
-          <button class="pbr-faq__q" aria-expanded="false">
-            Which Petaloons outfits are best for a {{ breed_name }}?
-            <span class="pbr-faq__icon">+</span>
-          </button>
-          <div class="pbr-faq__a">
-            {{ breed_name }} dogs look stunning in our <a href="/collections/dog-lehengas" style="color:#b84500;">Dog Lehengas</a> and <a href="/collections/dog-sherwani-collection-india" style="color:#b84500;">Dog Sherwanis</a> for weddings and festivals. Our <a href="/collections/dog-t-shirts" style="color:#b84500;">Dog T-Shirts</a> are perfect for casual everyday wear in all sizes.
-          </div>
-        </div>
-        <div class="pbr-faq">
-          <button class="pbr-faq__q" aria-expanded="false">
-            Are Petaloons dog clothes safe and comfortable for {{ breed_name }} dogs?
-            <span class="pbr-faq__icon">+</span>
-          </button>
-          <div class="pbr-faq__a">
-            Yes! All Petaloons outfits use pet-safe, breathable fabrics with non-toxic dyes — tested by real dog parents. They are designed for full range of motion so your {{ breed_name }} can move, play and pose freely.
-          </div>
-        </div>
-        <div class="pbr-faq">
-          <button class="pbr-faq__q" aria-expanded="false">
-            What if the outfit doesn't fit my {{ breed_name }}?
-            <span class="pbr-faq__icon">+</span>
-          </button>
-          <div class="pbr-faq__a">
-            Petaloons has a hassle-free <strong>7-day return policy</strong>. If an outfit doesn't fit, contact our team within 7 days of delivery. We recommend using our detailed size guide before ordering to get the right fit first time.
-          </div>
-        </div>
-        <div class="pbr-faq">
-          <button class="pbr-faq__q" aria-expanded="false">
-            Does Petaloons deliver dog clothes for {{ breed_name }} across India?
-            <span class="pbr-faq__icon">+</span>
-          </button>
-          <div class="pbr-faq__a">
-            Yes, Petaloons delivers pan-India including Mumbai, Delhi, Bangalore, Chennai, Hyderabad, Pune, Kolkata, Jaipur and all major cities. <strong>Free shipping on orders above ₹999.</strong> Express delivery available in metro cities.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══ RELATED BREEDS ══ -->
-  <section class="pbr-section pbr-section--grey">
-    <div class="pbr-container">
-      <p class="pbr-section-label">More Breed Guides</p>
-      <h2 class="pbr-section-title">Shop by Dog Breed</h2>
-      <p class="pbr-section-sub">Find the perfect fit guide for your dog's breed.</p>
-
-      <div class="pbr-related">
-        <a href="/pages/dog-clothes-for-golden-retriever" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🐕‍🦺</span>
-          <div class="pbr-rel-card__name">Golden Retriever</div>
-          <div class="pbr-rel-card__size">L–XXL</div>
-        </a>
-        <a href="/pages/dog-clothes-for-labrador" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🐶</span>
-          <div class="pbr-rel-card__name">Labrador</div>
-          <div class="pbr-rel-card__size">L–XL</div>
-        </a>
-        <a href="/pages/dog-clothes-for-pug" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🐾</span>
-          <div class="pbr-rel-card__name">Pug</div>
-          <div class="pbr-rel-card__size">XS–S</div>
-        </a>
-        <a href="/pages/dog-clothes-for-beagle" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🐕</span>
-          <div class="pbr-rel-card__name">Beagle</div>
-          <div class="pbr-rel-card__size">S–M</div>
-        </a>
-        <a href="/pages/dog-clothes-for-german-shepherd" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🦮</span>
-          <div class="pbr-rel-card__name">German Shepherd</div>
-          <div class="pbr-rel-card__size">XL</div>
-        </a>
-        <a href="/pages/dog-clothes-for-shih-tzu" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🐩</span>
-          <div class="pbr-rel-card__name">Shih Tzu</div>
-          <div class="pbr-rel-card__size">XS–S</div>
-        </a>
-        <a href="/pages/dog-clothes-for-dachshund" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🌭</span>
-          <div class="pbr-rel-card__name">Dachshund</div>
-          <div class="pbr-rel-card__size">XS–S</div>
-        </a>
-        <a href="/pages/dog-clothes-for-pomeranian" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🦊</span>
-          <div class="pbr-rel-card__name">Pomeranian</div>
-          <div class="pbr-rel-card__size">XS</div>
-        </a>
-        <a href="/pages/dog-clothes-for-chihuahua" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🐭</span>
-          <div class="pbr-rel-card__name">Chihuahua</div>
-          <div class="pbr-rel-card__size">XS</div>
-        </a>
-        <a href="/pages/dog-clothes-for-indie-dog" class="pbr-rel-card">
-          <span class="pbr-rel-card__emoji">🇮🇳</span>
-          <div class="pbr-rel-card__name">Indie Dog</div>
-          <div class="pbr-rel-card__size">S–M</div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-</div><!-- .pbr-wrap -->
-
-<!-- ══ STICKY CTA ══ -->
-<div class="pbr-sticky" id="pbr-sticky" aria-hidden="true">
-  <p class="pbr-sticky__text">Dressing your <strong>{{ breed_name }}</strong>? Find the perfect outfit.</p>
-  <div class="pbr-sticky__btns">
-    <a href="/collections/dog-lehengas"  class="pbr-sticky__btn pbr-sticky__btn--outline">👗 Lehenga</a>
-    <a href="/collections/dog-t-shirts"  class="pbr-sticky__btn pbr-sticky__btn--gold">Shop Now</a>
   </div>
+
+  <!-- TRUST CARDS -->
+  <div class="pbreed-trust">
+    <div class="pbreed-trust__inner">
+      <div class="pbreed-trust-card">
+        <span class="pbreed-trust-card__icon">📐</span>
+        <div class="pbreed-trust-card__val">{{ typical_size }}</div>
+        <div class="pbreed-trust-card__label">Typical {{ breed_name }} Size</div>
+      </div>
+      <div class="pbreed-trust-card">
+        <span class="pbreed-trust-card__icon">🎁</span>
+        <div class="pbreed-trust-card__val">Free Shipping</div>
+        <div class="pbreed-trust-card__label">Orders above ₹999</div>
+      </div>
+      <div class="pbreed-trust-card">
+        <span class="pbreed-trust-card__icon">🇮🇳</span>
+        <div class="pbreed-trust-card__val">Made in India</div>
+        <div class="pbreed-trust-card__label">Handcrafted outfits</div>
+      </div>
+      <div class="pbreed-trust-card">
+        <span class="pbreed-trust-card__icon">🔄</span>
+        <div class="pbreed-trust-card__val">7-Day Returns</div>
+        <div class="pbreed-trust-card__label">Hassle-free policy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN BODY -->
+  <div class="pbreed-body">
+    <div class="pbreed-body__inner">
+
+      <!-- Content -->
+      <div>
+        <div class="pbreed-eyebrow">{{ breed_name }} Fashion Guide</div>
+        <h2 class="pbreed-h2">Everything You Need to Know About Dressing Your {{ breed_name }}</h2>
+        <p class="pbreed-intro-text">
+          {{ breed_emoji }} The {{ breed_name }} is one of India's most beloved dog breeds — and at Petaloons, we've designed hundreds of outfits with the {{ breed_name }}'s unique body shape, coat type, and personality in mind. Here's your complete guide.
+        </p>
+
+        <div class="pbreed-highlights">
+          <div class="pbreed-highlight">
+            <div class="pbreed-highlight__label">Coat Type</div>
+            <div class="pbreed-highlight__val">{{ coat_type }}</div>
+          </div>
+          <div class="pbreed-highlight">
+            <div class="pbreed-highlight__label">Typical Size</div>
+            <div class="pbreed-highlight__val">{{ typical_size }}</div>
+          </div>
+          <div class="pbreed-highlight">
+            <div class="pbreed-highlight__label">Best Outfits</div>
+            <div class="pbreed-highlight__val">{{ best_outfits }}</div>
+          </div>
+          <div class="pbreed-highlight">
+            <div class="pbreed-highlight__label">Avoid</div>
+            <div class="pbreed-highlight__val">{{ avoid }}</div>
+          </div>
+        </div>
+
+        <div class="pbreed-tip">
+          <strong>💡 #1 Tip for {{ breed_name }} Owners:</strong> {{ key_tip }}
+        </div>
+
+        <div class="pbreed-eyebrow" style="margin-top:8px;">Best Outfits for {{ breed_name }}s</div>
+        <div class="pbreed-outfit-list">
+          <a href="/collections/dog-lehengas" class="pbreed-outfit-item">
+            <span class="pbreed-outfit-item__icon">👗</span>
+            <div>
+              <div class="pbreed-outfit-item__name">Dog Lehengas</div>
+              <div class="pbreed-outfit-item__desc">Traditional Indian lehengas for Diwali, Navratri and weddings</div>
+            </div>
+            <span class="pbreed-outfit-item__arrow">→</span>
+          </a>
+          <a href="/collections/dog-sherwani-collection-india" class="pbreed-outfit-item">
+            <span class="pbreed-outfit-item__icon">🎩</span>
+            <div>
+              <div class="pbreed-outfit-item__name">Dog Sherwanis</div>
+              <div class="pbreed-outfit-item__desc">Premium embroidered sherwanis for weddings and festive occasions</div>
+            </div>
+            <span class="pbreed-outfit-item__arrow">→</span>
+          </a>
+          <a href="/collections/dog-bandanas" class="pbreed-outfit-item">
+            <span class="pbreed-outfit-item__icon">🎀</span>
+            <div>
+              <div class="pbreed-outfit-item__name">Dog Bandanas</div>
+              <div class="pbreed-outfit-item__desc">The easiest everyday accessory for {{ breed_name }}s</div>
+            </div>
+            <span class="pbreed-outfit-item__arrow">→</span>
+          </a>
+          <a href="/collections/dog-t-shirts" class="pbreed-outfit-item">
+            <span class="pbreed-outfit-item__icon">👕</span>
+            <div>
+              <div class="pbreed-outfit-item__name">Dog T-Shirts</div>
+              <div class="pbreed-outfit-item__desc">Breathable cotton tees for daily walks</div>
+            </div>
+            <span class="pbreed-outfit-item__arrow">→</span>
+          </a>
+          <a href="/collections/ethnic-wear-for-dogs" class="pbreed-outfit-item">
+            <span class="pbreed-outfit-item__icon">🪔</span>
+            <div>
+              <div class="pbreed-outfit-item__name">Ethnic Wear</div>
+              <div class="pbreed-outfit-item__desc">Kurtas and traditional Indian outfits for every festival</div>
+            </div>
+            <span class="pbreed-outfit-item__arrow">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="pbreed-sidebar">
+        <div class="pbreed-card">
+          <div class="pbreed-card__title">📐 {{ breed_name }} Size Guide</div>
+          <table class="pbreed-size-table">
+            <thead><tr><th>Size</th><th>Chest</th><th>Weight</th></tr></thead>
+            <tbody>
+              <tr><td>XS</td><td>28–33 cm</td><td>1.5–3 kg</td></tr>
+              <tr><td>S</td><td>33–38 cm</td><td>3–5 kg</td></tr>
+              <tr><td>M</td><td>39–46 cm</td><td>5–9 kg</td></tr>
+              <tr><td>L</td><td>47–54 cm</td><td>9–15 kg</td></tr>
+              <tr><td>XL</td><td>55–65 cm</td><td>15–25 kg</td></tr>
+            </tbody>
+          </table>
+          {%- if size_note != blank -%}
+          <p class="pbreed-size-note">📌 {{ size_note }}</p>
+          {%- endif -%}
+        </div>
+
+        <div class="pbreed-wa-card">
+          <div class="pbreed-wa-card__icon">🐾</div>
+          <div class="pbreed-wa-card__title">Not Sure What Size?</div>
+          <div class="pbreed-wa-card__text">Send us your {{ breed_name }}'s measurements — we'll recommend the perfect size and outfit within 2 hours.</div>
+          <a href="/pages/contact" class="pbreed-wa-card__btn">📧 Email Us</a>
+          <a href="https://wa.me/918625075493?text=Hi!%20I%20need%20help%20sizing%20for%20my%20{{ breed_name }}." class="pbreed-wa-card__wa" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- COLLECTIONS -->
+  <div class="pbreed-collections">
+    <div class="pbreed-collections__inner">
+      <div class="pbreed-col-head">
+        <div class="pbreed-eyebrow">Shop by Occasion</div>
+        <h2 class="pbreed-h2" style="margin:0;">All Collections for {{ breed_name }}s</h2>
+      </div>
+      <div class="pbreed-col-grid">
+        <a href="/collections/dog-lehengas" class="pbreed-col-item">
+          <span class="pbreed-col-item__icon">👗</span>
+          <div class="pbreed-col-item__name">Dog Lehengas</div>
+          <div class="pbreed-col-item__sub">Diwali, Navratri and wedding looks</div>
+          <span class="pbreed-col-item__link">Shop Now →</span>
+        </a>
+        <a href="/collections/dog-sherwani-collection-india" class="pbreed-col-item">
+          <span class="pbreed-col-item__icon">🎩</span>
+          <div class="pbreed-col-item__name">Dog Sherwanis</div>
+          <div class="pbreed-col-item__sub">Wedding and formal occasions</div>
+          <span class="pbreed-col-item__link">Shop Now →</span>
+        </a>
+        <a href="/collections/dog-tuxedos" class="pbreed-col-item">
+          <span class="pbreed-col-item__icon">🤵</span>
+          <div class="pbreed-col-item__name">Dog Tuxedos</div>
+          <div class="pbreed-col-item__sub">Formal events and photoshoots</div>
+          <span class="pbreed-col-item__link">Shop Now →</span>
+        </a>
+        <a href="/collections/dog-t-shirts" class="pbreed-col-item">
+          <span class="pbreed-col-item__icon">👕</span>
+          <div class="pbreed-col-item__name">Dog T-Shirts</div>
+          <div class="pbreed-col-item__sub">Everyday casual wear</div>
+          <span class="pbreed-col-item__link">Shop Now →</span>
+        </a>
+        <a href="/collections/dog-bandanas" class="pbreed-col-item">
+          <span class="pbreed-col-item__icon">🎀</span>
+          <div class="pbreed-col-item__name">Dog Bandanas</div>
+          <div class="pbreed-col-item__sub">Quick, stylish everyday accessory</div>
+          <span class="pbreed-col-item__link">Shop Now →</span>
+        </a>
+        <a href="/collections/dog-couple-dress" class="pbreed-col-item">
+          <span class="pbreed-col-item__icon">👫</span>
+          <div class="pbreed-col-item__name">Couple Outfits</div>
+          <div class="pbreed-col-item__sub">Matching dog and owner sets</div>
+          <span class="pbreed-col-item__link">Shop Now →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="pbreed-faq">
+    <div class="pbreed-faq__inner">
+      <div style="text-align:center;margin-bottom:40px;">
+        <div class="pbreed-eyebrow">{{ breed_name }} Questions</div>
+        <h2 class="pbreed-h2" style="margin:0;">Frequently Asked by {{ breed_name }} Parents</h2>
+      </div>
+      <div class="pbreed-faq__item">
+        <button class="pbreed-faq__q open" type="button" aria-expanded="true">
+          What size Petaloons outfit should I order for my {{ breed_name }}?
+          <span class="pbreed-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pbreed-faq__a open">Most {{ breed_name }}s wear {{ typical_size }}. Measure your dog's chest girth, neck girth, and back length, then compare with the size chart on each product page. If between sizes, go up. <a href="https://wa.me/918625075493">WhatsApp us</a> with measurements for a personalised recommendation.</div>
+      </div>
+      <div class="pbreed-faq__item">
+        <button class="pbreed-faq__q" type="button" aria-expanded="false">
+          What are the best outfits for {{ breed_name }}s?
+          <span class="pbreed-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pbreed-faq__a">The best outfits for {{ breed_name }}s are: {{ best_outfits }}. These suit the {{ breed_name }}'s body shape and coat type perfectly.</div>
+      </div>
+      <div class="pbreed-faq__item">
+        <button class="pbreed-faq__q" type="button" aria-expanded="false">
+          Is it safe to put clothes on a {{ breed_name }}?
+          <span class="pbreed-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pbreed-faq__a">Yes, when fitted correctly and made from breathable natural fabrics. Always ensure two fingers fit under any strap, never restrict breathing or movement, and monitor your dog while dressed. Remove outfits if your dog shows any discomfort.</div>
+      </div>
+      <div class="pbreed-faq__item">
+        <button class="pbreed-faq__q" type="button" aria-expanded="false">
+          Does Petaloons ship {{ breed_name }} dog clothes across India?
+          <span class="pbreed-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pbreed-faq__a">Yes! Petaloons ships pan-India with free shipping on orders above ₹999. Express delivery is available in metro cities. Tracking link sent via SMS and email after dispatch.</div>
+      </div>
+      <div class="pbreed-faq__item">
+        <button class="pbreed-faq__q" type="button" aria-expanded="false">
+          Can I return if the outfit does not fit my {{ breed_name }}?
+          <span class="pbreed-faq__chevron" aria-hidden="true">▾</span>
+        </button>
+        <div class="pbreed-faq__a">Yes! Petaloons offers a 7-day hassle-free return policy. If the size does not fit your {{ breed_name }}, contact us within 7 days of delivery for a free replacement or full refund.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="pbreed-cta">
+    <div class="pbreed-cta__inner">
+      <div class="pbreed-cta__title">{{ breed_emoji }} Shop {{ breed_name }} Outfits — Free Shipping Across India</div>
+      <p class="pbreed-cta__sub">Premium handcrafted dog fashion for {{ breed_name }}s. Join 10,000+ happy dog parents who trust Petaloons.</p>
+      <div class="pbreed-cta__btns">
+        <a href="/collections/all" class="pbreed-cta__btn pbreed-cta__btn--gold">🛍️ Shop Now</a>
+        <a href="https://wa.me/918625075493?text=Hi!%20I%20want%20an%20outfit%20for%20my%20{{ breed_name }}." class="pbreed-cta__btn pbreed-cta__btn--wa" target="_blank" rel="noopener">💬 WhatsApp Us</a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
+<script type="application/ld+json">
+[
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "{{ breed_name }} Clothes and Outfits India | Petaloons",
+    "description": "Shop premium {{ breed_name }} dog clothes and outfits in India. Lehengas, sherwanis, bandanas, tees and ethnic wear. Free shipping above Rs.999. Pan-India delivery.",
+    "url": "{{ shop.url }}/pages/{{ page.handle }}",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type":"ListItem","position":1,"name":"Home","item":"{{ shop.url }}"},
+        {"@type":"ListItem","position":2,"name":"Dog Clothes","item":"{{ shop.url }}/collections/all"},
+        {"@type":"ListItem","position":3,"name":"{{ breed_name }} Clothes","item":"{{ shop.url }}/pages/{{ page.handle }}"}
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"What size dog clothes for {{ breed_name }}?","acceptedAnswer":{"@type":"Answer","text":"Most {{ breed_name }}s wear {{ typical_size }}. Always measure chest girth first. Petaloons offers free sizing help on WhatsApp at +91 86250 75493."}},
+      {"@type":"Question","name":"Best dog outfits for {{ breed_name }} in India?","acceptedAnswer":{"@type":"Answer","text":"Best outfits for {{ breed_name }}s: {{ best_outfits }}. Available at Petaloons with free shipping across India."}},
+      {"@type":"Question","name":"Where to buy {{ breed_name }} dog clothes in India?","acceptedAnswer":{"@type":"Answer","text":"Petaloons is India's #1 dog fashion brand. Shop {{ breed_name }} outfits at petaloons.com with free shipping on orders above Rs.999."}}
+    ]
+  }
+]
+</script>
+
 <script>
-(function () {
-  // FAQ accordion
-  document.querySelectorAll('.pbr-faq__q').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var faq = btn.closest('.pbr-faq');
-      var open = faq.classList.contains('pbr-faq--open');
-      document.querySelectorAll('.pbr-faq--open').forEach(function (el) { el.classList.remove('pbr-faq--open'); el.querySelector('.pbr-faq__q').setAttribute('aria-expanded','false'); });
-      if (!open) { faq.classList.add('pbr-faq--open'); btn.setAttribute('aria-expanded','true'); }
+  document.querySelectorAll('.pbreed-faq__q').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var ans = btn.nextElementSibling, isOpen = btn.classList.contains('open');
+      btn.closest('.pbreed-faq__inner').querySelectorAll('.pbreed-faq__q').forEach(function(b){ b.classList.remove('open'); b.setAttribute('aria-expanded','false'); });
+      btn.closest('.pbreed-faq__inner').querySelectorAll('.pbreed-faq__a').forEach(function(a){ a.classList.remove('open'); });
+      if (!isOpen) { btn.classList.add('open'); btn.setAttribute('aria-expanded','true'); ans.classList.add('open'); }
     });
   });
-
-  // Sticky CTA on scroll
-  var sticky = document.getElementById('pbr-sticky');
-  if (sticky) {
-    window.addEventListener('scroll', function () {
-      if (window.scrollY > 400) {
-        sticky.classList.add('pbr-sticky--visible');
-        sticky.removeAttribute('aria-hidden');
-      } else {
-        sticky.classList.remove('pbr-sticky--visible');
-        sticky.setAttribute('aria-hidden','true');
-      }
-    }, { passive: true });
-  }
-})();
 </script>
 
 {% schema %}
 {
-  "name": "Breed Landing Page",
-  "tag": "section",
-  "class": "pbr-section-wrapper",
-  "settings": [
-    {
-      "type": "header",
-      "content": "Breed Identity"
-    },
-    {
-      "type": "text",
-      "id": "breed_name",
-      "label": "Breed Name",
-      "default": "Golden Retriever"
-    },
-    {
-      "type": "text",
-      "id": "breed_emoji",
-      "label": "Breed Emoji",
-      "default": "🐕‍🦺"
-    },
-    {
-      "type": "textarea",
-      "id": "breed_blurb",
-      "label": "Breed Description (hero subtitle)",
-      "default": "Friendly, energetic and always camera-ready — Golden Retrievers love dressing up for every occasion."
-    },
-    {
-      "type": "text",
-      "id": "breed_weight",
-      "label": "Typical Weight Range",
-      "default": "25–40 kg"
-    },
-    {
-      "type": "header",
-      "content": "Size Guide"
-    },
-    {
-      "type": "text",
-      "id": "sz_recommended",
-      "label": "Recommended Size (e.g. L / XL)",
-      "default": "L / XL"
-    },
-    {
-      "type": "text",
-      "id": "sz_chest",
-      "label": "Typical Chest Girth",
-      "default": "60–72 cm"
-    },
-    {
-      "type": "text",
-      "id": "sz_neck",
-      "label": "Typical Neck Girth",
-      "default": "42–50 cm"
-    },
-    {
-      "type": "text",
-      "id": "sz_back",
-      "label": "Typical Back Length",
-      "default": "52–62 cm"
-    },
-    {
-      "type": "header",
-      "content": "Styling Tips"
-    },
-    {
-      "type": "textarea",
-      "id": "tip_lehenga",
-      "label": "Lehenga Tip",
-      "default": "Flared lehengas with broad yokes look stunning on this breed — choose fabrics that allow free leg movement."
-    },
-    {
-      "type": "textarea",
-      "id": "tip_sherwani",
-      "label": "Sherwani Tip",
-      "default": "A structured sherwani with a neck band accentuates this breed's natural elegance. Deep jewel tones work beautifully."
-    },
-    {
-      "type": "textarea",
-      "id": "tip_tshirt",
-      "label": "T-Shirt Tip",
-      "default": "Lightweight cotton tees are ideal for summer walks. Choose printed or graphic styles for a playful everyday look."
-    },
-    {
-      "type": "textarea",
-      "id": "tip_colours",
-      "label": "Best Colours Tip",
-      "default": "Warm oranges, royal blues and jewel-toned burgundies contrast beautifully with this breed's coat colour."
-    }
-  ],
-  "presets": [
-    {
-      "name": "Breed Landing Page",
-      "settings": {
-        "breed_name": "Golden Retriever",
-        "breed_emoji": "🐕‍🦺",
-        "breed_weight": "25–40 kg",
-        "sz_recommended": "L / XL"
-      }
-    }
-  ]
+  "name": "Petaloons Breed Page",
+  "settings": [],
+  "presets": [{ "name": "Petaloons Breed Page" }]
 }
 {% endschema %}

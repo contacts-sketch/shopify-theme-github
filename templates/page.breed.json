@@ -2,20 +2,7 @@
   "sections": {
     "main": {
       "type": "petaloons-breed",
-      "settings": {
-        "breed_name": "Golden Retriever",
-        "breed_emoji": "🐕‍🦺",
-        "breed_blurb": "Friendly, energetic and always camera-ready — Golden Retrievers love dressing up for every occasion.",
-        "breed_weight": "25–40 kg",
-        "sz_recommended": "L / XL",
-        "sz_chest": "62–72 cm",
-        "sz_neck": "44–50 cm",
-        "sz_back": "52–62 cm",
-        "tip_lehenga": "Flared lehengas with broad yokes look stunning on Golden Retrievers — choose fabrics that allow free leg movement.",
-        "tip_sherwani": "A structured sherwani with a neck band accentuates the Golden Retriever's natural elegance. Deep jewel tones like burgundy and navy work beautifully.",
-        "tip_tshirt": "Lightweight cotton tees are ideal for summer walks. Choose printed or graphic styles for a playful everyday look.",
-        "tip_colours": "Warm oranges, royal blues and jewel-toned burgundies contrast beautifully with the Golden Retriever's golden coat."
-      }
+      "settings": {}
     }
   },
   "order": ["main"]
