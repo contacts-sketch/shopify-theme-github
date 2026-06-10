@@ -1,9 +1,0 @@
-{
-  "sections": {
-    "main": {
-      "type": "petaloons-breed",
-      "settings": {}
-    }
-  },
-  "order": ["main"]
-}
