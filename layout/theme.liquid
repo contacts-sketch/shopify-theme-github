@@ -35,7 +35,14 @@
 
     {%- comment -%} LCP preload: Petaloons homepage hero lehenga image {%- endcomment -%}
     {%- if request.page_type == 'index' -%}
-      <link rel="preload" as="image" href="https://www.petaloons.com/cdn/shop/files/1.0.png?v=1777115848" fetchpriority="high">
+      <link rel="preload" as="image"
+        href="https://cdn.shopify.com/s/files/1/0611/1107/4890/files/1.0.png?v=1777115848&width=480"
+        imagesrcset="https://cdn.shopify.com/s/files/1/0611/1107/4890/files/1.0.png?v=1777115848&width=240 240w,
+                     https://cdn.shopify.com/s/files/1/0611/1107/4890/files/1.0.png?v=1777115848&width=360 360w,
+                     https://cdn.shopify.com/s/files/1/0611/1107/4890/files/1.0.png?v=1777115848&width=480 480w,
+                     https://cdn.shopify.com/s/files/1/0611/1107/4890/files/1.0.png?v=1777115848&width=720 720w"
+        imagesizes="(min-width: 990px) 260px, (min-width: 750px) 40vw, 55vw"
+        fetchpriority="high">
     {%- endif -%}
 
     {%- comment -%} LCP preload: product page featured image {%- endcomment -%}
