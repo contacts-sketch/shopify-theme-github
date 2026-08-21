@@ -826,6 +826,12 @@
 
   <style>
     /* ── Product page trust + accordion UI ── */
+    .phm-pdp-extras {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
     .phm-trust-strip {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -870,6 +876,8 @@
       margin-bottom: 8px;
       box-shadow: 0 1px 4px rgba(0,0,0,.06);
       overflow: hidden;
+      width: 100%;
+      box-sizing: border-box;
     }
     .phm-acc summary {
       padding: 15px 18px;
@@ -960,6 +968,9 @@
       margin-top: 1px;
     }
   </style>
+
+  <!-- ── Trust + Accordions wrapper: constrained to product info column ── -->
+  <div class="phm-pdp-extras">
 
   <!-- ── Trust Badges ── -->
   <div class="phm-trust-strip">
@@ -1053,6 +1064,8 @@
       });
     });
   </script>
+
+  </div><!-- /phm-pdp-extras -->
 
 </product-info>
 
