@@ -1,46 +1,149 @@
 {% comment %}theme-check-disable ImgLazyLoading{% endcomment %}
 {{ 'component-collection-hero.css' | asset_url | stylesheet_tag }}
 
-{%- style -%}
-  @media screen and (max-width: 749px) {
-    .collection-hero--with-image .collection-hero__inner {
-      padding-bottom: calc({{ settings.media_shadow_vertical_offset | at_least: 0 }}px + 2rem);
-    }
+<style>
+  .phm-col-hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4a1010 0%, #7b2d2d 45%, #a0451a 100%);
+    min-height: 200px;
   }
-{%- endstyle -%}
+  .phm-col-hero--has-img { min-height: 280px; }
+  .phm-col-hero__bg-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.25;
+  }
+  .phm-col-hero__overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to right, rgba(74,16,16,.92) 0%, rgba(74,16,16,.5) 60%, rgba(74,16,16,.1) 100%);
+  }
+  .phm-col-hero__inner {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .phm-col-hero__text { flex: 1; }
+  .phm-col-hero__eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #c0922a;
+    margin-bottom: 8px;
+  }
+  .phm-col-hero__title {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(26px, 4vw, 42px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .phm-col-hero__desc {
+    font-size: 14px;
+    color: rgba(255,255,255,.75);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 0 20px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .phm-col-hero__meta {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .phm-col-hero__count {
+    font-size: 13px;
+    color: rgba(255,255,255,.6);
+  }
+  .phm-col-hero__count strong { color: #fff; }
+  .phm-col-hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(192,146,42,.15);
+    border: 1px solid rgba(192,146,42,.4);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: #c0922a;
+    font-weight: 600;
+  }
+  .phm-col-hero__img-col {
+    flex-shrink: 0;
+    width: clamp(120px, 20vw, 200px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .phm-col-hero__img-col img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 8px;
+    opacity: .9;
+  }
+  .phm-col-hero__img-col img:first-child {
+    grid-column: 1 / -1;
+    aspect-ratio: 2/1;
+  }
+  @media (max-width: 600px) {
+    .phm-col-hero__img-col { display: none; }
+    .phm-col-hero__inner { padding: 28px 16px; }
+  }
+</style>
 
-<div class="collection-hero{% if section.settings.show_collection_image and collection.image %} collection-hero--with-image{% endif %} color-{{ section.settings.color_scheme }} gradient">
-  <div class="collection-hero__inner page-width {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    <div class="collection-hero__text-wrapper">
-      <h1 class="collection-hero__title">
-        <span class="visually-hidden">{{ 'sections.collection_template.title' | t }}: </span>
-        {{- collection.title | escape -}}
-      </h1>
+{%- assign hero_products = collection.products | where: 'available', true -%}
 
-      {%- if section.settings.show_collection_description -%}
-        <div class="collection-hero__description rte">{{ collection.description }}</div>
+<div class="phm-col-hero{% if collection.image %} phm-col-hero--has-img{% endif %}">
+  {%- if collection.image -%}
+    <img class="phm-col-hero__bg-img"
+      src="{{ collection.image | image_url: width: 1400 }}"
+      alt="{{ collection.image.alt | escape }}"
+      width="1400" loading="eager" fetchpriority="high">
+  {%- endif -%}
+  <div class="phm-col-hero__overlay"></div>
+
+  <div class="phm-col-hero__inner">
+    <div class="phm-col-hero__text">
+      <div class="phm-col-hero__eyebrow">Petaloons Collection</div>
+      <h1 class="phm-col-hero__title">{{ collection.title | escape }}</h1>
+
+      {%- if collection.description != blank -%}
+        <div class="phm-col-hero__desc">{{ collection.description | strip_html }}</div>
       {%- endif -%}
+
+      <div class="phm-col-hero__meta">
+        <span class="phm-col-hero__count">
+          <strong>{{ collection.products_count }}</strong> products
+        </span>
+        <span class="phm-col-hero__badge">🇮🇳 Handcrafted in India</span>
+        <span class="phm-col-hero__badge">🚚 Free shipping ₹999+</span>
+      </div>
     </div>
 
-    {%- if section.settings.show_collection_image and collection.image -%}
-      <div class="collection-hero__image-container media gradient">
-        <img
-          srcset="
-            {%- if collection.image.width >= 165 -%}{{ collection.image | image_url: width: 165 }} 165w,{%- endif -%}
-            {%- if collection.image.width >= 360 -%}{{ collection.image | image_url: width: 360 }} 360w,{%- endif -%}
-            {%- if collection.image.width >= 535 -%}{{ collection.image | image_url: width: 535 }} 535w,{%- endif -%}
-            {%- if collection.image.width >= 750 -%}{{ collection.image | image_url: width: 750 }} 750w,{%- endif -%}
-            {%- if collection.image.width >= 1070 -%}{{ collection.image | image_url: width: 1070 }} 1070w,{%- endif -%}
-            {%- if collection.image.width >= 1500 -%}{{ collection.image | image_url: width: 1500 }} 1500w,{%- endif -%}
-            {{ collection.image | image_url }} {{ collection.image.width }}w
-          "
-          src="{{ collection.image | image_url: width: 750 }}"
-          sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
-          alt="{{ collection.image.alt | escape }}"
-          width="{{ collection.image.width }}"
-          height="{{ collection.image.height }}"
-        >
-      </div>
+    {%- if hero_products.size >= 3 -%}
+    <div class="phm-col-hero__img-col" aria-hidden="true">
+      {%- for p in hero_products limit: 3 -%}
+        {%- if p.featured_image -%}
+          <img src="{{ p.featured_image | image_url: width: 300 }}"
+               alt="{{ p.featured_image.alt | default: p.title | escape }}"
+               width="300" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}">
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
     {%- endif -%}
   </div>
 </div>
