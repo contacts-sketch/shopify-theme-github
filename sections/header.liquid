@@ -470,11 +470,26 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
+    "url": {{ request.origin | json }},
+    "foundingDate": "2020",
+    "description": "India's #1 dog fashion brand — handcrafted dog lehenga, dog sherwani and ethnic pet wear for weddings, festivals and everyday celebrations.",
+    "areaServed": { "@type": "Country", "name": "India" },
     {% if settings.logo %}
-      "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+      "width": 500,
+      "height": 125
+    },
     {% endif %}
-    "sameAs": {{ _sameAs | json }},
-    "url": {{ request.origin | append: request.path | json }}
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "email": "contacts@petaloons.com",
+      "availableLanguage": ["English", "Hindi"],
+      "areaServed": "IN"
+    },
+    "sameAs": {{ _sameAs | json }}
   }
 </script>
 

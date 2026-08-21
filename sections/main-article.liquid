@@ -289,7 +289,51 @@
 </article>
 
 <script type="application/ld+json">
-  {{ article | structured_data }}
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  "description": {{ article.excerpt_or_content | strip_html | truncate: 160 | json }},
+  "url": {{ request.origin | append: article.url | json }},
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "dateModified": {{ article.updated_at | default: article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
+  "inLanguage": "en-IN",
+  "wordCount": {{ article.content | strip_html | split: ' ' | size }},
+  "articleSection": {{ blog.title | json }},
+  "keywords": "dog ethnic wear, dog lehenga, dog sherwani, pet fashion India, Petaloons",
+  {%- if article.image -%}
+  "image": {
+    "@type": "ImageObject",
+    "url": {{ article.image | image_url: width: 1200 | prepend: 'https:' | json }},
+    "width": 1200,
+    "height": 630
+  },
+  {%- endif -%}
+  "author": {
+    "@type": "Organization",
+    "name": "Petaloons",
+    "url": {{ request.origin | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {%- if settings.logo != blank -%}{{ settings.logo | image_url: width: 400 | prepend: 'https:' | json }}{%- else -%}"https://www.petaloons.com/cdn/shop/files/petaloons-logo.png"{%- endif -%}
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Petaloons",
+    "url": {{ request.origin | json }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {%- if settings.logo != blank -%}{{ settings.logo | image_url: width: 400 | prepend: 'https:' | json }}{%- else -%}"https://www.petaloons.com/cdn/shop/files/petaloons-logo.png"{%- endif -%},
+      "width": 400,
+      "height": 100
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ request.origin | append: article.url | json }}
+  }
+}
 </script>
 
 {% schema %}
