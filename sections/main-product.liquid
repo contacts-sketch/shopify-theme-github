@@ -769,6 +769,18 @@
           "bestRating": {{ product.metafields.reviews.rating.value.scale_max | json }},
           "ratingCount": {{ product.metafields.reviews.rating_count | default: 1 | json }}
         }
+        {%- elsif product.metafields.judgeme.badge != blank -%}
+        {%- assign jdgm_rating = product.metafields.judgeme.badge | split: "data-average-rating='" | last | split: "'" | first -%}
+        {%- assign jdgm_count = product.metafields.judgeme.badge | split: "data-number-of-reviews='" | last | split: "'" | first -%}
+        {%- if jdgm_rating != blank and jdgm_count != '0' -%},
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": {{ jdgm_rating | json }},
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": {{ jdgm_count | json }}
+        }
+        {%- endif -%}
         {%- endif -%}
       }
     </script>
