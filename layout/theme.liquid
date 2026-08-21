@@ -38,6 +38,24 @@
       <link rel="preload" as="image" href="https://www.petaloons.com/cdn/shop/files/1.0.png?v=1777115848" fetchpriority="high">
     {%- endif -%}
 
+    {%- comment -%} LCP preload: product page featured image {%- endcomment -%}
+    {%- if request.page_type == 'product' -%}
+      {%- assign lcp_img = product.selected_or_first_available_variant.featured_media.preview_image | default: product.featured_image -%}
+      {%- if lcp_img != blank -%}
+        <link rel="preload" as="image"
+          href="{{ lcp_img | image_url: width: 823 }}"
+          imagesrcset="{{ lcp_img | image_url: width: 493 }} 493w, {{ lcp_img | image_url: width: 823 }} 823w, {{ lcp_img | image_url: width: 1100 }} 1100w"
+          imagesizes="(min-width: 750px) 50vw, 100vw"
+          fetchpriority="high">
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- comment -%} DNS prefetch for third-party analytics/marketing scripts {%- endcomment -%}
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://www.google-analytics.com">
+    <link rel="dns-prefetch" href="https://googleads.g.doubleclick.net">
+
     {%- comment -%} LCP preload for slideshow/image-banner sections {%- endcomment -%}
     {%- unless request.page_type == 'index' -%}
       {%- for section in sections -%}
